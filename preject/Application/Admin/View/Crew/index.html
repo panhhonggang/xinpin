@@ -1,0 +1,73 @@
+<include file="Public/header" />
+<div class="content">
+    <include file="Public/nav" />
+    <div class="row-fluid fl" id="main">
+        <div class="tableBox">
+            <div class="titleBar">机组管理/<span>机组列表</span></div>
+            <form class="form-search fr" action="__URL__/index" method="get">
+                <input type="text" name="cname" class="input-medium" placeholder="请输入机组名称...">
+                <button type="submit" class="btn">搜索</button>
+            </form>
+
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>机组ID</th>
+                    <th>机组名称</th>
+                    <th>一号设备</th>
+                    <th>二号设备</th>
+                    <th>三号设备</th>
+                    <th>四号设备</th>
+                    <th>五号设备</th>
+                    <th>六号设备</th>
+                    <th>七号设备</th>
+                    <th>八号设备</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <notempty name="list">
+                    <foreach name="list" item="vo" key="key">
+                    <tr>
+                        <td>{{$vo.id}}</td>
+                        <td>{{$vo.cname}}</td>
+                        <td>{{$vo.did1}}</td>
+                        <td>{{$vo.did2}}</td>
+                        <td>{{$vo.did3}}</td>
+                        <td>{{$vo.did4}}</td>
+                        <td>{{$vo.did5}}</td>
+                        <td>{{$vo.did6}}</td>
+                        <td>{{$vo.did7}}</td>
+                        <td>{{$vo.did8}}</td>
+                        <td>
+                            <if condition="$Think.session.adminuser.leavel eq 0">
+                                <a href="">未完待续</a>
+                                <a href="__URL__/del/id/{{$vo.0}}">删除</a>
+                            <else/>
+                                <span>您无操作权限</span>
+                            </if>
+                        </td>
+                    </tr>
+                    </foreach>
+                    <else />
+                    <tr>
+                        <td colspan="12">查无数据</td>
+                    </tr>
+                    </notempty>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <ul>
+                    {{$button}}
+                </ul>
+            </div>
+            <script>
+                $('.pagination ul a').unwrap('div').wrap('<li></li>');
+                $('.pagination ul span').wrap('<li class="active"></li>')
+            </script>
+        </div>
+        <!-- footer part -->
+        <include file="Public/footer" />
+    </div>
+</div>
+

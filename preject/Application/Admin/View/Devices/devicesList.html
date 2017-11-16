@@ -1,0 +1,55 @@
+<include file="Public/header" />
+<div class="content">
+    <include file="Public/nav" />
+    <div class="row-fluid fl" id="main">
+        <div class="tableBox">
+            <div class="titleBar">设备管理/<span>设备列表</span></div>
+            <form class="form-search fr" action="" method="">
+                <input type="text" class="input-medium" name="name" placeholder="请输入用户昵称" / >  
+                <button type="submit" class="btn">查找</button>
+            </form>
+            <table class="table table-bordered table-hover text-center" >
+                <thead class="h4 ">
+                    <tr class="danger">
+                        <td>ID</td>
+                        <td>设备编号</td>
+                        <td>绑定的经销商</td>
+                        <td>用户信息（读）</td>
+                        <td>激活日期（读）</td>
+                        <td>计费模式（读）</td>
+                        <td>剩余量:时长和流量（读）</td>
+                        <td>设备状态（读）</td>
+                        <td>是否在线（读）</td>
+                        <td>更新时间</td>
+                    </tr>
+                </thead>
+                <tbody>
+                <for start="1" end="2">
+                        <volist name="deviceInfo" id="data">
+                            <tr>
+                                <td>{{$i}}</td>
+                                <td>{{$data.device_code}}</td>
+                                <td>{{$data.device_statu}}</td>
+                                <td>{{$data.phvalue}}</td>
+                                <td>{{$data.filter1}}%</td>
+                                <td>{{$data.filter2}}%</td>
+                                <td>{{$data.filter3}}%</td>
+                                <td>{{$data.filter4}}%</td>
+                                <td>{{$data.filter5}}%</td>
+                                <td>{{$data.updated_at}}</td>
+                            </tr>
+                        </volist>
+                </for>
+                </tbody>
+            </table>
+            <!-- 上下页，请加样式 -->
+            <div class="pagination pagination-lg pull-center">
+                <ul>
+                    {{$button}}
+                </ul>
+            </div>
+        </div>
+        <include file="Public/footer" />
+    </div>
+</div>
+

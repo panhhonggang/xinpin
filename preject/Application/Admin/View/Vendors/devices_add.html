@@ -1,0 +1,51 @@
+<include file="Public/header" />
+<div class="content">
+    <include file="Public/nav" />
+    <div class="row-fluid fl" id="main">
+        <div class="tableBox">
+            <div class="titleBar">后台管理/<span>绑定机组</span></div>
+            <div class="formBox">
+                <form class="form-horizontal " action="__URL__/devices_add" method="post">
+                    <div class="control-group">
+                        <label class="control-label">请选择经销商：</label>
+                        <div class="controls">
+                            <select name="vid" id="">
+                                <notempty name="user">
+                                    <foreach name="user" item="vo" key="key">
+                                        <option value="{{$vo.id}}">{{$vo.name}}</option>
+                                    </foreach>
+                                    <else />
+                                    <option value="0">查无数据</option>
+                                </notempty>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">请选择机组：</label>
+                        <div class="controls">
+                            <select name="cid" id="">
+                                <notempty name="devices">
+                                    <foreach name="devices" item="vv" key="key">
+                                        <option value="{{$vv.id}}">{{$vv.cname}}</option>
+                                    </foreach>
+                                    <else />
+                                    <option value="0">查无数据</option>
+                                </notempty>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <label class="checkbox">
+                                &nbsp;
+                            </label>
+                            <button class="btn btn-large btn-primary form-submit" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确认&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <include file="Public/footer" />
+    </div>
+</div>
+

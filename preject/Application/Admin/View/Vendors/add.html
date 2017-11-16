@@ -1,0 +1,53 @@
+<include file="Public/header" />
+<div class="content">
+    <include file="Public/nav" />
+    <div class="row-fluid fl" id="main">
+        <div class="tableBox">
+            <div class="titleBar">后台管理/<span>添加经销商</span></div>
+            <div class="formBox">
+                <form class="" action="__URL__/add" method="post">
+                    <!-- <div class="">
+                        <span>账号属性</span>
+                            一级经销商：<input type="radio" name="leavel" value="1" style="margin: 0">
+                    </div> -->
+                    <div class="control-group">
+                        <span>账户名</span>
+                        <input type="text" name="name" placeholder="请输入登录账号...">
+                    </div>
+                    <div class="control-group">
+                        <span>密码</span>
+                        <input type="password" name="password" placeholder="请输入登录密码...">
+                    </div>
+                    <div class="control-group">
+                        <span>确认密码</span>
+                        <input type="password" name="repassword" placeholder="请再次输入密码...">
+                    </div>
+                    <div class="control-group">
+                        <span>公司名称</span>
+                        <input type="text" name="company" placeholder="请输入公司名称...">
+                    </div>
+                    <div class="control-group">
+                        <span>手机号码</span>
+                        <input type="text" name="phone" placeholder="请输入手机号码...">
+                    </div>
+                    <div class="control-group">
+                        <span>邮箱</span>
+                        <input type="text" name="email" placeholder="请输入邮箱...">
+                    </div>
+                    <div class="control-group">
+                        <span>地址</span>
+                        <input type="text" name="address" placeholder="请输入地址...">
+                    </div>
+                    <div class="control-group">
+                        <span>身份证号</span>
+                        <input type="text" name="idcard" placeholder="请输入身份证号...">
+                    </div>
+                    <div class="control-group">
+                        <button class="btn btn-primary " type="submit" style="display: block; padding: 2px 40px;margin:20px auto">确认</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <include file="Public/footer" />
+    </div>
+</div>
