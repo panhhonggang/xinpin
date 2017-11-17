@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-11-16 11:29:27
+Date: 2017-11-17 14:20:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -306,16 +306,17 @@ INSERT INTO `xp_vendors` VALUES ('2', '经销商头子', '202cb962ac59075b964b07
 DROP TABLE IF EXISTS `xp_work`;
 CREATE TABLE `xp_work` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `number` int(11) NOT NULL COMMENT '工单编号(时间+序号)',
+  `number` varchar(30) NOT NULL COMMENT '工单编号(时间+机组id)',
   `name` varchar(50) NOT NULL COMMENT '处理人',
   `type` tinyint(1) NOT NULL COMMENT '工单类型(0：安装 1：维修 2：维护)',
   `content` text NOT NULL COMMENT '维护内容',
   `address` varchar(50) NOT NULL COMMENT '地址',
   `result` tinyint(1) NOT NULL COMMENT '处理结果(0：未处理 1：正在处理 2：已处理)',
-  `time` int(11) NOT NULL COMMENT '处理时间',
+  `time` varchar(30) NOT NULL COMMENT '处理时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of xp_work
 -- ----------------------------
+INSERT INTO `xp_work` VALUES ('1', '20171117-2', '隔壁老王', '0', '安装2号机组在三里屯试衣间', '三里屯', '2', '2017-11-17');
