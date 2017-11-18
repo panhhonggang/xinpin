@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-11-16 11:29:27
+Date: 2017-11-18 11:35:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,7 +38,7 @@ INSERT INTO `xp_binding` VALUES ('1', '2', '1', '1510801488');
 DROP TABLE IF EXISTS `xp_card`;
 CREATE TABLE `xp_card` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `iccard` int(11) NOT NULL COMMENT 'IC卡编号',
+  `iccard` varchar(50) NOT NULL COMMENT 'IC卡编号',
   `name` varchar(255) DEFAULT NULL COMMENT '持有人姓名',
   `studentcode` int(11) DEFAULT NULL COMMENT '学籍号',
   `school` varchar(255) DEFAULT NULL COMMENT '学校',
@@ -47,11 +47,21 @@ CREATE TABLE `xp_card` (
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态(0：未绑定 1：已绑定 2：挂失)',
   `addtime` int(11) NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of xp_card
 -- ----------------------------
+INSERT INTO `xp_card` VALUES ('21', 'IC0001', null, null, null, null, '0', '0', '1510976099');
+INSERT INTO `xp_card` VALUES ('22', 'IC0002', null, null, null, null, '0', '0', '1510976099');
+INSERT INTO `xp_card` VALUES ('23', 'IC0003', null, null, null, null, '0', '0', '1510976099');
+INSERT INTO `xp_card` VALUES ('24', 'IC0004', null, null, null, null, '0', '0', '1510976099');
+INSERT INTO `xp_card` VALUES ('25', 'IC0005', null, null, null, null, '0', '0', '1510976099');
+INSERT INTO `xp_card` VALUES ('26', 'IC0006', null, null, null, null, '0', '0', '1510976099');
+INSERT INTO `xp_card` VALUES ('27', 'IC0007', null, null, null, null, '1', '0', '1510976099');
+INSERT INTO `xp_card` VALUES ('28', 'IC0008', null, null, null, null, '1', '0', '1510976099');
+INSERT INTO `xp_card` VALUES ('29', 'IC0009', null, null, null, null, '1', '0', '1510976099');
+INSERT INTO `xp_card` VALUES ('30', 'IC0010', null, null, null, null, '1', '0', '1510976099');
 
 -- ----------------------------
 -- Table structure for xp_consume
@@ -306,16 +316,17 @@ INSERT INTO `xp_vendors` VALUES ('2', '经销商头子', '202cb962ac59075b964b07
 DROP TABLE IF EXISTS `xp_work`;
 CREATE TABLE `xp_work` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `number` int(11) NOT NULL COMMENT '工单编号(时间+序号)',
+  `number` varchar(30) NOT NULL COMMENT '工单编号(时间+机组id)',
   `name` varchar(50) NOT NULL COMMENT '处理人',
   `type` tinyint(1) NOT NULL COMMENT '工单类型(0：安装 1：维修 2：维护)',
   `content` text NOT NULL COMMENT '维护内容',
   `address` varchar(50) NOT NULL COMMENT '地址',
   `result` tinyint(1) NOT NULL COMMENT '处理结果(0：未处理 1：正在处理 2：已处理)',
-  `time` int(11) NOT NULL COMMENT '处理时间',
+  `time` varchar(30) NOT NULL COMMENT '处理时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of xp_work
 -- ----------------------------
+INSERT INTO `xp_work` VALUES ('1', '20171117-2', '隔壁老王', '0', '安装2号机组在三里屯试衣间', '三里屯', '2', '2017-11-17');
