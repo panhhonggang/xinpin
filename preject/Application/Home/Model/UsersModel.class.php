@@ -8,9 +8,8 @@ class UsersModel extends Model
         array('name','require','姓名不能为空'), //默认情况下用正则进行验证 
         array('address','require','地址不能为空'), //默认情况下用正则进行验证 
         array('password','require','密码不能为空'), //默认情况下用正则进行验证 
-        array('name','','姓名已经存在！',0,'unique',1), // 在新增的时候验证name字段是否唯一
         array('phone','','手机号已经存在！',0,'unique',1), // 在新增的时候验证name字段是否唯一
-
+        array('repassword','password','确认密码不正确',0,'confirm'), // 验证确认密码是否和密码一致
 
 
 
@@ -24,5 +23,6 @@ class UsersModel extends Model
         array('password','md5',3,'function') ,  // 对password字段在新增和编辑的时候使md5函数处理
         array('addtime','time',3,'function'),   // 对update_time字段在更新的时候写入当前时间戳       
     );
+
 
 }
