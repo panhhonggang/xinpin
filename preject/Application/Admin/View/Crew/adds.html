@@ -22,21 +22,19 @@
         }
     </style>
         <div class="tableBox">
-            <div class="titleBar">机组管理/<span>机组设置</span></div>
+            <div class="titleBar">机组管理/<span>批量导入</span></div>
             <div class="formBox">
-                <form class="" action="__URL__/add" method="post">
+                <form class="" action="__URL__/upload" method="post" enctype="multipart/form-data">
                     <div class="control-group">
-                        <span>机组编码</span>
-                        <input type="text" class="control" name="cname" placeholder="请输入机组编码" style="width:210px;">
-                    </div>
-                    <div class="control-group">
-                        <span>设备编码</span>
-                        <input type="text" class="control" name="dcode" placeholder="请输入设备编码" style="width:210px;">
+                        <span>上传表格</span>
+                        <input type="file" class="control" name="excelData" style="width:210px;">
+                        <!-- <input type="hidden" name="table" value="tablename"/> -->
                     </div>
                     <div class=" btn-groups">
-                        <button class="btns reset" type="reset">重置</button>
-                        <button class="subbtn btns" type="submit">提交</button>
+                        <button class="subbtn btns" type="submit">批量导入</button>
                     </div>
+                    
+
                 </form>
             </div>
         </div>
