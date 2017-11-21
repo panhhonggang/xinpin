@@ -30,17 +30,17 @@ ul li{
 	background: #333;
 }
 
-
 /*content part css*/
 .content{
 	overflow: hidden;
 	width: 100%;
-	margin-top: 70px;
+	position: relative;
 }
-.content .welcomePage h1{
-	width: 300px;
+.content .welcomePage{
+	width: 400px;
 	height: 50px;
-	margin: 100px auto;
+	margin: 200px auto;
+	font-size: 40px;
 }
 /*header part css*/
 #header{ 
@@ -48,11 +48,9 @@ ul li{
     line-height: 70px;
     width: 100%;
     background: #222;
-    position: fixed;
-    top: 0;
-    left: 0;
     font-size: 14px;
-    color: #9d9d9d;
+    color: #fff;
+    z-index: 1000000;
 }
 #header .welcomeText .currentAccount{
 	font-size: 20px;
@@ -62,28 +60,27 @@ ul li{
 	margin-left: 70px;
 }
 #header .headerRight{
-	margin-right: 50px;
+	height: 70px;
+	line-height: 50px;
 }
 #header .headerRight div{
 	line-height: 48px;
 	float: left;
-	height: 48px;
-	color: #fff;
+	height: 70px;
+	line-height: 70px;
 }
 #header .headerRight .button{
-	width:135px;
-	height: 47px;
-	display: inline-block;
+	width:100px;
 	text-align: center;
 	cursor: pointer;
-	color: #949494;
 }
 
 
 
 /*form part css*/
-.content #main{width: 85%; padding-top:50px; }
-.content #main .titleBar{font-family: "黑体"; font-size: 20px;}
+.content #main{width: 85%; }
+.content #main .titleBar{font-family: "黑体"; font-size: 20px; padding: 15px 0;}
+.form-search{padding: 15px 0;}
 .content #main .titleBar span{ font-size: 16px;}
 .content .formBox{
 	width:500px;
