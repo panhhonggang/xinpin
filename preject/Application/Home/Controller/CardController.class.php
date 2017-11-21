@@ -31,7 +31,7 @@ class CardController extends CommonController
                         $data['uid'] = $_SESSION['homeuser']['id'];
                         $data['status'] = 1;
                         $info = $user->where('iccard="'.$_POST['iccard'].'"')->save($data);
-                        //dump($_SESSION);exit();
+                        
                         if($info){
                            //跳转到用户中心
                             $this->success('添加成功',U('Users/index')); 

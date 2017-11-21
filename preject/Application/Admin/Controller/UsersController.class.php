@@ -40,15 +40,15 @@ class UsersController extends CommonController
         if (IS_POST) {
  
             // 接收数据
+            // 尊敬的${content}，测试喝水建议。
             $phone = $_POST['phone'];
-            $name = $_POST['name'];
-            $content = $_POST['content'];
+            $content = '用户' . $_POST['name'] . '您好！'.$_POST['content'];
 
             // 开始接口代码
             $sms = new \Org\Util\SmsDemo;
             $response = $sms::sendSms(
                 "阿里云短信测试专用", // 短信签名
-                "SMS_112465498", // 短信模板编号
+                "SMS_112475574", // 短信模板编号
                 $phone, // 短信接收者
                 Array(  // 短信模板中字段的值
                     "content"=>$content,

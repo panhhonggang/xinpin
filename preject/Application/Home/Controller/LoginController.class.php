@@ -17,6 +17,9 @@ class LoginController extends Controller
     //用户登录
     public function login()
     {
+        // 登录检查
+        if(!empty($_SESSION['homeuser'])) $this->redirect('Index/index');
+
         if(IS_POST){         
             //判断验证码是否正确
             $Verify =  new \Think\Verify();
