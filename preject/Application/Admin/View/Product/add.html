@@ -14,7 +14,7 @@
         }
         .control-group{position: relative;}
         .control-group .elected{position: absolute; top: 0;left: 0;}
-        .control-group .textarea{margin-left: 190px;}
+        .control-group .textarea{margin-left: 185px; width: 219px;}
         .btn-groups .btns{
             margin: 150px 0 50px 90px;
             padding: 8px 35px;
@@ -24,13 +24,13 @@
         <div class="tableBox">
             <div class="titleBar">产品管理/<span>产品类型设置</span></div>
             <div class="formBox">
-                <form class="" action="__URL__/add" method="post">
+                <form class="form-horizontal " action="__URL__/add" method="post">
                     <div class="control-group">
-                        <span>类型名称</span>
+                        <span>类型名称：</span>
                         <input type="text" class="control" name="typename" placeholder="请输入类型名称" style="width:210px;">
                     </div>
                     <div class="control-group">
-                        <span>请选择滤芯</span>
+                        <span>请选择滤芯：</span>
 
                         <select name="" class="form-control selects" >
                             <foreach name="list" item="vo">
@@ -39,13 +39,13 @@
                         </select>
                     </div>
                     <div class="control-group">
-                        <span class="elected" >已选择滤芯</span>
+                        <span class="elected" >已选择滤芯：</span>
                         <div class="textarea inline"></div>
                     </div>
 
                     <div class=" btn-groups">
-                        <button class="btns reset" type="reset">重置</button>
-                        <button class="subbtn btns" type="submit">提交</button>
+                        <button class="btns reset btn-primary" type="reset">重置</button>
+                        <button class="subbtn btns btn-primary" type="submit">提交</button>
                     </div>
                 </form>
             </div>

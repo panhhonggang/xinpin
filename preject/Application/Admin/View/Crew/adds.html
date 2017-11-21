@@ -15,23 +15,23 @@
         .control-group{position: relative;}
         .control-group .elected{position: absolute; top: 0;left: 0;}
         .control-group .textarea{margin-left: 190px;}
-        .btn-groups .btns{
-            margin: 150px 0 50px 90px;
-            padding: 8px 35px;
-            border-radius: 7px;
+        .btn-groups{
+            width: 300px;
+            margin: 0 auto;
         }
+       
     </style>
         <div class="tableBox">
             <div class="titleBar">机组管理/<span>批量导入</span></div>
             <div class="formBox">
-                <form class="" action="__URL__/upload" method="post" enctype="multipart/form-data">
+                <form class="form-group" action="__URL__/upload" method="post" enctype="multipart/form-data">
                     <div class="control-group">
                         <span>上传表格</span>
-                        <input type="file" class="control" name="excelData" style="width:210px;">
+                        <input class="file-input" type="file" class="control" name="excelData" style="width:210px;">
                         <!-- <input type="hidden" name="table" value="tablename"/> -->
                     </div>
-                    <div class=" btn-groups">
-                        <button class="subbtn btns" type="submit">批量导入</button>
+                    <div class="btn-groups">
+                        <button class="subbtn btns btn-primary oddbtn" type="submit">批量导入</button>
                     </div>
                     
 
