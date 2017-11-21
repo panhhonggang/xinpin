@@ -38,8 +38,32 @@ class UsersController extends CommonController
     public function message($id)
     {   
         if (IS_POST) {
-            dump($_POST);die;
+ 
+            // 接收数据
+            $phone = $_POST['phone'];
+            $name = $_POST['name'];
+            $content = $_POST['content'];
+
             // 开始接口代码
+            $sms = new \Org\Util\SmsDemo;
+            $response = $sms::sendSms(
+                "阿里云短信测试专用", // 短信签名
+                "SMS_112465498", // 短信模板编号
+                $phone, // 短信接收者
+                Array(  // 短信模板中字段的值
+                    "content"=>$content,
+                    "product"=>"dsd"
+                ),
+                "123"   // 流水号,选填
+            );
+
+            // 信息推送状态判断
+            if($response->Code=='OK'){
+                $this->error('消息推送成功！');
+            }else{
+                $this->error('消息推送失败，错误码：' . $response->Code);
+            }
+
         }else{
             $user = M('users');
             $userinfo = $user->where('id='.$id)->select();
@@ -62,162 +86,5 @@ class UsersController extends CommonController
         } else {
             $this->error('修改失败啦！');
         }
-    }
-    
-    /**
-     * 删除经销商方法
-     * 需保证其没有下级，没有设备与之挂钩
-     * @author 潘宏钢 <619328391@qq.com>
-     */
-    public function del($id)
-    {
-        $userinfo = M('vendors')->where("id=".$id)->select();
-
-        if ($userinfo[0]['leavel'] == 0 ) {
-            $this->error('不能删除超级管理员！');
-        }else{
-            // 查
-            $res = D('vendors')->delete($id);
-            if($res){
-                $this->success('删除成功',U('index'));
-            }else{
-                $this->error('删除失败');
-            }
-
-        }
-    }
-
-    /**
-     * 机组绑定经销商方法
-     * 
-     * @author 潘宏钢 <619328391@qq.com>
-     */
-    public function devices_add()
-    {
-        if (IS_POST) {
-
-            if ($_POST['cid']) {
-
-                if ($_POST['vid']) {
-                   
-                    $arr = array(
-                        'vid' => I('vid'),
-                        'cid' => I('cid'),
-                        'addtime' => time(),
-                    );
-                    
-                    // 添加
-                    $binding = M('binding');
-                    if ($binding->add($arr)) {
-                        // 更改机组的绑定状态
-                        $devices = M('crew');  
-                        $devices->where('id='.$_POST['cid'])->setField('status','1');
-
-                        $this->success('添加成功',U('bindinglist'));
-                    }else{
-                        $this->error('添加失败啦');
-                    }
-
-                }else{
-                    $this->error('经销商不存在！请在经销商管理中添加经销商后尝试！正在为您跳转至经销商管理',U('index')); 
-                }
-
-            }else{
-                $this->error('机组不存在！请在机组管理中设置机组后尝试！正在为您跳转至机组管理',U('Crew/index'));
-            }   
-
-        }else{
-
-            if(!empty($_SESSION['adminuser'])){
-                // 获取经销商信息
-                $case = $_SESSION['adminuser']['leavel'];
-
-                switch ($case) {
-                    
-                    case '0':
-                        $user = D('vendors')->getAll();
-                        break;
-
-                    case '1':
-                    // 一级经销商只能给二级经销商绑定设备，如需再往下分级，则case '2' leavel=3
-                        $user = M('vendors')->where('leavel=2')->select();
-
-                        break;    
-                    
-                    default:
-                        # code...
-                        break;
-                }
-
-                // 获取机组信息
-                $devices = M('crew')->where('status=0')->select();
-
-                $this->assign('user',$user);
-                $this->assign('devices',$devices);
-                $this->display();
-            }else{
-                $this->error('登录失效，请重新登陆！',U('Login/login'));
-            }
-            
-        }
-
-    }
-
-    /**
-     * 机组绑定经销商列表
-     * 
-     * @author 潘宏钢 <619328391@qq.com>
-     */
-    public function bindinglist()
-    {
-       // 根据用户昵称进行搜索
-        if(!empty($_GET['name'])) $map['name'] = array('like',"%{$_GET['name']}%");
-
-        $binding = M('binding');
-        
-        $total =$binding->where($map)
-                    ->join('xp_vendors ON xp_binding.vid = xp_vendors.id')
-                    ->join('xp_crew ON xp_binding.cid = xp_crew.id')
-                    ->field('xp_binding.*,xp_vendors.name,xp_vendors.phone,xp_crew.cname')
-                    ->count();
-        $page  = new \Think\Page($total,8);
-        $pageButton =$page->show();
-
-        $bindinglist = $binding->where($map)
-                                ->limit($page->firstRow.','.$page->listRows)
-                                ->join('xp_vendors ON xp_binding.vid = xp_vendors.id')
-                                ->join('xp_crew ON xp_binding.cid = xp_crew.id')
-                                ->field('xp_binding.*,xp_vendors.name,xp_vendors.phone,xp_crew.cname')
-                                ->select();
-        // dump($bindinglist);
-        $this->assign('list',$bindinglist);
-        $this->assign('button',$pageButton);
-        $this->display(); 
-    }
-
-    /**
-     * 解除绑定方法
-     * 
-     * @author 潘宏钢 <619328391@qq.com>
-     */
-    public function bindingdel($id,$did)
-    {
-        
-        if ($_SESSION['adminuser']['leavel'] == 0) {
-
-            $res = D('binding')->delete($id);
-            if($res){
-                // 更新设备绑定状态
-                $devices = M('crew');  
-                $devices->where('id='.$did)->setField('status','0');
-                $this->success('解除成功',U('bindinglist'));
-            }else{
-                $this->error('解除失败');
-            }
-
-        }else{
-           $this->error('对不起，您没有权限解除绑定！',U('bindinglist'));
-        }
-    }
-
+    }   
 }
