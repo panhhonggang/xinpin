@@ -16,7 +16,7 @@
         .control-group .elected{position: absolute; top: 0;left: 0;}
         .control-group .textarea{margin-left: 190px;}
         .btn-groups .btns{
-            margin: 150px 0 50px 90px;
+            margin: 50px 0 50px 90px;
             padding: 8px 35px;
             border-radius: 7px;
         }
@@ -35,6 +35,10 @@
                         <input type="text" class="control" name="name" placeholder="请输入处理人姓名..." style="width:210px;">
                     </div>
                     <div class="control-group">
+                        <span>处理人电话</span>
+                        <input type="text" class="control" name="phone" placeholder="请输入处理人电话..." style="width:210px;">
+                    </div>
+                    <div class="control-group">
                         <span>维护类型</span>
                         <input type="radio" class="control" name="type" value="0" checked>安装&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="radio" class="control" name="type" value="1">维修&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -46,8 +50,12 @@
                     </div>
                     <div class="control-group">
                         <span>地址</span>
+                        <div class="info">
+                            <select id="s_province" name="s_province"></select>&nbsp;&nbsp;
+                            <select id="s_city" name="s_city" ></select>&nbsp;&nbsp;
+                            <select id="s_county" name="s_county"></select>
+                        </div>
                         <!-- 此处需要三级联动 -->
-                        <input type="text" class="control" name="address" placeholder="请输入地址..." style="width:210px;">
                     </div>
                     <div class="control-group">
                         <span>处理结果</span>
@@ -58,11 +66,11 @@
                     <div class="control-group">
                         <span>处理时间</span>
                         <!-- 需要时间插件 -->
-                        <input type="date" class="control" name="time"  style="width:210px;">
+                        <input type="text" id="addMaintenanceDate" placeholder="输入处理时间" onclick="layui.laydate({elem: this,istime: 1, format: 'YYYY-MM-DD' })"/>
                     </div>
-                    <div class=" btn-groups">
-                        <button class="btns reset" type="reset">重置</button>
-                        <button class="subbtn btns" type="submit">提交</button>
+                    <div class="btn-groups">
+                        <button class="btns reset btn-primary" type="reset">重置</button>
+                        <button class="subbtn btns btn-primary" type="submit">提交</button>
                     </div>
                     
 
@@ -105,5 +113,17 @@
     $(".reset").click(function(){
         textareaHtml="";
         $(".textarea").html("");
-    });    
+    });   
+
+    //处理日期
+    layui.use('laydate', function(){
+        var element =laydate = layui.laydate
+    })
+    //城市三级联动
+    _init_area();
+    var Gid  = document.getElementById ;
+    var showArea = function(){
+        Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" + Gid('s_city').value + " - 县/区" + Gid('s_county').value + "</h3>"
+    }
+
 </script>

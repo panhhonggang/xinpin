@@ -1,0 +1,147 @@
+/*注册页面css*/
+.logo{
+	width: 100vw;
+	height: 50vw;
+	margin-top: 10vw;
+	background: url("../image/logo.png") no-repeat;
+	background-position:center center;
+	background-size: 60vw 31vw;
+}
+.inputBox .row input{
+	background: #60CDAF;
+	margin-top: 20px;
+	color: #fff;
+	border:none;
+	box-shadow:inset 0 0 5px #218C6A;
+}
+
+.inputBox .row input::-webkit-input-placeholder {
+	color:#fff;
+}
+.registerBtn {
+	width: 90vw;
+	margin: 20vw 0 0 5vw;
+	color: #218C6A;
+	font-weight: bold;
+}
+.provingSpan{
+	color: #000;
+	margin-top: 20px;
+	display: inline-block;
+	padding: 7px 0;
+
+}
+.registerFooter{
+	width: 100vw;
+	margin-top: 10vw;
+}
+.registerFooter a{
+	color: #218C6A;
+}
+.checkSpan{
+	width: 15px;
+	height: 15px;
+	border: 1px solid #61CDAC;
+	margin:0 2vw;
+	border-radius: 3px;
+	padding: 0px 8px;
+}
+.btn-list{
+	margin-top: 5vw;
+}
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0 auto;
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    -webkit-user-select: none;
+}
+
+body {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+}
+.col-md-12{position: relative;}
+.col-md-12 .caret{
+	position:absolute;
+	right: 5vw;
+	top: 15px;
+	color: #007958;
+}
+/*注册页面css end*/
+
+/*主页面css */
+.showBalanceBox{
+	width: 100vw;
+	height: 70vw;
+	background: #61CDB1;
+	position: relative;
+}
+.showBalanceBox .showBalance{
+	width: 100vw;
+	height: 60vw;
+	position: absolute;
+	top: 5vw;
+	background: #fff;
+	
+}
+.moneylogo{
+	width: 30vw;
+	height: 30vw;
+	margin: 0 auto;
+	background:url("../image/moneylogo.png") center center no-repeat;
+	background-size: 20vw 20vw;
+}
+.numBalance{
+	font-weight: bold;
+}
+.table-data{
+	background: url("../image/tableBg.png") no-repeat;
+	background-size: 100% 100%;
+	text-align: center;			
+}
+.slippage-list{
+	width: 100vw;
+	height: 20vw;
+	margin-top: 5vw;
+}
+
+.slippage-list li{width: 10px;
+height: 10px;
+border-radius: 50%;
+background: #ccc;
+margin: 0 2vw;
+}
+.slippage-list li.slippage-active{
+	background: #008A63;
+}
+footer{
+	border-top: 2px solid #ccc;
+	padding-top: 10px;
+}
+footer > section{
+	width: 20vw;
+	float: left;
+	text-align: center;
+
+}
+footer > section div{
+	width: 10vw;
+	height: 10vw;
+}
+footer > section div.logo1{
+	background: url("../image/sprite.png") no-repeat;
+	background-position: 
+}
