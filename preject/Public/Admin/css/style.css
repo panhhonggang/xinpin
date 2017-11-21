@@ -14,6 +14,9 @@ html, body {
 .fl{
 	float: left;
 }
+.bodyBg{
+	background: #fff;
+}
 ul li{
 	list-style: none;
 }
@@ -24,6 +27,7 @@ ul li{
 }
 .navBox ul li.active ul{
 	display: block;
+	background: #333;
 }
 
 
@@ -31,6 +35,7 @@ ul li{
 .content{
 	overflow: hidden;
 	width: 100%;
+	margin-top: 70px;
 }
 .content .welcomePage h1{
 	width: 300px;
@@ -39,57 +44,45 @@ ul li{
 }
 /*header part css*/
 #header{ 
-	background:url(../img/header-bg.jpg) repeat-x;
-	height: 130px;
-	line-height: 130px;
-	color:#fff; 
+	height: 70px;
+    line-height: 70px;
+    width: 100%;
+    background: #222;
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-size: 14px;
+    color: #9d9d9d;
 }
 #header .welcomeText .currentAccount{
 	font-size: 20px;
 }
 #header .headerLeft{
-	font-size: 40px;
-	margin-left: 300px;
+	font-size: 25px;
+	margin-left: 70px;
 }
 #header .headerRight{
-float: right;
-margin-right: 50px;
-margin-top: 30px;
+	margin-right: 50px;
 }
 #header .headerRight div{
 	line-height: 48px;
 	float: left;
 	height: 48px;
+	color: #fff;
 }
 #header .headerRight .button{
 	width:135px;
 	height: 47px;
-	background: url(../img/headBtn_bg.png) no-repeat;
 	display: inline-block;
-	margin-left: 20px;
 	text-align: center;
 	cursor: pointer;
+	color: #949494;
 }
-#header .headerRight  .button div{
-	float: left;
-	margin-left: 16px;
-}
-#header .headerRight .button .modifyLogo{
-	width:29px;
-	display: inline-block;
-	background:url(../img/modifyLogo.png) no-repeat;
-	background-position: center center;
-}
-#header .headerRight .button .bowoutLogo{
-	width:29px;
-	display: inline-block;
-	background:url(../img/bowoutLogo.png) no-repeat;
-	background-position: center center;
-}
+
 
 
 /*form part css*/
-.content #main{width: 85%; padding-top:20px; }
+.content #main{width: 85%; padding-top:50px; }
 .content #main .titleBar{font-family: "黑体"; font-size: 20px;}
 .content #main .titleBar span{ font-size: 16px;}
 .content .formBox{
@@ -122,10 +115,48 @@ margin-top: 30px;
 	bottom: 0 ;left: 15%;  }
 .content #footer p{ padding:10px 20px;}
  
+.btn{
+	border: 0px;
+	border-radius: 10px;
+}
+.form-group{
+    margin-top: 100px;
+}
+.btn-groups .btns{
+    margin: 150px 0 50px 90px;
+    border-radius: 7px;
+}
+.btn-groups .oddbtn{
+	width: 120px;
+	height: 40px;
+    margin: 50px auto;
+    display: block;
 
+}
 
+.btn-groups .btnL{
+	width: 120px;
+	height: 40px;
+    
+}
+.btn-groups .btnR{
+	width: 120px;
+	height: 40px;
+    margin: 50px auto;
+    display: block;
+}
+.form-horizontal {
+	margin-top: 100px;
+}
 /*login part css*/
 #login{ padding-top: 200px; }
+
+.info{
+	display: inline-block;
+}
+.info select{
+	width: 63px;
+}
 
 
 
