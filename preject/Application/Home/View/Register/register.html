@@ -11,7 +11,7 @@
 	<script language="javascript">
 		function get_phone_code(){
 			$.post("__URL__/getcode",{phone:jQuery.trim($('#phone').val())},function(msg) {
-				if(msg=='提交成功'){
+				if(msg=='OK'){
 					RemainTime();	
 				}
 			});
@@ -44,7 +44,8 @@
 			}else{
 				sTime='没有倒计时';
 			}
-			document.getElementById('zphone').value = sTime;
+
+			document.getElementById('zphone').innerHTML = sTime;
 		}	
 	</script>
 </head>
@@ -70,7 +71,7 @@
 		</section>
 		<!-- 下一步按钮 -->
 		<section class="registerBtn btn text-center btn-default">
-			<button style="border: none;background: none;">下一步</button>
+			<button style="border: none;background: none; width: 100%;height: 100%;">下一步</button>
 		</section>
 	</form>
 	<section class="registerFooter text-center">
