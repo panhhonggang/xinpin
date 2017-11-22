@@ -82,39 +82,6 @@
     </div>
 </div>
 <script>
-    var filter="",textareaHtml1="";
-    var b=0;
-    //添加滤芯项
-    $("select").change(function(){
-        b++;
-        if(b>8){
-            alert("不能超过8个滤芯！");
-        }else{
-            var i=0,textareaHtml2="";
-            //设置显示已选择滤芯 
-            textareaHtml1+="<p class='inline form-control'>"+$("select option:selected").text()+"<input type='hidden' name='' value='"+$("select option:selected").val()+"' /></p>";
-            $(".textarea").html(textareaHtml1);
-            for (;i<$(".textarea").children().length; i++) {
-                filter='did'+(i+1).toString();
-                $(".textarea p").eq(i).children("input").attr("name",filter);
-            }
-            // 设置未选择滤芯
-            var lengths=8-$(".textarea").children().length;
-            if(lengths>0){
-                for(var j=0;j<lengths;j++){
-                    textareaHtml2+="<p class='inline form-control' style='visibility:hidden;'>''<input type='hidden' name='did"+(i+1+j).toString()+"' value='' /></p>"
-                }
-            }
-            $(".textarea").append(textareaHtml2);
-        }
-        
-    });
-    //重置
-    $(".reset").click(function(){
-        textareaHtml="";
-        $(".textarea").html("");
-    });   
-
     //处理日期
     layui.use('laydate', function(){
         var element =laydate = layui.laydate
