@@ -1,33 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1" >
+	<title>添加IC卡</title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
+	<script src="__PUBLIC__/Home/js/public.js"></script>
 </head>
 <body>
-	
-	<form action="__URL__/add" method="post" name="formUser">
-		<table width="600"  border="1" align="center" cellpadding="5" cellspacing="3">
-			<caption><h3>IC卡管理-添加</h3></caption>
-			<tr>
-				<td align="right">IC卡编号</td>
-	        	<td><input type="text" name="iccard" ></td>
-	        </tr>
-			<tr>
-				<td align="right">学籍号</td>
-	        	<td><input type="text" name="studentcode" ></td>
-	        </tr>
-
-			<tr>
-				<td align="right">学校</td>
-	        	<td><input type="text" name="school" ></td>
-	        </tr>
-
-			<tr>
-				<td align="right"></td>
-				<td><input type="submit" value="添加" class="button"></td>
-			</tr>
-		</table>
+	<section class="addICtitle">请填写持卡人资料</section>
+	<form class="container addIC" action="__URL__/add" method="post" name="formUser">
+		<section class="row">
+			<section class="col-md-12">
+				<input class="form-control" type="text" value="" name="" placeholder="持卡人姓名">
+			</section>
+		</section>
+		<section class="row">
+			<section class="col-md-12">
+				<input class="form-control" type="text" value="" name="" placeholder="学校">
+			</section>
+		</section>
+		<section class="row">
+			<section class="col-md-12">
+				<input class="form-control" type="text" value="" name="" placeholder="学籍号">
+			</section>
+		</section>
+		<section class="row">
+		  <section class="col-xs-12">
+		    <section class="input-group">
+		      <input type="text" class="form-control" placeholder="IC卡账号">
+		      <span class="input-group-btn">
+		        <button class="btn btn-default" type="button"></button>
+		      </span>
+		    </section>
+		  </section><!-- /.col-lg-6 -->
+		</section><!-- /.row -->
+		<section class="row addIDBtn">
+			<section class="col-md-12 form-group">
+				<input class="form-control" type="submit" value="保存" class="button"></td>
+			</section>
+		</section>
 	</form>
 </body>
 </html>
