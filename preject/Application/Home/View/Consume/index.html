@@ -1,10 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1" >
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
+<script src="__PUBLIC__/Home/js/public.js"></script>
+<title>消费记录</title>
 </head>
 <body>
-	<h1>消费记录主页</h1>
+    <!-- slider --> 
+    <ul class="consumeList nav nav-pills" role="tablist">
+  		<li role="presentation" class="active">CiCi</li>
+    	<li>BiBi</li>
+    </ul>
+    <ul class="consumePointList nav nav-pills" role="tablist">
+  		<li role="presentation" class="active">
+  			<span class="spanActive"></span>
+  		</li>
+		<li>
+			<span></span>
+		</li>
+	</ul>
+	<ul class="thead nav nav-pills" role="tablist">
+  		<li role="presentation" class="">用水地点</li>
+		<li>盛水量/ML</li>
+		<li></li>
+	</ul>
+    <section class="container consumeNode">
+    	<table class="consumeTable table table-defalt text-center">
+    		<tbody>
+    			<tbody>
+    				<tr>
+    					<td>广东省</td>
+    					<td>45</td>
+    					<td>20170105</td>
+    				</tr>
+    				<tr>
+    					<td>广东省</td>
+    					<td>45</td>
+    					<td>20170105</td>
+    				</tr>
+    			</tbody>
+    		</tbody>
+    	</table>
+    </section>
+    <!-- footer -->
+    <footer>
+        <section class="">
+            <a href="{{:U('Home/index/index')}}"><span class="logo1"></span>首页</a>
+        </section>
+        <section class="">
+            <a href="{{:U('Home/Consume/index')}}"><span class="logo2"></span>饮水记录</a>
+        </section>
+        <section class="">
+            <a href="{{:U('Home/index/index')}}"><span class="logo3"></span>充值</a>
+        </section>
+        <section class="">
+            <a href="#"><span class="logo4"></span>扫码取水</a>
+        </section>
+        <section class="">
+            <a href="{{:U('Home/index/index')}}"><span class="logo5"></span>我的</a>
+        </section>
+    </footer>
+
 </body>
 </html>

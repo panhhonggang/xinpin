@@ -22,6 +22,7 @@ body {
     -webkit-text-size-adjust: 100%;
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
+    /*line-height: 1.2;*/
 }
 .logo{
 	width: 100vw;
@@ -155,7 +156,8 @@ footer > section{
 	text-align: center;
 	color: #848282;
 }
-footer > section > div{
+footer > section > a span{
+	display: block;
 	width: 11vw;
 	height: 11vw;
 	margin: 0 auto;
@@ -163,20 +165,20 @@ footer > section > div{
 	background-size: 17.7rem 9rem;
 	
 }
-footer > section div.logo1{
+footer > section span.logo1{
 	background-position: -11.6rem 0;
 }
-footer > section div.logo2{
+footer > section span.logo2{
 	background-position: 0.1rem 0;
 }
-footer > section div.logo3{
+footer > section span.logo3{
 	background-position: 0.1rem -1.8rem;
 }
-footer > section div.logo4{
-	background-position: -9.6rem 0;
-}
-footer > section div.logo5{
+footer > section span.logo4{
 	background-position: -3.8rem 0;
+}
+footer > section span.logo5{
+	background-position: -9.6rem 0;
 }
 
 /*添加ic卡 css*/
@@ -271,4 +273,54 @@ footer > section div.logo5{
 	padding-left:18vw;
 	color: #2B302F;
 	font-size: 1rem;
+}
+/*consume css*/
+.consumeList{
+	width: 100vw;
+	height: 10vh;
+	border-bottom: 1px solid #ccc;
+}
+.consumeList >li{
+	text-align: center;
+	width: 50vw;
+	height: 10vh;
+	line-height: 10vh;
+	font-size: 1rem;
+}
+.consumeList li+li,.consumePointList li+li,.thead li+li {
+	margin-left: 0;
+}
+.thead{
+	width: 100vw;
+	height: 10vh;
+}
+.thead > li{
+	width: 33.3vw;
+	height: 8vh;
+	line-height: 8vh;
+	text-align: center;
+	background: #60CDAF;
+	color: #fff;
+}
+.consumePointList{
+	width: 100vw;
+	height: 3vh;
+	background: #F5F5F6;
+	border-top: 1px solid #D7D7D7;
+}
+.consumePointList >li{
+	width: 50vw;
+	height: 2vh;
+	text-align: center;
+}
+.consumePointList >li span.spanActive{
+	padding:0  8vw;
+	background: url("../image/sprite.png") no-repeat;
+	background-position: -13.4rem -3.9rem;
+	background-size: 16rem 9rem;
+}
+.consumeNode{
+	width: 100vw;
+	height: 65vh;
+	margin-top: -.7rem;
 }
