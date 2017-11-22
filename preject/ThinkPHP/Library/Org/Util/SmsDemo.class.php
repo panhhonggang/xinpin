@@ -3,7 +3,7 @@
 namespace Org\Util;
 ini_set("display_errors", "on");
 
-require_once '/Aliyun/vendor/autoload.php';
+require_once dirname(__FILE__).'/Aliyun/vendor/autoload.php';
 
 use Aliyun\Core\Config;
 use Aliyun\Core\Profile\DefaultProfile;
