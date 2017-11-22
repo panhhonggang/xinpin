@@ -3,14 +3,15 @@ namespace Home\Controller;
 use Think\Controller;
 class UsersController extends CommonController 
 {
+	//我的
     public function index()
     {
-        if(empty($_SESSION['homeuser'])){
-            //跳转到登录页面
-            $this->success('请先登录',U('Users/index'));
-        }else{
-            $this->display();
-        }
-        
+        $this->display();        
     }
+	
+	//个人信息
+	public function personalInformation()
+	{
+		$this->display();
+	}
 }
