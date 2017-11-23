@@ -65,27 +65,24 @@ class VendorsController extends CommonController
      * 编辑经销商方法
      * @author 潘宏钢 <619328391@qq.com>
      */
-    public function edit()
+    public function edit($id)
     {
         if(IS_POST){
-            
-            if ($_POST['password'] == $_POST['repassword']) {
-                $mod = M('vendors');
-                $mod->password = md5($_POST['password']);
-
-                $res = $mod->where("id=".$_POST['id'])->save();
-
+            $user = D('vendors');
+            $userinfo = $user->create();
+            if ($userinfo) {
+                $res = $user->save();
                 if ($res) {
-                    $this->success('修改成功啦！','index');
-                }else{
-                    $this->error('修改失败！');
-                }
-            } else {
-                $this->error('两次密码不一样，请重新输入！');
+                    $this->success('编辑经销商成功啦！！！',U('Vendors/index'));
+                } else {
+                    $this->error('编辑经销商失败啦！');
+                }                
+            }else{
+                $this->error($user->getError());
             }
 
         } else {
-            $info = D('vendors')->find($id);
+            $info[] = D('vendors')->find($id);
             $this->assign('info',$info);
             $this->display();
         }

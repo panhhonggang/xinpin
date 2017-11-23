@@ -26,7 +26,7 @@ class VendorsModel extends Model
     // 自动完成
     protected $_auto = array ( 
         array('addtime','time',3,'function'), // 对addtime字段在新增和编辑的时候写入当前时间戳 
-        array('password','md5',3,'function') , // 对password字段在新增和编辑的时候使md5函数处理
+        array('password','md5',1,'function') , // 对password字段在新增的时候使md5函数处理
         
     );
 
