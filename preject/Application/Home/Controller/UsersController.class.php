@@ -4,7 +4,7 @@ use Think\Controller;
 class UsersController extends CommonController 
 {
 	//我的
-    public function index()
+    public function mine()
     {
         $this->display();        
     }
