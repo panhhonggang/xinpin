@@ -71,7 +71,7 @@ class Jssdk
     return $ticket;
   }
 
-  public function getAccessToken() 
+  private function getAccessToken() 
   {
     // access_token 应该全局存储与更新，以下代码以写入到文件中做示例
     $data = json_decode($this->get_php_file("access_token.php"));
@@ -111,14 +111,13 @@ class Jssdk
 
   private function get_php_file($filename) 
   {
-    $str = trim(substr(file_get_contents(dirname(__FILE__).'/'.$filename), 15));
-    return trim(substr(file_get_contents(dirname(__FILE__).'/'.$filename), 15));
+    return trim(substr(file_get_contents(dirname(__FILE__).'/weixin/'.$filename), 15));
   }
 
 
   private function set_php_file($filename, $content) 
   {
-    $fp = fopen(dirname(__FILE__).'/'.$filename, "w");
+    $fp = fopen(dirname(__FILE__).'/weixin/'.$filename, "w");
     fwrite($fp, "<?php exit();?>" . $content);
     fclose($fp);
   }

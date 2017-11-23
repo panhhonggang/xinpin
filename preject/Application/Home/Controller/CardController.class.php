@@ -11,11 +11,18 @@ class CardController extends CommonController
     // 微信扫一扫
     public function scanQRCode()
     {
+        // 实例化微信JSSDK对象
         $AppID = 'wxf98c8a4475ef7b8e';
         $AppSecret = '301249afeb156728a86a88dc2258c213';
         $jssdk = new \Org\Util\Jssdk($AppID,$AppSecret);
         $signPackage = $jssdk->getSignPackage();
-        //dump($signPackage);
+
+        // 分配数据
+        $this->assign('signPackage',$signPackage);
+
+        // 显示页面
+        $this->display();
+        // dump($signPackage);
 
     }
 
@@ -23,6 +30,7 @@ class CardController extends CommonController
     //IC卡必须后台存在
     public function add()
     {
+
 
     	//判断是否更新IC卡
     	if(IS_POST){	
