@@ -152,35 +152,39 @@ footer{
 	height: 8vh;
 	border-top: .2vh solid #ccc;
 }
-footer > section{
+footer > a{
 	width: 20vw;
 	padding: 2vh 0 1vh 0;
+	display: block;
 	float: left;
 	text-align: center;
 	color: #848282;
 }
-footer > section > a span{
+footer > a:hover{
+	color: #848282;
+	text-decoration: none;
+}
+footer > a span{
 	display: block;
 	width: 11vw;
 	height: 11vw;
 	margin: 0 auto;
 	background: url("../image/sprite.png") no-repeat;
 	background-size: 17.7rem 9rem;
-	
 }
-footer > section span.logo1{
-	background-position: -11.6rem 0;
+footer > a span.logo1{
+	background-position: -13.5rem 0;
 }
-footer > section span.logo2{
+footer > a span.logo2{
 	background-position: 0.1rem 0;
 }
-footer > section span.logo3{
+footer > a span.logo3{
 	background-position: 0.1rem -1.8rem;
 }
-footer > section span.logo4{
+footer > a span.logo4{
 	background-position: -3.8rem 0;
 }
-footer > section span.logo5{
+footer > a span.logo5{
 	background-position: -9.6rem 0;
 }
 
@@ -334,8 +338,8 @@ footer > section span.logo5{
 	border-bottom: 2vh solid #F5F5F6;
 }
 .minelogo{
-	width: 30vw;
-    height: 30vw;
+	width: 25vw;
+    height: 25vw;
     margin: 0 auto;
     margin-top: 5vw;
     margin-bottom: 1vw;
@@ -396,6 +400,12 @@ footer > section span.logo5{
 	background: url("../image/sprite.png") no-repeat;
 	background-size: 17.7rem 9rem;
 	background-position: -13.5rem -3.6rem;
+}
+.quitBtn{
+	background: #D9534F;
+	color: #fff;
+	height: 6vh;
+	margin-bottom: 5vh;
 }
 /*personalInformation css*/
 .personalList{

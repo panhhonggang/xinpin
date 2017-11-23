@@ -18,7 +18,7 @@ return array(
     'DB_SLAVE_NO'           =>  '', // 指定从服务器序号
 
     // 显示页面Trace信息
-    'SHOW_PAGE_TRACE' =>true,
+    // 'SHOW_PAGE_TRACE' =>true,
     /* 权限配置 */
     'AUTH_CONFIG' => array(
         'AUTH_ON' => true, //认证开关
