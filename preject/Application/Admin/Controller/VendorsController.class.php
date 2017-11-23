@@ -266,13 +266,12 @@ class VendorsController extends CommonController
                 
                 if ($old == $info) {
                     $res = $user->where('id='.$id)->setField('password',$new);
-                    
                     if ($res) {
                         $this->success('修改密码成功，请重新登录！',U('Login/logout'));
                     }else{
                         $this->error('修改密码失败！');
                     }
-                                                 
+
                 }else{
                     $this->error('原密码错误，请重新输入！');
                 }
