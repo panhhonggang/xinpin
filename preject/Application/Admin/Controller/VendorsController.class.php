@@ -247,4 +247,43 @@ class VendorsController extends CommonController
         }
     }
 
+    /**
+     * 修改密码方法
+     * 
+     * @author 潘宏钢 <619328391@qq.com>
+     */
+    public function password()
+    {
+        if (IS_POST) {
+            $old = md5(I('oldpassword')); 
+            $new = md5(I('newpassword')); 
+            $re = md5(I('repassword'));
+            $id = I('id');
+
+            if ($new == $re) {
+                $user = M('Vendors');
+                $info = $user->where('id='.$id)->getField('password');
+                
+                if ($old == $info) {
+                    $res = $user->where('id='.$id)->setField('password',$new);
+                    
+                    if ($res) {
+                        $this->success('修改密码成功，请重新登录！',U('Login/logout'));
+                    }else{
+                        $this->error('修改密码失败！');
+                    }
+                                                 
+                }else{
+                    $this->error('原密码错误，请重新输入！');
+                }
+
+            }else{
+                $this->error('两次密码不一样，请重新输入！');
+            }
+
+        }else{
+            $this->display();
+        }
+    }
+
 }
