@@ -8,6 +8,17 @@ class CardController extends CommonController
         $this->display();
     }
 
+    // 微信扫一扫
+    public function scanQRCode()
+    {
+        $AppID = 'wxf98c8a4475ef7b8e';
+        $AppSecret = '301249afeb156728a86a88dc2258c213';
+        $jssdk = new \Org\Util\Jssdk($AppID,$AppSecret);
+        $signPackage = $jssdk->getSignPackage();
+        //dump($signPackage);
+
+    }
+
     //更新
     //IC卡必须后台存在
     public function add()
