@@ -12,7 +12,6 @@ class CardController extends CommonController
     //IC卡必须后台存在
     public function add()
     {
-
     	//判断是否更新IC卡
     	if(IS_POST){	
     		$user = D('Card');
@@ -54,6 +53,14 @@ class CardController extends CommonController
             }
 
     	}else{
+            // 实例化微信JSSDK对象
+            $AppID = 'wxf98c8a4475ef7b8e';
+            $AppSecret = '301249afeb156728a86a88dc2258c213';
+            $jssdk = new \Org\Util\Jssdk($AppID,$AppSecret);
+            $signPackage = $jssdk->getSignPackage();
+
+            // 分配数据
+            $this->assign('signPackage',$signPackage);
     		$this->display();	
     	}
     	
