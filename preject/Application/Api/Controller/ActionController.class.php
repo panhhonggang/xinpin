@@ -11,7 +11,6 @@ class ActionController extends Controller
     {
         $message = I('post.');
         Log::write(json_encode($message));
-
         // 判断session是否为空
         if( empty( session('client_id') ) ){
             // 绑定用户
@@ -20,9 +19,26 @@ class ActionController extends Controller
 
         // 判断类型
         if( !isset($message['PackType']) ){
+            $Revive = json_decode($message,true);
+            if( $Revive['PackType'] == 'login' ){
+                Gateway::joinGroup($message['client_id'], $Revive['DeviceID'] );
+            }
 
         }
 
+        switch ($message['PackType']) {
+            case 'login':
+                $this->loginAction($message);
+                break;
+            
+            case 'select':
+                $this->selectAction($message);
+                break;
+
+            default:
+                # code...
+                break;
+        }
 
         /*if( isset($message['PackType']) ){
             var_dump($message);
@@ -71,7 +87,13 @@ class ActionController extends Controller
         Gateway::bindUid( $message['client_id'], $message['DeviceID'] );
 
         // 绑定完成后直接存到session
-        session('client_id', $message['DeviceID']);
+        session($message['client_id'], $message['DeviceID']);
+    }
+
+    // 发送数据
+    public function sendData($data)
+    {
+
     }
 
     // 登陆数据处理

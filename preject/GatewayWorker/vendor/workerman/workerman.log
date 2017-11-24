@@ -177,3 +177,37 @@ Stack trace:
 2017-11-18 22:04:41 pid:2536 Workerman[start.php] start in DEBUG mode
 2017-11-18 22:36:32 pid:2536 Workerman[start.php] stopping ...
 2017-11-18 22:36:32 pid:2536 Workerman[start.php] has been stopped
+2017-11-24 08:44:09 pid:12503 Workerman[start.php] start in DEBUG mode
+2017-11-24 08:46:31 pid:12536 Workerman[start.php] reload 
+2017-11-24 08:46:31 pid:12503 Workerman[start.php] reloading
+2017-11-24 08:47:01 pid:12541 Workerman[start.php] reload 
+2017-11-24 08:47:01 pid:12503 Workerman[start.php] reloading
+2017-11-24 09:11:00 pid:12503 Workerman[start.php] stopping ...
+2017-11-24 09:11:01 pid:12503 Workerman[start.php] has been stopped
+2017-11-24 09:11:02 pid:12622 Workerman[start.php] start in DEBUG mode
+2017-11-24 09:11:34 pid:12622 Workerman[start.php] stopping ...
+2017-11-24 09:11:34 pid:12622 Workerman[start.php] has been stopped
+2017-11-24 09:11:35 pid:12630 Workerman[start.php] start in DEBUG mode
+2017-11-24 09:12:12 pid:12630 Workerman[start.php] stopping ...
+2017-11-24 09:12:13 pid:12630 Workerman[start.php] has been stopped
+2017-11-24 09:12:14 pid:12640 Workerman[start.php] start in DEBUG mode
+2017-11-24 09:12:24 pid:12640 Workerman[start.php] stopping ...
+2017-11-24 09:12:24 pid:12640 Workerman[start.php] has been stopped
+2017-11-24 09:12:25 pid:12648 Workerman[start.php] start in DEBUG mode
+2017-11-24 09:14:31 pid:12648 Workerman[start.php] stopping ...
+2017-11-24 09:14:31 pid:12648 Workerman[start.php] has been stopped
+2017-11-24 09:14:33 pid:12658 Workerman[start.php] start in DEBUG mode
+2017-11-24 09:16:41 pid:12658 Workerman[start.php] stopping ...
+2017-11-24 09:16:41 pid:12658 Workerman[start.php] has been stopped
+2017-11-24 09:16:42 pid:12670 Workerman[start.php] start in DEBUG mode
+2017-11-24 09:17:53 pid:12670 Workerman[start.php] stopping ...
+2017-11-24 09:17:53 pid:12670 Workerman[start.php] has been stopped
+2017-11-24 09:17:54 pid:12680 Workerman[start.php] start in DEBUG mode
+2017-11-24 09:20:00 pid:12680 Workerman[start.php] stopping ...
+2017-11-24 09:20:00 pid:12680 Workerman[start.php] has been stopped
+2017-11-24 09:20:02 pid:12692 Workerman[start.php] start in DEBUG mode
+2017-11-24 09:40:28 pid:12692 Workerman[start.php] stopping ...
+2017-11-24 09:40:28 pid:12692 Workerman[start.php] has been stopped
+2017-11-24 09:40:29 pid:12737 Workerman[start.php] start in DEBUG mode
+2017-11-24 09:42:45 pid:12749 Workerman[start.php] reload 
+2017-11-24 09:42:45 pid:12737 Workerman[start.php] reloading

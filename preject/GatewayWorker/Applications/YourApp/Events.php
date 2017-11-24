@@ -47,17 +47,20 @@ class Events
     * @param mixed $message 具体消息
     */
     public static function onMessage($client_id, $message) {
-        if( isset($client_id) ){
-            $message['client_id'] = $client_id;
-        }
-        $url = 'http://127.0.0.1/xinpin/preject/api/action/receive';
+        
+        // if( isset($client_id) ){
+        //     $message['client_id'] = $client_id;
+        // }
+        var_dump($message);
+        $url = 'http://192.168.37.76/xinpin/preject/api/action/receive';
         $curlobj = curl_init();
         curl_setopt($curlobj,CURLOPT_URL,$url);
         curl_setopt($curlobj,CURLOPT_HEADER,0);     
         curl_setopt($curlobj,CURLOPT_RETURNTRANSFER,1);
         curl_setopt($curlobj,CURLOPT_POST,1);
         curl_setopt($curlobj,CURLOPT_POSTFIELDS,$message);
-        curl_exec($curlobj);
+        $res = curl_exec($curlobj);
+        var_dump($res);
     }
 
     /**
