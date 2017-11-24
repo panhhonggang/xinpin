@@ -15,7 +15,10 @@
                     <input type="hidden" name="id" value="{{$vo.id}}">
                     <input type="hidden" name="name" value="{{$vo.name}}">
                     <input type="hidden" name="password" value="{{$vo.password}}">
-                    
+                    <div class="control-group">
+                        <span>您正在编辑的是</span>
+                        <span style="font-size:30px;color:red;">{{$vo.name}}</span>
+                    </div>
                     <div class="control-group">
                         <span>手机</span>
                         <input type="text" name="phone" value="{{$vo.phone}}">
