@@ -6,78 +6,56 @@ use Org\Util\Gateway;
 
 class ActionController extends Controller
 {
+    public function __construct()
+    {
+        Gateway::$registerAddress = '127.0.0.1:9504';
+    }
     // 接收信息
     public function receive()
     {
         $message = I('post.');
+        $client_id = $message['client_id'];
+        unset($message['client_id']);
         Log::write(json_encode($message));
-        // 判断session是否为空
-        if( empty( session('client_id') ) ){
-            // 绑定用户
-            $this->bind($message);
-        }
 
-        // 判断类型
-        if( !isset($message['PackType']) ){
-            $Revive = json_decode($message,true);
-            if( $Revive['PackType'] == 'login' ){
-                Gateway::joinGroup($message['client_id'], $Revive['DeviceID'] );
-            }
-
-        }
-
-        switch ($message['PackType']) {
-            case 'login':
-                $this->loginAction($message);
-                break;
-            
-            case 'select':
-                $this->selectAction($message);
-                break;
-
-            default:
-                # code...
-                break;
-        }
-
-        /*if( isset($message['PackType']) ){
-            var_dump($message);
-            // 判断session 中是否保存了连接
-            if( empty( Gateway::getSession($message['client_id']) ) ){
-                // 将发送的信息保存到连接中
-                Gateway::setSession($message['client_id'], $message);
+        if( isset($message['PackType']) ){
+            if( empty( Gateway::getSession($client_id) ) ){
+                Gateway::setSession($client_id, $message);
             } else {
-                // 获取连接
-                $res = Gateway::getSession($message['client_id']);
-                // 将连接设为DeviceID
+                $res = Gateway::getSession($client_id);
                 $message['DeviceID'] = $res['DeviceID'];
             }
 
-            // 将信息发送到连接
-            Gateway::sendToClient($message['client_id'],$message);
-            // 判断信息的类型
+            Gateway::sendToClient($client_id, $message);
             if($message['PackType'] == 'login'){
-                // 登陆状态下将设备ID与连接绑定
-                Gateway::bindUid($message['client_id'], $message['DeviceID']);
+                Gateway::bindUid($client_id, $message['DeviceID']);
             }
-            // 判断设备ID是否存在
             if( isset($message['DeviceID']) ){
-                // 判断组里面的设备是否大于0
                 if( Gateway::getClientCountByGroup($message['DeviceID']) > 0 ){
-                    // 将json格式的数据发送到 以设备ID命名的组里面
                     Gateway::sendToGroup( $message['DeviceID'], json_encode($message) );
                 }
             }
+
+            switch ($message['PackType']) {
+                case 'login':
+                    $this->loginAction($message);
+                    break;
+                case 'Select':
+                    $this->selectAction($message);
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+
         } else {
-            var_dump($message['client_id']);
             $ReviveArray=json_decode($message,true);
             if( $ReviveArray['PackType'] == 'login' ){
-                Gateway::joinGroup( $message['client_id'], $ReviveArray['DeviceID'] );
+                Gateway::joinGroup( $client_id, $ReviveArray['DeviceID'] );
             } else {
                 Gateway::sendToUid($ReviveArray['DeviceID'], $ReviveArray);
             }
-        }*/
-
+        }
     }
 
     // 绑定用户
@@ -87,7 +65,7 @@ class ActionController extends Controller
         Gateway::bindUid( $message['client_id'], $message['DeviceID'] );
 
         // 绑定完成后直接存到session
-        session($message['client_id'], $message['DeviceID']);
+        Gateway::setSession($message['client_id'], $message['DeviceID']);
     }
 
     // 发送数据
@@ -103,7 +81,7 @@ class ActionController extends Controller
                     'DataCmd'      => $message['DataCmd'],
                     'Device'       => $message['Device'],
                     'PackType'     => $message['PackType'],
-                    'DeviceStause' => $message['DeviceStause'],
+                    // 'DeviceStause' => $message['DeviceStause'],
                     'AliveStause'  => $message['AliveStause'],
                     'DeviceType'   => $message['DeviceType'],
                     'DeviceID'     => $message['DeviceID'],
