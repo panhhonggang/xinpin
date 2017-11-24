@@ -33,7 +33,7 @@ class Gateway
      *
      * @var string
      */
-    public static $registerAddress = '127.0.0.1:9504';
+    public static $registerAddress = '127.0.0.1:10016';
 
     /**
      * 注册中心地址缓存
