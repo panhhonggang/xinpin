@@ -29,7 +29,13 @@
                     </div>
                     <div class="control-group">
                         <span>地址</span>
-                        <input type="text" name="address" value="{{$vo.address}}">
+                        <div class="info">
+                            <select id="s_province" name="s_province"></select>&nbsp;&nbsp;
+                            <select id="s_city" name="s_city" ></select>&nbsp;&nbsp;
+                            <select id="s_county" name="s_county"></select>
+                            <!-- <input type="text" name="address" value="{{$vo.address}}"> -->
+                            <input class="addressValue" type="hidden" name="address" value="" />
+                        </div>
                     </div>
                     <div class="control-group">
                         <span>公司</span>
@@ -50,6 +56,21 @@
         <!-- footer part -->
         <include file="Public/footer" />
     </div>
-    <!-- footer part -->
-    <!-- <include file="Public/footer" /> -->
 </div>
+<script>
+$(function(){
+    //城市三级联动
+    _init_area();
+    $(".oddbtn").click(function(ev){
+        if($('#s_province').val()==""||$('#s_city').val()==""||$('#s_county').val()==""){
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                layer.msg('亲，请把地址填写完整');
+            });    
+            ev.preventDefault();
+        }else{
+            $(".addressValue").val($('#s_province').val() + " " + $('#s_city').val() + " " + $('#s_county').val());
+        }
+    });
+})
+</script>
