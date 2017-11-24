@@ -6,41 +6,26 @@
     <include file="Public/nav" />
     <!-- from part-->
     <div class="row-fluid fl" id="main">
-    <style type="text/css">
-        .textarea{width: 215px; min-height: 110px; border: 1px solid #ccc;}
-        .textarea p{
-            padding: 0 10px;
-            margin: 5px;
-        }
-        .control-group{position: relative;}
-        .control-group .elected{position: absolute; top: 0;left: 0;}
-        .control-group .textarea{margin-left: 185px; width: 219px;}
-        .btn-groups .btns{
-            margin: 150px 0 50px 90px;
-            padding: 8px 35px;
-            border-radius: 7px;
-        }
-    </style>
         <div class="tableBox">
             <div class="titleBar">产品管理/<span>产品类型设置</span></div>
             <div class="formBox">
                 <form class="form-horizontal " action="__URL__/add" method="post">
-                    <div class="control-group">
+                    <div class="groupBox control-group">
                         <span>类型名称：</span>
                         <input type="text" class="control" name="typename" placeholder="请输入类型名称" style="width:210px;">
                     </div>
-                    <div class="control-group">
-                        <span>请选择滤芯：</span>
-
-                        <select name="" class="form-control selects" >
+                    <div class="groupBox control-group">
+                        <span>请设置滤芯：</span>
+                        <input type="text" class="control selects" placeholder="设置滤芯" />
+                        <div class="selectList">
                             <foreach name="list" item="vo">
-                                <option value="{{$vo.filtername}}">{{$vo.filtername}}（{{$vo.alias}}）</option>
+                                <p>{{$vo.filtername}}-{{$vo.alias}}</p>
                             </foreach>
-                        </select>
+                        </div>
                     </div>
-                    <div class="control-group">
+                    <div class="groupBox control-group">
                         <span class="elected" >已选择滤芯：</span>
-                        <div class="textarea inline"></div>
+                        <div class="textareaBox textarea inline"></div>
                     </div>
 
                     <div class=" btn-groups">
@@ -58,33 +43,40 @@
     var filter="",textareaHtml1="";
     var b=0;
     //添加滤芯项
-    $("select").change(function(){
+    $(".selects").click(function(ev){
         b++;
         if(b>8){
-            alert("不能超过8个滤芯！");
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                layer.msg('亲，设置滤芯不能超过8个！');
+            });    
+            ev.preventDefault();
         }else{
+            $(".selectList").show();
             var i=0,textareaHtml2="";
             //设置显示已选择滤芯 
-            textareaHtml1+="<p class='inline form-control'>"+$("select option:selected").text()+"<input type='hidden' name='' value='"+$("select option:selected").val()+"' /></p>";
-            $(".textarea").html(textareaHtml1);
-            for (;i<$(".textarea").children().length; i++) {
-                filter='filter'+(i+1).toString();
-                $(".textarea p").eq(i).children("input").attr("name",filter);
-            }
-            // 设置未选择滤芯
-            var lengths=8-$(".textarea").children().length;
-            if(lengths>0){
-                for(var j=0;j<lengths;j++){
-                    textareaHtml2+="<p class='inline form-control' style='visibility:hidden;'>''<input type='hidden' name='filter"+(i+1+j).toString()+"' value='' /></p>"
+            $(".selectList p").unbind('click').click(function(){
+                textareaHtml1+="<p class='inline form-control'>"+$(this).html()+"<input type='hidden' name='' value='"+$(this).html()+"' /></p>";
+                $(".selects").val($(this).html());
+                $(".textarea").html(textareaHtml1);
+                $(".selectList").hide();
+                for (;i<$(".textarea").children().length; i++) {
+                    filter='filter'+(i+1).toString();
+                    $(".textarea p").eq(i).children("input").attr("name",filter);
                 }
-            }
-            $(".textarea").append(textareaHtml2);
+                // 设置未选择滤芯
+                var lengths=8-$(".textarea").children().length;
+                if(lengths>0){
+                    for(var j=0;j<lengths;j++){
+                        textareaHtml2+="<p class='inline form-control' style='visibility:hidden;'>''<input type='hidden' name='filter"+(i+1+j).toString()+"' value='' /></p>"
+                    }
+                }
+                $(".textarea").append(textareaHtml2);
+            });
         }
-        
     });
     //重置
     $(".reset").click(function(){
-        textareaHtml="";
-        $(".textarea").html("");
+        location.reload();
     });    
 </script>
