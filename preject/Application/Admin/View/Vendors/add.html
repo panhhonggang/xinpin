@@ -36,7 +36,13 @@
                     </div>
                     <div class="control-group">
                         <span>地址</span>
-                        <input type="text" name="address" placeholder="请输入地址...">
+                        <div class="info">
+                            <select id="s_province" name="s_province"></select>&nbsp;&nbsp;
+                            <select id="s_city" name="s_city" ></select>&nbsp;&nbsp;
+                            <select id="s_county" name="s_county"></select>
+                            <input class="addressValue" type="hidden" name="address" value="" />
+                        </div>
+                        <!-- 此处需要三级联动 -->
                     </div>
                     <div class="control-group">
                         <span>身份证号</span>
@@ -51,3 +57,21 @@
         <include file="Public/footer" />
     </div>
 </div>
+<script>
+$(function(){
+    //城市三级联动
+    _init_area();
+    $(".oddbtn").click(function(ev){
+        var addressValue="";
+        if($('#s_province').val()==""||$('#s_city').val()==""||$('#s_county').val()==""){
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                layer.msg('亲，请把地址填写完整');
+            });    
+            ev.preventDefault();
+        }else{
+            addressValue=$('#s_province').val() + " " + $('#s_city').val() + " " + $('#s_county').val() + "";
+        }
+    });
+})
+</script>

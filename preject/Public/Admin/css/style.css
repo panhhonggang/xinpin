@@ -148,13 +148,46 @@ ul li{
 /*login part css*/
 #login{ padding-top: 200px; }
 
+.textareaBox{width: 215px; min-height: 110px; border: 1px solid #ccc;}
+.textareaBox p{
+    padding: 0 10px;
+    margin: 5px;
+}
+.groupBox{position: relative;}
+.groupBox .elected{position: absolute; top: 0;left: 0;}
+.groupBox .textareaBox{margin-left: 185px; width: 219px;}
+.btn-groups .btns{
+    margin: 150px 0 50px 90px;
+    padding: 8px 35px;
+    border-radius: 7px;
+}
 .info{
 	display: inline-block;
 }
 .info select{
 	width: 63px;
 }
-
+.selects{
+    width: 210px;
+    position: relative;
+}
+.selectList{
+    width: 218px;
+    height: auto;
+    position: absolute;
+    top: 30px;
+    left: 185px;
+    border: 1px solid #ccc;
+    display: none;
+    z-index: 1000;
+    background: #fff;
+    cursor:pointer;
+}
+.selectList p:hover{
+	background: #007FCC;
+	cursor:pointer;
+	color: #fff;
+}
 
 
 
