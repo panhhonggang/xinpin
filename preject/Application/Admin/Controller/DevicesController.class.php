@@ -92,7 +92,7 @@ class DevicesController extends CommonController
             $info = $Devices->create();
             if($info){
                 if(!in_array($_POST['type_id'], $res)){
-                    $this->error($_POST['device_code'] . '设备类型不存在',U('Devices/show_add_device'),100);
+                    $this->error('已导入' . $i . '条数据<br>' . $_POST['device_code'] . '设备类型不存在');
                 }
                 $res = $Devices->add();
                 if (!$res) {
@@ -100,12 +100,12 @@ class DevicesController extends CommonController
                     $this->error('导入失败啦！');
                 }
             } else {
-                $this->error('已导入' . $i . '条数据<br>' . $_POST['device_code'] . '不正确',U('Devices/show_add_device'),100);
+                $this->error('已导入' . $i . '条数据<br>' . $_POST['device_code'] . '不正确');
             }   
             $i ++;
         }
 
-        $this->success($i . '条数据导入成功',U('Devices/show_add_device'));
+        $this->success($i . '条数据导入成功');
     }
 
     private function getExcel($fileName, $headArr, $data)
