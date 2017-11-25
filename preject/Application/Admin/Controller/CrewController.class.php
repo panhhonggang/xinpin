@@ -19,6 +19,7 @@ class CrewController extends CommonController
     public function index()
     {	
        // 根据名称进行搜索
+        $map = '';
         if(!empty($_GET['name'])) $map['name'] = array('like',"%{$_GET['name']}%");
 
         $type = M('crew');
@@ -260,6 +261,7 @@ class CrewController extends CommonController
     public function filterlist()
     {
        // 根据用户昵称进行搜索
+        $map = '';
         if(!empty($_GET['filtername'])) $map['filtername'] = array('like',"%{$_GET['filtername']}%");
 
         $filter = M('filters');

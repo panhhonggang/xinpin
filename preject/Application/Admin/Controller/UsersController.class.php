@@ -17,6 +17,7 @@ class UsersController extends CommonController
     public function index()
     {	
         // 根据用户昵称进行搜索
+        $map = '';
     	if(!empty($_GET['name'])) $map['name'] = array('like',"%{$_GET['name']}%");
 
         $user = D('users');

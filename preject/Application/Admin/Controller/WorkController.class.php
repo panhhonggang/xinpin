@@ -19,6 +19,7 @@ class WorkController extends CommonController
     public function index()
     {	
        // 根据名称进行搜索
+        $map = '';
         if(!empty($_GET['name'])) $map['name'] = array('like',"%{$_GET['name']}%");
 
         $type = D('work');

@@ -19,6 +19,7 @@ class ProductController extends CommonController
     public function index()
     {	
        // 根据类型名称进行搜索
+        $map = '';
         if(!empty($_GET['typename'])) $map['typename'] = array('like',"%{$_GET['typename']}%");
 
         $type = M('device_type');
@@ -112,6 +113,7 @@ class ProductController extends CommonController
     public function filterlist()
     {
        // 根据用户昵称进行搜索
+        $map = '';
         if(!empty($_GET['filtername'])) $map['filtername'] = array('like',"%{$_GET['filtername']}%");
 
         $filter = M('filters');

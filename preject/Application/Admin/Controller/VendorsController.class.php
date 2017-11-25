@@ -17,6 +17,7 @@ class VendorsController extends CommonController
     public function index()
     {	
         // 根据用户昵称进行搜索
+        $map = '';
     	if(!empty($_GET['name'])) $map['name'] = array('like',"%{$_GET['name']}%");
 
         $user = D('vendors');
@@ -195,6 +196,7 @@ class VendorsController extends CommonController
     public function bindinglist()
     {
        // 根据用户昵称进行搜索
+        $map = '';
         if(!empty($_GET['name'])) $map['name'] = array('like',"%{$_GET['name']}%");
 
         $binding = M('binding');
@@ -224,7 +226,7 @@ class VendorsController extends CommonController
      * 
      * @author 潘宏钢 <619328391@qq.com>
      */
-    public function bindingdel($id,$did)
+    public function bindingdel($id,$cid)
     {
         
         if ($_SESSION['adminuser']['leavel'] == 0) {
@@ -233,7 +235,7 @@ class VendorsController extends CommonController
             if($res){
                 // 更新设备绑定状态
                 $devices = M('crew');  
-                $devices->where('id='.$did)->setField('status','0');
+                $devices->where('id='.$cid)->setField('status','0');
                 $this->success('解除成功',U('bindinglist'));
             }else{
                 $this->error('解除失败');
