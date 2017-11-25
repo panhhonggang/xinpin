@@ -14,28 +14,38 @@ class ActionController extends Controller
     public function receive()
     {
         $message = I('post.');
-        $client_id = $message['client_id'];
-        unset($message['client_id']);
-        Log::write(json_encode($message));
+        if(isset($message['client_id']))
+        {
+            $client_id = $message['client_id'];
+            unset($message['client_id']);
+        }
+
+        foreach ($message as $key => $value) {
+            file_put_contents('message', $key);
+        }
 
         if( isset($message['PackType']) ){
+
             if( empty( Gateway::getSession($client_id) ) ){
                 Gateway::setSession($client_id, $message);
             } else {
                 $res = Gateway::getSession($client_id);
                 $message['DeviceID'] = $res['DeviceID'];
             }
-
-            Gateway::sendToClient($client_id, $message);
+            
             if($message['PackType'] == 'login'){
+                
                 Gateway::bindUid($client_id, $message['DeviceID']);
+
             }
+
             if( isset($message['DeviceID']) ){
                 if( Gateway::getClientCountByGroup($message['DeviceID']) > 0 ){
                     Gateway::sendToGroup( $message['DeviceID'], json_encode($message) );
                 }
             }
-
+            Gateway::sendToClient($client_id, $message);
+            Log::write( json_encode($message), 'message_2');
             switch ($message['PackType']) {
                 case 'login':
                     $this->loginAction($message);
@@ -49,23 +59,14 @@ class ActionController extends Controller
             }
 
         } else {
-            $ReviveArray=json_decode($message,true);
+            $message = file_get_contents('message');
+            $ReviveArray=json_decode($message, true);
             if( $ReviveArray['PackType'] == 'login' ){
                 Gateway::joinGroup( $client_id, $ReviveArray['DeviceID'] );
             } else {
                 Gateway::sendToUid($ReviveArray['DeviceID'], $ReviveArray);
             }
         }
-    }
-
-    // 绑定用户
-    public function bind($message)
-    {
-        // 用户跟deviceID绑定
-        Gateway::bindUid( $message['client_id'], $message['DeviceID'] );
-
-        // 绑定完成后直接存到session
-        Gateway::setSession($message['client_id'], $message['DeviceID']);
     }
 
     // 发送数据
@@ -122,8 +123,7 @@ class ActionController extends Controller
             $data = array_merge( $data, $res );
         }
 
-        $status_id = M('devices_statu')->where("DeviceID={$message['DeviceID']}")->getField('id');
-        Log::write(json_encode($data));
+        $status_id = M('devices_statu')->where("DeviceID=" . $message['DeviceID'])->getField('id');
         $this->updateData($status_id, $data);
     }
 

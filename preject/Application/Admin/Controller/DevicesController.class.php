@@ -8,7 +8,7 @@ use Think\Controller;
  * @package Admin\Controller
  * @author 陈昌平 <chenchangping@foxmail.com>
  */
-class DevicesController extends Controller
+class DevicesController extends CommonController
 {
     /**
      * 显示设备列表
@@ -30,6 +30,7 @@ class DevicesController extends Controller
      */
     public function show_add_device()
     {
+        dump($_SESSION);
         $this->display('show_add_device');
     }
 

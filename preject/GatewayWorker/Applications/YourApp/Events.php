@@ -35,10 +35,7 @@ class Events
      * @param int $client_id 连接id
      */
     public static function onConnect($client_id) {
-        // 向当前client_id发送数据 
-        // Gateway::sendToClient($client_id, json_encode(array('client_id'=>$client_id)));
-        // 向所有人发送
-        #Gateway::sendToAll("$client_id login\n");
+        // var_export(Gateway::getAllClientCount() ). "\n";
     }
     
     /**
@@ -47,7 +44,8 @@ class Events
     * @param mixed $message 具体消息
     */
     public static function onMessage($client_id, $message) {
-        var_dump($message);
+        var_dump($client_id . $message);
+
         if( is_array($message)){
             $message['client_id'] = $client_id;
         }
@@ -58,8 +56,8 @@ class Events
         curl_setopt($curlobj,CURLOPT_RETURNTRANSFER,1);
         curl_setopt($curlobj,CURLOPT_POST,1);
         curl_setopt($curlobj,CURLOPT_POSTFIELDS,$message);
-        $res = curl_exec($curlobj);
-        var_dump($res);
+        /*$res = */curl_exec($curlobj);
+        // var_dump($res);
     }
 
     /**
@@ -67,7 +65,6 @@ class Events
     * @param int $client_id 连接id
     */
     public static function onClose($client_id) {
-       // 向所有人发送 
-       // GateWay::sendToAll("$client_id logout");
+        // 
     }
 }
