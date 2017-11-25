@@ -17,10 +17,6 @@ class DevicesController extends CommonController
     {
         $device = D('Devices');
 
-        $user_id = $_SESSION['adminuser']['id'];
-//        $res = $device->getDevicesInfo($user_id);
-        $device_id = $device->getBindDevice($user_id);
-        $res = $device->getAllFilters($device_id);
         $this->assign('deviceInfo', $res);
         $this->display('devicesList');
     }
@@ -30,7 +26,8 @@ class DevicesController extends CommonController
      */
     public function show_add_device()
     {
-        dump($_SESSION);
+        $res = M('DeviceType')->select();
+        $this->assign('res', $res);
         $this->display('show_add_device');
     }
 
@@ -39,16 +36,19 @@ class DevicesController extends CommonController
      */
     public function add_device( $code=null )
     {
-        echo "<pre>";
         $devices = D('Devices');
-        $code = I('device_code');
+        $code = I('post.');
+
         if(!$devices->create()){
             $this->error($devices->getError(), 'show_add_device');
         }
-        if(!$devices->add_device($value)){
+        if(!$devices->add()){
             $this->error('添加失败', 'show_add_device');
+        } else {
+            $this->success('添加成功', 'show_add_device', 3);
         }
-        $this->success('添加成功', 'show_add_device', 3);
+
+
     }
 
     /**
@@ -84,17 +84,23 @@ class DevicesController extends CommonController
         $i = 0;
         foreach ($data as $key => $val) {
             $_POST['device_code'] = $val['A'];
+            $_POST['type_id'] = (string)$val['B'];
             // $datas['addtime'] = time();
             $Devices = D('Devices'); 
+            $res = D('Devices')->getCate();
+
             $info = $Devices->create();
             if($info){
+                if(!in_array($_POST['type_id'], $res)){
+                    $this->error($_POST['device_code'] . '设备类型不存在',U('Devices/show_add_device'),100);
+                }
                 $res = $Devices->add();
                 if (!$res) {
                     
                     $this->error('导入失败啦！');
                 }
             } else {
-                $this->error('已导入' . $i . '条数据<br>' . $_POST['device_code'] . '不正确');
+                $this->error('已导入' . $i . '条数据<br>' . $_POST['device_code'] . '不正确',U('Devices/show_add_device'),100);
             }   
             $i ++;
         }

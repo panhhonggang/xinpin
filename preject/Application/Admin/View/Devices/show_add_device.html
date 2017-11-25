@@ -5,9 +5,15 @@
         <div class="tableBox">
             <div class="titleBar">设备管理/<span>设备添加</span></div>
             <div class="span8 offset2">
+                
                 <form class="tabbable table-bordered" action="add_device" method="post">
                     <div class="controls">设备编码：
                         <input type="text" name="device_code" placeholder="请输入设备编码">
+                        <select name="type_id">
+                            <foreach name="res" item="vo">
+                                <option value="{{$vo.id}}">{{$vo.typename}}</option>
+                            </foreach>
+                        </select>
                         <button style="vertical-align:top;" class="btn">确认</button>
                     </div>
                 </form>

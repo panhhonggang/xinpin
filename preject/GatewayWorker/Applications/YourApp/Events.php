@@ -44,7 +44,6 @@ class Events
     * @param mixed $message 具体消息
     */
     public static function onMessage($client_id, $message) {
-        var_dump($client_id . $message);
 
         if( is_array($message)){
             $message['client_id'] = $client_id;
