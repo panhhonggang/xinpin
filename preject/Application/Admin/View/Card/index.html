@@ -35,7 +35,11 @@
                         <td>{{$vo.addtime|date='Y-m-d H:i:s',###}}</td>
                         <td>
                             <if condition="$Think.session.adminuser.leavel eq 0">
-                                <a href="#">待定操作</a>
+                                <switch name="vo.status">
+                                    <case value="挂失"><a href="__URL__/edit/id/{{$vo.id}}">编辑</a></case>
+                                    <case value="已绑定"><a href="__URL__/edit/id/{{$vo.id}}">编辑</a></case>
+                                    <default />
+                                </switch>
                             <else/>
                                 <span>您无操作权限</span>
                             </if>

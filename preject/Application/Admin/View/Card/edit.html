@@ -7,38 +7,44 @@
     <!-- from part-->
     <div class="row-fluid fl" id="main">
         <div class="tableBox">
-            <div class="titleBar">产品管理/<span>滤芯设置</span></div>
+            <div class="titleBar">IC卡管理/<span>编辑IC卡</span></div>
             <div class="formBox">
 
                 <foreach name="info" item="vo">
 
-                <form class="" action="__URL__/filter_edit" method="post">
+                <form class="" action="__URL__/edit" method="post">
                     
                     <input type="hidden" name="id" value="{{$vo.id}}">
                     
                     <div class="control-group">
-                        <span>滤芯名称</span>
-                        <input type="text" name="filtername" placeholder="请输入滤芯名称..." value="{{$vo.filtername}}">
+                        <span>IC卡编号</span>
+                        <input type="text" name="iccard" value="{{$vo.iccard}}">
                     </div>
                     <div class="control-group">
-                        <span>滤芯别名</span>
-                        <input type="text" name="alias" placeholder="请输入滤芯别名..." value="{{$vo.alias}}">
+                        <span>计费类型</span>
+                        <switch name="vo.type">
+                            <case value="0">
+                                免费卡：<input type="radio" name="type" value="0" checked>
+                                计费卡：<input type="radio" name="type" value="1">
+                            </case>
+                            <case value="1">
+                                免费卡：<input type="radio" name="type" value="0">
+                                计费卡：<input type="radio" name="type" value="1" checked>
+                            </case>
+                            <default />
+                        </switch>
                     </div>
                     <div class="control-group">
-                        <span>时间寿命(小时)</span>
-                        <input type="text" name="timelife" placeholder="请输入数字..." value="{{$vo.timelife}}">
+                        <span>持有人</span>
+                        <input type="text" name="name" value="{{$vo.name}}">
                     </div>
                     <div class="control-group">
-                        <span>流量寿命(升)</span>
-                        <input type="text" name="flowlife" placeholder="请输入数字..." value="{{$vo.flowlife}}">
+                        <span>学籍号</span>
+                        <input type="text" name="studentcode" value="{{$vo.studentcode}}">
                     </div>
                     <div class="control-group">
-                        <span>滤芯简介</span>
-                        <textarea name="introduce" id="" cols="30" rows="5">{{$vo.introduce}}</textarea>
-                    </div>
-                    <div class="control-group">
-                        <span>购买网址</span>
-                        <input type="url" name="url" placeholder="请加上http://..." value="{{$vo.url}}">
+                        <span>学校</span>
+                        <input type="text" name="school" value="{{$vo.school}}">
                     </div>
                     
                     <div class="control-group">

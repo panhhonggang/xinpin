@@ -40,6 +40,32 @@ class CardController extends CommonController
         $this->display();
     }
 
+    public function edit($id)
+    {
+        if (IS_POST) {
+            // dump($_POST);die;
+            $mod = D('card');
+            $info = $mod->create();
+            
+            if($info){
+                $res = $mod->where("id=".$_POST['id'])->save();
+
+                if ($res) {
+                    $this->success('修改成功啦！',U('Card/index'));
+                }else{
+                    $this->error('修改失败！');
+                }
+            }else{
+                // getError是在数据创建验证时调用，提示的是验证失败的错误信息
+                $this->error($filter->getError());
+            }
+        }else{
+            $info = M('card')->where("id=".$id)->select();
+            $this->assign('info',$info);
+            $this->display();
+        }
+    }
+
     public function upload()
     {   
         header("Content-Type:text/html;charset=utf-8");

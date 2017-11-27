@@ -23,7 +23,7 @@
                     <th>六级滤芯</th>
                     <th>七级滤芯</th>
                     <th>八级滤芯</th>
-                    <th>操作</th>
+                    <!-- <th>操作</th> -->
                 </tr>
                 </thead>
                 <tbody>
@@ -41,14 +41,14 @@
                         <td>{{$vo.filter6}}</td>
                         <td>{{$vo.filter7}}</td>
                         <td>{{$vo.filter8}}</td>
-                        <td>
+                        <!-- <td>
                             <if condition="$Think.session.adminuser.leavel eq 0">
-                                <a href="">未完待续</a>
-                                <a href="__URL__/del/id/{{$vo.0}}">删除</a>
+                                <a href="__URL__/edit/id/{{$vo.id}}">编辑</a>
+                                <a href="__URL__/del/id/{{$vo.id}}">删除</a>
                             <else/>
                                 <span>您无操作权限</span>
                             </if>
-                        </td>
+                        </td> -->
                     </tr>
                     </foreach>
                     <else />
