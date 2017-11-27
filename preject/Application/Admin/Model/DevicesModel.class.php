@@ -33,4 +33,54 @@ class DevicesModel extends Model
         $res = array_column( $data, 'id' );
         return $res;
     }
+
+    /**
+     * 获取信息
+     * @return [type] [description]
+     */
+    public function getInfo()
+    {
+        $bind = D('binding');
+        $crew = M('Crew');
+        $devices_statu = M('DevicesStatu');
+        $vendor = M('Vendors');
+        // 通过经销商获取绑定的机组
+        $res = $bind->select();
+        $cids = array_column($res, 'cid');
+        // 通过机组获取设备编码
+        $crews = $crew->where(['id' => ['in', $cids]])->select();
+        $dcode = array_column($crews, 'dcode');
+        // 通过设备编码获取设备信息
+        $result = $devices_statu->where(['DeviceID' => ['in', $dcode]])->select();
+
+        $vendor = $this->join('xp_crew ON xp_devices.device_code = xp_crew.dcode')
+                              ->join('xp_binding ON xp_crew.id = xp_binding.cid')
+                              ->join('xp_vendors ON xp_binding.vid = xp_vendors.id')
+                              ->field('xp_devices.device_code,xp_vendors.name')
+                              ->select();
+
+        $data = $this->order('updatetime desc')->select();
+        $array = array();
+        foreach ($data as $key => $value) {
+            foreach ($result as $k => $val) {
+                if($value['device_code'] == $val['deviceid']){
+                    foreach ($val as $keys => $values) {
+                        $value['d'.$keys] = $values;
+                    }
+                }
+            }
+
+            foreach ($vendor as $vkey => $v) {
+                if($value['device_code'] == $v['device_code']){
+                    foreach ($v as $ven) {
+                        $value['name'] = $ven;
+                    }
+                }
+            }
+
+            $array[] = $value;
+        }
+        return $array;
+    }
+
 }

@@ -16,36 +16,36 @@
                         <td>绑定的经销商</td>
                         <td>设备信息（读）</td>
                         <td>激活日期（读）</td>
-                        <td>计费模式（读）</td>
-                        <td>剩余量:时长和流量（读）</td>
+                        <!-- <td>计费模式（读）</td> -->
+                        <!-- <td>剩余量:时长和流量（读）</td> -->
                         <td>设备状态（读）</td>
                         <td>是否在线（读）</td>
                         <td>更新时间</td>
                     </tr>
                 </thead>
                 <tbody>
-                <for start="1" end="2">
+                    <for start="1" end="2">
                         <volist name="deviceInfo" id="data">
                             <tr>
                                 <td>{{$i}}</td>
                                 <td>{{$data.device_code}}</td>
-                                <td>{{$data.device_statu}}</td>
+                                <td>{{$data.name}}</td>
                                 <td>{{$data.phvalue}}</td>
-                                <td>{{$data.filter1}}%</td>
-                                <td>{{$data.filter2}}%</td>
-                                <td>{{$data.filter3}}%</td>
-                                <td>{{$data.filter4}}%</td>
-                                <td>{{$data.filter5}}%</td>
-                                <td>{{$data.updated_at}}</td>
+                                <td>{{$data.updatetime}}</td>
+                                <!-- <td>{{$data.LeasingMode}}</td> -->
+                                <!-- <td>{{$data.filter3}}</td> -->
+                                <td>{{$data.dalivestause}}</td>
+                                <td>{{$data.filter5}}</td>
+                                <td>{{$data.dupdatetime}}</td>
                             </tr>
                         </volist>
-                </for>
+                    </for>
                 </tbody>
             </table>
             <!-- 上下页，请加样式 -->
             <div class="pagination pagination-lg pull-center">
                 <ul>
-                    {{$button}}
+                    {{$page}}
                 </ul>
             </div>
         </div>
