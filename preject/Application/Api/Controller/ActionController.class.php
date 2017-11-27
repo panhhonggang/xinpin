@@ -95,6 +95,11 @@ class ActionController extends Controller
         
         if( empty($status_id) ){
             $res = $this->saveData($data);
+            if($res){
+                $data['updatetime'] = time();
+                $data['device_status'] = 1;
+                $result = M('devices')->where('device_code=' . $message['DeviceID'])->save($data);
+            }
         } else {
             $res = $this->updateData($status_id, $data);
         }
@@ -155,4 +160,6 @@ class ActionController extends Controller
             return $data;
         }
     }
+
+
 }

@@ -26,6 +26,7 @@ class DevicesModel extends Model
         array('addtime', 'time', 1, 'function'),
     );
 
+    // 获取产品类型
     public function getCate()
     {
         $data = M('DeviceType')->field('id')->select();
