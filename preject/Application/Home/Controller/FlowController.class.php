@@ -8,13 +8,6 @@ class FlowController extends CommonController
 	// 充值
     public function recharge()
     {
-        // 显示模板
-    	$this->display();
-	}
-
-	// 充值
-    public function weixin()
-    {
     	//调用微信JS-SDK类获取签名需要用到的数据
         $weixin = new WeixinJssdk;
         $signPackage = $weixin->getSignPackage();
@@ -38,8 +31,10 @@ class FlowController extends CommonController
      */
     public function uniformOrder()
     {
-    	$money = I('money');
+    	// 将金额强转换整数
+    	$money = I('money') * 100;
     	$openId = I('openId');
+    	// dump($money);die;
         //echo 1;exit;
         //微信examle的WxPay.JsApiPay.php
         vendor('WxPay.jsapi.WxPay#JsApiPay');
