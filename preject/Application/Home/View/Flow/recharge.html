@@ -10,27 +10,21 @@
 <!-- rechargeOption -->
 <section class="rechargeOption container">
 	<section class="textOption">选择充值金额</section>
-	<ul class="col-xs-12 listOption ">
-		<li class="col-xs-4"><a href="#">￥20</a></li>
-		<li class="col-xs-4"><a href="#">￥30</a></li>
-		<li class="col-xs-4"><a href="#">￥50</a></li>
-	</ul>
-	<ul class="col-xs-12 listOption ">
-		<li class="col-xs-4"><a href="#">￥100</a></li>
-		<li class="col-xs-4"><a href="#">￥150</a></li>
-		<li class="col-xs-4"><a href="#">￥200</a></li>
-	</ul>   
+	<section class="col-xs-12 listOption ">
+		<a class="col-xs-4" href="#">￥20</a>
+		<a class="col-xs-4" href="#">￥30</a>
+		<a class="col-xs-4" href="#">￥50</a>
+		<a class="col-xs-4" href="#">￥100</a>
+		<a class="col-xs-4" href="#">￥150</a>
+		<a class="col-xs-4" href="#">￥200</a>
+	</section>   
 </section>
-<ul class="payList">
-	<li>
+<section class="payList">
 		<a href="#"><i class="i1"></i>微信支付<span></span></a>
-	</li>
-	<li>
 		<a href="#"><i class="i2"></i>支付宝支付<span></span></a>
-	</li>
-</ul>
+</section>
 <section class="container">
-	<button class="rechargeBtn btn text-center form-control" onclick="pay()">下一步</button>
+	<button class="rechargeBtn btn text-center form-control">下一步</button>
 </section>
 <footer>
     <a class="btn1" href="{{:U('Home/index/index')}}"><span class="logo1"></span>首页</a>
@@ -41,22 +35,26 @@
 </footer>
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
+<!-- layui.js -->
+<script type="text/javascript" src="__PUBLIC__/Admin/layui/layui.js"></script>
+<!-- layui.css -->
+<link rel="stylesheet" href="__PUBLIC__/Admin/layui/css/layui.css" />
 <script src="__PUBLIC__/Home/js/public.js"></script>
-<script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js" ></script>
+<!-- 微信支付支持JS部分代码 -->
+<script src="__PUBLIC__/Home/js/jquery-1.8.3.min.js"></script>
+<script src="__PUBLIC__/Home/js/jweixin-1.2.0.js"></script>
 <script>
     $(".logo3").css("background-position","-1.8rem -1.8rem");
     $(".btn3").css("color","#008C63");
 </script>
 </body>
 </html>
-<!-- 微信支付支持JS部分代码 -->
-<script src="__PUBLIC__/Home/js/jquery-1.8.3.min.js"></script>
-<script src="__PUBLIC__/Home/js/jweixin-1.2.0.js"></script>
 <script>
+//微信接口
 wx.config({
     debug: false,
     appId: '{{$info["appId"]}}',
-    timestamp: {{$info["timestamp"]}},
+    timestamp: '{{$info["timestamp"]}}',
     nonceStr: '{{$info["nonceStr"]}}',
     signature: '{{$info["signature"]}}',
     jsApiList: [
@@ -64,42 +62,41 @@ wx.config({
       'chooseWXPay'
     ]
 });
-
-function pay(){
-	var money = 0;
-	var payType = '';
-	// 获取充值金额
-
-	// 获取冲值类型（微信|支付宝）
-
-	// 调用冲值接口
-	if(payType=='weixin'){
-		// 调用微信支付
-		weiXinPay(money);
-	}else if(payType=='Ali'){
-		AliPay(money);
+var money = 0;
+var payType = '';
+//选择支付金额
+$(".listOption a").click(function(){
+	$(this).toggleClass("activeBg").siblings().removeClass("activeBg");
+	money=$(this).children("span").html();
+});
+//选择支付方式
+$(".payList a").click(function(){
+	$(this).children("span").addClass("payItem");
+	$(this).siblings().children("span").removeClass("payItem");
+	payType=$(this).text();
+});
+// 支付下一步
+$(".rechargeBtn").click(function(){
+	if(money!=0&payType!=''){
+		$.post('{{:U("Flow/Pay")}}', 'payType='+payType+'&money='+money, function(res){		
+			if ( res ) {
+				layui.use('layer', function(){
+		            var layer = layui.layer;
+		            layer.msg('充值成功！');
+	        	})
+			}else{
+				layui.use('layer', function(){
+		            var layer = layui.layer;
+		            layer.msg('充值失败！');
+		        })
+	        };
+		});
 	}else{
-		alert('请选择支付类型');
+		layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.msg('请选择支付金额或支付方式！');
+        });   
 	}
-}
-
-
-function weiXinPay(money)
-{
-	$.post('{{:U("Flow/uniformOrder")}}', 'openId={{$openId}}&money='+money, function(res){
-		WeixinJSBridge.invoke(
-			'getBrandWCPayRequest',
-			JSON.parse(res),
-			function(res){
-				if (res.err_msg.substr(-2) == 'ok') {
-					//location.href = 'http://www.lizelong.com';
-					alert('充值成功！');
-				} else if (res.err_msg.substr(-6) == 'cancel') {
-					alert('还好你机智，其实就算你付了钱，哥也得不到！');
-				}
-			}
-		);
-	});
-}
+});
 
 </script>

@@ -28,6 +28,9 @@ ul li{
 	list-style: none;
 	overflow: hidden;
 }
+.listOption a,.payList a{
+text-decoration:none;
+}
 
 
 .logo{
@@ -285,17 +288,41 @@ footer > a span.logo5{
 	font-size: 1rem;
 }
 /*consume css*/
-.consumeList{
+.consume{
 	width: 100vw;
-	height: 10vh;
+	height: 13vh;
 	border-bottom: 1px solid #ccc;
+	overflow: hidden;
+}
+.consumeList{
+	width: 200vw;
 }
 .consumeList >li{
+	text-align: center;
+	width: 50vw;
+	height: 13vh;
+	line-height: 10vh;
+	font-size: 1rem;
+}
+.consumeList >li p{
 	text-align: center;
 	width: 50vw;
 	height: 10vh;
 	line-height: 10vh;
 	font-size: 1rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid #D7D7D7;
+}
+.spanActive{
+	background:#008A63;
+    opacity:0.5;
+    display: block;
+    float: left;
+    width:2vw; 
+    height:3vw; 
+    border-radius:5px;
+    margin-left:16.8vw;
+	padding:0  8vw;
 }
 .consumeList li+li,.consumePointList li+li,.thead li+li {
 	margin-left: 0;
@@ -312,29 +339,12 @@ footer > a span.logo5{
 	background: #60CDAF;
 	color: #fff;
 }
-.consumePointList{
-	width: 100vw;
-	height: 3vh;
-	background: #F5F5F6;
-	border-top: 1px solid #D7D7D7;
-}
-.consumePointList >li{
-	width: 50vw;
-	height: 2vh;
-	text-align: center;
-}
-.consumePointList >li span.spanActive{
-	padding:0  8vw;
-	background: url("../image/sprite.png") no-repeat;
-	background-position: -13.4rem -3.9rem;
-	background-size: 16rem 9rem;
-}
 .consumeNode{
 	width: 100vw;
 	height: 65vh;
 	margin-top: -.7rem;
 }
-/**/
+/*recharge css*/
 .rechargeHhead{
 	width: 100vw;
 	padding: 0 5vw;
@@ -488,10 +498,11 @@ footer > a span.logo5{
 	font-weight: bold;
 	margin-bottom: 5vh;
 }
-.listOption li a{
+.listOption a{
 	display: block;
 	width: 20vw;
 	height: 6vh;
+	margin: 3vw;
 	line-height: 6vh;
 	border:1px solid #383838;;
 	border-radius: 2vw;
@@ -503,7 +514,7 @@ footer > a span.logo5{
 	height: 26vh;
 	border-bottom: 2vh solid #F5F5F6;
 }
-.payList > li{
+.payList > a{
 	position: relative;
 	display: block;
 	font-size: .7rem;
@@ -511,11 +522,10 @@ footer > a span.logo5{
 	padding-left: 15vw;
 	height: 8vh;
 	line-height: 8vh;
-}
-.payList > li > a{
 	color: #383838;
 }
-.payList > li > a > i{
+
+.payList > a > i{
 	width: 11vw;
 	height: 11vw;
 	line-height: 11vw;
@@ -527,13 +537,13 @@ footer > a span.logo5{
 	background: url("../image/sprite.png") no-repeat;
 	background-size: 17.7rem 9rem;
 }
-.payList > li > a > i.i1{
+.payList > a > i.i1{
 	    background-position: -5.7rem -1.8rem;
 }
-.payList > li > a > i.i2{
+.payList > a > i.i2{
 	    background-position: -3.8rem -1.9rem;
 }
-.payList > li > a > span{
+.payList > a > span{
 	width: 4vw;
 	height: 4vw;
 	position: absolute;
@@ -542,9 +552,17 @@ footer > a span.logo5{
 	border: 1px solid #029167;
 	border-radius: 50%;
 }
+.payItem{
+	background: #029167;
+}
 .rechargeBtn{
 	background: #008A63;
 	color: #fff;
 	height: 6vh;
 	margin-bottom: 5vh;
+}
+.listOption a.activeBg{
+	background:#60CDAF;
+	border:0;
+	color:#fff;
 }

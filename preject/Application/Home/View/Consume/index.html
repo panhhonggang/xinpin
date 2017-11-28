@@ -8,18 +8,25 @@
 </head>
 <body>
     <!-- slider --> 
-    <ul class="consumeList nav nav-pills" role="tablist">
-        <li role="presentation" class="active">CiCi</li>
-        <li>BiBi</li>
-    </ul>
-    <ul class="consumePointList nav nav-pills" role="tablist">
-        <li role="presentation" class="active">
-            <span class="spanActive"></span>
-        </li>
-        <li>
-            <span></span>
-        </li>
-    </ul>
+    <section id="consume" class="consume nav nav-pills" role="tablist">
+        <ul id="textList" class="consumeList nav nav-pills" role="tablist">
+            <li role="presentation">
+                <p>CiCi</p>
+                <span class="spanActive"></span>
+            </li>
+            <li role="presentation">
+                <p>CiCi</p>
+                <span></span>
+            </li><li role="presentation">
+                <p>CiCi</p>
+                <span></span>
+            </li>
+        </ul>
+        
+    </section>
+
+
+
     <ul class="thead nav nav-pills" role="tablist">
         <li role="presentation" class="">用水地点</li>
         <li>盛水量/ML</li>
@@ -28,18 +35,16 @@
     <section class="container consumeNode">
         <table class="consumeTable table table-defalt text-center">
             <tbody>
-                <tbody>
-                    <tr>
-                        <td>广东省</td>
-                        <td>45</td>
-                        <td>20170105</td>
-                    </tr>
-                    <tr>
-                        <td>广东省</td>
-                        <td>45</td>
-                        <td>20170105</td>
-                    </tr>
-                </tbody>
+                <tr>
+                    <td>广东省</td>
+                    <td>45</td>
+                    <td>20170105</td>
+                </tr>
+                <tr>
+                    <td>广东省</td>
+                    <td>45</td>
+                    <td>20170105</td>
+                </tr>
             </tbody>
         </table>
     </section>
@@ -61,3 +66,13 @@
     </script>
 </body>
 </html>
+<script>
+    //数据表滑动显示
+    if($("#textList").children().size()>2){
+        fnTab_txt(id("consume"),id("textList"),id("textList").children,$(window).width()/2);
+    }
+    $("#textList li").click(function(){
+        $(this).children("span").addClass("spanActive");
+        $(this).siblings().children("span").removeClass("spanActive");
+    });
+</script>
