@@ -8,6 +8,13 @@ class FlowController extends CommonController
 	// 充值
     public function recharge()
     {
+        // 显示模板
+    	$this->display();
+	}
+
+	// 充值
+    public function weixin()
+    {
     	//调用微信JS-SDK类获取签名需要用到的数据
         $weixin = new WeixinJssdk;
         $signPackage = $weixin->getSignPackage();
@@ -40,22 +47,33 @@ class FlowController extends CommonController
         //②、统一下单
         vendor('WxPay.jsapi.WxPay#JsApiPay');
         $input = new \WxPayUnifiedOrder();
-        $input->SetBody("充值".($money/100)."元水费");
-        $input->SetAttach("love");
-        $input->SetOut_trade_no(\WxPayConfig::MCHID.date("YmdHis"));
-        $input->SetTotal_fee($money);//单位为分
-        $input->SetTime_start(date("YmdHis"));
-        $input->SetTime_expire(date("YmdHis", time() + 300));
-        $input->SetGoods_tag("test");
+        // 产品内容
+        $input->SetBody("馨品净水设备-充值");
+        // $input->SetAttach("love");
+        // 设置商户系统内部的订单号,32个字符内、可包含字母, 其他说明见商户订单号
+        $input->SetOut_trade_no(\WxPayConfig::MCHID.date("YmdHis").mt_rand(0,9999));
+        // 产品金额单位为分
+        $input->SetTotal_fee($money);
+        // 设置订单生成时间
+        // $input->SetTime_start(date("YmdHis"));
+        // 设置订单失效时间
+        // $input->SetTime_expire(date("YmdHis", time() + 300));
+        // $input->SetGoods_tag("test");
+        // 支付成功的回调地址
         $input->SetNotify_url("http://wuzhibin.cn/Home/Flow/notify");
+        // 支付方式 JS-SDK 类型是：JSAPI
         $input->SetTrade_type("JSAPI");
+        // 用户在公众号的唯一标识
         $input->SetOpenid($openId);
+        // 统一下单 
         $order = \WxPayApi::unifiedOrder($input);
+        // 返回支付需要的对象JSON格式数据
         $jsApiParameters = $tools->GetJsApiParameters($order);
+
         echo $jsApiParameters;
         exit;
     }
-    
+
     // 充值完成的回调
 	public function notify(){
 		//$this->display();
