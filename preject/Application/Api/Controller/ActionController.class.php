@@ -30,9 +30,31 @@ class ActionController extends Controller
                 Gateway::setSession($client_id, $message);
             } else {
                 $res = Gateway::getSession($client_id);
+
                 $message['DeviceID'] = $res['DeviceID'];
             }
+// $data['EnOut'],$data['OutWaterFlow'],$data['MaxTime']
             
+            Log::write( json_encode($message), 'message_2');
+            switch ($message['PackType']) {
+                case 'login':
+                    $this->loginAction($message);
+                    break;
+                case 'Select':
+                    $this->selectAction($message);
+                    break;
+                case 'Requestwater':
+                    $message = $this->RequesAction($message);
+                    break;
+                case 'Stopwater':
+                    $this->stopAction($message);
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+            Log::write( json_encode($message), 'message_4');
+
             if($message['PackType'] == 'login'){
                 
                 Gateway::bindUid($client_id, $message['DeviceID']);
@@ -45,18 +67,6 @@ class ActionController extends Controller
                 }
             }
             Gateway::sendToClient($client_id, $message);
-            Log::write( json_encode($message), 'message_2');
-            switch ($message['PackType']) {
-                case 'login':
-                    $this->loginAction($message);
-                    break;
-                case 'Select':
-                    $this->selectAction($message);
-                    break;
-                default:
-                    # code...
-                    break;
-            }
 
         } else {
             $message = file_get_contents('message');
@@ -69,11 +79,71 @@ class ActionController extends Controller
         }
     }
 
-    // 发送数据
-    public function sendData($data)
+    // 出水请求
+    public function RequesAction($message)
     {
+        // 查询IC卡的类型
+        $icCard = M('card')->where('iccard='.$message['iccard'])->find();
+        // Log::write( json_encode($icCard), 'message_1');
+        if( !empty($icCard) && $icCard['type'] == 0 ){
+            $message['EnOut'] = -1;
+            $message['OutWaterFlow'] = -1;
+            $message['MaxTime'] = -1;
+            // Log::write( json_encode($message), 'message_3');
+            return $message;
+        }
+
+        
+        if( !empty($icCard) && $icCard['type'] == 1){
+            // 计算出水量
+            $user = M('users')->where('id='.$icCard['uid'])->find();
+            $outwater = floor($user['balance'] / 1.5 * 100) / 100;
+            session( 'water'.$user['id'], $outwater);
+            Log::write($outwater, '可用水量');
+            $message['EnOut'] = -1;
+            $message['OutWaterFlow'] = $outwater;
+            $message['MaxTime'] = -1;
+            // Log::write( json_encode($message), 'message_2');
+            return $message;
+        }
 
     }
+
+    // 停水处理
+    public function stopAction($message)
+    {
+
+        // $icCard = M('card')->where('iccard='.$message['iccard']->find();
+        Log::write($message, 'card数据');
+        // if( !empty($icCard) && $icCard['water'] > 0 ){
+            // $user = M('users')->where('id='.$icCard['uid'])->find();
+            // $totalWater = session('water'.$user['id']) - $message['water'];
+            // session('water'.$user['id'], $totalWater);
+            // $this->saveConsume($user['id'], $icCard['iccard'], $totalWater);
+        // }
+        return 1111;
+    }
+
+
+    // 保存消费记录
+    // public function saveConsume($uid, $iccard, $totalWater)
+    // {
+    //     // id  int(11) 无符号、非空、自增   主键  自增ID
+    //     // uid int(11) 无符号、非空  普通索引    用户ID
+    //     // icid    int(11) 无符号、非空  普通索引    IC卡ID
+    //     // flow    int(10) 非空      消费流量
+    //     // address varchar(255)    非空      消费地点
+    //     // time    int(11) 非空      消费时间
+    //     $time = time();
+    //     M('consume')->add();
+
+    // }
+
+    // 更新用户余额
+    // public function updateBalance($balance)
+    // {
+
+    // }
 
     // 登陆数据处理
     public function loginAction($message)
@@ -82,7 +152,6 @@ class ActionController extends Controller
                     'DataCmd'      => $message['DataCmd'],
                     'Device'       => $message['Device'],
                     'PackType'     => $message['PackType'],
-                    // 'DeviceStause' => $message['DeviceStause'],
                     'AliveStause'  => $message['AliveStause'],
                     'DeviceType'   => $message['DeviceType'],
                     'DeviceID'     => $message['DeviceID'],
@@ -160,6 +229,8 @@ class ActionController extends Controller
             return $data;
         }
     }
+
+
 
 
 }

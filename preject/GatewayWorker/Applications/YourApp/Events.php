@@ -48,6 +48,7 @@ class Events
         if( is_array($message)){
             $message['client_id'] = $client_id;
         }
+        var_dump($message);
         $url = 'http://192.168.37.76/xinpin/preject/api/action/receive';
         $curlobj = curl_init();
         curl_setopt($curlobj,CURLOPT_URL,$url);

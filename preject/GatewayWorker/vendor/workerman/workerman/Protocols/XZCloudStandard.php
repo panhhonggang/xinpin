@@ -401,7 +401,12 @@ class XZCloudStandard
             else if($data['PackType']=='Outwater')
             {
                 $data['DataCmd']=4;
-                $DataPack=pack('cnc',$data['EnOut'],$data['OutWaterFlow'],$data['MaxTime']);
+                $DataPack.=pack('cnc',$data['EnOut'],$data['OutWaterFlow'],$data['MaxTime']);
+            }
+            else if($data['PackType']=='Requestwater')
+            {
+                $data['DataCmd']=$data['DataCmd']|0x8000;
+                $DataPack.=pack('cnc',$data['EnOut'],$data['OutWaterFlow'],$data['MaxTime']);
             }
 
 
