@@ -113,6 +113,7 @@ class CrewController extends CommonController
 
     public function save_import($data)
     {   
+        $i = 0;
         unset($data[1]);
         foreach ($data as $key => $val) {
             // dump($val);die;
@@ -123,17 +124,17 @@ class CrewController extends CommonController
             $info = $crew->create();
             if($info){
                 $res = $crew->add();
-                if ($res) {
-                    $this->success('导入成功',U('crew/index'));
-                } else {
+                if (!$res) {
                     $this->error('导入失败啦！');
                 }
             
             } else {
                 // getError是在数据创建验证时调用，提示的是验证失败的错误信息
                 $this->error($crew->getError());
-            }   
+            }
+            $i++;
         }
+        $this->success($i . '条数据导入成功',U('crew/index'));
     }
 
     private function getExcel($fileName, $headArr, $data)

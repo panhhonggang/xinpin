@@ -92,6 +92,8 @@ class CardController extends CommonController
 
     public function save_import($data)
     {   
+        $i = 0;
+        unset($data[1]);
         foreach ($data as $key => $val) {
             
             $_POST['iccard'] = $val['A'];
@@ -101,17 +103,17 @@ class CardController extends CommonController
             $info = $card->create();
             if($info){
                 $res = $card->add();
-                if ($res) {
-                    $this->success('导入成功',U('card/index'));
-                } else {
+                if (!$res) {
                     $this->error('导入失败啦！');
                 }
-            
             } else {
                 // getError是在数据创建验证时调用，提示的是验证失败的错误信息
                 $this->error($card->getError());
-            }   
+            }
+            $i++;   
         }
+        $this->success($i . '条数据导入成功',U('card/index'));
+
     }
 
     private function getExcel($fileName, $headArr, $data)
