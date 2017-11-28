@@ -55,12 +55,6 @@ class CardController extends CommonController
             }
 
     	}else{
-            // 实例化微信JSSDK对象
-            // $AppID = 'wxf98c8a4475ef7b8e';
-            // $AppSecret = '301249afeb156728a86a88dc2258c213';
-            // $jssdk = new \Org\Util\Jssdk($AppID,$AppSecret);
-            // $signPackage = $jssdk->getSignPackage();
-
             //调用微信JS-SDK类获取签名需要用到的数据
             $weixin = new WeixinJssdk;
             $signPackage = $weixin->getSignPackage();   

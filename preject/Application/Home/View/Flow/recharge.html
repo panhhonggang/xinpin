@@ -19,8 +19,7 @@
 		<li class="col-xs-4"><a href="#">￥100</a></li>
 		<li class="col-xs-4"><a href="#">￥150</a></li>
 		<li class="col-xs-4"><a href="#">￥200</a></li>
-	</ul>
-    
+	</ul>   
 </section>
 <ul class="payList">
 	<li>
@@ -31,7 +30,7 @@
 	</li>
 </ul>
 <section class="container">
-	<button class="rechargeBtn btn text-center form-control">下一步</button>
+	<button class="rechargeBtn btn text-center form-control" onclick="pay()">下一步</button>
 </section>
 <footer>
     <a class="btn1" href="{{:U('Home/index/index')}}"><span class="logo1"></span>首页</a>
@@ -50,3 +49,57 @@
 </script>
 </body>
 </html>
+<!-- 微信支付支持JS部分代码 -->
+<script src="__PUBLIC__/Home/js/jquery-1.8.3.min.js"></script>
+<script src="__PUBLIC__/Home/js/jweixin-1.2.0.js"></script>
+<script>
+wx.config({
+    debug: false,
+    appId: '{{$info["appId"]}}',
+    timestamp: {{$info["timestamp"]}},
+    nonceStr: '{{$info["nonceStr"]}}',
+    signature: '{{$info["signature"]}}',
+    jsApiList: [
+      // 所有要调用的 API 都要加到这个列表中
+      'chooseWXPay'
+    ]
+});
+
+function pay(){
+	var money = 0;
+	var payType = '';
+	// 获取充值金额
+
+	// 获取冲值类型（微信|支付宝）
+
+	// 调用冲值接口
+	if(payType=='weixin'){
+		// 调用微信支付
+		weiXinPay(money);
+	}else if(payType=='Ali'){
+		AliPay(money);
+	}else{
+		alert('请选择支付类型');
+	}
+}
+
+
+function weiXinPay(money)
+{
+	$.post('{{:U("Flow/uniformOrder")}}', 'openId={{$openId}}&money='+money, function(res){
+		WeixinJSBridge.invoke(
+			'getBrandWCPayRequest',
+			JSON.parse(res),
+			function(res){
+				if (res.err_msg.substr(-2) == 'ok') {
+					//location.href = 'http://www.lizelong.com';
+					alert('充值成功！');
+				} else if (res.err_msg.substr(-6) == 'cancel') {
+					alert('还好你机智，其实就算你付了钱，哥也得不到！');
+				}
+			}
+		);
+	});
+}
+
+</script>
