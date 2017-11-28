@@ -26,7 +26,10 @@ body {
 }
 ul li{
 	list-style: none;
+	overflow: hidden;
 }
+
+
 .logo{
 	width: 100vw;
 	height: 50vw;
@@ -133,7 +136,7 @@ ul li{
 	height: 20vw;
 	margin-top: 5vw;
 }
-.slider h4{
+h4.tableTitle {
 	color:#008A63;
 }
 
@@ -330,6 +333,30 @@ footer > a span.logo5{
 	width: 100vw;
 	height: 65vh;
 	margin-top: -.7rem;
+}
+/**/
+.rechargeHhead{
+	width: 100vw;
+	padding: 0 5vw;
+	text-align: center;
+	background: #60CDAF;
+	color: #fff;
+}
+.rechargeHhead > li{
+	width: 45vw;
+	height: 8vh;
+	line-height: 8vh;
+	text-align: left;
+	padding: 0 8px;
+}
+.rechargeHhead > li.text-right{
+	text-align: right;
+}
+.rechargeHhead > li+li {
+     margin-left: 0; 
+}
+.rechargeNode{
+	height: 80vh;
 }
 /*mine css*/
 .showmine{
