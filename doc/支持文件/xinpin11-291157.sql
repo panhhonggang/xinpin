@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50548
 File Encoding         : 65001
 
-Date: 2017-11-27 17:17:30
+Date: 2017-11-29 11:57:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,21 @@ CREATE TABLE `xp_binding` (
   `cid` int(11) NOT NULL COMMENT '机组ID',
   `addtime` int(11) NOT NULL COMMENT '绑定时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of xp_binding
+-- ----------------------------
+INSERT INTO `xp_binding` VALUES ('1', '2', '1', '1510801488');
+INSERT INTO `xp_binding` VALUES ('2', '2', '2', '1510990453');
+INSERT INTO `xp_binding` VALUES ('3', '1', '1', '1510990453');
+INSERT INTO `xp_binding` VALUES ('4', '1', '2', '1510801488');
+INSERT INTO `xp_binding` VALUES ('5', '1', '10', '1511604903');
+INSERT INTO `xp_binding` VALUES ('6', '1', '11', '1511604917');
+INSERT INTO `xp_binding` VALUES ('7', '1', '12', '1511604917');
+INSERT INTO `xp_binding` VALUES ('8', '1', '13', '1511604917');
+INSERT INTO `xp_binding` VALUES ('12', '1', '14', '1511837539');
+INSERT INTO `xp_binding` VALUES ('10', '1', '15', '1511837508');
 
 -- ----------------------------
 -- Table structure for xp_card
@@ -42,7 +56,23 @@ CREATE TABLE `xp_card` (
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态(0：未绑定 1：已绑定 2：挂失)',
   `addtime` int(11) NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of xp_card
+-- ----------------------------
+INSERT INTO `xp_card` VALUES ('31', 'IC0001', null, null, null, null, '0', '0', '1510989876');
+INSERT INTO `xp_card` VALUES ('32', 'IC0002', null, null, null, null, '0', '0', '1510989876');
+INSERT INTO `xp_card` VALUES ('33', 'IC0003', null, null, null, null, '0', '0', '1510989876');
+INSERT INTO `xp_card` VALUES ('34', 'IC0004', null, null, null, null, '0', '0', '1510989876');
+INSERT INTO `xp_card` VALUES ('35', 'IC0005', null, null, null, null, '0', '0', '1510989876');
+INSERT INTO `xp_card` VALUES ('36', 'IC0006', null, null, null, null, '0', '0', '1510989876');
+INSERT INTO `xp_card` VALUES ('37', 'IC0007', null, null, null, null, '1', '0', '1510989876');
+INSERT INTO `xp_card` VALUES ('38', 'IC0008', null, null, null, null, '1', '0', '1510989876');
+INSERT INTO `xp_card` VALUES ('39', 'IC0009', null, null, null, null, '1', '0', '1510989876');
+INSERT INTO `xp_card` VALUES ('40', 'IC0010', null, null, null, null, '1', '0', '1510989876');
+INSERT INTO `xp_card` VALUES ('42', 'IC0000', null, null, null, null, '0', '0', '1511427435');
+INSERT INTO `xp_card` VALUES ('43', '18112236364114563214', '00', null, '', '1', '1', '0', '1511427435');
 
 -- ----------------------------
 -- Table structure for xp_consume
@@ -56,7 +86,39 @@ CREATE TABLE `xp_consume` (
   `address` varchar(255) NOT NULL COMMENT '消费地点',
   `time` int(11) NOT NULL COMMENT '消费时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of xp_consume
+-- ----------------------------
+INSERT INTO `xp_consume` VALUES ('1', '1', '43', '-16', 'aaaa', '1511919559');
+INSERT INTO `xp_consume` VALUES ('2', '1', '43', '-16', 'aaaa', '1511919620');
+INSERT INTO `xp_consume` VALUES ('3', '1', '43', '-16', 'aaaa', '1511919763');
+INSERT INTO `xp_consume` VALUES ('4', '1', '43', '4552', 'aaaa', '1511923696');
+INSERT INTO `xp_consume` VALUES ('5', '1', '43', '4536', 'aaaa', '1511923703');
+INSERT INTO `xp_consume` VALUES ('6', '1', '43', '4520', 'aaaa', '1511923709');
+INSERT INTO `xp_consume` VALUES ('7', '1', '43', '4504', 'aaaa', '1511923710');
+INSERT INTO `xp_consume` VALUES ('8', '1', '43', '4488', 'aaaa', '1511923710');
+INSERT INTO `xp_consume` VALUES ('9', '1', '43', '4472', 'aaaa', '1511923710');
+INSERT INTO `xp_consume` VALUES ('10', '1', '43', '16', 'aaaa', '1511923956');
+INSERT INTO `xp_consume` VALUES ('11', '1', '43', '16', 'aaaa', '1511924002');
+INSERT INTO `xp_consume` VALUES ('12', '1', '43', '16', 'aaaa', '1511924101');
+INSERT INTO `xp_consume` VALUES ('13', '1', '43', '16', 'aaaa', '1511924106');
+INSERT INTO `xp_consume` VALUES ('14', '1', '43', '16', 'aaaa', '1511924272');
+INSERT INTO `xp_consume` VALUES ('15', '1', '43', '16', 'aaaa', '1511924396');
+INSERT INTO `xp_consume` VALUES ('16', '1', '43', '16', 'aaaa', '1511924468');
+INSERT INTO `xp_consume` VALUES ('17', '1', '43', '16', 'aaaa', '1511924517');
+INSERT INTO `xp_consume` VALUES ('18', '1', '43', '16', 'aaaa', '1511924644');
+INSERT INTO `xp_consume` VALUES ('19', '1', '43', '16', 'aaaa', '1511924674');
+INSERT INTO `xp_consume` VALUES ('20', '1', '43', '16', 'aaaa', '1511924814');
+INSERT INTO `xp_consume` VALUES ('21', '1', '43', '16', 'aaaa', '1511924881');
+INSERT INTO `xp_consume` VALUES ('22', '1', '43', '16', 'aaaa', '1511924937');
+INSERT INTO `xp_consume` VALUES ('23', '1', '43', '16', 'aaaa', '1511925423');
+INSERT INTO `xp_consume` VALUES ('24', '1', '43', '16', 'aaaa', '1511925575');
+INSERT INTO `xp_consume` VALUES ('25', '1', '43', '16', 'aaaa', '1511925579');
+INSERT INTO `xp_consume` VALUES ('26', '1', '43', '16', 'aaaa', '1511925805');
+INSERT INTO `xp_consume` VALUES ('27', '1', '43', '16', 'aaaa', '1511925810');
+INSERT INTO `xp_consume` VALUES ('28', '1', '43', '16', 'aaaa', '1511925827');
 
 -- ----------------------------
 -- Table structure for xp_crew
@@ -69,7 +131,17 @@ CREATE TABLE `xp_crew` (
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已绑定(0：未绑定  1：已绑定)',
   `addtime` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of xp_crew
+-- ----------------------------
+INSERT INTO `xp_crew` VALUES ('10', 'SB250', '112233445566778', '1', '1511145348');
+INSERT INTO `xp_crew` VALUES ('11', 'AE86', '112233445566778', '1', '1511145348');
+INSERT INTO `xp_crew` VALUES ('12', 'AE861', '2017051200000189', '1', '1511145348');
+INSERT INTO `xp_crew` VALUES ('13', 'AE8612', '2017051200000189', '1', '1511145348');
+INSERT INTO `xp_crew` VALUES ('14', 'AA002', '2017051200000188', '1', '1511837298');
+INSERT INTO `xp_crew` VALUES ('15', 'AA003', '2017051200000187', '1', '1511837497');
 
 -- ----------------------------
 -- Table structure for xp_device_config
@@ -84,6 +156,10 @@ CREATE TABLE `xp_device_config` (
   `addtime` int(11) NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of xp_device_config
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for xp_device_type
@@ -105,6 +181,14 @@ CREATE TABLE `xp_device_type` (
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of xp_device_type
+-- ----------------------------
+INSERT INTO `xp_device_type` VALUES ('1', '商务型', 'PP棉', '滤芯1号', '', '', '', '', '', '', '1510802286');
+INSERT INTO `xp_device_type` VALUES ('2', '家用型', 'RO膜', 'PP棉', '', '', '', '', '', '', '1510802316');
+INSERT INTO `xp_device_type` VALUES ('3', '高级型', 'RO膜', 'PP棉', '滤芯1号', '', '', '', '', '', '1510802334');
+INSERT INTO `xp_device_type` VALUES ('4', 'aaa', 'RO膜-C型', 'RO膜-C型', 'PP棉-B型', 'RO膜-C型', 'RO膜-C型', 'PP棉-B型', '', '', '1511593004');
+
+-- ----------------------------
 -- Table structure for xp_devices
 -- ----------------------------
 DROP TABLE IF EXISTS `xp_devices`;
@@ -117,7 +201,14 @@ CREATE TABLE `xp_devices` (
   `addtime` int(11) NOT NULL COMMENT '添加时间',
   `updatetime` int(11) DEFAULT NULL COMMENT '激活时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of xp_devices
+-- ----------------------------
+INSERT INTO `xp_devices` VALUES ('1', '2017051200000189', '0', '0', '2', '1511837236', null);
+INSERT INTO `xp_devices` VALUES ('2', '2017051200000188', '0', '1', '3', '1511837283', null);
+INSERT INTO `xp_devices` VALUES ('3', '2017051200000187', '0', '1', '2', '1511837485', null);
 
 -- ----------------------------
 -- Table structure for xp_devices_statu
@@ -161,7 +252,12 @@ CREATE TABLE `xp_devices_statu` (
   `updatetime` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`,`DeviceID`,`DeviceStause`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of xp_devices_statu
+-- ----------------------------
+INSERT INTO `xp_devices_statu` VALUES ('10', '112233445566778', '11', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1', null, null, null, 'GPRS', '11223344556677889900', '90', '10020\0\0\0\0\0', '1511775150', '1511926998');
 
 -- ----------------------------
 -- Table structure for xp_filters
@@ -182,6 +278,13 @@ CREATE TABLE `xp_filters` (
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of xp_filters
+-- ----------------------------
+INSERT INTO `xp_filters` VALUES ('1', '滤芯1号', 'A型', '500', '200', null, null, '啊实打实', 'http://www.baidu.com', '1510802182');
+INSERT INTO `xp_filters` VALUES ('2', 'PP棉', 'B型', '100', '321', null, null, '啊实打实', 'http://www.baidu.com', '1510802203');
+INSERT INTO `xp_filters` VALUES ('3', 'RO膜', 'C型', '500', '200', null, null, '驱蚊器无', 'http://www.baidu.com', '1510802307');
+
+-- ----------------------------
 -- Table structure for xp_flow
 -- ----------------------------
 DROP TABLE IF EXISTS `xp_flow`;
@@ -193,6 +296,10 @@ CREATE TABLE `xp_flow` (
   `time` int(11) NOT NULL COMMENT '充值时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of xp_flow
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for xp_leavel
@@ -207,6 +314,10 @@ CREATE TABLE `xp_leavel` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of xp_leavel
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for xp_loglist
 -- ----------------------------
 DROP TABLE IF EXISTS `xp_loglist`;
@@ -218,6 +329,10 @@ CREATE TABLE `xp_loglist` (
   `ip` varchar(15) NOT NULL COMMENT '操作IP',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of xp_loglist
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for xp_users
@@ -235,7 +350,12 @@ CREATE TABLE `xp_users` (
   `balance` int(10) NOT NULL DEFAULT '0' COMMENT '账户余额',
   `addtime` int(11) NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of xp_users
+-- ----------------------------
+INSERT INTO `xp_users` VALUES ('1', '', '', '', '', '1', null, null, '8924', '0');
 
 -- ----------------------------
 -- Table structure for xp_vendors
@@ -257,6 +377,12 @@ CREATE TABLE `xp_vendors` (
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of xp_vendors
+-- ----------------------------
+INSERT INTO `xp_vendors` VALUES ('1', 'admin', '202cb962ac59075b964b07152d234b70', '13838381438', null, '中国', null, '点球电子', '0', '0', '1509585067');
+INSERT INTO `xp_vendors` VALUES ('2', '经销商头子', '202cb962ac59075b964b07152d234b70', '13838381438', '619328391@qq.com', '中国广东', '430122199610224517', '点球', null, '1', '1510797277');
+
+-- ----------------------------
 -- Table structure for xp_work
 -- ----------------------------
 DROP TABLE IF EXISTS `xp_work`;
@@ -272,3 +398,9 @@ CREATE TABLE `xp_work` (
   `time` varchar(30) NOT NULL COMMENT '处理时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of xp_work
+-- ----------------------------
+INSERT INTO `xp_work` VALUES ('1', '20171117-2', '隔壁老王', '', '0', '安装2号机组在三里屯试衣间', '三里屯', '2', '2017-11-17');
+INSERT INTO `xp_work` VALUES ('2', '20171118-2', '啊啊', '', '1', '维护爱爱爱爱', '中国广东', '2', '2017-11-13');

@@ -45,6 +45,7 @@ class Events
     */
     public static function onMessage($client_id, $message) {
 
+        var_dump($message);
         if( is_array($message)){
             $message['client_id'] = $client_id;
         }

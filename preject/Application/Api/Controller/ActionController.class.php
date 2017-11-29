@@ -19,10 +19,10 @@ class ActionController extends Controller
         {
             $client_id = $message['client_id'];
             unset($message['client_id']);
-        }
-
-        foreach ($message as $key => $value) {
-            file_put_contents('message', $key);
+        } else {
+            foreach ($message as $key => $value) {
+                file_put_contents('message', $key);
+            }
         }
 
         if( isset($message['PackType']) ){
@@ -44,6 +44,8 @@ class ActionController extends Controller
                 case 'login':
                     $this->loginAction($message);
                     break;
+
+                // 设备设置
                 case 'Select':
                     $this->selectAction($message);
                     break;
@@ -180,7 +182,7 @@ class ActionController extends Controller
 
     }
 
-    // 查询数据处理
+    // 数据处理
     public function selectAction($message)
     {
         $data = [
@@ -224,15 +226,13 @@ class ActionController extends Controller
     // 滤芯处理
     public function filterAction($message)
     {
-        if( $message['FilerNum'] != null ){
-            $data = array();
-            for( $i = 1; $i <= $message['FilerNum']; $i ++)
-            {
-                $data['ReFlowFilter' . $i]   = $message['ReFlowFilter' . $i];
-                $data['ReDayFilter' . $i]    = $message['ReDayFilter' . $i];
-            }
-            return $data;
+        $data = array();
+        for( $i = 1; $i <= $message['FilerNum']; $i ++)
+        {
+            $data['ReFlowFilter' . $i]   = $message['ReFlowFilter' . $i];
+            $data['ReDayFilter' . $i]    = $message['ReDayFilter' . $i];
         }
+        return $data;
     }
 
 }
