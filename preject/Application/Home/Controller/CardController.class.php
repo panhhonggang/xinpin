@@ -66,18 +66,31 @@ class CardController extends CommonController
     	
     }
 
+    //解绑
+    //解挂后:IC卡处于未绑定状态
+    public function relieveIC()
+    {
+        // IC卡卡号
+        // $this->display();
+        return true;
+    } 
+
     //挂失
     //挂失：IC卡处于绑定状态
     public function reportTheLossOf()
     {
-    	$this->display();
+        // IC卡卡号
+    	// $this->display();
+        return true;
     }
 
     //解挂
     //解挂后:IC卡处于未绑定状态
     public function hangingSolution()
     {
-    	$this->display();
+        // IC卡卡号
+    	// $this->display();
+        return true;
     }    
 
 }
