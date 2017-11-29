@@ -9,6 +9,55 @@
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
 <script src="__PUBLIC__/Home/js/public.js"></script>
 <title>IC卡管理</title>
+<style type="text/css">
+.promptBg{
+	width: 16rem;
+    background: rgba(0,0,0,.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100001;
+	display: none;
+    font-size: .8rem;
+}
+.promptBg .promptBox {
+    width: 12rem;
+    height:7rem;
+    background: #fff;
+    border-radius: .3rem;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+.promptBg .promptBox p {
+    margin-top: 1.5rem;
+}
+.promptBg .promptBox section{
+	border-top: 1px solid #ccc;
+	margin-top: 2.5rem;
+}
+.promptBg .promptBox section a{
+	display:block;
+    width: 6rem;
+    float: left;
+    font-size: .8rem;
+    text-align: center;
+    color: #252525;
+    padding: .3rem 0;
+    background: #fff;
+}
+.promptBg .promptBox section a.no_btn{
+	border-right: 1px solid #ccc;
+    border-bottom-left-radius: 1rem;
+}
+.promptBg .promptBox section a.yes_btn{
+	color: #28A07F;
+}
+</style>
 </head>
 <body>
 
@@ -16,7 +65,9 @@
     <section class="container IDshow"> 
         <section class="IDshowBg">
         	<span class="IDtext text-center">1234567895464655484</span>
+
         </section>
+        <p class="reportLostItemsTxt">已挂失</p>
         <section class="setList">
         	<ul class="setItem">
         		<li class="reportLostItems">挂失</li>
@@ -27,7 +78,16 @@
         </section>
     </section>
     <button class="addIDbtn"><span><a href="{{:U(add)}}">添加IC卡</a></span></button>
-
+	<!-- 确认取消提示start -->
+	<section class="promptBg">
+		<section class="promptBox">
+			<p class="hintTxt"></p>
+			<section>
+				<a class="no_btn" >否</a>
+				<a class="yes_btn">是</a>
+			</section>
+		</section>
+	</section>
 
 </body>
 </html>
@@ -40,58 +100,87 @@
 			$(".setItem").hide();
 		});
 	});
-	var numVal="";
-	numVal=$(this).parent().parent().siblings().children("span").text();
-	//挂失
+	//解绑
 	$(".unBind").click(function(){
-		
-		alert("确定要挂失该卡吗");
-		// $.ajax({
-		// 	url:"",
-		// 	type:"POST",
-		// 	dataType:"json",
-		// 	data:{numVal},
-		// 	success:function(res){
-		// 		if(res.data.status.errCode==0){
-
-		// 		}else{
-		// 			alert("挂失失败");
-		// 		}
-		// 	}
-		// });
+		var _this=$(this);
+		$(".hintTxt").text("确定要解绑该IC卡吗？");
+	 	$('.promptBg').show();
+        $('.promptBg').height($(window).height());
+        $('.no_btn').unbind('click').click(function(){
+            $('.promptBg').hide();
+        });
+        $('.yes_btn').unbind('click').click(function(){
+            $.ajax({
+				url:"{{:U('Home/Flow/reportTheLossOf')}}",
+				type:"post",
+				dataType:"json",
+				data:{numVal:$(this).parent().parent().siblings().children("span").text()},
+				success:function(res){
+					if(res.status.errCode==true){
+						_this.parent().parent().parent().remove();
+						alert("解绑成功！");
+					}else{
+						alert("挂失失败");
+					}
+				}
+			});
+        });
 	});
+
 	//解挂
 	$(".uncoupling").click(function(){
-		alert("确定要解挂该卡吗");
-		// $.ajax({
-		// 	url:"",
-		// 	type:"POST",
-		// 	dataType:"json",
-		// 	data:{numVal},
-		// 	success:function(res){
-		// 		if(res.data.status.errCode==0){
-
-		// 		}else{
-		// 			alert("解挂失败");
-		// 		}
-		// 	}
-		// });
+		var _this=$(this);
+		$(".hintTxt").text("确定要解挂该IC卡吗");
+	 	$('.promptBg').show();
+        $('.promptBg').height($(window).height());
+        $('.no_btn').unbind('click').click(function(){
+            $('.promptBg').hide();
+        });
+        
+        $('.yes_btn').unbind('click').click(function(){
+        	
+			$.ajax({
+				url:"{{:U('Home/Flow/hangingSolution')}}",
+				type:"post",
+				dataType:"json",
+				data:{numVal:$(this).parent().parent().siblings().children("span").text()},
+				success:function(res){
+					if(res.status.errCode==true){
+						$(".reportLostItemsTxt").hide();
+						_this.parent().parent().siblings(".IDshowBg").removeClass("IDshowBgActive");
+					}else{
+						alert("解挂失败");
+					}
+				}
+			});
+		})
 	});
-	//解绑
+	//挂失
 	$(".reportLostItems").click(function(){
-		alert("确定要解绑该卡吗");
-		// $.ajax({
-		// 	url:"",
-		// 	type:"POST",
-		// 	dataType:"json",
-		// 	data:{numVal},
-		// 	success:function(res){
-		// 		if(res.data.status.errCode==0){
-
-		// 		}else{
-		// 			alert("解绑失败");
-		// 		}
-		// 	}
-		// });
+		var _this=$(this);
+		$(".hintTxt").text("确定要挂失该IC卡吗");
+	 	$('.promptBg').show();
+        $('.promptBg').height($(window).height());
+        $('.no_btn').unbind('click').click(function(){
+            $('.promptBg').hide();
+        });
+        $('.yes_btn').unbind('click').click(function(){
+        	
+			$.ajax({
+				url:"{{:U('Home/Flow/relieveIC')}}",
+				type:"post",
+				dataType:"json",
+				data:{numVal:$(this).parent().parent().siblings().children("span").text()},
+				success:function(res){
+					if(res.status.errCode==true){
+						$(".reportLostItemsTxt").show();
+        				_this.parent().parent().siblings(".IDshowBg").addClass("IDshowBgActive");
+						
+					}else{
+						alert("解绑失败");
+					}
+				}
+			});
+		});
 	});
 </script>

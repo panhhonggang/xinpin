@@ -238,6 +238,7 @@ footer > a span.logo5{
 	width: 100vw;
 	height: 45vh;
 	border-bottom: .3rem solid #F5F5F6;
+	position: relative;
 }
 .IDshow .IDshowBg{
 	position: relative;
@@ -246,17 +247,32 @@ footer > a span.logo5{
 	margin: 0 auto;
 	margin-top: 1rem;
 	background: url("../image/ICbg.png") no-repeat;
+	opacity:0.4;
 	background-size: 100% 100%;
+	color: #fff;
+}
+.IDshow .IDshowBgActive{
+	opcity:0.4;
+	color:#000;
 }
 .IDshow .IDshowBg .IDtext{
 	position: absolute;
 	left: 0;
-	bottom: 1rem;
+	bottom: 1.5rem;
 	width: 100%;
-	height: 1rem;
-	color: #fff;
+	height: 1rem;	
 	font-size: 1rem;
 	font-weight: bold;
+}
+.IDshow .reportLostItemsTxt{
+	display: none;
+	position: absolute;
+	left: 3rem;
+	bottom: 3rem;
+	font-weight: bold;
+	margin-bottom: .1rem;
+	opacity:1;
+	color: #fff;
 }
 .setList{
 	height: 5vh;
