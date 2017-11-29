@@ -105,6 +105,9 @@ function weixinPay(money){
 					alert('充值成功！');
 				} else if (res.err_msg.substr(-6) == 'cancel') {
 					alert('取消成功！');
+					// alert(res.err_code+res.err_desc+res.err_msg); // 显示错误信息
+				}else{
+					alert('充值失败！');
 				}
 			}
 		);
