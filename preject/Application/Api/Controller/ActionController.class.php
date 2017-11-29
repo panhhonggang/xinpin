@@ -14,6 +14,7 @@ class ActionController extends Controller
     public function receive()
     {
         $message = I('post.');
+
         if(isset($message['client_id']))
         {
             $client_id = $message['client_id'];
@@ -33,9 +34,12 @@ class ActionController extends Controller
 
                 $message['DeviceID'] = $res['DeviceID'];
             }
-// $data['EnOut'],$data['OutWaterFlow'],$data['MaxTime']
             
-            Log::write( json_encode($message), 'message_2');
+            if($message['PackType'] == 'login'){
+                
+                Gateway::bindUid($client_id, $message['DeviceID']);
+
+            }
             switch ($message['PackType']) {
                 case 'login':
                     $this->loginAction($message);
@@ -44,28 +48,23 @@ class ActionController extends Controller
                     $this->selectAction($message);
                     break;
                 case 'Requestwater':
-                    $message = $this->RequesAction($message);
+                    $message = $this->RequesAction($client_id, $message);
                     break;
                 case 'Stopwater':
-                    $this->stopAction($message);
+                    $this->stopAction($client_id, $message);
                     break;
                 default:
                     # code...
                     break;
             }
-            Log::write( json_encode($message), 'message_4');
 
-            if($message['PackType'] == 'login'){
-                
-                Gateway::bindUid($client_id, $message['DeviceID']);
-
-            }
 
             if( isset($message['DeviceID']) ){
                 if( Gateway::getClientCountByGroup($message['DeviceID']) > 0 ){
                     Gateway::sendToGroup( $message['DeviceID'], json_encode($message) );
                 }
             }
+            Log::write( ($client_id), 'client_id_2');
             Gateway::sendToClient($client_id, $message);
 
         } else {
@@ -77,19 +76,18 @@ class ActionController extends Controller
                 Gateway::sendToUid($ReviveArray['DeviceID'], $ReviveArray);
             }
         }
+
     }
 
     // 出水请求
-    public function RequesAction($message)
+    public function RequesAction($client_id, $message)
     {
         // 查询IC卡的类型
         $icCard = M('card')->where('iccard='.$message['iccard'])->find();
-        // Log::write( json_encode($icCard), 'message_1');
         if( !empty($icCard) && $icCard['type'] == 0 ){
             $message['EnOut'] = -1;
             $message['OutWaterFlow'] = -1;
             $message['MaxTime'] = -1;
-            // Log::write( json_encode($message), 'message_3');
             return $message;
         }
 
@@ -97,53 +95,60 @@ class ActionController extends Controller
         if( !empty($icCard) && $icCard['type'] == 1){
             // 计算出水量
             $user = M('users')->where('id='.$icCard['uid'])->find();
-            $outwater = floor($user['balance'] / 1.5 * 100) / 100;
-            session( 'water'.$user['id'], $outwater);
-            Log::write($outwater, '可用水量');
+            $outwater = $user['balance'] / 1.5;
+            Gateway::updateSession( $client_id , [$client_id . $user['id'] => $outwater]);
+
             $message['EnOut'] = -1;
             $message['OutWaterFlow'] = $outwater;
             $message['MaxTime'] = -1;
-            // Log::write( json_encode($message), 'message_2');
             return $message;
         }
 
     }
 
     // 停水处理
-    public function stopAction($message)
+    public function stopAction($client_id, $message)
     {
+        $icCard = M('card')->where('iccard='.$message['iccard'])->find();
+        if( !empty($icCard) && $message['water'] > 0 ){
+            $user = M('users')->where('id='.$icCard['uid'])->find();
 
-        // $icCard = M('card')->where('iccard='.$message['iccard']->find();
-        Log::write($message, 'card数据');
-        // if( !empty($icCard) && $icCard['water'] > 0 ){
-            // $user = M('users')->where('id='.$icCard['uid'])->find();
-            // $totalWater = session('water'.$user['id']) - $message['water'];
-            // session('water'.$user['id'], $totalWater);
-            // $this->saveConsume($user['id'], $icCard['iccard'], $totalWater);
-        // }
-        return 1111;
+            // 计算使用水量消费的金额
+            $totalWater = $message['water'] * 1.5;
+
+            // 计算余额
+            $balance = $user['balance'] - $totalWater;
+
+            Gateway::updateSession($client_id, [$client_id . $user['id']=>$totalWater]);
+            $this->saveConsume($user['id'], $icCard['id'], $message['water']);
+            $this->updateBalance($user['id'], $balance);
+        }
     }
 
 
     // 保存消费记录
-    // public function saveConsume($uid, $iccard, $totalWater)
-    // {
-    //     // id  int(11) 无符号、非空、自增   主键  自增ID
-    //     // uid int(11) 无符号、非空  普通索引    用户ID
-    //     // icid    int(11) 无符号、非空  普通索引    IC卡ID
-    //     // flow    int(10) 非空      消费流量
-    //     // address varchar(255)    非空      消费地点
-    //     // time    int(11) 非空      消费时间
-    //     $time = time();
-    //     M('consume')->add();
+    public function saveConsume($uid, $icid, $flow)
+    {
+        // 指定数据库需要的字段
+        $data = array(
+            'uid' => $uid,
+            'icid' => $icid,
+            'flow' => $flow,
+            'address' => 'aaaa',
+            'time' => time(),
+        );
 
-    // }
+        // 执行添加
+        M('consume')->add($data);
+
+    }
 
     // 更新用户余额
-    // public function updateBalance($balance)
-    // {
-
-    // }
+    public function updateBalance($uid, $balance)
+    {
+        $data['balance'] = $balance;
+        M('users')->where('id='.$uid)->save($data);
+    }
 
     // 登陆数据处理
     public function loginAction($message)
@@ -229,8 +234,5 @@ class ActionController extends Controller
             return $data;
         }
     }
-
-
-
 
 }
