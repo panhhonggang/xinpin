@@ -258,16 +258,44 @@ footer > a span.logo5{
 	font-size: 1rem;
 	font-weight: bold;
 }
-.IDshow .set{
-	width: 3.2rem;
-	height: 1.5rem;
-	margin-top: .3rem;
-	margin-right: 5vw;
+.setList{
+	height: 5vh;
+	line-height: 5vh;
+	min-width: 17vw;
 	border:#008B61 1px solid;
+	
+	border-radius: 2vw;
+	position: relative;
+	position: absolute;
+	background:#fff;
+	display: inline-block;
+	top: 33vh;
+	right: 10vw;
+	margin-top: 2vh;
+	text-align: center;
+}
+.setList .set{
+	width: 17vw;
+	position:absolute;
+	display: inline-block;
 	color: #008B61;
 	font-weight: bold;
-	border-radius: 8px;
-	background:#fff;
+	right: 0;
+	top: 0;
+}
+.setList .setItem{
+	display: none;
+	margin-right: 15vw;
+	/*padding: 0 2vw;*/
+	top: 0;
+
+}
+.setList .setItem > li{
+	float: left;
+	width: 20vw;
+	display: inline-block;
+	/*margin-right: 5vw;*/
+	padding: 0 5vw;
 }
 .addIDbtn{
 	width:100vw;

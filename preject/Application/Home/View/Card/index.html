@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1" >
+<script src="__PUBLIC__/Home/js/jquery-1.8.3.min.js"></script>
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
 <script src="__PUBLIC__/Home/js/public.js"></script>
@@ -16,10 +17,81 @@
         <section class="IDshowBg">
         	<span class="IDtext text-center">1234567895464655484</span>
         </section>
-        <button class="set btn-defalut pull-right">设置</button>
+        <section class="setList">
+        	<ul class="setItem">
+        		<li class="reportLostItems">挂失</li>
+        		<li class="uncoupling">解挂</li>
+        		<li class="unBind">解绑</li>
+        	</ul>
+        	<section class="set">设置</section>
+        </section>
     </section>
     <button class="addIDbtn"><span><a href="{{:U(add)}}">添加IC卡</a></span></button>
 
 
 </body>
 </html>
+<script>
+	//设置按钮
+	$(".set").click(function(ev){
+		$(".setItem").show();
+		ev.stopPropagation();
+		$("body").unbind("click").click(function(){
+			$(".setItem").hide();
+		});
+	});
+	var numVal="";
+	numVal=$(this).parent().parent().siblings().children("span").text();
+	//挂失
+	$(".unBind").click(function(){
+		
+		alert("确定要挂失该卡吗");
+		// $.ajax({
+		// 	url:"",
+		// 	type:"POST",
+		// 	dataType:"json",
+		// 	data:{numVal},
+		// 	success:function(res){
+		// 		if(res.data.status.errCode==0){
+
+		// 		}else{
+		// 			alert("挂失失败");
+		// 		}
+		// 	}
+		// });
+	});
+	//解挂
+	$(".uncoupling").click(function(){
+		alert("确定要解挂该卡吗");
+		// $.ajax({
+		// 	url:"",
+		// 	type:"POST",
+		// 	dataType:"json",
+		// 	data:{numVal},
+		// 	success:function(res){
+		// 		if(res.data.status.errCode==0){
+
+		// 		}else{
+		// 			alert("解挂失败");
+		// 		}
+		// 	}
+		// });
+	});
+	//解绑
+	$(".reportLostItems").click(function(){
+		alert("确定要解绑该卡吗");
+		// $.ajax({
+		// 	url:"",
+		// 	type:"POST",
+		// 	dataType:"json",
+		// 	data:{numVal},
+		// 	success:function(res){
+		// 		if(res.data.status.errCode==0){
+
+		// 		}else{
+		// 			alert("解绑失败");
+		// 		}
+		// 	}
+		// });
+	});
+</script>
