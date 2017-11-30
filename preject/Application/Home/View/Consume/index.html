@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1" >
+<script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js" ></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
 <title>饮水记录</title>
 </head>
 <body>
@@ -15,18 +18,15 @@
                 <span class="spanActive"></span>
             </li>
             <li role="presentation">
-                <p>CiCi</p>
+                <p>bbb</p>
                 <span></span>
             </li><li role="presentation">
-                <p>CiCi</p>
+                <p>sss</p>
                 <span></span>
             </li>
         </ul>
         
     </section>
-
-
-
     <ul class="thead nav nav-pills" role="tablist">
         <li role="presentation" class="">用水地点</li>
         <li>盛水量/ML</li>
@@ -56,17 +56,12 @@
         <a><span class="logo4"></span>扫码取水</a>
         <a class="btn5" href="{{:U('Home/Users/mine')}}"><span class="logo5"></span>我的</a>
     </footer>
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
+
+    
     <script src="__PUBLIC__/Home/js/public.js"></script>
-    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js" ></script>
     <script>
-        $(".logo2").css("background-position","-1.8rem 0");
+    $(".logo2").css("background-position","-1.8rem 0");
         $(".btn2").css("color","#008C63");
-    </script>
-</body>
-</html>
-<script>
     //数据表滑动显示
     if($("#textList").children().size()>2){
         fnTab_txt(id("consume"),id("textList"),id("textList").children,$(window).width()/2);
@@ -76,3 +71,6 @@
         $(this).siblings().children("span").removeClass("spanActive");
     });
 </script>
+</body>
+</html>
+

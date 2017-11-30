@@ -114,7 +114,7 @@ ul li{
  
 .btn{
 	border: 0px;
-	border-radius: 10px;
+	border-radius: 5px;
 }
 .form-group{
     margin-top: 100px;
@@ -124,7 +124,7 @@ ul li{
     border-radius: 7px;
 }
 .btn-groups .oddbtn{
-	width: 120px;
+	width: 150px;
 	height: 40px;
     margin: 50px auto;
     display: block;
@@ -157,7 +157,7 @@ ul li{
 .groupBox .elected{position: absolute; top: 0;left: 0;}
 .groupBox .textareaBox{margin-left: 185px; width: 219px;}
 .btn-groups .btns{
-    margin: 150px 0 50px 90px;
+    /*margin: 150px 0 50px 90px;*/
     padding: 8px 35px;
     border-radius: 7px;
 }
@@ -188,7 +188,16 @@ ul li{
 	cursor:pointer;
 	color: #fff;
 }
-
-
-
-
+.tableBox input[type="file"]{
+	line-height: 0;
+}
+.tableBox select.selectAgency{
+	padding: 5px 4px;
+	height: 32px;
+	width: 216px;
+	/*line-height: 35px;*/
+}
+.addBatch{
+	display: none;
+	margin: 100px 0 50px 100px;
+}

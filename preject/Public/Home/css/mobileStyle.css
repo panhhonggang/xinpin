@@ -12,7 +12,7 @@ html,
 body {
     margin: 0 auto;
     width: 100%;
-    min-height: 100%;
+   	height: 100%;
     overflow-x: hidden;
     -webkit-user-select: none;
 }
@@ -113,15 +113,18 @@ text-decoration:none;
 	height: 44vh;
 }
 .moneylogo{
-	width: 30vw;
-	height: 30vw;
-	margin: 0 auto;
-	background:url("../image/moneylogo.png") center center no-repeat;
-	background-size: 20vw 20vw;
+	width: 23vw;
+	height: 23vw;
+	position: absolute;
+	margin: auto;
+	left: 0;
+	right: 0;
+	top: 3vw;
 }
-.textBalance{
+.showBalance .textBalance{
 	font-size: .7rem;
-	margin: 0;
+	margin-top: 20vh;
+	margin-bottom: 0;
 }
 .numBalance{
 	font-weight: bold;
@@ -155,7 +158,10 @@ h4.tableTitle {
 }
 footer{
 	width: 100vw;
-	height: 8vh;
+	height: 14vh;
+	position: fixed;
+	left: 0;
+	bottom: 0;
 	border-top: .2vh solid #ccc;
 }
 footer > a{
@@ -247,7 +253,6 @@ footer > a span.logo5{
 	margin: 0 auto;
 	margin-top: 1rem;
 	background: url("../image/ICbg.png") no-repeat;
-	opacity:0.4;
 	background-size: 100% 100%;
 	color: #fff;
 }
@@ -275,8 +280,8 @@ footer > a span.logo5{
 	color: #fff;
 }
 .setList{
-	height: 5vh;
-	line-height: 5vh;
+	height: 6vh;
+	line-height: 6vh;
 	min-width: 17vw;
 	border:#008B61 1px solid;
 	
@@ -313,23 +318,27 @@ footer > a span.logo5{
 	/*margin-right: 5vw;*/
 	padding: 0 5vw;
 }
-.addIDbtn{
+a.addIDbtn{
 	width:100vw;
-	height: 10vh;
+	height: 9vh;
+	line-height: 9vh;
+	display: block;
 	position: absolute;
 	left: 0;
 	bottom: 0;
 	background:#E8F9F5 url("../image/sprite.png") no-repeat;
 	background-size: 17rem auto;
-	background-position: -15.1rem -1.2rem;
+	background-position: -14rem -4.5rem;
 	border: none;
+	text-align: center;
+	text-decoration: none;
 }
 .addIDbtn span{
 	display: block;
 	text-align: left;
-	padding-left:18vw;
+	padding-left:21vw;
 	color: #2B302F;
-	font-size: 1rem;
+	font-size: .8rem;
 }
 /*consume css*/
 .consume{
@@ -424,7 +433,6 @@ footer > a span.logo5{
     margin: 0 auto;
     margin-top: 5vw;
     margin-bottom: 1vw;
-    border:1px solid #ccc;
     border-radius: 50%;
     text-align: center;
 }
@@ -434,7 +442,7 @@ footer > a span.logo5{
 }
 .mineList{
 	width: 100vw;
-	height: 48vh;
+	height: 39vh;
 	margin-bottom:0;
 }
 .mineList > li > a{
@@ -444,8 +452,9 @@ footer > a span.logo5{
 	font-size: .7rem;
 	width: 100vw;
 	padding-left: 15vw;
-	height: 8vh;
-	line-height: 8vh;
+	height: 10vh;
+	line-height: 10vh;
+	text-decoration: none;
 	color: #383838;
 }
 .mineList > li > a > i{
@@ -454,21 +463,21 @@ footer > a span.logo5{
 	line-height: 8vw;
 	position: absolute;
 	left: 3vw;
-	top: 2vw;
+	top: 3vw;
 	font-weight: bold;
 	display: inline-block;
 	background: url("../image/sprite.png") no-repeat;
-	background-size: 17.7rem 9rem;
+	background-size: 16.7rem 8.5rem;
 }
 
 .mineList > li > a > i.i1{
-	background-position: -9.1rem -2.2rem;
+	background-position: -8.5rem -2rem;
 }
 .mineList > li > a > i.i2{
-	background-position: -12.4rem -2.2rem;
+	background-position: -11.6rem -2rem;
 }
 .mineList > li > a > i.i3{
-	background-position: -14rem -2.2rem;
+	background-position: -13.1rem -2rem;
 }
 .mineList > li > a > span{
 	width: 8vw;
@@ -476,7 +485,7 @@ footer > a span.logo5{
 	line-height: 8vw;
 	position: absolute;
 	right: 4vw;
-	top: 2vw;
+	top: 4vw;
 	display: inline-block;
 	background: url("../image/sprite.png") no-repeat;
 	background-size: 17.7rem 9rem;
@@ -485,7 +494,7 @@ footer > a span.logo5{
 .quitBtn{
 	background: #D9534F;
 	color: #fff;
-	height: 6vh;
+	height: 7vh;
 	margin-bottom: 5vh;
 }
 /*personalInformation css*/
@@ -501,30 +510,30 @@ footer > a span.logo5{
 	font-size: .7rem;
 	width: 100vw;
 	padding-left: 15vw;
-	height: 8vh;
-	line-height: 8vh;
+	height: 10vh;
+	line-height: 10vh;
 	color: #383838;
 }
 .personalList > li > i{
-	width: 9vw;
-	height: 9vw;
-	line-height: 9vw;
+	width: 8vw;
+	height: 8vw;
+	line-height: 8vw;
 	position: absolute;
 	left: 3vw;
 	top: 2vw;
 	font-weight: bold;
 	display: inline-block;
 	background: url("../image/sprite.png") no-repeat;
-	background-size: 17.7rem 9rem;
+	background-size: 16.7rem 8.5rem;
 }
 .personalList > li > i.i1{
-	background-position: -9.1rem -2.2rem;
+	background-position: -8.5rem -2rem;
 }
 .personalList > li > i.i2{
-	background-position: -7.6rem -2.2rem;
+	background-position: -7rem -2rem;
 }
 .personalList > li > i.i3{
-	background-position: -10.5rem -2.2rem;
+	background-position: -9.9rem -2rem;
 }
 .personalList > li > span{
 	margin-left: 4vw;
