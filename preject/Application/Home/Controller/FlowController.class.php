@@ -79,7 +79,16 @@ class FlowController extends CommonController
 	}
 
 	// 充值记录
-	public function rechargeNote(){
+	public function rechargeNodes(){
+        // 查询用户IC卡号 xp_card
+        $id = $_SESSION['homeuser']['id'];
+
+        // 查询用户名下已绑定的卡号
+        $record = M('Flow')->field('money,time')->where('`uid`='.$id)->select();
+        //echo '<pre>';
+        //print_r($record);die;
+        // 分配数据
+        $this->assign('record',$record);
 		$this->display();
 	}
 

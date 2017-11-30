@@ -8,20 +8,18 @@
 </head>
 <body>
 <ul class="rechargeHhead nav nav-pills" role="tablist">
-    <li role="presentation">用水地点</li>
-    <li class="text-right">用水时间</li>
+    <li role="presentation">金额（元）</li>
+    <li class="text-right">时间</li>
 </ul>
 <section class="container rechargeNode">
     <table class="rechargeTable table table-defalt text-center">
     	<tbody>
+        <foreach name="record" item="v">
             <tr>
-                <td class="text-left">45</td>
-                <td class="text-right">20170105</td>
+                <td class="text-left">{{$v['money']/100}}</td>
+                <td class="text-right">{{:date('Y-m-d', $v['time'])}}</td>
             </tr>
-            <tr>
-                <td class="text-left">45</td>
-                <td class="text-right">20170105</td>
-            </tr>
+        </foreach>
         </tbody>
     </table>
 </section>
