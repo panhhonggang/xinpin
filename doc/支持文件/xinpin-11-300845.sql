@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-11-30 00:44:12
+-- Generation Time: 2017-11-30 02:44:29
 -- 服务器版本： 5.7.14
 -- PHP Version: 5.6.25
 
@@ -494,7 +494,8 @@ ALTER TABLE `xp_filters`
 -- Indexes for table `xp_flow`
 --
 ALTER TABLE `xp_flow`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `ordernumber` (`ordernumber`);
 
 --
 -- Indexes for table `xp_leavel`

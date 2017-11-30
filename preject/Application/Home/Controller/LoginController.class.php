@@ -29,6 +29,10 @@ class LoginController extends Controller
             //查询手机号
             $condition['phone'] = $_POST['phone'];
             $info = M('Users')->where($condition)->find();
+
+            if($info['status']==0){
+                $this->error('你输入的用户没有已被禁用，请与管理员联系！');
+            }
    
             if($info){
                 //接收密码
