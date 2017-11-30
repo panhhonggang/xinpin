@@ -11,15 +11,19 @@ use Think\Controller;
 class DevicesController extends CommonController
 {
     /**
-     * 显示设备列表
+     * 显示未绑定设备列表
      */
     public function devicesList()
     {
         $devices = D('Devices');
+        $count = $devices->count();
+        $Page       = new \Think\Page($count,25);
+        $show       = $Page->show();
 
-        $ListInfo = $devices->getInfo();
+        $ListInfo = $devices->limit($Page->firstRow.','.$Page->listRows)->getInfo();
         
         $this->assign('deviceInfo', $ListInfo);
+        $this->assign('page',$show);
         $this->display('devicesList');
     }
 
@@ -87,10 +91,9 @@ class DevicesController extends CommonController
         foreach ($data as $key => $val) {
             $_POST['device_code'] = $val['A'];
             $_POST['type_id'] = (string)$val['B'];
-            // $datas['addtime'] = time();
+            $datas['addtime'] = time();
             $Devices = D('Devices'); 
             $res = D('Devices')->getCate();
-
             $info = $Devices->create();
             if($info){
                 if(!in_array($_POST['type_id'], $res)){

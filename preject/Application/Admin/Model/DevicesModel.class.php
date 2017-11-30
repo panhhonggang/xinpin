@@ -16,7 +16,6 @@ class DevicesModel extends Model
         array('device_code', '/^\d{16}$/', '设备编码只能是数字', '2', 'regex'),
         array('device_code', '', '请不要重复录入', '1', 'unique'),
         array('type_id','require','设备类型不能为空'),
-        // array('type_id', '{$this->getCate()}','设备类型不正确', '1', 'in'),
 
     );
 

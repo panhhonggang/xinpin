@@ -24,7 +24,7 @@ class ActionController extends Controller
                 file_put_contents('message', $key);
             }
         }
-
+        Log::write($message,'调试信息');
         if( isset($message['PackType']) ){
 
             if( empty( Gateway::getSession($client_id) ) ){
@@ -66,17 +66,20 @@ class ActionController extends Controller
                     Gateway::sendToGroup( $message['DeviceID'], json_encode($message) );
                 }
             }
-            Log::write( ($client_id), 'client_id_2');
+            if(!Gateway::isOnline($client_id)){
+                return "设备已离线";
+            }
             Gateway::sendToClient($client_id, $message);
-
         } else {
             $message = file_get_contents('message');
             $ReviveArray=json_decode($message, true);
             if( $ReviveArray['PackType'] == 'login' ){
                 Gateway::joinGroup( $client_id, $ReviveArray['DeviceID'] );
-            } else {
-                Gateway::sendToUid($ReviveArray['DeviceID'], $ReviveArray);
             }
+            if(!Gateway::isUidOnline($ReviveArray['DeviceID'])){
+                return "设备已离线";
+            }
+            Gateway::sendToUid($ReviveArray['DeviceID'], $ReviveArray);
         }
 
     }
