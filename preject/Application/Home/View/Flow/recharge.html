@@ -84,7 +84,11 @@ $(".rechargeBtn").click(function(){
 			weixinPay(money);
 		}else{
 			// 调用支付宝支付
-			console.dir('支付宝支付');
+			// console.dir('支付宝支付');
+			layui.use('layer', function(){
+	            var layer = layui.layer;
+	            layer.msg('支付宝暂不开放，请使用微信充值！');
+	        });  
 		}		
 	}else{
 		layui.use('layer', function(){
@@ -101,12 +105,18 @@ function weixinPay(money){
 			JSON.parse(res),
 			function(res){
 				if (res.err_msg.substr(-2) == 'ok') {
+					// 充值成功跳转到首页
 					location.href = "{{:U('Home/Index/index')}}";
 				} else if (res.err_msg.substr(-6) == 'cancel') {
-					alert('取消成功！');
-					// alert(res.err_code+res.err_desc+res.err_msg); // 显示错误信息
+					layui.use('layer', function(){
+        			    var layer = layui.layer;
+        			    layer.msg('取消成功！');
+        			}); 
 				}else{
-					alert('充值失败！');
+					layui.use('layer', function(){
+        			    var layer = layui.layer;
+        			    layer.msg('充值失败！');
+        			}); 
 				}
 			}
 		);
