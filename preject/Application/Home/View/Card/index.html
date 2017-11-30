@@ -62,10 +62,10 @@
 <body>
 
     <!-- addID --> 
+    <foreach name="icid" item="vo" key="key">
     <section class="container IDshow"> 
         <section class="IDshowBg">
-        	<span class="IDtext text-center">1234567895464655484</span>
-
+        	<span class="IDtext text-center">{{$vo['iccard']}}</span><b>状态：{{$vo['status']}}</b>
         </section>
         <p class="reportLostItemsTxt">已挂失</p>
         <section class="setList">
@@ -77,6 +77,9 @@
         	<section class="set">设置</section>
         </section>
     </section>
+    </foreach>
+
+
 	<a class="addIDbtn" href="{{:U(add)}}"><span>添加IC卡</span></a>
 	<!-- 确认取消提示start -->
 	<section class="promptBg">
@@ -97,7 +100,8 @@
 			$(".setItem").hide();
 		});
 	});
-	//解绑
+	// 解绑
+	// 后台数据：解绑 成功返回 1 ，解绑 失败返回-1
 	$(".unBind").click(function(){
 		var _this=$(this);
 		$(".hintTxt").text("确定要解绑该IC卡吗？");
@@ -108,12 +112,12 @@
         });
         $('.yes_btn').unbind('click').click(function(){
             $.ajax({
-				url:"{{:U('Home/Flow/reportTheLossOf')}}",
+				url:"{{:U('Home/Card/relieveIC')}}",
 				type:"post",
 				dataType:"json",
 				data:{numVal:_this.parent().parent().siblings().children("span").text()},
 				success:function(res){
-					if(res.status.errCode==true){
+					if(res.status.errCode==1){
 						_this.parent().parent().parent().remove();
 						alert("解绑成功！");
 					}else{
@@ -125,6 +129,7 @@
 	});
 
 	//解挂
+	// 后台数据：解挂 成功返回 1 ，解挂 失败返回-1
 	$(".uncoupling").click(function(){
 		var _this=$(this);
 		$(".hintTxt").text("确定要解挂该IC卡吗");
@@ -137,12 +142,12 @@
         $('.yes_btn').unbind('click').click(function(){
         	
 			$.ajax({
-				url:"{{:U('Home/Flow/hangingSolution')}}",
+				url:"{{:U('Home/Card/hangingSolution')}}",
 				type:"post",
 				dataType:"json",
 				data:{numVal:_this.parent().parent().siblings().children("span").text()},
 				success:function(res){
-					if(res.status.errCode==true){
+					if(res.status.errCode==1){
 						$(".reportLostItemsTxt").hide();
 						_this.parent().parent().siblings(".IDshowBg").removeClass("IDshowBgActive");
 					}else{
@@ -164,12 +169,12 @@
         $('.yes_btn').unbind('click').click(function(){
         	
 			$.ajax({
-				url:"{{:U('Home/Flow/relieveIC')}}",
+				url:"{{:U('Home/Card/reportTheLossOf')}}",
 				type:"post",
 				dataType:"json",
 				data:{numVal:_this.parent().parent().siblings().children("span").text()},
 				success:function(res){
-					if(res.status.errCode==true){
+					if(res.status.errCode==1){
 						$(".reportLostItemsTxt").show();
         				_this.parent().parent().siblings(".IDshowBg").addClass("IDshowBgActive");
 						

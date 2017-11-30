@@ -7,6 +7,15 @@ class CardController extends CommonController
 {
     public function index()
     {
+        // 查询用户IC卡号 xp_card
+        $uid = $_SESSION['homeuser']['id'];
+        // 查询用户名下已绑定的卡号
+        $icid = M('Card')->field('iccard,status')->where('`uid`='.$uid)->select();
+
+        //分配数据        
+        $this->assign('icid',$icid);
+
+        // 显示模板
         $this->display();
     }
 
@@ -67,12 +76,23 @@ class CardController extends CommonController
     }
 
     //解绑
-    //解挂后:IC卡处于未绑定状态
+    //解挂后:IC卡处于未绑定状态 ，持卡用户为 null
     public function relieveIC()
     {
-        // IC卡卡号
-        // $this->display();
-        return true;
+        // 接收要修改的卡号
+        $iccard = I('numVal');
+        $data['status'] = 0;
+        $data['uid'] = null;
+        $res = M('Card')->where('`iccard`="'.$iccard.'"')->save($data);
+
+        // 检查是否解绑成功
+        if($res){
+            // 成功返回
+            echo 1;
+        }else{
+            // 失败返回
+            echo -1;
+        }
     } 
 
     //挂失
@@ -80,8 +100,20 @@ class CardController extends CommonController
     public function reportTheLossOf()
     {
         // IC卡卡号
-    	// $this->display();
-        return true;
+        // 接收要修改的卡号
+        $iccard = I('numVal');
+        $data['status'] = 2;   
+        $res = M('Card')->where('`iccard`="'.$iccard.'"')->save($data);
+
+        // 检查是否挂失成功
+        if($res){
+            // 成功返回
+            echo 1;
+        }else{
+            // 失败返回
+            echo -1;
+        }
+
     }
 
     //解挂
@@ -89,8 +121,19 @@ class CardController extends CommonController
     public function hangingSolution()
     {
         // IC卡卡号
-    	// $this->display();
-        return true;
+        // 接收要修改的卡号
+        $iccard = I('numVal');
+        $data['status'] = 1;   
+        $res = M('Card')->where('`iccard`="'.$iccard.'"')->save($data);
+
+        // 检查是否解挂成功
+        if($res){
+            // 成功返回
+            echo 1;
+        }else{
+            // 失败返回
+            echo -1;
+        }
     }    
 
 }
