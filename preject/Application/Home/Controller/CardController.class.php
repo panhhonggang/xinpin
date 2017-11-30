@@ -117,7 +117,7 @@ class CardController extends CommonController
     }
 
     //解挂
-    //解挂后:IC卡处于未绑定状态
+    //解挂后:IC卡处于绑定状态
     public function hangingSolution()
     {
         // IC卡卡号
