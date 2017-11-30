@@ -17,32 +17,45 @@ class LoginController extends Controller
     //用户登录
     public function login()
     {
-        // 登录检查
+        // 登录如果已经登录就不用重复登录了
         if(!empty($_SESSION['homeuser'])) $this->redirect('Index/index');
 
         if(IS_POST){         
-            //判断验证码是否正确
+            // 判断验证码是否正确
             $Verify =  new \Think\Verify();
             $res = $Verify->check($_POST['verify_code']);
             if(!$res) $this->error('验证码不对');
 
-            //查询手机号
+            // 查询手机号
             $condition['phone'] = $_POST['phone'];
             $info = M('Users')->where($condition)->find();
-
+            // 判断用户状态（0：禁用 1：启用）
             if($info['status']==0){
-                $this->error('你输入的用户没有已被禁用，请与管理员联系！');
+                $this->error('用户名已被禁用，请与管理员联系！');
             }
    
             if($info){
-                //接收密码
+                // 接收密码
                 $password = MD5($_POST['password']);
-                //密码验证
+                // 密码验证
                 if ($info['password'] == $password) {
-                    //验证成功
-                    $_SESSION['homeuser'] = $info;
-                    //跳转到主页
-                    $this->redirect('Index/index');
+
+                    // 记录用户最后登录时间
+                    $data['login_time'] = time();
+
+                    $mes = M('Users')->where('id='.$info['id'])->save($data);
+
+                    // 登录时间记录成功
+                    if($mes){
+                        // 登录成功
+                        $_SESSION['homeuser'] = $info;
+                        // 跳转到主页
+                        $this->redirect('Index/index');  
+                    }else{
+                        // 登记失败退回去重新登录
+                        $this->error('登录失败请重新登录');
+                    }
+
                 }else{
                     $this->error('您的密码输入错误！');
                 }
@@ -52,18 +65,19 @@ class LoginController extends Controller
             }
 
         }else{
+            // 显示模板
            $this->display(); 
         } 
     }
 
-    //退出登录
+    // 退出登录
     public function logout()
     {
         unset($_SESSION['homeuser']);
         $this->redirect('Login/login');
     }
 
-    //用户登录验证码生成
+    // 用户登录验证码生成
     public function verifyCode(){
         $config =    array(
             'fontSize'    =>    20,    // 验证码字体大小
