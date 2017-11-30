@@ -27,7 +27,7 @@
                 <form class="form-group" action="__URL__/add" method="post">
                     <div class="control-group">
                         <span>机组编码</span>
-                        <input type="text" class="control" name="cname" placeholder="请输入机组编码" style="width:210px;">
+                        <input type="text" class="control" name="cname" placeholder="请输入机组编码" style="width:210px;"><a class="addBtn" href="javascript:;">批量添加</a>
                     </div>
                     <div class="control-group">
                         <span>设备编码</span>
@@ -40,8 +40,29 @@
                 </form>
             </div>
         </div>
+        <!-- 批量添加弹框 -->
+            <div class="addBatch">
+                <form method="post" action="__URL__/upload" enctype="multipart/form-data">
+                    <input type="file" name="excelData" class="filename">
+                    <button class="btn add_device">添加</button>
+                </form>
+            </div>
         <!-- footer part -->
         <include file="Public/footer"/>
     </div>
 </div>
+<script>
+    $(".addBtn").click(function(){
+        //显示充值弹框
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.open({
+                type: 1, 
+                title: ['批量导入', 'font-size:18px;'],
+                area: ['500px', '300px'],
+                content: $(".addBatch")
+            }); 
+        });
+    });
+</script>
 

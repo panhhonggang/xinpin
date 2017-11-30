@@ -9,7 +9,7 @@
                 <form class="form-horizontal " action="add_device" method="post">
                     <div class="control-group">
                         <span>设备编码：</span>
-                        <input type="text" name="device_code" placeholder="请输入设备编码"><a class="add" href="javascript:;" style="margin-left: 30px;">批量添加</a>
+                        <input type="text" name="device_code" placeholder="请输入设备编码"><a class="addBtn" href="javascript:;">批量添加</a>
                     </div>
                     <div class="control-group">
                         <span>请选择经销商：</span>
@@ -54,7 +54,7 @@
 </div>
 <script type="text/javascript" src="__PUBLIC__/Admin/js/devices.js"></script>
 <script>
-    $(".add").click(function(){
+    $(".addBtn").click(function(){
         //显示充值弹框
         layui.use('layer', function(){
             var layer = layui.layer;

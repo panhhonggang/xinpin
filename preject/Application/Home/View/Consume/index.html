@@ -72,7 +72,7 @@
     function getIcIdConsume(icid){
         $.post('{{:U("Consume/getIcIdConsume")}}', 'icid='+icid, function(res){
             // 回调操作-异步刷新
-            
+            location.reload();
         });
     };
 </script>
