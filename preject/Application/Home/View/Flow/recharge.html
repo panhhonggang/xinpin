@@ -101,8 +101,7 @@ function weixinPay(money){
 			JSON.parse(res),
 			function(res){
 				if (res.err_msg.substr(-2) == 'ok') {
-					// location.href = 'http://www.lizelong.com';
-					alert('充值成功！');
+					location.href = "{{:U('Home/Index/index')}}";
 				} else if (res.err_msg.substr(-6) == 'cancel') {
 					alert('取消成功！');
 					// alert(res.err_code+res.err_desc+res.err_msg); // 显示错误信息
@@ -113,5 +112,4 @@ function weixinPay(money){
 		);
 	});
 };
-
 </script>

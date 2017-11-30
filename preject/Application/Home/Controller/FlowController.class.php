@@ -32,7 +32,8 @@ class FlowController extends CommonController
     public function uniformOrder()
     {
     	// 将金额强转换整数
-    	$money = I('money') * 100;
+    	// $money = I('money') * 100;
+    	$money = 1;
     	$openId = I('openId');
     	// dump($money);die;
         //echo 1;exit;
@@ -44,7 +45,8 @@ class FlowController extends CommonController
         $input = new \WxPayUnifiedOrder();
         // 产品内容
         $input->SetBody("馨品净水设备-充值");
-        // $input->SetAttach("love");
+        // 用户ID
+        $input->SetAttach($_SESSION['homeuser']['id']);
         // 设置商户系统内部的订单号,32个字符内、可包含字母, 其他说明见商户订单号
         $input->SetOut_trade_no(\WxPayConfig::MCHID.date("YmdHis").mt_rand(0,9999));
         // 产品金额单位为分
@@ -55,13 +57,14 @@ class FlowController extends CommonController
         // $input->SetTime_expire(date("YmdHis", time() + 300));
         // $input->SetGoods_tag("test");
         // 支付成功的回调地址
-        $input->SetNotify_url("http://wuzhibin.cn/Home/Flow/notify");
+        $input->SetNotify_url("http://wuzhibin.cn/Home/Weixinpay/notify.html");
         // 支付方式 JS-SDK 类型是：JSAPI
         $input->SetTrade_type("JSAPI");
         // 用户在公众号的唯一标识
         $input->SetOpenid($openId);
         // 统一下单 
         $order = \WxPayApi::unifiedOrder($input);
+        
         // 返回支付需要的对象JSON格式数据
         $jsApiParameters = $tools->GetJsApiParameters($order);
 
@@ -69,10 +72,10 @@ class FlowController extends CommonController
         exit;
     }
 
-    // 充值完成的回调
-	public function notify(){
+    // 充值完成将数据写入数据库
+	public function writeData(){
 		//$this->display();
-		echo '充值完成的回调';
+		// echo '充值完成的回调';
 	}
 
 	// 充值记录

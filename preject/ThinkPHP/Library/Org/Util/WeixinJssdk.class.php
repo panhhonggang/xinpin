@@ -289,32 +289,5 @@ class WeixinJssdk
     $bizString = $this->ToUrlParams($urlObj);
     return "https://api.weixin.qq.com/sns/oauth2/access_token?".$bizString;
   }
-
-  public function WxPayValue()
-  {
-    // 必填项
-    // 公众账号ID
-    $Value['appid'] = $this->APPID;
-    // 商户号
-    $Value['mch_id'] = $this->MCHID;
-    // 随机字符串
-    $Value['nonce_str'] = $this->createNonceStr();
-    // 商品描述
-    $Value['body'] = '测试支付';
-    //商户订单号 
-    $Value['out_trade_no'] = $this->createNonceStr($length = 16).mt_rand(0,999999);
-    // 标价金额单位1分钱
-    $Value['total_fee'] = 1;
-    // 终端IP
-    $Value['spbill_create_ip'] = $_SERVER['REMOTE_ADDR'];
-    // 支持成功回调地址
-    $Value['notify_url'] = 'http://wuzhibin.cn/Home/Index/pay';
-    // 交易类型
-    $Value['trade_type'] = JSAPI;
-    // 用户标识
-    $Value['openid'] = $this->GetOpenid();
-
-    return $Value;
-  }
 }
 
