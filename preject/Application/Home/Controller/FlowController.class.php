@@ -32,8 +32,8 @@ class FlowController extends CommonController
     public function uniformOrder()
     {
     	// 将金额强转换整数
-    	// $money = I('money') * 100;
-    	$money = 1;
+    	$money = I('money') * 100;
+    	// $money = 1;
     	$openId = I('openId');
     	// dump($money);die;
         //echo 1;exit;
