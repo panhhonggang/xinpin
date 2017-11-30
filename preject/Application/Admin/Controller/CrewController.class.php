@@ -71,6 +71,9 @@ class CrewController extends CommonController
                 $this->error('设备编码不存在，请先添加设备后尝试！');
             }
         }else{
+            $devices = M('devices');
+            $info = $devices->where('binding_status=0')->select();
+            $this->assign('info',$info);
             $this->display();
         }
 
