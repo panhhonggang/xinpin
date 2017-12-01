@@ -11,20 +11,54 @@ use Think\Controller;
 class DevicesController extends CommonController
 {
     /**
-     * 显示未绑定设备列表
+     * 显示设备列表
      */
     public function devicesList()
     {
-        $devices = D('Devices');
-        $count = $devices->count();
+        $map = '';
+        if(!empty($_GET['name'])) $map['name'] = array('like',"%{$_GET['name']}%");
+        $devices = M('Devices');
+        $count = $devices
+                ->where($map)
+                ->join('xp_devices_statu ON xp_devices.device_code = xp_devices_statu.DeviceID')
+                  ->join('xp_crew ON xp_devices.device_code = xp_crew.dcode')
+                  ->join('xp_device_type ON xp_devices.type_id = xp_device_type.id')
+                  ->join('xp_binding ON xp_crew.id = xp_binding.cid')
+                  ->join('xp_vendors ON xp_binding.vid = xp_vendors.id')
+                  ->field('xp_devices.*,xp_device_type.typename,xp_crew.dcode,xp_crew.cname,xp_vendors.name,xp_devices_statu.updatetime')
+                ->count();
         $Page       = new \Think\Page($count,25);
         $show       = $Page->show();
 
-        $ListInfo = $devices->limit($Page->firstRow.','.$Page->listRows)->getInfo();
-        
-        $this->assign('deviceInfo', $ListInfo);
+        // $ListInfo = $devices/*->limit($Page->firstRow.','.$Page->listRows)*/->getInfo();
+        $vendor = $devices
+                    ->where($map)
+                  ->join('xp_devices_statu ON xp_devices.device_code = xp_devices_statu.DeviceID')
+                  ->join('xp_crew ON xp_devices.device_code = xp_crew.dcode')
+                  ->join('xp_device_type ON xp_devices.type_id = xp_device_type.id')
+                  ->join('xp_binding ON xp_crew.id = xp_binding.cid')
+                  ->join('xp_vendors ON xp_binding.vid = xp_vendors.id')
+                  ->field('xp_devices.*,xp_device_type.typename,xp_crew.dcode,xp_crew.cname,xp_vendors.name,xp_devices_statu.updatetime')
+                  ->limit($Page->firstRow.','.$Page->listRows)
+                  ->select();
+        $array = array('正常', '冲洗','缺水', '漏水', '检修','欠费', '关机');
+        foreach ($vendor as $key => $value) {
+            $vendor[$key]['device_status'] = $array[$value['device_status']];
+        }
+
+        $this->assign('deviceInfo', $vendor);
         $this->assign('page',$show);
         $this->display('devicesList');
+    }
+
+    // 查询设备详情
+    public function deviceDetail()
+    {
+        $code = I('post.code');
+        $devices = D('devices');
+        $res = $devices->getInfoBydecode($code);
+        $res['flow'] = M('consume')->where('did='.$res['id'])->sum('flow');
+        $this->ajaxReturn($res, 'json');
     }
 
     /**
