@@ -32,11 +32,9 @@ class FlowController extends CommonController
     public function uniformOrder()
     {
     	// 将金额强转换整数
-    	//$money = I('money') * 100;
-    	$money = 1;
+    	$money = I('money') * 100;
+        // 用户在公众号的唯一ID
     	$openId = I('openId');
-    	// dump($money);die;
-        //echo 1;exit;
         //微信examle的WxPay.JsApiPay.php
         vendor('WxPay.jsapi.WxPay#JsApiPay');
         $tools = new \JsApiPay();
@@ -71,12 +69,6 @@ class FlowController extends CommonController
         echo $jsApiParameters;
         exit;
     }
-
-    // 充值完成将数据写入数据库
-	public function writeData(){
-		//$this->display();
-		// echo '充值完成的回调';
-	}
 
 	// 充值记录
 	public function rechargeNodes(){
