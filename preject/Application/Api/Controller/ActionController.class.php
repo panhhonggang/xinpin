@@ -15,7 +15,7 @@ class ActionController extends Controller
     {
         $message = I('post.');
 
-        if(isset($message['client_id']))
+        /*if(isset($message['client_id']))
         {
             $client_id = $message['client_id'];
             unset($message['client_id']);
@@ -23,9 +23,14 @@ class ActionController extends Controller
             foreach ($message as $key => $value) {
                 file_put_contents('message', $key);
             }
-        }
-        if( isset($message['PackType']) ){
+        }*/
 
+        $message = I('post.');
+        $client_id = $message['client_id'];
+        unset($message['client_id']);
+
+        // if( isset($message['PackType']) ){
+        if( $message['soure']=='TCP'){
             if( empty( Gateway::getSession($client_id) ) ){
                 Gateway::setSession($client_id, $message);
             } else {
@@ -39,6 +44,9 @@ class ActionController extends Controller
                 Gateway::bindUid($client_id, $message['DeviceID']);
 
             }
+
+            Log::write(json_encode($message), '设备发送消息');
+
             switch ($message['PackType']) {
                 case 'login':
                     $this->loginAction($message);
@@ -60,7 +68,6 @@ class ActionController extends Controller
                     break;
             }
 
-
             if( isset($message['DeviceID']) ){
                 if( Gateway::getClientCountByGroup($message['DeviceID']) > 0 ){
                     Gateway::sendToGroup( $message['DeviceID'], json_encode($message) );
@@ -71,15 +78,24 @@ class ActionController extends Controller
             }
             Gateway::sendToClient($client_id, $message);
         } else {
-            $message = file_get_contents('message');
+            /*$message = file_get_contents('message');
             $ReviveArray=json_decode($message, true);
-            if( $ReviveArray['PackType'] == 'login' ){
+            Log::write(json_encode($ReviveArray), 'web发送消息');*/
+            /*if( $ReviveArray['PackType'] == 'login' ){
                 Gateway::joinGroup( $client_id, $ReviveArray['DeviceID'] );
+            } else {
+                Gateway::sendToUid($ReviveArray['DeviceID'], $ReviveArray);
+            }*/
+
+            if( $message['PackType'] == 'login' ){
+                Gateway::joinGroup( $client_id, $message['DeviceID'] );
+            } else {
+                Gateway::sendToUid($message['DeviceID'], $message);
             }
+            
             if(!Gateway::isUidOnline($ReviveArray['DeviceID'])){
                 return "设备已离线";
             }
-            Gateway::sendToUid($ReviveArray['DeviceID'], $ReviveArray);
         }
 
     }

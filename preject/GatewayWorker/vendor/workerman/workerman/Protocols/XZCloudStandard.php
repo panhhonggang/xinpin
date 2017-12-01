@@ -221,7 +221,7 @@ class XZCloudStandard
                 $decodeData[self::DeviceType]  = $lognData['DeviceType'];
                 $decodeData[self::DeviceID]    = substr($recv_buffer,2,15);
                 $decodeData[self::ICCID]       = substr($recv_buffer,17,20);
-                $decodeData[self::Loaction]    = substr($recv_buffer,37,10);;
+                $decodeData[self::Loaction]    = substr($recv_buffer,37,10);
                 $decodeData[self::CSQ]         = $lognData['CSQ'];
                 
             }
