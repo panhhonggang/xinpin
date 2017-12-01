@@ -35,7 +35,7 @@ class CardController extends CommonController
                 if($status==0){
                     $res = $user->create();
                     if($res){
-                        $data['name'] = $_SESSION['homeuser']['name'];
+                        $data['name'] = $res['name'];
                         $data['studentcode'] = $res['studentcode'];
                         $data['school'] = $res['school'];
                         $data['uid'] = $_SESSION['homeuser']['id'];
@@ -44,7 +44,7 @@ class CardController extends CommonController
                         
                         if($info){
                            //跳转到用户中心
-                            $this->success('添加成功',U('Users/index')); 
+                            $this->success('添加成功',U('Card/index')); 
                         }else{
                             $this->error('添加失败');
                         }
