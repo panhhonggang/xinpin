@@ -51,7 +51,10 @@ class WeixinpayController extends Controller
 
 	    			// 更新用户余额
 	    			// 读取用户余额
-    				$money = (int) M('users')->where('id='.$data['uid'])->find()['balance'];
+    				$user = M('users')->where('id='.$data['uid'])->find();
+
+                    // 用户余额
+                    $money = (int) $user['balance'];
 
     				// 更新用户余额
     				$data['balance'] = $money + $data['money'];
@@ -63,6 +66,32 @@ class WeixinpayController extends Controller
     				if($mes){
 	    				// 写更新日志
 	    				file_put_contents('./log/wxgxY_log.txt','余额更新成功', FILE_APPEND);
+
+                        // 用户名
+                        $username = $user['name'];
+                        $content = $username . '：您于'.date('Y年m月d日 h时i分s秒',$data['addtime']).'成功冲值'.$data['money'].'元';
+
+                        // 开始接口代码
+                        $sms = new \Org\Util\SmsDemo;
+                        $response = $sms::sendSms(
+                            "阿里云短信测试专用", // 短信签名
+                            "SMS_112475574", // 短信模板编号
+                            $phone, // 短信接收者
+                            Array(  // 短信模板中字段的值
+                                "content"=>$content,
+                                "product"=>"dsd"
+                            ),
+                            "123"   // 流水号,选填
+                        );
+
+                        // 信息推送状态判断
+                        if($response->Code=='OK'){
+                            $this->error('消息推送成功！');
+                        }else{
+                            $this->error('消息推送失败，错误码：' . $response->Code);
+                        }
+
+
 	    			}else{
 	    				// 写更新日志
 	    				file_put_contents('./log/wxgxN_log.txt','更新失败', FILE_APPEND);
