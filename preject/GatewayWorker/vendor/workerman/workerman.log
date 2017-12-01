@@ -699,3 +699,19 @@ Stack trace:
 2017-11-29 15:46:37 pid:16594 Workerman[start.php] status 
 2017-11-30 08:43:36 pid:16587 Workerman[start.php] stopping ...
 2017-11-30 08:43:36 pid:16587 Workerman[start.php] has been stopped
+2017-12-01 13:40:16 pid:25753 Workerman[start.php] start in DEBUG mode
+2017-12-01 13:40:19 pid:25753 Workerman[start.php] stopping ...
+2017-12-01 13:40:20 pid:25753 Workerman[start.php] has been stopped
+2017-12-01 13:40:24 pid:25758 Workerman[start.php] start in DEBUG mode
+2017-12-01 13:43:54 pid:25758 Workerman[start.php] stopping ...
+2017-12-01 13:43:54 pid:25758 Workerman[start.php] has been stopped
+2017-12-01 13:43:56 pid:25769 Workerman[start.php] start in DEBUG mode
+2017-12-01 13:45:59 pid:25769 Workerman[start.php] stopping ...
+2017-12-01 13:46:01 pid:25769 worker[YourAppBusinessWorker:25770] exit with status 9
+2017-12-01 13:46:01 pid:25769 Workerman[start.php] has been stopped
+2017-12-01 13:46:03 pid:25776 Workerman[start.php] start in DEBUG mode
+2017-12-01 14:00:04 pid:25776 Workerman[start.php] stopping ...
+2017-12-01 14:00:04 pid:25776 Workerman[start.php] has been stopped
+2017-12-01 14:00:06 pid:25806 Workerman[start.php] start in DEBUG mode
+2017-12-01 14:08:39 pid:25806 Workerman[start.php] stopping ...
+2017-12-01 14:08:39 pid:25806 Workerman[start.php] has been stopped

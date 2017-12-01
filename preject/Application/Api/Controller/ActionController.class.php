@@ -24,7 +24,6 @@ class ActionController extends Controller
                 file_put_contents('message', $key);
             }
         }
-        Log::write($message,'调试信息');
         if( isset($message['PackType']) ){
 
             if( empty( Gateway::getSession($client_id) ) ){
@@ -53,6 +52,7 @@ class ActionController extends Controller
                     $message = $this->RequesAction($client_id, $message);
                     break;
                 case 'Stopwater':
+                Log::write(json_encode($message), '停水处理');
                     $this->stopAction($client_id, $message);
                     break;
                 default:
@@ -125,18 +125,23 @@ class ActionController extends Controller
             $balance = $user['balance'] - $totalWater;
 
             Gateway::updateSession($client_id, [$client_id . $user['id']=>$totalWater]);
-            $this->saveConsume($user['id'], $icCard['id'], $message['water']);
+
+            $res = $this->saveConsume($user['id'],$message['DeviceID'], $icCard['id'], $message['water']);
+
             $this->updateBalance($user['id'], $balance);
         }
     }
 
 
     // 保存消费记录
-    public function saveConsume($uid, $icid, $flow)
+    public function saveConsume($uid, $code, $icid, $flow)
     {
+        $res = M('devices')->where('device_code='.$code)->getField('id');
+
         // 指定数据库需要的字段
         $data = array(
             'uid' => $uid,
+            'did' => $res,
             'icid' => $icid,
             'flow' => $flow,
             'address' => 'aaaa',

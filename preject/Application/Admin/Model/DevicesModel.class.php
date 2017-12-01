@@ -46,7 +46,6 @@ class DevicesModel extends Model
             ->join('xp_crew on xp_devices.device_code = xp_crew.dcode')
             ->join('xp_binding on xp_crew.id = xp_binding.cid')
             ->join('xp_vendors on xp_binding.vid = xp_vendors.id')
-            // ->sum('xp_consume.flow')
             ->field('xp_consume.address,xp_vendors.name,xp_devices_statu.*,xp_devices.id')
             ->find();
 

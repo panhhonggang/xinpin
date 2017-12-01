@@ -50,7 +50,7 @@ class Events
             $message['client_id'] = $client_id;
         }
 
-        $url = 'http://test.pingbbs.com/api/action/receive';
+        $url = 'http://192.168.37.76/xinpin/preject/api/action/receive';
         $curlobj = curl_init();
         curl_setopt($curlobj,CURLOPT_URL,$url);
         curl_setopt($curlobj,CURLOPT_HEADER,0);     

@@ -30,7 +30,6 @@ class DevicesController extends CommonController
         $Page       = new \Think\Page($count,25);
         $show       = $Page->show();
 
-        // $ListInfo = $devices/*->limit($Page->firstRow.','.$Page->listRows)*/->getInfo();
         $vendor = $devices
                     ->where($map)
                   ->join('xp_devices_statu ON xp_devices.device_code = xp_devices_statu.DeviceID')
