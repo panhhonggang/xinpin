@@ -15,7 +15,7 @@ class ConsumeController extends CommonController {
     	$icid = M('Card')->field('iccard,id')->where('`uid`='.$uid)->select();
 
     	// 查询第一张卡消费记录
-    	$icidOne = M('Consume')->field('flow,address,time')->where('`icid`="'.$icid[0]['id'].'"')->select();
+    	$icidOne = M('Consume')->field('flow,address,time')->where('`icid`="'.$icid[0]['id'].'"')->order('id desc')->select();
         	
     	//分配数据        
         $this->assign('icid',$icid);
@@ -29,7 +29,7 @@ class ConsumeController extends CommonController {
         $icid = I('icid');
 
         // 查询IC卡消费记录
-        $icIdConsume = M('Consume')->field('flow,address,time')->where('`icid`="'.$icid.'"')->select();
+        $icIdConsume = M('Consume')->field('flow,address,time')->where('`icid`="'.$icid.'"')->order('id desc')->select();
 
         // 采用JSON格式返回数据
         $this->ajaxReturn($icIdConsume);

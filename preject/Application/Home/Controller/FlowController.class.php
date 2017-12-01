@@ -76,7 +76,7 @@ class FlowController extends CommonController
         $id = $_SESSION['homeuser']['id'];
 
         // 查询用户名下已绑定的卡号
-        $record = M('Flow')->field('money,time')->where('`uid`='.$id)->select();
+        $record = M('Flow')->field('money,time')->where('`uid`='.$id)->order('id desc')->select();
         //echo '<pre>';
         //print_r($record);die;
         // 分配数据
