@@ -57,7 +57,7 @@ class FlowController extends CommonController
         // $input->SetTime_expire(date("YmdHis", time() + 300));
         // $input->SetGoods_tag("test");
         // 支付成功的回调地址
-        $input->SetNotify_url("http://wuzhibin.cn/Home/Weixinpay/notify.html");
+        $input->SetNotify_url("http://xinpin.dianqiukj.com/index.php/Home/Weixinpay/notify.html");
         // 支付方式 JS-SDK 类型是：JSAPI
         $input->SetTrade_type("JSAPI");
         // 用户在公众号的唯一标识
