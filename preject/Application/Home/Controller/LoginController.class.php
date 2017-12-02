@@ -17,10 +17,31 @@ class LoginController extends Controller
     //用户登录
     public function login()
     {
+        // 获取用户cookie
+        $userInfo = cookie('homeuser');
+
+        // 判断用户cookie
+        if(!empty($userInfo)){
+
+            // 查询数据库
+            $data['phone'] = $userInfo['phone'];
+            $data['password'] = $userInfo['password'];
+            $user = M('Users')->where($data)->find();
+
+            // 如果用户信息正确
+            if($user){
+                // 自动登录
+                $_SESSION['homeuser'] = $userInfo;     
+            }else{
+                // 清除cookie
+                cookie('homeuser',null);
+            }
+        }
         // 登录如果已经登录就不用重复登录了
         if(!empty($_SESSION['homeuser'])) $this->redirect('Index/index');
 
-        if(IS_POST){         
+        if(IS_POST){ 
+              
             // 判断验证码是否正确
             $Verify =  new \Think\Verify();
             $res = $Verify->check($_POST['verify_code']);
@@ -47,6 +68,11 @@ class LoginController extends Controller
 
                     // 登录时间记录成功
                     if($mes){
+                        // 判断是否选择自动登录
+                        if(!empty(I('remember'))){
+                            // 设置cookie有效期一周
+                            cookie('homeuser',$info,604800);
+                        }
                         // 登录成功
                         $_SESSION['homeuser'] = $info;
                         // 跳转到主页
@@ -73,6 +99,7 @@ class LoginController extends Controller
     // 退出登录
     public function logout()
     {
+        cookie('homeuser',null);
         unset($_SESSION['homeuser']);
         $this->redirect('Login/login');
     }
