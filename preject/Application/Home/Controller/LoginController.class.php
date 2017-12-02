@@ -30,6 +30,11 @@ class LoginController extends Controller
 
             // 如果用户信息正确
             if($user){
+                // 记录用户最后登录时间
+                $data['login_time'] = time();
+                // 记录用户最后登录IP
+                $data['login_ip'] = get_client_ip();
+                $mes = M('Users')->where('id='.$info['id'])->save($data);
                 // 自动登录
                 $_SESSION['homeuser'] = $userInfo;     
             }else{
@@ -63,6 +68,8 @@ class LoginController extends Controller
 
                     // 记录用户最后登录时间
                     $data['login_time'] = time();
+                    // 记录用户最后登录IP
+                    $data['login_ip'] = get_client_ip();
 
                     $mes = M('Users')->where('id='.$info['id'])->save($data);
 
