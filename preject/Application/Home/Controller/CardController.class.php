@@ -44,7 +44,7 @@ class CardController extends CommonController
                         
                         if($info){
                            //跳转到用户中心
-                            $this->success('添加成功',U('Card/index')); 
+                            $this->success('添加成功',U('Users/mine')); 
                         }else{
                             $this->error('添加失败');
                         }
