@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
-<link rel="stylesheet" href="__PUBLIC__/Home/css/LArea.css">
+
 <title>注册</title>
 <style type="text/css">
 
@@ -42,12 +42,16 @@
 		    </section>
 		</section>
 		<!-- 注册按钮 -->
-		<section class="registerBtn btn text-center btn-default"><button style="border: none;background: none;width:100%;height:100%;">注册</button></section>
+		<section class="registerBtn text-center">>注册</section>
 	</form>
 	<section class="registerFooter text-center">已有账号， <a href="{{:U('Login/login')}}">立即登录</a></section>
 	<script src="__PUBLIC__/Home/js/LAreaData1.js"></script>
     <script src="__PUBLIC__/Home/js/LAreaData2.js"></script>
     <script src="__PUBLIC__/Home/js/LArea.js"></script>
+    <script src="__PUBLIC__/Home/js/public.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/LArea.css">
+    <!-- layui.js -->
+	<script type="text/javascript" src="__PUBLIC__/Admin/layui/layui.js"></script>
     <script>
     var area1 = new LArea();
     area1.init({

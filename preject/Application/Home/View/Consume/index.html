@@ -24,8 +24,8 @@
     </section>
     <ul class="thead nav nav-pills" role="tablist">
         <li role="presentation" class="">用水地点</li>
+        <li>用水时间</li>
         <li>盛水量/ML</li>
-        <li></li>
     </ul>
     <section class="container consumeNode">
         <table class="consumeTable table table-defalt text-center">
@@ -72,7 +72,13 @@
     function getIcIdConsume(icid){
         $.post('{{:U("Consume/getIcIdConsume")}}', 'icid='+icid, function(res){
             // 回调操作-异步刷新
-            location.reload();
+            if(res.length>0){
+                alert(res.length);
+                $(".consumeTable tbody")
+            }else{
+                $(".consumeTable tbody").html("");
+            }  
+            // console.dir(res);
         });
     };
 </script>

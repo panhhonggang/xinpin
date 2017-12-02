@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1" >
+<script src="__PUBLIC__/Home/js/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
 <title>馨品共享水</title>
 <style>
 #text{
@@ -51,7 +54,7 @@
     float: left;
 }
 
-#text span.spanActive,#footerNav span.spanActive{
+#text span.spanActiveList{
     opacity:1;
 }
 #textList table{
@@ -63,6 +66,9 @@ h4.addUp{
     margin: 2vh auto;
     color:#008A63;
 }
+h4{
+    padding-left: 2vw;
+}
 footer.footer{
     margin-top: 40vh;
 }
@@ -72,7 +78,7 @@ footer.footer{
     <!-- logo -->
     <section class="showBalanceBox">
         <section class="showBalance">
-            <p class="moneylogo"></p>
+            <img class="moneylogo" src="__PUBLIC__/Home/image/moneylogo.png" />
             <p class="textBalance text-center">账号余额 (元)</p>
             <p class="numBalance text-center">{{$money}}</p>
         </section>
@@ -139,7 +145,7 @@ footer.footer{
             </li>
         </ul>
         <nav id="textNav">
-            <span class="spanActive"></span>
+            <span class="spanActiveList"></span>
             <span></span>
         </nav>
     </section>
@@ -151,20 +157,22 @@ footer.footer{
         <a><span class="logo4"></span>扫码取水</a>
         <a class="btn5" href="{{:U('Home/Users/mine')}}"><span class="logo5"></span>我的</a>
     </footer>
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
     <script src="__PUBLIC__/Home/js/public.js"></script>
-    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js" ></script>
     <script>
         $(".logo1").css("background-position","-11.6rem 0");
         $(".btn1").css("color","#008C63");
+        // 剩余金额logo效果
+        $(".showBalanceBox").click(function(){
+            $(".moneylogo").animate({width:"26vw",height:"26vw",top:"1.5vw"},"fast");
+            $(".moneylogo").animate({width:"23vw",height:"23vw",top:"3vw"},"fast");
+            $(".moneylogo").animate({width:"25vw",height:"25vw",top:"2vw"},"fast");
+            $(".moneylogo").animate({width:"23vw",height:"23vw",top:"3vw"},"fast");
+            $(".moneylogo").animate({width:"24vw",height:"24vw",top:"2.5vw"},"fast");
+        });
+        //数据表滑动显示
+        if($("#textList").children().size()>1){
+            fnTab_txt(id("text"),id("textList"),id("textNav").children,$(window).width(),"spanActiveList");
+        }
     </script>
 </body>
 </html>
-
-<script>
-    //数据表滑动显示
-    if($("#textList").children().size()>1){
-        fnTab_txt(id("text"),id("textList"),id("textNav").children,$(window).width(),"spanActive");
-    }
-</script>

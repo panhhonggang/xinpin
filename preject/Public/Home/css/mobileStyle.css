@@ -28,18 +28,24 @@ ul li{
 	list-style: none;
 	overflow: hidden;
 }
+h4{
+	padding-left: 2vw;
+}
 .listOption a,.payList a{
 text-decoration:none;
 }
-
-
 .logo{
-	width: 100vw;
-	height: 50vw;
-	margin-top: 10vw;
-	background: url("../image/logo.png") no-repeat;
-	background-position:center center;
-	background-size: 60vw 31vw;
+	width: 52vw;
+	height: 26.9vw;
+	margin:10vw auto;
+	margin-bottom: 5vw;
+	background: url("../image/sprite.png") no-repeat;
+	background-size: 12.7rem 6.5rem;
+	background-position: 0 -2.5rem;
+}
+.inputBox{
+	width: 85vw;
+	margin: 0 auto;
 }
 .inputBox .row input{
 	background: #60CDAF;
@@ -73,12 +79,18 @@ text-decoration:none;
 	color: #218C6A;
 }
 .checkSpan{
-	width: 15px;
-	height: 15px;
+	width: 14px;
+	height: 13px;
 	border: 1px solid #61CDAC;
 	margin:0 2vw;
 	border-radius: 3px;
 	padding: 0px 8px;
+	
+}
+.checkSpanBg{
+	background: url("../image/sprite.png") no-repeat;
+	background-size: 17.7rem 9rem;
+	background-position: -15.5rem -2.7rem;
 }
 .btn-list{
 	margin-top: 5vw;
@@ -270,7 +282,6 @@ footer > a span.logo5{
 	font-weight: bold;
 }
 .IDshow .reportLostItemsTxt{
-	display: none;
 	position: absolute;
 	left: 3rem;
 	bottom: 3rem;

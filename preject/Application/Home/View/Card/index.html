@@ -60,14 +60,16 @@
 </style>
 </head>
 <body>
-
+	<!-- 状态：1:绑定 2：挂失 -->
+	
     <!-- addID --> 
     <foreach name="icid" item="vo" key="key">
     <section class="container IDshow"> 
         <section class="IDshowBg">
-        	<span class="IDtext text-center">{{$vo['iccard']}}</span><b>状态：{{$vo['status']}}</b>
+        	<span class="IDtext text-center">{{$vo['iccard']}}</span>
         </section>
-        <p class="reportLostItemsTxt">已挂失</p>
+        <p class="reportLostItemsTxt"></p>
+        <input class="resStatus" type="hidden" value="{{$vo['status']}}" name="">
         <section class="setList">
         	<ul class="setItem">
         		<li class="reportLostItems">挂失</li>
@@ -92,6 +94,14 @@
 		</section>
 	</section>
 	<script>
+	for(var i=0;i<$(".IDshow").size();i++){
+		// alert($(".IDshow").eq(i).children("input").val());
+		if($(".IDshow").eq(i).children("input").val()==2){
+
+			$(".IDshow").eq(i).children(".reportLostItemsTxt").text("已挂失");
+		};
+	}
+	// alert($(".IDshow").size());
 	//设置按钮
 	$(".set").click(function(ev){
 		$(".setItem").show();
@@ -121,7 +131,7 @@
 						_this.parent().parent().parent().remove();
 						alert("解绑成功！");
 					}else{
-						alert("挂失失败");
+						alert("解绑失败");
 					}
 				}
 			});
@@ -148,7 +158,6 @@
 				data:{numVal:_this.parent().parent().siblings().children("span").text()},
 				success:function(res){
 					if(res.status.errCode==1){
-						$(".reportLostItemsTxt").hide();
 						_this.parent().parent().siblings(".IDshowBg").removeClass("IDshowBgActive");
 					}else{
 						alert("解挂失败");
@@ -175,11 +184,11 @@
 				data:{numVal:_this.parent().parent().siblings().children("span").text()},
 				success:function(res){
 					if(res.status.errCode==1){
-						$(".reportLostItemsTxt").show();
+						_this.parent().parent().siblings(".reportLostItemsTxt").text("已挂失");
         				_this.parent().parent().siblings(".IDshowBg").addClass("IDshowBgActive");
 						
 					}else{
-						alert("解绑失败");
+						alert("挂失失败");
 					}
 				}
 			});
