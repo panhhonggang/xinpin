@@ -16,7 +16,7 @@
         <foreach name="icid" item="vo" key="key">
             <li role="presentation">
                 <p onclick="getIcIdConsume({{:(int) $vo['id']}})">{{$vo['iccard']}}</p>
-                <span class="spanActive"></span>
+                <span class=""></span>
             </li>
 
         </foreach>
@@ -54,6 +54,7 @@
     <script>
     $(".logo2").css("background-position","-1.8rem 0");
         $(".btn2").css("color","#008C63");
+        $(".consumeList li").eq(0).children("span").addClass("spanActive");
     //数据表滑动显示
     if($("#textList").children().size()>2){
         fnTab_txt(id("consume"),id("textList"),id("textList").children,$(window).width()/2);
@@ -73,8 +74,17 @@
         $.post('{{:U("Consume/getIcIdConsume")}}', 'icid='+icid, function(res){
             // 回调操作-异步刷新
             if(res.length>0){
-                alert(res.length);
-                $(".consumeTable tbody")
+                var trList="";
+                var trList0="<tr><td></td><td></td><td></td></tr>";
+                for(var i=0;i<res.length;i++){
+                    trList+=trList0;
+                }
+                $(".consumeTable tbody").html(trList);
+                for(var i=0;i<res.length;i++){
+                    $(".consumeTable tbody tr").eq(i).children().eq(0).html(res[i].address);
+                    $(".consumeTable tbody tr").eq(i).children().eq(1).html(res[i].time);
+                    $(".consumeTable tbody tr").eq(i).children().eq(2).html(res[i].flow);
+                }
             }else{
                 $(".consumeTable tbody").html("");
             }  

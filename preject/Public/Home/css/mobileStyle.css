@@ -78,13 +78,15 @@ text-decoration:none;
 .registerFooter a{
 	color: #218C6A;
 }
-.checkSpan{
+.inputBox .row input.checkSpan {
 	width: 14px;
 	height: 13px;
 	border: 1px solid #61CDAC;
 	margin:0 2vw;
 	border-radius: 3px;
 	padding: 0px 8px;
+	background: none;
+	box-shadow:none;
 	
 }
 .checkSpanBg{
@@ -175,6 +177,7 @@ footer{
 	left: 0;
 	bottom: 0;
 	border-top: .2vh solid #ccc;
+	background: #fff;
 }
 footer > a{
 	width: 20vw;
@@ -377,6 +380,8 @@ a.addIDbtn{
 	margin-bottom: 0;
 	border-bottom: 1px solid #D7D7D7;
 }
+.consumeTable{
+}
 .spanActive{
 	background:#008A63;
     opacity:0.5;
@@ -407,6 +412,8 @@ a.addIDbtn{
 	width: 100vw;
 	height: 65vh;
 	margin-top: -.7rem;
+	overflow:scroll; 
+	overflow-x:hidden;
 }
 /*recharge css*/
 .rechargeHhead{
