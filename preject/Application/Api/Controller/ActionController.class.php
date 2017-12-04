@@ -17,7 +17,6 @@ class ActionController extends Controller
         $client_id = $message['client_id'];
         unset($message['client_id']);
 
-        Log::write(json_encode($message), '接收信息');
         if( $message['soure']=='TCP'){
             if( empty( Gateway::getSession($client_id) ) ){
                 Gateway::setSession($client_id, $message);
@@ -66,14 +65,6 @@ class ActionController extends Controller
             }
             Gateway::sendToClient($client_id, $message);
         } else {
-            /*$message = file_get_contents('message');
-            $ReviveArray=json_decode($message, true);
-            Log::write(json_encode($ReviveArray), 'web发送消息');*/
-            /*if( $ReviveArray['PackType'] == 'login' ){
-                Gateway::joinGroup( $client_id, $ReviveArray['DeviceID'] );
-            } else {
-                Gateway::sendToUid($ReviveArray['DeviceID'], $ReviveArray);
-            }*/
 
             if( $message['PackType'] == 'login' ){
                 Gateway::joinGroup( $client_id, $message['DeviceID'] );
@@ -135,7 +126,6 @@ class ActionController extends Controller
             $this->updateBalance($user['id'], $balance);
         }
     }
-
 
     // 保存消费记录
     public function saveConsume($uid, $code, $icid, $flow)
