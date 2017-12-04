@@ -63,7 +63,11 @@
         $(this).children("span").addClass("spanActive");
         $(this).siblings().children("span").removeClass("spanActive");
     });
-
+    //无数据是的样式显示
+    if($("#textList").children().size()==0){
+        var liHtml="<li role='presentation' style='width:100vw;'><p style='width:100vw;'>暂无数据</p><span class='spanActive' style='margin:0 auto;float:initial;'></span></li>";
+        $("#textList").html(liHtml);
+    }
     // 请求查询IC卡消费
     /**
      * [getIcIdConsume 请求查询IC卡消费记录]

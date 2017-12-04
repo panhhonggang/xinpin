@@ -93,18 +93,18 @@
 			</section>
 		</section>
 	</section>
+	<!-- layui.js -->
+	<script type="text/javascript" src="__PUBLIC__/Admin/layui/layui.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/Admin/layui/css/layui.css" />
 	<script>
 	for(var i=0;i<$(".IDshow").size();i++){
-		// alert($(".IDshow").eq(i).children("input").val());
 		if($(".IDshow").eq(i).children("input").val()==2){
-
 			$(".IDshow").eq(i).children(".reportLostItemsTxt").text("已挂失");
 		};
 	}
-	// alert($(".IDshow").size());
 	//设置按钮
 	$(".set").click(function(ev){
-		$(".setItem").show();
+		$(this).siblings(".setItem").show();
 		ev.stopPropagation();
 		$("body").unbind("click").click(function(){
 			$(".setItem").hide();
@@ -127,11 +127,20 @@
 				dataType:"json",
 				data:{numVal:_this.parent().parent().siblings().children("span").text()},
 				success:function(res){
-					if(res.status.errCode==1){
+					console.dir(res);
+					$('.promptBg').hide();
+					if(res==1){
 						_this.parent().parent().parent().remove();
-						alert("解绑成功！");
+						location.reload();
+						layui.use('layer', function(){
+				            var layer = layui.layer;
+				            layer.msg('该卡解绑成功！');
+				        }); 
 					}else{
-						alert("解绑失败");
+						layui.use('layer', function(){
+				            var layer = layui.layer;
+				            layer.msg('该卡解绑失败!');
+				        }); 
 					}
 				}
 			});
@@ -157,10 +166,19 @@
 				dataType:"json",
 				data:{numVal:_this.parent().parent().siblings().children("span").text()},
 				success:function(res){
-					if(res.status.errCode==1){
+					$('.promptBg').hide();
+					if(res==1){
 						_this.parent().parent().siblings(".IDshowBg").removeClass("IDshowBgActive");
+						location.reload();
+						layui.use('layer', function(){
+				            var layer = layui.layer;
+				            layer.msg('该卡解挂成功!');
+				        }); 
 					}else{
-						alert("解挂失败");
+						layui.use('layer', function(){
+				            var layer = layui.layer;
+				            layer.msg('该卡解挂失败!');
+				        }); 
 					}
 				}
 			});
@@ -183,12 +201,19 @@
 				dataType:"json",
 				data:{numVal:_this.parent().parent().siblings().children("span").text()},
 				success:function(res){
-					if(res.status.errCode==1){
+					$('.promptBg').hide();
+					if(res==1){
 						_this.parent().parent().siblings(".reportLostItemsTxt").text("已挂失");
-        				_this.parent().parent().siblings(".IDshowBg").addClass("IDshowBgActive");
-						
+        				_this.parent().parent().siblings(".IDshowBg").css("opcity",0.4);
+						layui.use('layer', function(){
+				            var layer = layui.layer;
+				            layer.msg('该卡挂失成功!');
+				        }); 
 					}else{
-						alert("挂失失败");
+						layui.use('layer', function(){
+				            var layer = layui.layer;
+				            layer.msg('该卡挂失失败!');
+				        }); 
 					}
 				}
 			});

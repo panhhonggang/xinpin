@@ -35,16 +35,10 @@
 				</section>
 			</section>
 
-			<section class="row btn-list">
-				<section class="col-xs-4 text-right">
-					<input class="checkSpan" type="checkbox" name="remember" id="remember"><label for="remember">自动登录</label>
-				</section>
-				<section class="col-xs-4 text-center">
-					<a href="{{:U('Register/resetPassword')}}">忘记密码？</a>
-				</section>
-				<section class="col-xs-4 text-center">
-					<a href="{{:U('Register/register')}}">注册</a>
-				</section>
+			<section class="btn-list">
+					<input class="checkSpan" type="checkbox" name="remember" id="remember"><label for="remember" style="font-weight: 400">自动登录</label>
+					<a class="forgetPwd" href="{{:U('Register/resetPassword')}}">忘记密码？</a>
+					<a class="registerLink" href="{{:U('Register/register')}}">注册</a>
 			</section>
 		</section>
 		<!-- 登录按钮 -->

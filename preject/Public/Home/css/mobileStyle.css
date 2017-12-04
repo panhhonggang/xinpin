@@ -2,7 +2,6 @@
 * {
     margin: 0;
     padding: 0;
-    -webkit-appearance: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-touch-callout: none;
     box-sizing: border-box;
@@ -78,26 +77,41 @@ text-decoration:none;
 .registerFooter a{
 	color: #218C6A;
 }
-.inputBox .row input.checkSpan {
-	width: 14px;
-	height: 13px;
+
+
+.btn-list{
+	margin-top: 5vw;
+	width: 85vw;
+}
+.inputBox input.checkSpan {
+	width: 4vw;
+	height:4vw;
+	vertical-align: top;
 	border: 1px solid #61CDAC;
-	margin:0 2vw;
+	margin-right: 2vw;
 	border-radius: 3px;
-	padding: 0px 8px;
-	background: none;
-	box-shadow:none;
 	
 }
 .checkSpanBg{
 	background: url("../image/sprite.png") no-repeat;
 	background-size: 17.7rem 9rem;
-	background-position: -15.5rem -2.7rem;
+	background-position: -15.6rem -2.9rem;
 }
-.btn-list{
-	margin-top: 5vw;
+.btn-list a.forgetPwd{
+	display: inline-block;
+	width: 31vw;
+	text-align: right;
+	text-decoration: none;
 }
-
+input{
+	-webkit-appearance: none; 
+}
+.btn-list a.registerLink{
+	display: inline-block;
+	width: 22vw;
+	text-align: right;
+	text-decoration: none;
+}
 .col-md-12{position: relative;}
 .col-md-12 .caret{
 	position:absolute;
@@ -376,15 +390,12 @@ a.addIDbtn{
 	width: 50vw;
 	height: 10vh;
 	line-height: 10vh;
-	font-size: 1rem;
+	font-size: .8rem;
 	margin-bottom: 0;
 	border-bottom: 1px solid #D7D7D7;
 }
-.consumeTable{
-}
 .spanActive{
 	background:#008A63;
-    opacity:0.5;
     display: block;
     float: left;
     width:2vw; 
@@ -451,8 +462,11 @@ a.addIDbtn{
     margin: 0 auto;
     margin-top: 5vw;
     margin-bottom: 1vw;
-    border-radius: 50%;
-    text-align: center;
+}
+.minelogo img{
+	width: 100%;
+	border-radius: 50%;
+	border:1px solid #ccc;
 }
 .textMine{
 	color: #5e5e5e;
@@ -612,7 +626,7 @@ a.addIDbtn{
 	    background-position: -5.7rem -1.8rem;
 }
 .payList > a > i.i2{
-	    background-position: -3.8rem -1.9rem;
+	    background-position: -3.8rem -1.8rem;
 }
 .payList > a > span{
 	width: 4vw;
@@ -629,11 +643,15 @@ a.addIDbtn{
 .rechargeBtn{
 	background: #008A63;
 	color: #fff;
-	height: 6vh;
+	height: 7vh;
 	margin-bottom: 5vh;
 }
 .listOption a.activeBg{
 	background:#60CDAF;
 	border:0;
 	color:#fff;
+}
+.btn:active:focus, .btn:focus {
+    outline: none; 
+    outline-offset: none;
 }
