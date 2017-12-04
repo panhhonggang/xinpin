@@ -69,7 +69,7 @@ class WeixinpayController extends Controller
 
                         // 用户名
                         $username = $user['name'];
-                        $content = $username . '：您于'.date('Y年m月d日 h时i分s秒',$data['addtime']).'成功冲值'.$data['money'].'元';
+                        $content = $username . '：您于'.date('Y年m月d日 h时i分s秒',$data['addtime']).'成功冲值'.$data['money']/100.'元';
                         $phone = $user['phone'];
                         //file_put_contents('./log/wxgxY_log.txt',$content.' '.$phone, FILE_APPEND);
                         // 开始接口代码
