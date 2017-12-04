@@ -14,22 +14,10 @@ class ActionController extends Controller
     public function receive()
     {
         $message = I('post.');
-
-        /*if(isset($message['client_id']))
-        {
-            $client_id = $message['client_id'];
-            unset($message['client_id']);
-        } else {
-            foreach ($message as $key => $value) {
-                file_put_contents('message', $key);
-            }
-        }*/
-
-        $message = I('post.');
         $client_id = $message['client_id'];
         unset($message['client_id']);
 
-        // if( isset($message['PackType']) ){
+        Log::write(json_encode($message), '接收信息');
         if( $message['soure']=='TCP'){
             if( empty( Gateway::getSession($client_id) ) ){
                 Gateway::setSession($client_id, $message);
