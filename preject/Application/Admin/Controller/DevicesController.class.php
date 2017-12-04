@@ -27,11 +27,11 @@ class DevicesController extends CommonController
                   ->join('xp_vendors ON xp_binding.vid = xp_vendors.id')
                   ->field('xp_devices.*,xp_device_type.typename,xp_crew.dcode,xp_crew.cname,xp_vendors.name,xp_devices_statu.updatetime')
                 ->count();
-        $Page       = new \Think\Page($count,25);
-        $show       = $Page->show();
+        $Page   = new \Think\Page($count,25);
+        $show   = $Page->show();
 
         $vendor = $devices
-                    ->where($map)
+                  ->where($map)
                   ->join('xp_devices_statu ON xp_devices.device_code = xp_devices_statu.DeviceID')
                   ->join('xp_crew ON xp_devices.device_code = xp_crew.dcode')
                   ->join('xp_device_type ON xp_devices.type_id = xp_device_type.id')
@@ -53,9 +53,9 @@ class DevicesController extends CommonController
     // 查询设备详情
     public function deviceDetail()
     {
-        $code = I('post.code');
-        $devices = D('devices');
-        $res = $devices->getInfoBydecode($code);
+        $code        = I('post.code');
+        $devices     = D('devices');
+        $res         = $devices->getInfoBydecode($code);
         $res['flow'] = M('consume')->where('did='.$res['id'])->sum('flow');
         $this->ajaxReturn($res, 'json');
     }
