@@ -53,11 +53,13 @@ class DevicesController extends CommonController
     // 查询设备详情
     public function deviceDetail()
     {
+
         $code        = I('post.code');
         $devices     = D('devices');
         $res         = $devices->getInfoBydecode($code);
         $res['flow'] = M('consume')->where('did='.$res['id'])->sum('flow');
         $this->ajaxReturn($res, 'json');
+        // echo json_encode($res);
     }
 
     /**

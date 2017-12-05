@@ -210,3 +210,18 @@ a.addBtn{
 	text-decoration: none;
 	color: #585858;
 }
+.showdetail .filterInfo{
+	width: 400px;
+}
+.showdetail .filterInfo table{
+	width: 90%;
+	background: #f9f9f9;
+}
+.showdetail .deviceInfo{
+	width: 750px;
+}
+.showdetail h3{
+	height: 60px;
+	line-height: 60px;
+	color:#2b7dbc;
+}
