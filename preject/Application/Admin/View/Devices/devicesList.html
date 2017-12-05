@@ -19,6 +19,7 @@
                         <td>最近更新时间</td>
                         <td>设备状态</td>
                         <td>操作</td>
+                        <td>使用记录</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,7 +44,8 @@
                                     <default />
                                 </switch>
                             </td>
-                            <td><a class="btn-link">开机</a><a href="getDeviceChargeList?code={{$data.device_code}}" class="chargeBtn">使用记录</a></td>
+                            <td><a class="btn-link">开机</a><a class="btn-link" href="chargelist?code={{$data.device_code}}" class="chargeBtn">查看</a></td>
+                            <td><a class="btn-link" href="chargelist?code={{$data.device_code}}" class="chargeBtn">查看</a></td>
                         </tr>
                     </foreach>
                     <else />
@@ -104,23 +106,6 @@
             }
         })
     })
-    // 充值记录
-    // $(".chargeBtn").click(function(){
-    //     $.ajax({
-    //         url:"chargelist",
-    //         type:"get",
-    //         dataType:'json',
-    //         data:{code},
-    //         success:function(data){
-    //             if(){
-
-    //             }else{
-
-    //             }
-    //         };
-
-    //     });
-    // });
 </script>
 <div class="showdetail container">
     <div class="fl filterInfo">

@@ -77,7 +77,6 @@ class DevicesController extends CommonController
             ->field('xp_consume.flow,xp_consume.time,xp_users.*,xp_card.iccard')
             ->limit($Page->firstRow.','.$Page->listRows)
             ->select();
-
         $this->assign('$data', $data);
         $this->assign('page',$show);
         $this->display('chargelist');
