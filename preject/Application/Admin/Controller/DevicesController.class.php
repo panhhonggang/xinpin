@@ -56,7 +56,7 @@ class DevicesController extends CommonController
     }
 
     // 获取设备充值记录
-    public function getDeviceChargeList($code)
+    public function chargelist($code)
     {
         $devices = D('devices');
         $count = $devices

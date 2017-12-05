@@ -210,18 +210,42 @@ a.addBtn{
 	text-decoration: none;
 	color: #585858;
 }
+.showdetail {
+	display: none;
+	height: 600px;
+	background: #d5e1ed;
+}
 .showdetail .filterInfo{
-	width: 400px;
+	width: 500px;
+	margin-left: 50px;	
 }
 .showdetail .filterInfo table{
 	width: 90%;
-	background: #f9f9f9;
+	background: #bcd3eb;
+	margin: 0 auto;
+	
 }
 .showdetail .deviceInfo{
-	width: 750px;
+	width: 500px;
+	float: right;
+	margin-right: 50px;
+}
+.showdetail .deviceInfo table{
+	background: #bcd3eb;
+	width: 90%;
+	margin: 0 auto;
 }
 .showdetail h3{
+	font-family: 'Open Sans',"微软雅黑","黑体";
 	height: 60px;
+	width: 90%;
+	margin: 20px auto;
+	margin-bottom: 20px;
 	line-height: 60px;
-	color:#2b7dbc;
+	color:#fff;
+	text-align: center;
+	background: #a4b7cb;
+	box-shadow: 1px 5px 5px #99aabd;
+	border-radius: 7px;
+	
 }
