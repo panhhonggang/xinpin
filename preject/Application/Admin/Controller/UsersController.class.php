@@ -145,5 +145,15 @@ class UsersController extends CommonController
         $this->assign('list',$list);
         $this->assign('button',$pageButton);
         $this->display();        
-    }   
+    }
+
+    // 查询用户详情
+    public function usersDetail()
+    {
+        // $code        = I('post.code');
+        // $devices     = D('devices');
+        // $res         = $devices->getInfoBydecode($code);
+        // $res['flow'] = M('consume')->where('did='.$res['id'])->sum('flow');
+        // $this->ajaxReturn($res, 'json');
+    }  
 }
