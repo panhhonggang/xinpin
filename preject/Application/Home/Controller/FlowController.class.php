@@ -78,7 +78,7 @@ class FlowController extends CommonController
         // 查询用户IC卡号 xp_card
         $id = $_SESSION['homeuser']['id'];
 
-        // 查询用户名下已绑定的卡号
+        // 查询用户充值记录
         $record = M('Flow')->field('money,time')->where('`uid`='.$id)->order('id desc')->select();
         //echo '<pre>';
         //print_r($record);die;
