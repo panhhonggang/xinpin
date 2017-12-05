@@ -40,11 +40,6 @@ class DevicesController extends CommonController
                   ->field('xp_devices.*,xp_device_type.typename,xp_crew.dcode,xp_crew.cname,xp_vendors.name,xp_devices_statu.updatetime')
                   ->limit($Page->firstRow.','.$Page->listRows)
                   ->select();
-        $array = array('正常', '冲洗','缺水', '漏水', '检修','欠费', '关机');
-        foreach ($vendor as $key => $value) {
-            $vendor[$key]['device_status'] = $array[$value['device_status']];
-        }
-
         $this->assign('deviceInfo', $vendor);
         $this->assign('page',$show);
         $this->display('devicesList');
@@ -53,13 +48,39 @@ class DevicesController extends CommonController
     // 查询设备详情
     public function deviceDetail()
     {
-
         $code        = I('post.code');
         $devices     = D('devices');
         $res         = $devices->getInfoBydecode($code);
         $res['flow'] = M('consume')->where('did='.$res['id'])->sum('flow');
         $this->ajaxReturn($res, 'json');
-        // echo json_encode($res);
+    }
+
+    // 获取设备充值记录
+    public function getDeviceChargeList($code)
+    {
+        $devices = D('devices');
+        $count = $devices
+            ->where('device_code='.$code)
+            ->join('xp_consume on xp_devices.id=xp_consume.did')
+            ->join('xp_users on xp_consume.uid=xp_users.id')
+            ->join('xp_card on xp_consume.icid=xp_card.id')
+            ->field('xp_consume.flow,xp_consume.time,xp_users.*,xp_card.iccard')
+            ->count();
+        $Page   = new \Think\Page($count,50);
+        $show   = $Page->show();
+
+        $data = $devices
+            ->where('device_code='.$code)
+            ->join('xp_consume on xp_devices.id=xp_consume.did')
+            ->join('xp_users on xp_consume.uid=xp_users.id')
+            ->join('xp_card on xp_consume.icid=xp_card.id')
+            ->field('xp_consume.flow,xp_consume.time,xp_users.*,xp_card.iccard')
+            ->limit($Page->firstRow.','.$Page->listRows)
+            ->select();
+
+        $this->assign('$data', $data);
+        $this->assign('page',$show);
+        $this->display('chargelist');
     }
 
     /**
