@@ -151,8 +151,8 @@ class UsersController extends CommonController
     public function usersDetail()
     {       
         // 接收用户ID
-        //$id = I('post.id');
-        $id=1;
+        $id = I('post.id');
+        //$id=1;
 
         // 查询用户充值记录
         $record = M('Flow')->field('money,time')->where('`uid`='.$id)->order('id desc')->select();

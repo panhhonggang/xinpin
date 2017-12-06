@@ -5,7 +5,7 @@
 	border: 0;
 }
 html, body {
-    font-family:'Open Sans',"微软雅黑","黑体";
+    font-family: 'Open Sans',"微软雅黑","黑体";
     height: 100%;
 }
 .fr{ 
@@ -230,9 +230,15 @@ a.addBtn{
 	float: right;
 	margin-right: 50px;
 }
+.showdetail .deviceInfo .tableList{
+	height: 480px;
+	overflow-x: hidden;
+}
 .showdetail .deviceInfo table{
 	background: #bcd3eb;
 	width: 90%;
+	height: 580px;
+	overflow-x: hidden;
 	margin: 0 auto;
 }
 .showdetail h3{
@@ -248,4 +254,19 @@ a.addBtn{
 	box-shadow: 1px 5px 5px #99aabd;
 	border-radius: 7px;
 	
+}
+.btnList{
+	width: 90%;
+	height: 110px;
+	margin: 50px auto;
+	background: #a4b7cb;
+    box-shadow: 1px 5px 5px #99aabd;
+    border-radius: 7px;
+}
+.btnList h4{
+	height: 50px;
+	color: #fff;
+	line-height: 50px;
+	padding-left: 20px;
+	font-family: 'Open Sans',"微软雅黑","黑体";
 }
