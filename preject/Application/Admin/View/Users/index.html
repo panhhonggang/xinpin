@@ -86,16 +86,7 @@
             type:"post",
             dataType:'json',
             data:{id},
-            success:function(data){  
-                for(var js2 in data.icid){//记录总条数
-                    jsonNum++;
-                    js2+"="+data.icid[js2];
-                    thisNum=data.icid[js2].length
-                    console.log(js2);
-                    arrayJson[jsonNum]=js2;
-                    // alert(arrayJson[jsonNum]);
-                }
-            console.log(data.icid);              
+            success:function(data){              
                 if('给你老王玩了'){
                     layui.use('layer', function(){
                         var layer = layui.layer;
@@ -108,7 +99,6 @@
                     });
                     var tableHtml='';
                     var deviceInfo='';
-                    var html='';
                     // var obj = eval ("(" + data.icid + ")");
                     $(".filterInfoTable tbody").html("<tr><td>充值金额</td><td>充值时间</td></tr>");
                     $(".deviceInfoTable tbody").html("<tr><td>IC卡号</td><td>用水量</td><td>用水地点</td><td>用水时间</td></tr>");

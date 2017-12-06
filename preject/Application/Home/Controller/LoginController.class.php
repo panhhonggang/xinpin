@@ -34,7 +34,7 @@ class LoginController extends Controller
                 $data['login_time'] = time();
                 // 记录用户最后登录IP
                 $data['login_ip'] = get_client_ip();
-                $mes = M('Users')->where('id='.$info['id'])->save($data);
+                $mes = M('Users')->where('id='.$user['id'])->save($data);
                 // 自动登录
                 $_SESSION['homeuser'] = $userInfo;     
             }else{
