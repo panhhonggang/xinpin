@@ -31,7 +31,7 @@
     width:100vw;
 }
 #textNav{
-    top:32vh;
+    top:38vh;
     height:10px;
     width:100vw;
     text-align: center;
@@ -57,16 +57,27 @@
     opacity:1;
 }
 #textList table{
-    width: 90vw;
+    width: 95vw;
     margin: 0 auto;
 }
-h4.addUp{
+#textList table tr td{
+    height: 8vh;
+}
+.addUp{
     width: 85vw;
     margin: 2vh auto;
     color:#008A63;
+    
 }
 h4{
     padding-left: 2vw;
+    font-size: 1rem;
+    margin-top: 4vh;
+}
+.tableTitle{
+    padding-left: 2vw;
+    font-size: .8rem;
+    color:#008A63;
 }
 footer.footer{
     margin-top: 40vh;
@@ -86,7 +97,7 @@ footer.footer{
         <ul id="textList">
             <li>
                 <h4>CiCi</h4>
-                    <h4 class="tableTitle">一周饮水统计表</h4>
+                    <p class="tableTitle">一周饮水统计表</p>
                     <table class="table table-data">
                         <thead>
                             <tr>
@@ -111,36 +122,36 @@ footer.footer{
                             </tr>
                         </tbody>
                     </table>
-                    <h4 class="text-right addUp">累计：<span>4654</span>ML</h4>
+                    <p class="text-right addUp">累计：<span>4654</span>ML</p>
             </li>
             <li>
                 <h4>CiCi</h4>
-                    <h4 class="tableTitle">一周饮水统计表</h4>
-                    <table class="table table-data">
-                        <thead>
-                            <tr>
-                                <td>一</td>
-                                <td>二</td>
-                                <td>三</td>
-                                <td>四</td>
-                                <td>五</td>
-                                <td>六</td>
-                                <td>七</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>45</td>
-                                <td>43</td>
-                                <td>435</td>
-                                <td>42</td>
-                                <td>52</td>
-                                <td>57</td>
-                                <td>55</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <h4 class="text-right addUp">累计：<span>4654</span>ML</h4>
+                <p class="tableTitle">一周饮水统计表</p>
+                <table class="table table-data">
+                    <thead>
+                        <tr>
+                            <td>一</td>
+                            <td>二</td>
+                            <td>三</td>
+                            <td>四</td>
+                            <td>五</td>
+                            <td>六</td>
+                            <td>七</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>45</td>
+                            <td>43</td>
+                            <td>435</td>
+                            <td>42</td>
+                            <td>52</td>
+                            <td>57</td>
+                            <td>55</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="text-right addUp">累计：<span>4654</span>ML</p>
             </li>
         </ul>
         <nav id="textNav">
@@ -162,11 +173,11 @@ footer.footer{
         $(".btn1").css("color","#008C63");
         // 剩余金额logo效果
         $(".showBalanceBox").click(function(){
-            $(".moneylogo").animate({width:"26vw",height:"26vw",top:"1.5vw"},"fast");
-            $(".moneylogo").animate({width:"23vw",height:"23vw",top:"3vw"},"fast");
-            $(".moneylogo").animate({width:"25vw",height:"25vw",top:"2vw"},"fast");
-            $(".moneylogo").animate({width:"23vw",height:"23vw",top:"3vw"},"fast");
-            $(".moneylogo").animate({width:"24vw",height:"24vw",top:"2.5vw"},"fast");
+            $(".moneylogo").animate({width:"26vw",height:"26vw",top:"4.5vw"},"fast");
+            $(".moneylogo").animate({width:"23vw",height:"23vw",top:"7vw"},"fast");
+            $(".moneylogo").animate({width:"25vw",height:"25vw",top:"6vw"},"fast");
+            $(".moneylogo").animate({width:"23vw",height:"23vw",top:"7vw"},"fast");
+            $(".moneylogo").animate({width:"24vw",height:"24vw",top:"6.5vw"},"fast");
         });
         //数据表滑动显示
         if($("#textList").children().size()>1){
