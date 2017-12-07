@@ -46,12 +46,21 @@ class DevicesController extends CommonController
     }
 
     // 查询设备详情
-    public function deviceDetail()
+    public function deviceDetail($code=null)
     {
         $code        = I('post.code');
         $devices     = D('devices');
         $res         = $devices->getInfoBydecode($code);
+
         $res['flow'] = M('consume')->where('did='.$res['id'])->sum('flow');
+        $array = ['制水', '冲洗', '水满', '缺水', '漏水', '检修', '欠费', '关机'];
+        foreach ($res as $key => $value) {
+            $res['addtime'] = date('Y-m-d H:i:s', $value);
+            $res['updatetime'] = date('Y-m-d H:i:s', $value);
+            if($value == null){
+                $res[$key] = '--';
+            }
+        }
         $this->ajaxReturn($res, 'json');
     }
 
