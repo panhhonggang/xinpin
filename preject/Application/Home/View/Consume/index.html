@@ -33,8 +33,8 @@
             <foreach name="icidOne" item="v" key="k">
                 <tr>
                     <td>{{$v['address']}}</td>
-                    <td>{{$v['flow']}}</td>
                     <td>{{:date('Y年m月d日', $v['time'])}}</td>
+                    <td>{{$v['flow']}}</td>
                 </tr>
             </foreach>
             </tbody>

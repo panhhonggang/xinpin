@@ -13,7 +13,7 @@
 #text{
     overflow:hidden;
     width:100vw;
-    height:40vh;
+    height:42vh;
     top:42vh;
     left:0;
     right: 0;
@@ -24,14 +24,14 @@
 }
 #textList{
     width:200vw;
-    height:30vh;
+    height:32vh;
 }
 #textList li{
     float:left; 
     width:100vw;
 }
 #textNav{
-    top:38vh;
+    top:40vh;
     height:10px;
     width:100vw;
     text-align: center;
@@ -57,22 +57,29 @@
     opacity:1;
 }
 #textList table{
-    width: 95vw;
+    width: 97vw;
     margin: 0 auto;
+    margin-top: 1vh;
 }
 #textList table tr td{
-    height: 8vh;
+    height: 9vh;
 }
 .addUp{
-    width: 85vw;
-    margin: 2vh auto;
+    width: 95vw;
+    margin: 0vh auto;
+    margin-bottom: 0;
     color:#008A63;
+    font: .7rem;
     
+}
+.addUp .spanSize{
+    font-size: .9rem;
 }
 h4{
     padding-left: 2vw;
     font-size: 1rem;
-    margin-top: 4vh;
+    margin-top: 3vh;
+    color: #333;
 }
 .tableTitle{
     padding-left: 2vw;
@@ -97,7 +104,7 @@ footer.footer{
         <ul id="textList">
             <li>
                 <h4>CiCi</h4>
-                    <p class="tableTitle">一周饮水统计表</p>
+                    <p class="tableTitle">一周饮水统计表/mL</p>
                     <table class="table table-data">
                         <thead>
                             <tr>
@@ -112,21 +119,21 @@ footer.footer{
                         </thead>
                         <tbody>
                             <tr>
-                                <td>45</td>
-                                <td>43</td>
-                                <td>435</td>
-                                <td>42</td>
-                                <td>52</td>
-                                <td>57</td>
-                                <td>55</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
                             </tr>
                         </tbody>
                     </table>
-                    <p class="text-right addUp">累计：<span>4654</span>ML</p>
+                    <p class="text-right addUp">累计：<span class="spanSize">0</span>mL</p>
             </li>
-            <li>
+            <<!-- li>
                 <h4>CiCi</h4>
-                <p class="tableTitle">一周饮水统计表</p>
+                <p class="tableTitle">一周饮水统计表/mL</p>
                 <table class="table table-data">
                     <thead>
                         <tr>
@@ -151,12 +158,12 @@ footer.footer{
                         </tr>
                     </tbody> 
                 </table>
-                <p class="text-right addUp">累计：<span>4654</span>ML</p>
-            </li>
+                <p class="text-right addUp">累计：<span class="spanSize">4654</span>mL</p> 
+            </li> -->
         </ul>
         <nav id="textNav">
             <span class="spanActiveList"></span>
-            <span></span>
+            <!-- <span></span> -->
         </nav>
     </section>
     <!-- footer -->

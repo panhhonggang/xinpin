@@ -397,6 +397,11 @@ a.addIDbtn{
 	text-align: center;
 	width: 50vw;
 	height: 10vh;
+	word-break:keep-all;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	overflow: hidden;
 	line-height: 10vh;
 	font-size: .8rem;
 	margin-bottom: 0;

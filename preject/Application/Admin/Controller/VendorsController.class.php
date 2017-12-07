@@ -39,7 +39,7 @@ class VendorsController extends CommonController
     public function add()
     {
         if(IS_POST){
-
+// dump($_POST);die;
             $user = D('vendors');
             $info = $user->create();
             // dump($info);die;

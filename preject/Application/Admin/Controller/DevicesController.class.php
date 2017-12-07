@@ -20,23 +20,23 @@ class DevicesController extends CommonController
         $devices = M('Devices');
         $count = $devices
                 ->where($map)
-                ->join('xp_devices_statu ON xp_devices.device_code = xp_devices_statu.DeviceID')
-                  ->join('xp_crew ON xp_devices.device_code = xp_crew.dcode')
-                  ->join('xp_device_type ON xp_devices.type_id = xp_device_type.id')
-                  ->join('xp_binding ON xp_crew.id = xp_binding.cid')
-                  ->join('xp_vendors ON xp_binding.vid = xp_vendors.id')
+                ->join('LEFT JOIN xp_devices_statu ON xp_devices.device_code = xp_devices_statu.DeviceID')
+                  ->join('LEFT JOIN xp_crew ON xp_devices.device_code = xp_crew.dcode')
+                  ->join('LEFT JOIN xp_device_type ON xp_devices.type_id = xp_device_type.id')
+                  ->join('LEFT JOIN xp_binding ON xp_crew.id = xp_binding.cid')
+                  ->join('LEFT JOIN xp_vendors ON xp_binding.vid = xp_vendors.id')
                   ->field('xp_devices.*,xp_device_type.typename,xp_crew.dcode,xp_crew.cname,xp_vendors.name,xp_devices_statu.updatetime')
                 ->count();
-        $Page   = new \Think\Page($count,25);
+        $Page   = new \Think\Page($count,15);
         $show   = $Page->show();
 
         $vendor = $devices
                   ->where($map)
-                  ->join('xp_devices_statu ON xp_devices.device_code = xp_devices_statu.DeviceID')
-                  ->join('xp_crew ON xp_devices.device_code = xp_crew.dcode')
-                  ->join('xp_device_type ON xp_devices.type_id = xp_device_type.id')
-                  ->join('xp_binding ON xp_crew.id = xp_binding.cid')
-                  ->join('xp_vendors ON xp_binding.vid = xp_vendors.id')
+                  ->join('LEFT JOIN xp_devices_statu ON xp_devices.device_code = xp_devices_statu.DeviceID')
+                  ->join('LEFT JOIN xp_crew ON xp_devices.device_code = xp_crew.dcode')
+                  ->join('LEFT JOIN xp_device_type ON xp_devices.type_id = xp_device_type.id')
+                  ->join('LEFT JOIN xp_binding ON xp_crew.id = xp_binding.cid')
+                  ->join('LEFT JOIN xp_vendors ON xp_binding.vid = xp_vendors.id')
                   ->field('xp_devices.*,xp_device_type.typename,xp_crew.dcode,xp_crew.cname,xp_vendors.name,xp_devices_statu.updatetime')
                   ->limit($Page->firstRow.','.$Page->listRows)
                   ->select();
@@ -61,19 +61,19 @@ class DevicesController extends CommonController
         $devices = D('devices');
         $count = $devices
             ->where('device_code='.$code)
-            ->join('xp_consume on xp_devices.id=xp_consume.did')
-            ->join('xp_users on xp_consume.uid=xp_users.id')
-            ->join('xp_card on xp_consume.icid=xp_card.id')
+            ->join('LEFT JOIN xp_consume on xp_devices.id=xp_consume.did')
+            ->join('LEFT JOIN xp_users on xp_consume.uid=xp_users.id')
+            ->join('LEFT JOIN xp_card on xp_consume.icid=xp_card.id')
             ->field('xp_consume.flow,xp_consume.time,xp_users.*,xp_card.iccard')
             ->count();
-        $Page   = new \Think\Page($count,50);
+        $Page   = new \Think\Page($count,15);
         $show   = $Page->show();
 
         $data = $devices
             ->where('device_code='.$code)
-            ->join('xp_consume on xp_devices.id=xp_consume.did')
-            ->join('xp_users on xp_consume.uid=xp_users.id')
-            ->join('xp_card on xp_consume.icid=xp_card.id')
+            ->join('LEFT JOIN xp_consume on xp_devices.id=xp_consume.did')
+            ->join('LEFT JOIN xp_users on xp_consume.uid=xp_users.id')
+            ->join('LEFT JOIN xp_card on xp_consume.icid=xp_card.id')
             ->field('xp_consume.flow,xp_consume.time,xp_users.*,xp_card.iccard')
             ->limit($Page->firstRow.','.$Page->listRows)
             ->select();
