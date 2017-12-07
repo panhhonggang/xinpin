@@ -58,7 +58,7 @@ class VendorsController extends CommonController
                 $this->error($user->getError());
             }
         }else{
-            $this->display();
+            $this->display(); 
         }
     }
 

@@ -71,6 +71,7 @@ $(function(){
             ev.preventDefault();
         }else{
             addressValue=$('#s_province').val() + " " + $('#s_city').val() + " " + $('#s_county').val() + "";
+            $(".addressValue").val(addressValue);
         }
     });
 })
