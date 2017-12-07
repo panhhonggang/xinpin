@@ -67,7 +67,7 @@ class WorkController extends CommonController
         $data['result'] = $_GET['result'];
         $res = $work->where('id='.$id)->save($data); 
         if ($res) {
-             $this->redirect('work/index');
+             $this->success('修改状态成功',U('work/index'));
         } else {
             $this->error('修改失败啦！');
         }
