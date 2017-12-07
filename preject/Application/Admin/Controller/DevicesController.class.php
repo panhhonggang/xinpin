@@ -61,7 +61,8 @@ class DevicesController extends CommonController
                 $res[$key] = '--';
             }
         }
-        $this->ajaxReturn($res, 'json');
+        // $this->ajaxReturn($res, 'json');
+        $this->display('deviceDetail');
     }
 
     // 获取设备充值记录

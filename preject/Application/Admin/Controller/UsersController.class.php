@@ -180,7 +180,8 @@ class UsersController extends CommonController
         $date['icid'] = $icidDetail;
 
         // 返回JSON格式数据
-        $this->ajaxReturn($date, 'json');
+        // $this->ajaxReturn($date, 'json');
+        $this->display('usersDetail');
 
     }
 
