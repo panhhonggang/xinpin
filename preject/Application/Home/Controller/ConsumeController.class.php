@@ -12,7 +12,7 @@ class ConsumeController extends CommonController {
     {
     	// 查询用户IC卡号 xp_card
     	$uid = $_SESSION['homeuser']['id'];
-    	$icid = M('Card')->field('iccard,id')->where('`uid`='.$uid)->select();
+    	$icid = M('Card')->field('iccard,id,name')->where('`uid`='.$uid)->select();
 
     	// 查询第一张卡消费记录
     	$icidOne = M('Consume')->field('flow,address,time')->where('`icid`="'.$icid[0]['id'].'"')->order('id desc')->select();
