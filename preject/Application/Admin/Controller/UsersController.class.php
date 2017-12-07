@@ -160,7 +160,7 @@ class UsersController extends CommonController
 
         // 查询用户消费记录
         // 1.查询用户名下的所有IC卡
-        $icid = M('Card')->field('iccard,id')->where('`uid`='.$id)->select();
+        $icid = M('Card')->field('iccard,id,name')->where('`uid`='.$id)->select();
 
 
         // 定义一个空数组准备接收IC卡消费记录
@@ -170,7 +170,7 @@ class UsersController extends CommonController
         if($icid){
             // 遍历IC卡查询消费记录
             for($i=0;$i<count($icid);$i++){
-                $icidDetail[$icid[$i]['iccard']] = M('Consume')->field('flow,address,time')->where('`icid`="'.$icid[$i]['id'].'"')->order('id desc')->select();
+                $icidDetail[$icid[$i]['name']] = M('Consume')->field('flow,address,time')->where('`icid`="'.$icid[$i]['id'].'"')->order('id desc')->select();
             }   
         }
 
