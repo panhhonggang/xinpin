@@ -80,48 +80,42 @@
         var thisNum=0;
         var jsonNum=0;//绑定ic卡数量
         var arrayJson=[];
-        
+         
         $.ajax({
             url:"usersDetail",
             type:"post",
             dataType:'json',
             data:{id},
             success:function(data){              
-                if('给你老王玩了'){
-                    layui.use('layer', function(){
-                        var layer = layui.layer;
-                        layer.open({
-                            type: 1, 
-                            title: ['姓名:'+_this.html(), 'font-size:18px;'],
-                            area: ['1200px', '680px'],
-                            content: $(".showdetail")
-                        }); 
-                    });
-                    var tableHtml='';
-                    var deviceInfo='';
-                    // var obj = eval ("(" + data.icid + ")");
-                    $(".filterInfoTable tbody").html("<tr><td>充值金额</td><td>充值时间</td></tr>");
-                    $(".deviceInfoTable tbody").html("<tr><td>IC卡号</td><td>用水量</td><td>用水地点</td><td>用水时间</td></tr>");
-                    for(var i=0;i<data.record.length;i++){
-                        tableHtml+='<tr><td>'+data.record[i].money+'</td><td>'+ data.record[i].time +'</td></tr>';
-                    }
-                    $(".filterInfoTable tbody").append(tableHtml);
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.open({
+                        type: 1, 
+                        title: ['姓名:'+_this.html(), 'font-size:18px;'],
+                        area: ['1200px', '680px'],
+                        content: $(".showdetail")
+                    }); 
+                });
+                var tableHtml='';
+                var deviceInfo='';
+                // var obj = eval ("(" + data.icid + ")");
+                $(".filterInfoTable tbody").html("<tr><td>充值金额(元)</td><td>充值时间</td></tr>");
+                $(".deviceInfoTable tbody").html("<tr><td>用户姓名</td><td>用水量(升)</td><td>用水地点</td><td>用水时间</td></tr>");
+                for(var i=0;i<data.record.length;i++){
+                    tableHtml+='<tr><td>'+data.record[i].money+'</td><td>'+ getLocalTime(data.record[i].time) +'</td></tr>';
+                }
+                $(".filterInfoTable tbody").append(tableHtml);
 
-                    //消费记录遍历
-                    for (var countryObj in data.icid)
-                    { 
-                        for (var i = 0;i < data.icid[countryObj].length; i++)
-                        {
-                            deviceInfo+='<tr><td>'+countryObj+'</td><td>'+data.icid[countryObj][i]["flow"]+'</td><td>'+data.icid[countryObj][i]["address"]+'</td><td>'+data.icid[countryObj][i]["time"]+'</td></tr>';   
-                        }
+                //消费记录遍历
+
+                for (var countryObj in data.icid)
+                { 
+                    for (var i = 0;i < data.icid[countryObj].length; i++)
+                    {
+                        deviceInfo+='<tr><td>'+countryObj+'</td><td>'+data.icid[countryObj][i]["flow"]+'</td><td>'+data.icid[countryObj][i]["address"]+'</td><td>'+getLocalTime(data.icid[countryObj][i]["time"])+'</td></tr>';   
                     }
-                    $(".deviceInfoTable tbody").append(deviceInfo);
-                } else {
-                    layui.use('layer', function(){
-                        var layer = layui.layer;
-                        layer.msg('参数错误', {icon: 5});
-                    });
-                } 
+                }
+                $(".deviceInfoTable tbody").append(deviceInfo);
             }
         })
     })

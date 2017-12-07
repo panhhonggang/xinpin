@@ -88,10 +88,10 @@
                     });
                     var tableHtml='';
                     var deviceInfo='';
-                    $(".filterInfoTable tbody").html("");
+                    $(".filterInfoTable tbody").html("<tr><td>滤芯项</td><td>剩余流量值</td></tr>");
                     $(".deviceInfoTable").html("");
                     for(var i=0;i<8;i++){
-                        tableHtml+='<tr><td>redayfilter'+(i + 1)+'</td><td>'+ data['redayfilter'+(i + 1)] +'</td></tr>';
+                        tableHtml+='<tr><td>滤芯'+(i + 1)+'</td><td>'+ data['redayfilter'+(i + 1)] +'</td></tr>';
                     }
                     $(".filterInfoTable tbody").append(tableHtml);
 
