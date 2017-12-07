@@ -48,21 +48,30 @@ class DevicesController extends CommonController
     // 查询设备详情
     public function deviceDetail($code=null)
     {
-        // $code        = I('post.code');
-        // $devices     = D('devices');
-        // $res         = $devices->getInfoBydecode($code);
+        $code        = I('post.code');
+        $devices     = D('devices');
+        $res[0]         = $devices->getInfoBydecode($code);
+        $data = [];
+        $res[0]['flow'] = M('consume')->where('did='.$res[0]['id'])->sum('flow');
 
-        // $res['flow'] = M('consume')->where('did='.$res['id'])->sum('flow');
-        // $array = ['制水', '冲洗', '水满', '缺水', '漏水', '检修', '欠费', '关机'];
-        // foreach ($res as $key => $value) {
-        //     $res['addtime'] = date('Y-m-d H:i:s', $value);
-        //     $res['updatetime'] = date('Y-m-d H:i:s', $value);
-        //     if($value == null){
-        //         $res[$key] = '--';
-        //     }
-        // }
-        // $this->ajaxReturn($res, 'json');
-        $this->display('deviceDetail');
+        if( $res[0] == null ){
+            echo  '参数错误';
+            exit;
+        }
+        $devicestause = ['制水', '冲洗', '水满', '缺水', '漏水', '检修', '欠费', '关机'];
+        $alivestause = ['未激活', '已激活'];
+        foreach ($res as $key => $value) {
+            $value['devicestause'] = $devicestause[$value['devicestause']];
+            $value['alivestause'] = $alivestause[$value['alivestause']];
+            $value['addtime'] = date('Y-m-d H:i:s', $value['addtime']);
+            $value['updatetime'] = date('Y-m-d H:i:s', $value['updatetime']);
+            
+            foreach ($value as $k => $v) {
+                if($v == null) $value[$k] = '--';
+            }
+            $data = $value;
+        }
+        $this->ajaxReturn($data, 'json');
     }
 
     // 获取设备充值记录
