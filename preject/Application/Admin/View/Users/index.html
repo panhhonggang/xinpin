@@ -29,7 +29,7 @@
                     <foreach name="list" item="vo" key="key">
                     <tr>
                         <td class="userIndex">{{$vo.id}}</td>
-                        <td><a class="btn-link detail">{{$vo.name}}</a></td>
+                        <td><a class="btn-link" href="#">{{$vo.name}}</a></td>
                         <td>{{$vo.phone}}</td>
                         <td>{{$vo.address}}</td>
                         <td>{{$vo.balance}}</td>
@@ -70,73 +70,5 @@
         </div>
         <!-- footer part -->
         <include file="Public/footer" />
-    </div>
-</div>
-<script type="text/javascript">
-    // 用户详情
-    $('.detail').click(function (){
-        var _this=$(this);
-        var id = $(this).parent().siblings(".userIndex").html();
-        var thisNum=0;
-        var jsonNum=0;//绑定ic卡数量
-        var arrayJson=[];
-         
-        $.ajax({
-            url:"usersDetail",
-            type:"post",
-            dataType:'json',
-            data:{id},
-            success:function(data){              
-                layui.use('layer', function(){
-                    var layer = layui.layer;
-                    layer.open({
-                        type: 1, 
-                        title: ['姓名:'+_this.html(), 'font-size:18px;'],
-                        area: ['1200px', '680px'],
-                        content: $(".showdetail")
-                    }); 
-                });
-                var tableHtml='';
-                var deviceInfo='';
-                // var obj = eval ("(" + data.icid + ")");
-                $(".filterInfoTable tbody").html("<tr><td>充值金额(元)</td><td>充值时间</td></tr>");
-                $(".deviceInfoTable tbody").html("<tr><td>用户姓名</td><td>用水量(升)</td><td>用水地点</td><td>用水时间</td></tr>");
-                for(var i=0;i<data.record.length;i++){
-                    tableHtml+='<tr><td>'+data.record[i].money+'</td><td>'+ getLocalTime(data.record[i].time) +'</td></tr>';
-                }
-                $(".filterInfoTable tbody").append(tableHtml);
-
-                //消费记录遍历
-
-                for (var countryObj in data.icid)
-                { 
-                    for (var i = 0;i < data.icid[countryObj].length; i++)
-                    {
-                        deviceInfo+='<tr><td>'+countryObj+'</td><td>'+data.icid[countryObj][i]["flow"]+'</td><td>'+data.icid[countryObj][i]["address"]+'</td><td>'+getLocalTime(data.icid[countryObj][i]["time"])+'</td></tr>';   
-                    }
-                }
-                $(".deviceInfoTable tbody").append(deviceInfo);
-            }
-        })
-    })
-</script>
-<div class="showdetail container">
-    <div class="fl filterInfo">
-        <h3>充值记录</h3>
-        <table class="table filterInfoTable"> 
-            <tbody>
-                
-            </tbody>
-        </table>
-    </div>
-    <div class="fl deviceInfo">
-        <h3>消费记录</h3>
-        <div class="tableList">
-            <table class="table deviceInfoTable">
-                <tbody>
-                    
-                </tbody>
-            </table>
-        </div>
     </div>
 </div>

@@ -4,8 +4,10 @@
 	margin:0;
 	border: 0;
 }
-html, body {
+html, body,h1,h2,h3,h4,h5,h6,div,p,span,input {
     font-family: 'Open Sans',"微软雅黑","黑体";
+}
+html, body {
     height: 100%;
 }
 .fr{ 
@@ -19,6 +21,9 @@ html, body {
 }
 ul li{
 	list-style: none;
+}
+a{
+	color: #08c;
 }
 /*nav part css*/
 .navBox{width: 15%; padding: 0;}
@@ -197,76 +202,160 @@ ul li{
 	width: 216px;
 	/*line-height: 35px;*/
 }
+/*设备详情 css*/
+.deviceTitle{
+	color: #333;
+	margin: 20px 0;
+}
+.detailList{
+	width: 100%;
+	overflow: hidden;
+}
+.detailList .leftBox{
+	width: 45%;
+}
+.detailList .filterInfo,.detailList .deviceOperation{
+	
+	border-top: 3px solid #d2d6de;
+	border-bottom: 2px solid #d2d6de;
+	border-radius: 3px;
+	background: #fff;
+	margin-top: 15px;
+	padding: 0 1%;
+}
+.detailList .deviceInfo{
+	width: 45%;
+	border-top: 3px solid #d2d6de;
+	border-bottom: 2px solid #d2d6de;
+	margin-left: 6%;
+	margin-top: 15px;
+	background: #fff;
+	padding: 0 1%;
+	float: right;
+}
+.tableBox h3{
+	margin: 15px 0;
+}
+.deviceOperation .startingUp i{
+	display:block;
+	width: 10px;
+	height:10px;
+}
+.deviceOperation a{
+	margin:15px 40px;
+	display: inline-block;
+	background: #ccc;
+	padding: 20px 35px;
+	border-radius: 5px;
+}
+.filterInfoTable tr td:nth-child(1){
+	width: 10%
+}
+.filterInfoTable tr td:nth-child(2){
+	width: 70%
+}
+.filterInfoTable tr td:nth-child(3){
+	width: 10%
+}
+.filterInfoTable tr td:nth-child(4){
+	width: 10%
+}
+.filterInfoTable tr td:nth-child(2) .surplusBg{
+	width: 95%;
+	margin: 6px auto;
+	height: 10px;
+	background: #f5f5f5;
+	border-radius: 3px;
+}
+.filterInfoTable tr td:nth-child(2) .surplusBg .surplusShowColor{
+	width: 30%;
+	height: 10px;
+	/*background: #f00;*/
+	border-radius: 3px;
+}
+.filterInfoTable tr td:nth-child(4) button{
+	padding: 3px 7px;
+	border-radius:2px;
+	color: #8f0911;
+}
+.filterInfoTable tr:nth-child(1) td .surplusShowColor{
+	background: #dd4b39;
+}
+.filterInfoTable tr:nth-child(2) td .surplusShowColor{
+	background: #337AB7;
+}
+.filterInfoTable tr:nth-child(3) td .surplusShowColor{
+	background: #005384;
+}
+.filterInfoTable tr:nth-child(4) td .surplusShowColor{
+	background: #5CB85C;
+}
+.filterInfoTable tr:nth-child(5) td .surplusShowColor{
+	background: #4CC7F1;
+}
+.filterInfoTable tr:nth-child(6) td .surplusShowColor{
+	background: #05458F;
+}
+.filterInfoTable tr:nth-child(7) td .surplusShowColor{
+	background: #00C0EF;
+}
+.filterInfoTable tr:nth-child(8) td .surplusShowColor{
+	background: #293846;
+}
+.tableList{
+	width: 98%;
+	padding: 0 1%;
+	min-height: 200px;
+	max-height: 700px;
+	overflow-y:hidden; 
+	background: #fff;
+	margin-top: 20px;
+	border-top:4px solid #5ED0F4;
+	border-bottom: 1px solid #ccc;
+	border-radius: 5px;
+}
 .addBatch{
 	display: none;
-	margin: 100px 0 50px 100px;
 }
-a.addBtn{
-	display: inline-block;
-	background:#ccc;
-	border-radius: 5px;
-	padding: 0 5px;
+.addBtn{
+	padding: 5px;
+	margin-top: 2px;
 	margin-left: 20px;
-	text-decoration: none;
-	color: #585858;
+	background: #ccc;
+	display: inline-block;
+	border-radius: 5px;
 }
-.showdetail {
-	display: none;
-	height: 600px;
-	background: #d5e1ed;
+ .addBatch{
+	margin-top: 50px;
+	margin-left: 50px;
 }
-.showdetail .filterInfo{
-	width: 500px;
-	margin-left: 70px;	
+.keyPointList{
+	overflow: hidden;
 }
-.showdetail .filterInfo table{
-	width: 90%;
-	background: #bcd3eb;
-	margin: 0 auto;
-	
-}
-.showdetail .deviceInfo{
-	width: 500px;
-	float: right;
-	margin-right: 70px;
-}
-.showdetail .deviceInfo .tableList{
-	height: 480px;
-	overflow-x: hidden;
-}
-.showdetail .deviceInfo table{
-	background: #bcd3eb;
-	width: 90%;
-	height: 580px;
-	overflow-x: hidden;
-	margin: 0 auto;
-}
-.showdetail h3{
-	font-family: 'Open Sans',"微软雅黑","黑体";
-	height: 60px;
-	width: 90%;
-	margin: 20px auto;
-	margin-bottom: 20px;
-	line-height: 60px;
-	color:#fff;
+.keyPointList > div{
+	width: 22%;
+	height: 100px;
 	text-align: center;
-	background: #a4b7cb;
-	box-shadow: 1px 5px 5px #99aabd;
-	border-radius: 7px;
-	
-}
-.btnList{
-	width: 90%;
-	height: 110px;
-	margin: 50px auto;
-	background: #a4b7cb;
-    box-shadow: 1px 5px 5px #99aabd;
-    border-radius: 7px;
-}
-.btnList h4{
-	height: 50px;
+	margin-right: 4%;
 	color: #fff;
-	line-height: 50px;
-	padding-left: 20px;
-	font-family: 'Open Sans',"微软雅黑","黑体";
+	border-radius: 8px;
+}
+.keyPointList > div:nth-child(1){
+	background: #dd4b39;
+}
+
+.keyPointList > div:nth-child(2){
+	background: #337AB7;
+}
+.keyPointList > div:nth-child(3){
+	background: #05CE3E;
+}
+.keyPointList > div:nth-child(4){
+	float: right;
+	margin-right: 0;
+	background: #77E1FB;
+}
+.keyPointList > div h2{
+	margin: 14px 0;
+
 }

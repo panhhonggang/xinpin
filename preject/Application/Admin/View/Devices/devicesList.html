@@ -27,7 +27,7 @@
                     <foreach name="deviceInfo" item="data" key="key">
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td><a class="btn-link detail">{{$data.device_code}}</a></td>
+                            <td><a class="btn-link detail" href="#">{{$data.device_code}}</a></td>
                             <td>{{$data.cname}}</td>
                             <td>{{$data.name}}</td>
                             <td>{{$data.typename}}</td>
@@ -56,7 +56,7 @@
                 </tbody>
             </table>
             <!-- 上下页，请加样式 -->
-            <div class="pagination pagination-lg pull-center">
+            <div class="pagination">
                 <ul>
                     {{$page}}
                 </ul>
@@ -65,7 +65,7 @@
         <include file="Public/footer" />
     </div>
 </div>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     // 产品详情
     $('.detail').click(function (){
         var code = $(this).html();
@@ -88,10 +88,10 @@
                     });
                     var tableHtml='';
                     var deviceInfo='';
-                    $(".filterInfoTable tbody").html("<tr><td>滤芯项</td><td>剩余流量值</td></tr>");
+                    $(".filterInfoTable tbody").html("<tr><td>滤芯项</td><td>剩余流量信息</td></tr>");
                     $(".deviceInfoTable").html("");
                     for(var i=0;i<8;i++){
-                        tableHtml+='<tr><td>滤芯'+(i + 1)+'</td><td>'+ data['redayfilter'+(i + 1)] +'</td></tr>';
+                        tableHtml+='<tr><td>滤芯'+(i + 1)+'</td><td style=\"\"><p style=\"width:350px;display:inline-block\"><span style=\"width:;height:10px;background:#ccc;\"></span></p><span>'+ data['redayfilter'+(i + 1)] +'<span></td></tr>';
                     }
                     $(".filterInfoTable tbody").append(tableHtml);
 
@@ -136,4 +136,4 @@
             </table>
         </div>
     </div>
-</div>
+</div> -->
