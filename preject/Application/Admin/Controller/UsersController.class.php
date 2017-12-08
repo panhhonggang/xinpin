@@ -159,8 +159,8 @@ class UsersController extends CommonController
 
         // 查询用户充值记录
         // $record = M('Flow')->where('`uid`='.$id)->order('id desc')->select();
-        // $mode = array('系统赠送','微信支付','支付宝支付');
-        // $this->assign('mode',$mode);
+        $mode = array('系统赠送','微信支付','支付宝支付');
+        $this->assign('mode',$mode);
         // $this->assign('record',$record);
 
         // 查询用户消费记录总条数
@@ -186,7 +186,7 @@ class UsersController extends CommonController
         $page  = new \Think\Page($total,5);
         $pageButton =$page->show();
 
-        $list = $consume->where($map)->limit($page->firstRow.','.$page->listRows)
+        $list = $consume->where($map)->order('id desc')->limit($page->firstRow.','.$page->listRows)
                                 ->join('xp_users ON xp_consume.uid = xp_users.id')
                                 ->join('xp_card ON xp_consume.icid = xp_card.id')
                                 ->field('xp_consume.*,xp_users.name,xp_users.balance,xp_card.iccard')
