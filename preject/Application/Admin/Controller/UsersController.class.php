@@ -158,36 +158,43 @@ class UsersController extends CommonController
         $this->assign('userInfo',$userInfo);
 
         // 查询用户充值记录
-        $record = M('Flow')->where('`uid`='.$id)->order('id desc')->select();
-        $mode = array('系统赠送','微信支付','支付宝支付');
-        $this->assign('mode',$mode);
-        $this->assign('record',$record);
+        // $record = M('Flow')->where('`uid`='.$id)->order('id desc')->select();
+        // $mode = array('系统赠送','微信支付','支付宝支付');
+        // $this->assign('mode',$mode);
+        // $this->assign('record',$record);
+
+        // 查询用户消费记录总条数
+        $count = M('Flow')->where('`uid`='.$id)->count();
+        // 实例化分页类 传入总记录数和每页显示的记录数(5)
+        $recordPage = new \Think\Page($count,5);
+        // 分页显示输出
+        $recordshow  = $recordPage->show();
+        // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+        $recordlist = M('Flow')->where('`uid`='.$id)->order('id desc')->limit($recordPage->firstRow.','.$recordPage->listRows)->select();
+        $this->assign('recordlist',$recordlist);// 赋值数据集
+        $this->assign('recordshow',$recordshow);// 赋值分页输出
+        
 
 
         // 查询用户消费记录
-        // 1.查询用户名下的所有IC卡
-        $icid = M('Card')->field('iccard,id,name')->where('`uid`='.$id)->select();
+        $consume = M('consume');
+        $total = $consume->where($map)
+                                ->join('xp_users ON xp_consume.uid = xp_users.id')
+                                ->join('xp_card ON xp_consume.icid = xp_card.id')
+                                ->field('xp_consume.*,xp_users.name,xp_card.iccard')
+                                ->count();
+        $page  = new \Think\Page($total,5);
+        $pageButton =$page->show();
 
-
-        // 定义一个空数组准备接收IC卡消费记录
-        $icidDetail = array();
-
-        // 2.查询用户卡下的消费记录
-        if($icid){
-            // 遍历IC卡查询消费记录
-            for($i=0;$i<count($icid);$i++){
-                $icidDetail[$icid[$i]['name']] = M('Consume')->where('`icid`="'.$icid[$i]['id'].'"')->order('id desc')->select();
-            }   
-        }
-
-        //消费记录
-        // echo '<pre>';
-        // print_r($icidDetail);exit;
-
-        // 分配数据
-        $this->assign('icidDetail',$icidDetail);
-        $this->display('usersDetail');
-
+        $list = $consume->where($map)->limit($page->firstRow.','.$page->listRows)
+                                ->join('xp_users ON xp_consume.uid = xp_users.id')
+                                ->join('xp_card ON xp_consume.icid = xp_card.id')
+                                ->field('xp_consume.*,xp_users.name,xp_users.balance,xp_card.iccard')
+                                ->select();
+        // dump($list);die;
+        $this->assign('list',$list);
+        $this->assign('button',$pageButton);
+        $this->display();  
     }
 
 
