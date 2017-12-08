@@ -151,36 +151,41 @@ class UsersController extends CommonController
     public function usersDetail()
     {       
         // 接收用户ID
-        // $id = I('post.id');
+        $id = I('get.id');
         // //$id=1;
+        // 查询用户基础信息
+        $userInfo = M('Users')->where('`id`='.$id)->find();
+        $this->assign('userInfo',$userInfo);
 
-        // // 查询用户充值记录
-        // $record = M('Flow')->field('money,time')->where('`uid`='.$id)->order('id desc')->select();
+        // 查询用户充值记录
+        $record = M('Flow')->where('`uid`='.$id)->order('id desc')->select();
+        $mode = array('系统赠送','微信支付','支付宝支付');
+        $this->assign('mode',$mode);
+        $this->assign('record',$record);
 
 
-        // // 查询用户消费记录
-        // // 1.查询用户名下的所有IC卡
-        // $icid = M('Card')->field('iccard,id,name')->where('`uid`='.$id)->select();
+        // 查询用户消费记录
+        // 1.查询用户名下的所有IC卡
+        $icid = M('Card')->field('iccard,id,name')->where('`uid`='.$id)->select();
 
 
-        // // 定义一个空数组准备接收IC卡消费记录
-        // $icidDetail = array();
+        // 定义一个空数组准备接收IC卡消费记录
+        $icidDetail = array();
 
-        // // 2.查询用户卡下的消费记录
-        // if($icid){
-        //     // 遍历IC卡查询消费记录
-        //     for($i=0;$i<count($icid);$i++){
-        //         $icidDetail[$icid[$i]['name']] = M('Consume')->field('flow,address,time')->where('`icid`="'.$icid[$i]['id'].'"')->order('id desc')->select();
-        //     }   
-        // }
+        // 2.查询用户卡下的消费记录
+        if($icid){
+            // 遍历IC卡查询消费记录
+            for($i=0;$i<count($icid);$i++){
+                $icidDetail[$icid[$i]['name']] = M('Consume')->where('`icid`="'.$icid[$i]['id'].'"')->order('id desc')->select();
+            }   
+        }
 
-        // // 充值记录
-        // $date['record'] = $record;
-        // // 消费记录
-        // $date['icid'] = $icidDetail;
+        //消费记录
+        // echo '<pre>';
+        // print_r($icidDetail);exit;
 
-        // 返回JSON格式数据
-        // $this->ajaxReturn($date, 'json');
+        // 分配数据
+        $this->assign('icidDetail',$icidDetail);
         $this->display('usersDetail');
 
     }
