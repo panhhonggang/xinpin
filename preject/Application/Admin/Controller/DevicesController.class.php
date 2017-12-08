@@ -48,7 +48,6 @@ class DevicesController extends CommonController
     // 查询设备详情
     public function deviceDetail($code=null)
     {
-        $code        = I('post.code');
         $devices     = D('devices');
         $res[0]         = $devices->getInfoBydecode($code);
         $data = [];
@@ -71,7 +70,8 @@ class DevicesController extends CommonController
             }
             $data = $value;
         }
-        $this->ajaxReturn($data, 'json');
+        $this->assign('data', $data);
+        $this->display();
     }
 
     // 获取设备充值记录
@@ -263,5 +263,28 @@ class DevicesController extends CommonController
             }
         }
         $this->save_import($data);
+    }
+
+    public function device_unbind()
+    {
+        $data = I('post.data');
+        echo $data;
+        switch ($data) {
+            case '解绑':
+                $res = $this->redirect('Home/Card/relieveIC');
+                break;
+            case '挂失':
+                $res = $this->redirect('Home/Card/reportTheLossOf');
+                break;
+            case '解挂':
+                $res = $this->redirect('Home/Card/hangingSolution');
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+
+        $this->ajaxReturn($res, 'json');
     }
 }

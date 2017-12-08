@@ -40,7 +40,7 @@
                                         剩<span>30%</span>
                                     </td>
                                     <td>
-                                        <button>复位</button>
+                                        <button class="resetBtn">复位</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -78,15 +78,15 @@
                         <h3>设备操作</h3>
                         <a class="startingUp" >
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            <span>挂失</span>
+                            <button class="action">挂失</button>
                         </a>
                         <a class="shutDown" >
                             <i></i>
-                            <span>解挂</span>
+                            <button class="action">解挂</button>
                         </a>
                         <a class="shutDown" >
                             <i></i>
-                            <span>解绑</span>
+                            <button class="action">解绑</button>
                         </a>
                     </div>
                 </div>
@@ -292,3 +292,26 @@
         <include file="Public/footer" />
     </div>
 </div>
+
+<script>
+    $('.action').click(function(){
+        var data = $(this).text();
+        confirm('确认执行'+data+'操作？');
+        $.ajax({
+            url:'device_unbind',
+            dataType:'json',
+            data:{'data':data},
+            type:'post',
+            success:function(res){
+                alert(res);
+                if(res == 1){
+                    alert('操作成功');
+                    return false;
+                } else{
+                    alert('操作失败');
+                    return false;
+                }
+            }
+        });
+    });
+</script>

@@ -29,7 +29,7 @@
                     <foreach name="list" item="vo" key="key">
                     <tr>
                         <td class="userIndex">{{$vo.id}}</td>
-                        <td><a class="btn-link" href="#">{{$vo.name}}</a></td>
+                        <td><a class="btn-link" href="usersDetail?name={{$vo.name}}">{{$vo.name}}</a></td>
                         <td>{{$vo.phone}}</td>
                         <td>{{$vo.address}}</td>
                         <td>{{$vo.balance}}</td>
