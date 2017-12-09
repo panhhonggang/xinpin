@@ -4,22 +4,22 @@
     <div class="row-fluid fl" id="main" style="background: #ecf0f5;">
         <div class="tableBox">
             <div class="titleBar">设备管理/<span>设备列表</span></div>
-            <h1 class="deviceTitle text-center">当前设备：<span>465454215454</span>设备详情</h1>
+            <h1 class="deviceTitle text-center">当前设备：<span>{{$data['devicestause']}}</span>设备详情</h1>
             <div class="keyPointList">
                 <div class="fl">
-                    <h2>SADFA</h2>
+                    <h2>{{$data['devicestause']}}</h2>
                     <p>设备当前状态</p>
                 </div>
                 <div class="fl">
-                    <h2>FDGH</h2>
+                    <h2>{{$data['puretds']}}</h2>
                     <p>设备当前原水值</p>
                 </div>
                 <div class="fl">
-                    <h2>SFGH</h2>
+                    <h2>{{$data['rawtds']}}</h2>
                     <p>设备当前净水值</p>
                 </div>
                 <div class="fr">
-                    <h2>SFDG</h2>
+                    <h2>{{$data['leasingmode']}}</h2>
                     <p>设备当前租赁模式</p>
                 </div>
             </div>
@@ -37,21 +37,21 @@
                                         </div>
                                     </td>
                                     <td>
-                                        剩<span>30%</span>
+                                        剩<span>{{$data['reflowfilter1']}}%</span>
                                     </td>
                                     <td>
                                         <button class="resetBtn">复位</button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>滤芯项1</td>
+                                    <td>滤芯项2</td>
                                     <td>
                                         <div class="surplusBg">
                                             <p class="surplusShowColor" style="width: 35%"></p>
                                         </div>
                                     </td>
                                     <td>
-                                        剩<span>30%</span>
+                                        剩<span>{{$data['reflowfilter2']}}%</span>
                                     </td>
                                     <td>
                                         <button>复位</button>
@@ -65,7 +65,78 @@
                                         </div>
                                     </td>
                                     <td>
-                                        剩<span>30%</span>
+                                        剩<span>{{$data['reflowfilter3']}}%</span>
+                                    </td>
+                                    <td>
+                                        <button>复位</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>滤芯项1</td>
+                                    <td>
+                                        <div class="surplusBg">
+                                            <p class="surplusShowColor" style="width: 35%"></p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        剩<span>{{$data['reflowfilter4']}}%</span>
+                                    </td>
+                                    <td>
+                                        <button>复位</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>滤芯项1</td>
+                                    <td>
+                                        <div class="surplusBg">
+                                            <p class="surplusShowColor" style="width: 35%"></p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        剩<span>{{$data['reflowfilter5']}}%</span>
+                                    </td>
+                                    <td>
+                                        <button>复位</button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>滤芯项1</td>
+                                    <td>
+                                        <div class="surplusBg">
+                                            <p class="surplusShowColor" style="width: 35%"></p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        剩<span>{{$data['reflowfilter6']}}%</span>
+                                    </td>
+                                    <td>
+                                        <button>复位</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>滤芯项1</td>
+                                    <td>
+                                        <div class="surplusBg">
+                                            <p class="surplusShowColor" style="width: 35%"></p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        剩<span>{{$data['reflowfilter7']}}</span>
+                                    </td>
+                                    <td>
+                                        <button>复位</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>滤芯项1</td>
+                                    <td>
+                                        <div class="surplusBg">
+                                            <p class="surplusShowColor" style="width: 35%"></p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        剩<span>{{$data['reflowfilter8']}}%</span>
                                     </td>
                                     <td>
                                         <button>复位</button>

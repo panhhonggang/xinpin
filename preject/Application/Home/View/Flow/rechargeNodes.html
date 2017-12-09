@@ -9,34 +9,23 @@
 <body>
 <ul class="rechargeHhead nav nav-pills" role="tablist">
     <li role="presentation">金额（元）</li>
-    <li class="text-right">时间</li>
+    <li class="text-right"></li>
 </ul>
-<section class="container rechargeNode">
-    <table class="rechargeTable table table-defalt text-center">
+<section class="rechargeNode">
+    <table class="rechargeTable table-defalt text-center">
     	<tbody>
         <foreach name="record" item="v">
             <tr>
                 <td class="text-left">{{$v['money']/100}}</td>
-                <td class="text-right">{{:date('Y年m月d日', $v['time'])}}</td>
+                <td class="text-right" style="color: #908f8f;text-align: right">{{:date('Y年m月d日', $v['time'])}}</td>
             </tr>
         </foreach>
         </tbody>
     </table>
 </section>
-<footer>
-    <a class="btn1" href="{{:U('Home/index/index')}}"><span class="logo1"></span>首页</a>
-    <a class="btn2" href="{{:U('Home/Consume/index')}}"><span class="logo2"></span>饮水记录</a>
-    <a class="btn3" href="{{:U('Home/Flow/recharge')}}"><span class="logo3"></span>充值</a>
-    <a><span class="logo4"></span>扫码取水</a>
-    <a class="btn5" href="{{:U('Home/Users/mine')}}"><span class="logo5"></span>我的</a>
-</footer>
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
 <script src="__PUBLIC__/Home/js/public.js"></script>
 <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js" ></script>
-<script>
-    $(".logo3").css("background-position","-1.8rem -1.8rem");
-    $(".btn3").css("color","#008C63");
-</script>
 </body>
 </html>

@@ -33,6 +33,10 @@ h4{
 .listOption a,.payList a{
 text-decoration:none;
 }
+.payList h1{
+	font-size: .75rem;
+	padding: 4vh 3vh 2vh 3vh;
+}
 .logo{
 	width: 44vw;
 	height: 26.9vw;
@@ -165,7 +169,7 @@ input{
 	font-weight: bold;
 	font-size: 1.9rem;
 	line-height: 1.2;
-	margin-top: 2vh;
+	margin-top: 1vh;
 	color: #333333;
 }
 .table-data{
@@ -194,20 +198,21 @@ h4.tableTitle {
 }
 footer{
 	width: 100vw;
-	height: 14vh;
+	height: 2.6rem;
 	position: fixed;
 	left: 0;
 	bottom: 0;
-	border-top: .2vh solid #ccc;
 	background: #fff;
+	box-shadow: 0 -2px 5px rgba(89,89,89,0.1);
 }
 footer > a{
 	width: 20vw;
-	padding: 2vh 0 1vh 0;
+	padding: 1vh 0 0vh 0;
 	display: block;
 	float: left;
 	text-align: center;
 	color: #848282;
+	font-size: .5rem;
 }
 footer > a:hover{
 	color: #848282;
@@ -215,26 +220,26 @@ footer > a:hover{
 }
 footer > a span{
 	display: block;
-	width: 11vw;
-	height: 11vw;
+	width: 9vw;
+	height: 9vw;
 	margin: 0 auto;
 	background: url("../image/sprite.png") no-repeat;
-	background-size: 17.7rem 9rem;
+	background-size: 14.5rem 7.3rem;
 }
 footer > a span.logo1{
-	background-position: -13.5rem 0;
+	background-position: -11.1rem 0;
 }
 footer > a span.logo2{
-	background-position: 0.1rem 0;
+	background-position: 0rem 0rem;
 }
 footer > a span.logo3{
-	background-position: 0.1rem -1.8rem;
+	background-position: 0rem -1.45rem;
 }
 footer > a span.logo4{
-	background-position: -3.8rem 0;
+	background-position: -3.1rem 0rem;
 }
 footer > a span.logo5{
-	background-position: -9.6rem 0;
+	background-position: -7.9rem 0;
 }
 
 /*添加ic卡 css*/
@@ -247,34 +252,44 @@ footer > a span.logo5{
 }
 .addIC .row .btn{
 	width: 2.5rem;
-	height: 1.7rem;
+	height: 1.9rem;
 	background:#F2F3F3 url("../image/sprite.png") no-repeat;
 	background-size: 17.7rem 9rem;
 	background-position: -15.7rem .2rem;
+	margin-top: 4px;
+	border-top-right-radius: 9px;
+	border-bottom-right-radius: 9px;
 }
 .addIC input{
-	width: 100%;
-	height: 1.7rem;
+	width: 88%;
+	margin: 0 auto;
+	height: 1.9rem;
 	background: #F2F3F3;
 	border-radius: 6px;
+	border-radius: 9px;
+	margin-top: 1vw;
+	font-size: .73rem;
+	font-weight: 300;
 }
 .addICtitle{
 	width: 100vw;
-	height: 8vh;
-	padding: .5rem;
-	font-size: .8rem;
-	font-weight: bold;
+	height: 6vh;
+	padding: .5rem 1rem 0 1rem;
+	font-size: .75rem;
+	font-weight: 400;
 }
 .addIC .addIDBtn{
-	margin-top: 8rem;
+	position: fixed;
+	left: 6%;
+	bottom: 20vw;
 	border:0;
-	height: 1.7rem;
-}
-.addIDBtn input{
 	background: #008A63;
-	color: #fff;
-	font-weight: bold;
-	font-size: .7rem;
+    color: #fff;
+    height: 12vw;
+    width: 88%;
+	font-weight: 400;
+    border-radius: 8px;
+    font-size: .74rem;
 }
 /*IDmanage*/
 .IDshow{
@@ -286,7 +301,7 @@ footer > a span.logo5{
 .IDshow .IDshowBg{
 	position: relative;
 	width: 80vw;
-	height: 30vh;
+	height: 29vh;
 	margin: 0 auto;
 	margin-top: 1rem;
 	background: url("../image/ICbg.png") no-repeat;
@@ -316,9 +331,10 @@ footer > a span.logo5{
 	color: #fff;
 }
 .setList{
-	height: 6vh;
-	line-height: 6vh;
+	height: 5.5vh;
+	line-height: 5.5vh;
 	min-width: 17vw;
+	text-align: center;
 	border:#008B61 1px solid;
 	
 	border-radius: 2vw;
@@ -336,7 +352,8 @@ footer > a span.logo5{
 	position:absolute;
 	display: inline-block;
 	color: #008B61;
-	font-weight: bold;
+	font-weight: 450;
+	font-size: .75rem;
 	right: 0;
 	top: 0;
 }
@@ -364,7 +381,7 @@ a.addIDbtn{
 	bottom: 0;
 	background:#E8F9F5 url("../image/sprite.png") no-repeat;
 	background-size: 17rem auto;
-	background-position: -14rem -4.5rem;
+	background-position: -14.4rem -4.5rem;
 	border: none;
 	text-align: center;
 	text-decoration: none;
@@ -392,6 +409,7 @@ a.addIDbtn{
 	height: 13vh;
 	line-height: 10vh;
 	font-size: 1rem;
+	background: #f8f8f8
 }
 .consumeList >li p{
 	text-align: center;
@@ -405,6 +423,7 @@ a.addIDbtn{
 	font-size: .8rem;
 	margin-bottom: 0;
 	border-bottom: 1px solid #D7D7D7;
+	background: #fff;
 }
 .spanActive{
 	background:#008A63;
@@ -419,17 +438,29 @@ a.addIDbtn{
 .consumeList li+li,.consumePointList li+li,.thead li+li {
 	margin-left: 0;
 }
+.consumeTable{
+	width: 100%;
+}
+.consumeTable tr td{
+	/*width: 33.33%;*/
+	height: 8vh;
+	border-bottom: 1px solid #e9e9e9;
+	font-size: .7rem;
+	padding-left: 2vw;
+	text-align: center;
+}
 .thead{
 	width: 100vw;
 	height: 10vh;
 }
 .thead > li{
 	width: 33.3vw;
-	height: 8vh;
-	line-height: 8vh;
-	text-align: center;
+	height: 10vh;
+	line-height: 15vh;
+	padding-left: 2vw;
 	background: #60CDAF;
 	color: #fff;
+	font-size: .75rem;
 }
 .consumeNode{
 	width: 100vw;
@@ -441,17 +472,19 @@ a.addIDbtn{
 /*recharge css*/
 .rechargeHhead{
 	width: 100vw;
-	padding: 0 5vw;
+	padding: 0 4vw;
 	text-align: center;
 	background: #60CDAF;
 	color: #fff;
+	border-bottom: 1px solid #e9e9e9;
 }
 .rechargeHhead > li{
 	width: 45vw;
-	height: 8vh;
-	line-height: 8vh;
+	height: 10vh;
+	line-height: 15vh;
 	text-align: left;
-	padding: 0 8px;
+	font-size: .75rem;
+
 }
 .rechargeHhead > li.text-right{
 	text-align: right;
@@ -462,18 +495,29 @@ a.addIDbtn{
 .rechargeNode{
 	height: 80vh;
 }
+.rechargeNode table{
+	width: 100%;
+}
+.rechargeNode table tr{
+	border-bottom: 1px solid #e9e9e9;
+}
+.rechargeNode table tr td{
+	height: 8vh;
+	padding:0 5vw;
+	font-size: .7rem;
+}
 /*mine css*/
 .showmine{
 	width: 100vw;
-	height: 32vh;
-	border-bottom: 2vh solid #F5F5F6;
+	height: 28vh;
+	border-bottom: 2vw solid #F5F5F6;
 }
 .minelogo{
 	width: 25vw;
     height: 25vw;
     margin: 0 auto;
-    margin-top: 5vw;
-    margin-bottom: 1vw;
+    margin-top: 15vw;
+    margin-bottom: 3vw;
 }
 .minelogo img{
 	width: 100%;
@@ -486,17 +530,17 @@ a.addIDbtn{
 }
 .mineList{
 	width: 100vw;
-	height: 39vh;
+	height: 30vh;
 	margin-bottom:0;
 }
 .mineList > li > a{
 	position: relative;
 	display: block;
-	border-bottom: 1px #ccc solid;
-	font-size: .7rem;
+	border-bottom: 1px #eeecec solid;
+	font-size: .73rem;
 	width: 100vw;
-	padding-left: 15vw;
-	height: 10vh;
+	padding-left: 17vw;
+	height: 8vh;
 	line-height: 10vh;
 	text-decoration: none;
 	color: #383838;
@@ -506,8 +550,8 @@ a.addIDbtn{
 	height: 8vw;
 	line-height: 8vw;
 	position: absolute;
-	left: 3vw;
-	top: 3vw;
+	left: 5vw;
+	top: 2.2vw;
 	font-weight: bold;
 	display: inline-block;
 	background: url("../image/sprite.png") no-repeat;
@@ -522,6 +566,7 @@ a.addIDbtn{
 }
 .mineList > li > a > i.i3{
 	background-position: -13.1rem -2rem;
+	top: 2.5vw;
 }
 .mineList > li > a > span{
 	width: 8vw;
@@ -533,13 +578,16 @@ a.addIDbtn{
 	display: inline-block;
 	background: url("../image/sprite.png") no-repeat;
 	background-size: 17.7rem 9rem;
-	background-position: -13.5rem -3.6rem;
+	background-position: -13.4rem -3.6rem;
 }
 .quitBtn{
 	background: #D9534F;
 	color: #fff;
-	height: 7vh;
+	height: 12vw;
+	border-radius: 8px;
 	margin-bottom: 5vh;
+	margin-top: 10vh;
+	font-size: .74rem;
 }
 /*personalInformation css*/
 .personalList{
@@ -550,11 +598,11 @@ a.addIDbtn{
 .personalList > li{
 	position: relative;
 	display: block;
-	border-bottom: 1px #ccc solid;
-	font-size: .7rem;
+	border-bottom: 1px #e9e9e9 solid;
+	font-size: .75rem;
 	width: 100vw;
 	padding-left: 15vw;
-	height: 10vh;
+	height: 9vh;
 	line-height: 10vh;
 	color: #383838;
 }
@@ -564,11 +612,11 @@ a.addIDbtn{
 	line-height: 8vw;
 	position: absolute;
 	left: 3vw;
-	top: 2vw;
+	top: 2.7vw;
 	font-weight: bold;
 	display: inline-block;
 	background: url("../image/sprite.png") no-repeat;
-	background-size: 16.7rem 8.5rem;
+	background-size: 16.7rem 8.4rem;
 }
 .personalList > li > i.i1{
 	background-position: -8.5rem -2rem;
@@ -577,45 +625,51 @@ a.addIDbtn{
 	background-position: -7rem -2rem;
 }
 .personalList > li > i.i3{
+	width: 9vw;
 	background-position: -9.9rem -2rem;
 }
 .personalList > li > span{
 	margin-left: 4vw;
-	color: #5e5e5e;
+	color: #7d7c7c;
+	font-weight: 300;
 }
 /*textOption CSS*/
 .rechargeOption{
 	width: 100vw;
-	height: 35vh;
-	border-bottom: 2vh solid #F5F5F6;
+	height: 38vh;
+	border-bottom: 2vw solid #F5F5F6;
 }
 .rechargeOption .textOption{
-	padding: 2vh;
-	font-size: .7rem;
+	padding: 4vh 3vh 2vh 3vh;
+	font-size: .73rem;
 	font-weight: bold;
-	margin-bottom: 5vh;
+	/*margin-bottom: 5vh;*/
 }
 .listOption a{
 	display: block;
-	width: 20vw;
-	height: 6vh;
-	margin: 3vw;
-	line-height: 6vh;
-	border:1px solid #383838;;
+	width: 22vw;
+	height: 8vh;
+	margin: 3vw 4.2vw;
+	line-height: 8vh;
+	border:1px solid #969797;;
 	border-radius: 2vw;
 	text-align: center;
-	color: #383838;
+	color: #505050;
+	font-size: .8rem;
+	font-weight: 300;
 }
 .payList{
 	width: 100vw;
-	height: 26vh;
-	border-bottom: 2vh solid #F5F5F6;
+	height: 32vh;
+	
+	border-bottom: 2vw solid #F5F5F6;
 }
 .payList > a{
 	position: relative;
 	display: block;
-	font-size: .7rem;
-	width: 100vw;
+	font-size: .73rem;
+	width: 90vw;
+	margin: 0 auto;
 	padding-left: 15vw;
 	height: 8vh;
 	line-height: 8vh;
@@ -632,21 +686,29 @@ a.addIDbtn{
 	font-weight: bold;
 	display: inline-block;
 	background: url("../image/sprite.png") no-repeat;
-	background-size: 17.7rem 9rem;
+	background-size: 16rem 8.1rem;
 }
 .payList > a > i.i1{
-	    background-position: -5.7rem -1.8rem;
+	    background-position: -5rem -1.6rem;
 }
 .payList > a > i.i2{
-	    background-position: -3.8rem -1.8rem;
+	    background-position: -3.3rem -1.6rem;
 }
-.payList > a > span{
-	width: 4vw;
-	height: 4vw;
+.payList > a > p{
+	width: 24px;
+	height: 24px;
 	position: absolute;
-	right: 4vw;
-	top: 5vw;
+	right: 14px;
+	top: 8px;
 	border: 1px solid #029167;
+	border-radius: 50%;
+}
+.payList > a > p>span{
+	width: 14px;
+	height: 14px;
+	position: absolute;
+	right: 4px;
+	top: 4px;
 	border-radius: 50%;
 }
 .payItem{
@@ -655,8 +717,10 @@ a.addIDbtn{
 .rechargeBtn{
 	background: #008A63;
 	color: #fff;
-	height: 7vh;
-	margin-bottom: 5vh;
+    height: 12vw;
+    border-radius: 8px;
+    margin-top: 9vh;
+    font-size: .74rem;
 }
 .listOption a.activeBg{
 	background:#60CDAF;
@@ -666,4 +730,8 @@ a.addIDbtn{
 .btn:active:focus, .btn:focus {
     outline: none; 
     outline-offset: none;
+}
+.iccardbox{
+	margin-left: 6%;
+	width: 88%;
 }

@@ -49,6 +49,17 @@ class DevicesController extends CommonController
     public function deviceDetail($code=null)
     {
         $devices     = D('devices');
+        $type_id = $devices->where('device_code='.$code)->getField('type_id');
+        $filter = M('device_type')->where('id='.$type_id)->select();
+
+        // $filters = [];
+        foreach ($filter as $key => $value) {
+            $filters = M('filters')->where(['filtername' => ['in', $value]])->select();
+        }
+
+        dump($filters);
+
+
         $res[0]         = $devices->getInfoBydecode($code);
         $data = [];
         $res[0]['flow'] = M('consume')->where('did='.$res[0]['id'])->sum('flow');
@@ -70,6 +81,7 @@ class DevicesController extends CommonController
             }
             $data = $value;
         }
+        // dump($data);
         $this->assign('data', $data);
         $this->display();
     }

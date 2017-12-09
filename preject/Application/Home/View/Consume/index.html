@@ -24,17 +24,17 @@
     </section>
     <ul class="thead nav nav-pills" role="tablist">
         <li role="presentation" class="">用水地点</li>
-        <li>用水时间</li>
-        <li>盛水量/ML</li>
+        <li>盛水量/mL</li>
+        <li></li>
     </ul>
-    <section class="container consumeNode">
-        <table class="consumeTable table table-defalt text-center">
+    <section class="consumeNode ">
+        <table class="consumeTable ">
             <tbody>
-            <foreach name="icidOne" item="v" key="k">
-                <tr>
-                    <td>{{$v['address']}}</td>
-                    <td>{{:date('Y年m月d日', $v['time'])}}</td>
-                    <td>{{$v['flow']}}</td>
+            <foreach name="icidOne" item="v" key="k" class="container">
+                <tr class="row">
+                    <td class="col-xs-3">{{$v['address']}}</td>
+                    <td class=" col-xs-3" style="text-align: right" >{{$v['flow']}}</td>
+                    <td class="col-xs-7" style="color: #908f8f;text-align: right">{{:date('Y年m月d日', $v['time'])}}</td>
                 </tr>
             </foreach>
             </tbody>
@@ -52,7 +52,7 @@
     
     <script src="__PUBLIC__/Home/js/public.js"></script>
     <script>
-    $(".logo2").css("background-position","-1.8rem 0");
+    $(".logo2").css("background-position","-1.6rem 0");
         $(".btn2").css("color","#008C63");
         $(".consumeList li").eq(0).children("span").addClass("spanActive");
     //数据表滑动显示
