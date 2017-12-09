@@ -46,43 +46,26 @@ class DevicesController extends CommonController
     }
 
     // 查询设备详情
-    public function deviceDetail($code=null)
+    public function deviceDetail($code)
     {
         $devices     = D('devices');
-        $type_id = $devices->where('device_code='.$code)->getField('type_id');
-        $filter = M('device_type')->where('id='.$type_id)->select();
+        $res         = $devices->getInfoBydecode($code);
+        $res['flow'] = M('consume')->where('did='.$res['id'])->sum('flow');
+        
+        $filters = $devices->getFilterInfo($code);
+        $data = $devices->getFilterFlow($filters, $res);
 
-        // $filters = [];
-        foreach ($filter as $key => $value) {
-            $filters = M('filters')->where(['filtername' => ['in', $value]])->select();
-        }
-
-        dump($filters);
-
-
-        $res[0]         = $devices->getInfoBydecode($code);
-        $data = [];
-        $res[0]['flow'] = M('consume')->where('did='.$res[0]['id'])->sum('flow');
-
-        if( $res[0] == null ){
+        if( $data == null ){
             echo  '参数错误';
             exit;
         }
-        $devicestause = ['制水', '冲洗', '水满', '缺水', '漏水', '检修', '欠费', '关机'];
-        $alivestause = ['未激活', '已激活'];
-        foreach ($res as $key => $value) {
-            $value['devicestause'] = $devicestause[$value['devicestause']];
-            $value['alivestause'] = $alivestause[$value['alivestause']];
-            $value['addtime'] = date('Y-m-d H:i:s', $value['addtime']);
-            $value['updatetime'] = date('Y-m-d H:i:s', $value['updatetime']);
-            
-            foreach ($value as $k => $v) {
-                if($v == null) $value[$k] = '--';
-            }
-            $data = $value;
-        }
-        // dump($data);
-        $this->assign('data', $data);
+        
+        dump($data);
+        $assign = [
+            'data' => $data,
+        ];
+        
+        $this->assign($assign);
         $this->display();
     }
 

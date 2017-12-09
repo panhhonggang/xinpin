@@ -52,4 +52,64 @@ class DevicesModel extends Model
         return $data;
     }
 
+    public function getFilterInfo($code)
+    {
+        // 查询设备使用的Filter类型
+        $res = $this->where('device_code='.$code)->find();
+        $res = $this->getFilter($res['type_id']);
+        $res = $this->getFilterDetail($res);
+
+        return $res;
+    }
+
+    // 根据类型查询设备滤芯
+    public function getFilter($type_id)
+    {
+        $sum = M('device_type')->where('id='.$type_id)->find();
+        return $sum;
+    }
+
+    // 查询滤芯信息
+    public function getFilterDetail($sum)
+    {
+        unset($sum['id'],$sum['typename'],$sum['addtime']);
+        $sum = array_filter($sum);
+        foreach ($sum as $key => $value) {
+            $str = stripos($value,'-');
+            $map['filtername'] = substr($value, 0,$str);
+            $map['alias'] = substr($value, $str+1);
+            $res[] = M('filters')->where($map)->find();
+        }
+        return $res;
+    }
+
+    // 取出设备详情信息
+    public function getFilterFlow($data, $devicesInfo)
+    {
+        $devicestause = ['制水', '冲洗', '水满', '缺水', '漏水', '检修', '欠费', '关机'];
+        $alivestause = ['未激活', '已激活', 2, 3];
+        $count = count($data);
+        foreach ($devicesInfo as $key => $value) {
+            
+            if( $key == 'devicestause' ){
+                $devicesInfo['devicestause'] = $devicestause[$value];
+            }
+            if( $key == 'alivestause' ){
+                $devicesInfo['alivestause'] = $alivestause[$value];
+            }
+            if( $key == 'addtime' ){
+                $devicesInfo['addtime'] = date('Y-m-d H:i:s', $value);
+            }
+            if( $key == 'updatetime' ){
+                $devicesInfo['updatetime'] = date('Y-m-d H:i:s', $value);
+            }
+            if($value == null) $devicesInfo[$key] = '--';
+        }
+        for ($i=0; $i < $count; $i++) { 
+            $devicesInfo['redayfilter'.($i+1)] = ( round( ($devicesInfo['redayfilter'.($i+1)] / $data[$i]['timelife']), 2) ) * 100;
+            $devicesInfo['reflowfilter'.($i+1)] = ( round( ($devicesInfo['reflowfilter'.($i+1)] / $data[$i]['flowlife']), 2) ) * 100;
+        }
+        return $devicesInfo;
+    }
+
 }
