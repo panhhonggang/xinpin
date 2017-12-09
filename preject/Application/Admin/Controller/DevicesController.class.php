@@ -54,22 +54,22 @@ class DevicesController extends CommonController
         
         $filters = $devices->getFilterInfo($code);
         $data = $devices->getFilterFlow($filters, $res);
-
+        $vendors = $devices->getVendors($code);
         if( $data == null ){
             echo  '参数错误';
             exit;
         }
-        
-        dump($data);
+
         $assign = [
             'data' => $data,
+            'vendors' => $vendor,
         ];
         
         $this->assign($assign);
         $this->display();
     }
 
-    // 获取设备充值记录
+    // 获取充值记录
     public function chargelist($code)
     {
         $devices = D('devices');
@@ -260,6 +260,7 @@ class DevicesController extends CommonController
         $this->save_import($data);
     }
 
+    // 设备详情界面的操作
     public function device_unbind()
     {
         $data = I('post.data');

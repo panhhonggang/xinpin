@@ -112,4 +112,20 @@ class DevicesModel extends Model
         return $devicesInfo;
     }
 
+    // 根据设备编号查询经销商
+    public function getVendors($code)
+    {
+        if( !empty($code) ){
+            $res = $this->where()
+                ->join("LEFT JOIN xp_crew ON xp_devices.device_code = xp_crew.dcode")
+                ->join("LEFT JOIN xp_binding ON xp_crew.id = xp_binding.cid")
+                ->join("LEFT JOIN xp_vendors ON xp_binding.vid = xp_vendors.id")
+                ->field("xp_vendors.*")
+                ->find();
+
+            return $res;
+        }
+        return false;
+    }
+
 }
