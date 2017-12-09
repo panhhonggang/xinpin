@@ -83,22 +83,34 @@ class ProductController extends CommonController
     public function filter_add()
     {
         if (IS_POST) {
-            $filter = D('filters');
-            $info = $filter->create();
-            
-            if($info){
 
-                $res = $filter->add();
-                if ($res) {
-                    $this->success('添加滤芯成功啦！！！',U('Product/filterlist'));
+            $map['filtername'] = $_POST['filtername'];
+            $map['alias'] = $_POST['alias'];
+            $filters = M('filters');
+            $f = $filters->where($map)->select();
+
+            if (!$f) {
+               $filter = D('filters');
+                $info = $filter->create();
+                    
+                if($info){
+
+                    $res = $filter->add();
+                    if ($res) {
+                        $this->success('添加滤芯成功啦！！！',U('Product/filterlist'));
+                    } else {
+                        $this->error('添加滤芯失败啦！');
+                    }
+                
                 } else {
-                    $this->error('添加滤芯失败啦！');
+                    // getError是在数据创建验证时调用，提示的是验证失败的错误信息
+                    $this->error($filter->getError());
                 }
+
+            }else{
+                $this->error('您添加的滤芯别名已经存在，您可选择前往编辑');
+            }    
             
-            } else {
-                // getError是在数据创建验证时调用，提示的是验证失败的错误信息
-                $this->error($filter->getError());
-            }
         }else{
             $this->display();
         }
