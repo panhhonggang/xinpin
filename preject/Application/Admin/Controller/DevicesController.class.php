@@ -62,10 +62,11 @@ class DevicesController extends CommonController
 
         $assign = [
             'data' => $data,
-            'vendors' => $vendor,
+            'vendors' => $vendors,
         ];
-        
+        dump($assign);
         $this->assign($assign);
+
         $this->display();
     }
 
