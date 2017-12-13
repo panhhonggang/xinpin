@@ -32,8 +32,6 @@ class ActionController extends Controller
 
             }
 
-            Log::write(json_encode($message), '设备发送消息');
-
             switch ($message['PackType']) {
                 case 'login':
                     $this->loginAction($message);
@@ -47,7 +45,6 @@ class ActionController extends Controller
                     $message = $this->RequesAction($client_id, $message);
                     break;
                 case 'Stopwater':
-                Log::write(json_encode($message), '停水处理');
                     $this->stopAction($client_id, $message);
                     break;
                 default:
@@ -105,43 +102,32 @@ class ActionController extends Controller
         }
 
     }
-
+// PF0101701DY00001 
     // 停水处理
     public function stopAction($client_id, $message)
     {
-        $icCard = M('card')->where('iccard='.$message['iccard'])->find();
+        $arr = array('iccard' => $message['iccard']);
+        $icCard = M('card')->where($arr)->find();
+       
         if( !empty($icCard) && $message['water'] > 0 ){
-            $user = M('users')->where('id='.$icCard['uid'])->find();
-
-            // 计算使用水量消费的金额
-            $totalWater = $message['water'] * 1.5;
-
-            // 计算余额
-            $balance = $user['balance'] - $totalWater;
-
-            Gateway::updateSession($client_id, [$client_id . $user['id']=>$totalWater]);
-
-            $res = $this->saveConsume($user['id'],$message['DeviceID'], $icCard['id'], $message['water']);
-
-            $this->updateBalance($user['id'], $balance);
+            $res = $this->saveConsume($message['DeviceID'], $icCard['id'], $message['water']);
         }
     }
 
     // 保存消费记录
-    public function saveConsume($uid, $code, $icid, $flow)
+    public function saveConsume($code, $icid, $flow)
     {
-        $res = M('devices')->where('device_code='.$code)->getField('id');
+        $arr = ['device_code' => $code];
+        $res = M('devices')->where($arr)->getField('id');
 
         // 指定数据库需要的字段
         $data = array(
-            'uid' => $uid,
-            'did' => $res,
+            'did' => $res['id'],
             'icid' => $icid,
             'flow' => $flow,
-            'address' => 'aaaa',
             'time' => time(),
         );
-
+        Log::write(json_encode($data),'存储数据');
         // 执行添加
         M('consume')->add($data);
 
@@ -181,7 +167,6 @@ class ActionController extends Controller
         } else {
             $res = $this->updateData($status_id, $data);
         }
-
     }
 
     // 数据处理

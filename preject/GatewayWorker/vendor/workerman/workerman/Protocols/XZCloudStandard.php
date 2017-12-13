@@ -295,7 +295,7 @@ class XZCloudStandard
             $decodeData['PackType'] = 'Stopwater';
             $water = unpack('n*', $recv_buffer); 
             $decodeData['water'] = $water['1'];
-            $decodeData['iccard'] = substr($recv_buffer, 2, 20);
+            $decodeData['iccard'] = substr($recv_buffer, 2, 16);
         }
         else
         {
