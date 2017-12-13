@@ -66,10 +66,10 @@ wx.config({
     ]
 });
 var money = 0;
-var payType = '';
+var payType = '微信支付';
 //选择支付金额
 $(".listOption a").click(function(){
-	$(this).toggleClass("activeBg").siblings().removeClass("activeBg");
+	$(this).addClass("activeBg").siblings().removeClass("activeBg");
 	money=$(this).children("span").html();
 });
 //选择支付方式
@@ -77,6 +77,7 @@ $(".payList a").click(function(){
 	$(this).children().children("span").addClass("payItem");
 	$(this).siblings().children().children("span").removeClass("payItem");
 	payType=$(this).text();
+
 });
 // 支付
 $(".rechargeBtn").click(function(){

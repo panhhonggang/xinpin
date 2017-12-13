@@ -13,8 +13,10 @@ class FlowController extends CommonController
         $signPackage = $weixin->getSignPackage();
 
         // 查询用户微信中的openid
+        // 调试完打开
         $openId = $weixin->GetOpenid();
-
+        // 调试打开
+        // $openId = '';
         //分配数据        
         $this->assign('info',$signPackage);
         $this->assign('openId',$openId);

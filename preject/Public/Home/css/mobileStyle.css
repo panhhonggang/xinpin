@@ -279,14 +279,13 @@ footer > a span.logo5{
 	font-weight: 400;
 }
 .addIC .addIDBtn{
-	position: fixed;
-	left: 6%;
 	bottom: 20vw;
 	border:0;
 	background: #008A63;
     color: #fff;
     height: 12vw;
     width: 88%;
+    margin: 25vh auto;
 	font-weight: 400;
     border-radius: 8px;
     font-size: .74rem;
@@ -396,7 +395,7 @@ a.addIDbtn{
 /*consume css*/
 .consume{
 	width: 100vw;
-	height: 13vh;
+	/*height: 13vh;*/
 	border-bottom: 1px solid #ccc;
 	overflow: hidden;
 }
@@ -406,7 +405,6 @@ a.addIDbtn{
 .consumeList >li{
 	text-align: center;
 	width: 50vw;
-	height: 13vh;
 	line-height: 10vh;
 	font-size: 1rem;
 	background: #f8f8f8
@@ -647,7 +645,7 @@ a.addIDbtn{
 }
 .listOption a{
 	display: block;
-	width: 22vw;
+	width: 3.5rem;
 	height: 8vh;
 	margin: 3vw 4.2vw;
 	line-height: 8vh;
@@ -657,6 +655,11 @@ a.addIDbtn{
 	color: #505050;
 	font-size: .8rem;
 	font-weight: 300;
+	padding: 0;
+}
+.listOption a:hover{
+	color: #fff;
+	outline: none;
 }
 .payList{
 	width: 100vw;
