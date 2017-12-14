@@ -60,11 +60,14 @@ class DevicesController extends CommonController
             exit;
         }
 
+        $chargelist = $this->chargelist($code);
+
         $assign = [
             'data' => $data,
             'vendors' => $vendors,
+            'chargelist' => $chargelist,
         ];
-        dump($assign);
+        dump($assign['chargelist']);
         $this->assign($assign);
 
         $this->display();
@@ -92,9 +95,14 @@ class DevicesController extends CommonController
             ->field('xp_consume.flow,xp_consume.time,xp_users.*,xp_card.iccard')
             ->limit($Page->firstRow.','.$Page->listRows)
             ->select();
-        $this->assign('$data', $data);
-        $this->assign('page',$show);
-        $this->display('chargelist');
+        $assign = [
+            'data' => $data,
+            'show' => $show,
+        ];
+        return $assign;
+        // $this->assign('$data', $data);
+        // $this->assign('page',$show);
+        // $this->display('chargelist');
     }
 
     /**

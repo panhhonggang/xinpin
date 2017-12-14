@@ -7,16 +7,16 @@
             <h1 class="deviceTitle text-center">当前设备：<span>{{$data['deviceid']}}</span>设备详情</h1>
             <div class="keyPointList">
                 <div class="fl">
-                    <h2>{{$data['devicestause']}}</h2>
+                    <h2 class="deviceStause">{{$data['devicestause']}}</h2>
                     <p>设备当前状态</p>
                 </div>
                 <div class="fl">
                     <h2>{{$data['puretds']}}</h2>
-                    <p>设备当前原水值</p>
+                    <p>设备当前原水值(ppm)</p>
                 </div>
                 <div class="fl">
                     <h2>{{$data['rawtds']}}</h2>
-                    <p>设备当前净水值</p>
+                    <p>设备当前净水值(ppm)</p>
                 </div>
                 <div class="fr">
                     <h2>{{$data['leasingmode']}}</h2>
@@ -26,134 +26,18 @@
             <div class="detailList container">
                 <div class="fl leftBox ">
                     <div class=" filterInfo">
-                        <h3>滤芯信息</h3>
+                        <h3>滤芯信息(剩余值)</h3>
                         <table class="table filterInfoTable"> 
                             <tbody>
-                                <tr>
-                                    <td>滤芯项1</td>
-                                    <td>
-                                        <div class="surplusBg">
-                                            <p class="surplusShowColor surplus1"></p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        剩<span class="surplusNum1">{{$data['reflowfilter1']}}</span>%
-                                    </td>
-                                    <td>
-                                        <button class="resetBtn clickBtn" name="1">复位</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>滤芯项2</td>
-                                    <td>
-                                        <div class="surplusBg">
-                                            <p class="surplusShowColor surplus2"></p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        剩<span class="surplusNum2">{{$data['reflowfilter2']}}</span>%
-                                    </td>
-                                    <td>
-                                        <button class="resetBtn clickBtn" name="2">复位</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>滤芯项3</td>
-                                    <td>
-                                        <div class="surplusBg">
-                                            <p class="surplusShowColor surplus3"></p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        剩<span class="surplusNum3">{{$data['reflowfilter3']}}</span>%
-                                    </td>
-                                    <td>
-                                        <button class="resetBtn clickBtn" name="3">复位</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>滤芯项4</td>
-                                    <td>
-                                        <div class="surplusBg">
-                                            <p class="surplusShowColor surplus4"></p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        剩<span class="surplusNum4">{{$data['reflowfilter4']}}</span>%
-                                    </td>
-                                    <td>
-                                        <button class="resetBtn clickBtn" name="4">复位</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>滤芯项5</td>
-                                    <td>
-                                        <div class="surplusBg">
-                                            <p class="surplusShowColor surplus5"></p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        剩<span class="surplusNum5">{{$data['reflowfilter5']}}</span>%
-                                    </td>
-                                    <td>
-                                        <button class="resetBtn clickBtn" name="5">复位</button>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>滤芯项6</td>
-                                    <td>
-                                        <div class="surplusBg">
-                                            <p class="surplusShowColor surplus6"></p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        剩<span class="surplusNum6">{{$data['reflowfilter6']}}</span>%
-                                    </td>
-                                    <td>
-                                        <button class="resetBtn clickBtn" name="6">复位</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>滤芯项7</td>
-                                    <td>
-                                        <div class="surplusBg">
-                                            <p class="surplusShowColor surplus7"></p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        剩<span class="surplusNum7">{{$data['reflowfilter7']}}</span>%
-                                    </td>
-                                    <td>
-                                        <button class="resetBtn clickBtn" name="7">复位</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>滤芯项8</td>
-                                    <td>
-                                        <div class="surplusBg">
-                                            <p class="surplusShowColor surplus8"></p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        剩<span class="surplusNum8">{{$data['reflowfilter8']}}</span>%
-                                    </td>
-                                    <td>
-                                        <button class="resetBtn clickBtn" name="8">复位</button>
-                                    </td>
-                                </tr>
+                                
+                               
                             </tbody>
                         </table>
                     </div>
                     <div class="deviceOperation">
                         <h3>设备操作</h3>
                         <a>
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            <button class="startingUp clickBtn">开机</button>
-                        </a>
-                        <a>
-                            <i></i>
-                            <button class="shutDown clickBtn">关机</button>
+                            <button class="shutDown clickBtn"></button>
                         </a>
                     </div>
                 </div>
@@ -178,19 +62,19 @@
                                 <td>{{$data['loaction']}}</td> 
                             </tr>
                             <tr>
-                                <td>原水值</td>
+                                <td>原水值 (ppm)</td>
                                 <td>{{$data['puretds']}}</td> 
                             </tr>
                             <tr>
-                                <td>纯水值</td>
+                                <td>纯水值 (ppm)</td>
                                 <td>{{$data['rawtds']}}</td> 
                             </tr>
                             <tr>
-                                <td>剩余流量</td>
+                                <td>剩余流量 (L)</td>
                                 <td>{{$data['reflow']}}</td> 
                             </tr>
                             <tr>
-                                <td>剩余天数</td>
+                                <td>剩余天数 (D)</td>
                                 <td>{{$data['reday']}}</td> 
                             </tr>
                             <tr>
@@ -266,16 +150,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>{{$vendors['id']}}</td>
-                            <td>{{$vendors['name']}}</td>
-                            <td>{{$vendors['phone']}}</td>
-                            <td>{{$vendors['leavel']}}</td>
-                            <td>{{$vendors['addtime']}}</td>
-                            <td>{{$vendors['id']}}</td>
-                            <td>{{$vendors['email']}}</td>
-                            <td></td>
-                        </tr>
+                        <volist name="chargelist['data']" id="vendors">
+                            <tr>
+                                <td>{{$vendors['id']}}</td>
+                                <td>{{$vendors['name']}}</td>
+                                <td>{{$vendors['phone']}}</td>
+                                <td>{{$vendors['leavel']}}</td>
+                                <td>{{$vendors['addtime']}}</td>
+                                <td>{{$vendors['id']}}</td>
+                                <td>{{$vendors['email']}}</td>
+                                <td></td>
+                            </tr>
+                        </volist>
                     </tbody>
                 </table>
                 <div class="pagination">
@@ -318,11 +204,12 @@
                     </ul>
                 </div>
             </div> -->
-            <!-- <div class="tableList">
+            <div class="tableList">
                 <h3>使用记录</h3>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
+                            <td>序号</td>
                             <td>IC卡编号</td>
                             <td>用户姓名</td>
                             <td>手机号码</td>
@@ -333,15 +220,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>455</td>
-                            <td>455</td>
-                            <td>455</td>
-                            <td>455</td>
-                            <td>455</td>
-                            <td>455</td>
-                            <td>455</td>
-                        </tr>
+                        <volist name="chargelist['data']" id="vo">
+                            <tr>
+                                <td>{{$i}}</td>
+                                <td>{{$vo.iccard}}</td>
+                                <td>{{$vo.name}}</td>
+                                <td>{{$vo.phone}}</td>
+                                <td>{{$vo.time}}</td>
+                                <td>{{$vo.flow}}</td>
+                                <td>{{$vo.address}}</td>
+                                <td>是空的</td>
+                            </tr>
+                        </volist>
                     </tbody>
                 </table>
                 <div class="pagination">
@@ -349,20 +239,49 @@
                         
                     </ul>
                 </div>
-            </div> -->
+            </div>
         </div>
         <include file="Public/footer" />
     </div>
 </div>
 
 <script>
-    // function connect(){
-    //     var websoket=new WebSocket("ws://120.79.0.105:6001");
-    //     return websoket;
-    // }
+    var PackNum=0;
+    //开关机按钮
+    if($(".deviceStause").text()=="关机"){
+        $(".shutDown").text("开机");
+    }else{
+        $(".shutDown").text("关机");
+    }
+    //滤芯显示
+    var str='reflowfilter';
+    var filterHtml='';
+    var filterList=[];//字符串数组
+    var filterText=[];//文本数组
+    var data = {{$data|json_encode}};
+    for(var i=1;i<20;i++){
+        if(data['reflowfilter'+i] >= 0){
+            filterList['reflowfilter'+i] = data['reflowfilter'+i];
+            filterList['length'] = i;
+        }
+    }
+    for(var i=1;i<=filterList['length'];i++){
+        filterText[i]="滤芯"+i;
+    }
+    for(var i=1;i<=filterList['length'];i++){
+        if(filterList['reflowfilter'+i]>100){//设置剩余滤芯值不能超过100%;
+            filterList['reflowfilter'+i]=100;
+        }else{
+            filterList['reflowfilter'+i]=filterList['reflowfilter'+i];
+        }
+        filterHtml+='<tr><td>' + filterText[i] + '</td><td><div class="surplusBg"><p class="surplusShowColor" style="width:'+ filterList['reflowfilter'+i] +'%"></p></div></td><td><span class="surplusNum2">'+ filterList['reflowfilter'+i] +'</span>%</td><td><button class="resetBtn clickBtn"name="2">复位</button></td></tr>';
+        // console.log(i);
+    }
+    $(".filterInfoTable tbody").html(filterHtml);
+    //websoket
     var websoket= new WebSocket("ws://120.79.0.105:6001");
     websoket.onopen=function(){
-        var deviceId=112233445566778;//设备id
+        var deviceId=$(".deviceTitle span").text();//设备id
          ajson={
                         "DeviceID":deviceId,
                         "PackType":"login",
@@ -370,11 +289,12 @@
                     };
         websoket.send(JSON.stringify(ajson));
     }
-    
+    //按钮操作
     $('.clickBtn').click(function(){
+        var thisT=$(this);
         var _this=$(this).text();
         var filterN = $(this).attr('name');
-        var deviceId=112233445566778;//设备id
+        var deviceId=$(".deviceTitle span").text();//设备id
         var ajson;//数据对象
 
         if(_this!="复位"){
@@ -383,8 +303,6 @@
             var tipsText = "确定要"+ _this + "<a>滤芯" + filterN +"</a>吗";
         }
 
-        
-        // var websoket = connect();
         layui.use('layer', function(){
             var layer = layui.layer;
             layer.confirm(tipsText, {icon: 3, title:'温馨提示'}, function(index){
@@ -393,9 +311,8 @@
                         "DeviceID":deviceId,
                         "PackType":"SetData",
                         "Vison":0,
-                    };
-
-               // ajson.PackType='SetData';   
+                        "PackNum":PackNum,
+                    };  
                 if(_this=="开机"){
                     ajson['DeviceStause']=8;
                     
@@ -406,14 +323,30 @@
                     ajson['ReDayFilter'+filterN]=0;
                 }
                 websoket.send(JSON.stringify(ajson));
+                // console.log(ajson);
                 websoket.onmessage=function(event){
-                    // alert(124);
+                    // console.log(124564);
                     var data=event.data;
                     var obj=JSON.parse(data); 
-                    console.log(obj.IsSuccess);
+                    console.log(data);
 
-                    if(obj.IsSuccess=='7'){
-                        console.log(123);
+                    if(obj.IsSuccess=='1'){
+                        f(PackNum==obj.PackNum)
+                        {
+                           if(_this=="开机"){
+                            thisT.text("关机");
+                            }else if(_this=="关机"){
+                                thisT.text("开机");
+                                $(".deviceStause").text("关机");
+                            }else if(_this=="复位"){
+                                i
+                                thisT.parent().siblings().children(".surplusNum2").text(100);
+                                thisT.parent().siblings().children(".surplusBg p").width(100);
+
+                            };
+                           // PackNum++; 
+                        }
+                        
 
                     }else{
                         console.log(124);
@@ -422,16 +355,5 @@
                 
             });
         });
-        
-        
     });
-    //显示剩余滤芯百分比横条
-    $(".surplus1").width(parseInt($(".surplusNum1").html())+"%");
-    $(".surplus2").width(parseInt($(".surplusNum2").html())+"%");
-    $(".surplus3").width(parseInt($(".surplusNum3").html())+"%");
-    $(".surplus4").width(parseInt($(".surplusNum4").html())+"%");
-    $(".surplus5").width(parseInt($(".surplusNum5").html())+"%");
-    $(".surplus6").width(parseInt($(".surplusNum6").html())+"%");
-    $(".surplus7").width(parseInt($(".surplusNum7").html())+"%");
-    $(".surplus8").width(parseInt($(".surplusNum8").html())+"%");
 </script>
