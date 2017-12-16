@@ -42,7 +42,6 @@ class DevicesModel extends Model
         $data = $this
             ->where('device_code='.$code)
             ->join('LEFT JOIN xp_devices_statu on xp_devices.device_code = xp_devices_statu.DeviceID')
-            // ->join('xp_consume on xp_devices.id = xp_consume.did')
             ->join('LEFT JOIN xp_crew on xp_devices.device_code = xp_crew.dcode')
             ->join('LEFT JOIN xp_binding on xp_crew.id = xp_binding.cid')
             ->join('LEFT JOIN xp_vendors on xp_binding.vid = xp_vendors.id')
@@ -105,10 +104,11 @@ class DevicesModel extends Model
             }
             if($value == null) $devicesInfo[$key] = '--';
         }
-        for ($i=0; $i < $count; $i++) { 
-            $devicesInfo['redayfilter'.($i+1)] = ( round( ($devicesInfo['redayfilter'.($i+1)] / $data[$i]['timelife']), 2) ) * 100;
-            $devicesInfo['reflowfilter'.($i+1)] = ( round( ($devicesInfo['reflowfilter'.($i+1)] / $data[$i]['flowlife']), 2) ) * 100;
-        }
+        // for ($i=0; $i < $count; $i++) { 
+        //     $devicesInfo['redayfilter'.($i+1)] = ( round( ($devicesInfo['redayfilter'.($i+1)] / $data[$i]['timelife']), 2) ) * 100;
+        //     $devicesInfo['reflowfilter'.($i+1)] = ( round( ($devicesInfo['reflowfilter'.($i+1)] / $data[$i]['flowlife']), 2) ) * 100;
+        // }
+        $devicesInfo['data'] = $data;
         return $devicesInfo;
     }
 
