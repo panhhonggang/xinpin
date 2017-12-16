@@ -21,9 +21,9 @@ class CommonController extends Controller
     	if(empty($_SESSION['adminuser'])) $this->redirect('Login/login');
 
     	// 获取用户配置
-   	$user_config = D('Admin/Config');
-   	$config = $user_config->getconfig();
-   	$this->assign('config', $config); // 后台用户配置
+   	// $user_config = D('Admin/Config');
+   	// $config = $user_config->getconfig();
+   	// $this->assign('config', $config); // 后台用户配置
     }
 
 }
