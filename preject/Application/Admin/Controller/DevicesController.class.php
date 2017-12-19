@@ -67,6 +67,7 @@ class DevicesController extends CommonController
             'vendors' => $vendors,
             'chargelist' => $chargelist,
         ];
+        // dump($assign['data']);
         $this->assign($assign);
 
         $this->display();
