@@ -14,6 +14,7 @@ body {
    	height: 100%;
     overflow-x: hidden;
     -webkit-user-select: none;
+    color: #373737;
 }
 .listOption a:hover{
 	color: #000;
@@ -23,7 +24,7 @@ body {
     -webkit-text-size-adjust: 100%;
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
-    /*line-height: 1.2;*/
+    color: #373737;
 }
 ul li{
 	list-style: none;
@@ -43,7 +44,7 @@ text-decoration:none;
 	width: 44vw;
 	height: 26.9vw;
 	margin:0 auto;
-	margin-top: 30vw;
+	margin-top: 15vw;
 	margin-bottom: 1vw;
 	background: url("../image/sprite.png") no-repeat;
 	background-size: 11rem 5.6rem;
@@ -68,7 +69,7 @@ text-decoration:none;
 }
 .registerBtn {
 	width: 90vw;
-	margin: 20vw 0 0 5vw;
+	margin: 8vw 0 0 5vw;
 	color: #218C6A;
 	/*font-weight: bold;*/
 	font-size: .9rem;
@@ -99,6 +100,10 @@ text-decoration:none;
 .btn-list{
 	margin-top: 3vw;
 	width: 85vw;
+	color: #5F5F5F;
+}
+.btn-list a{
+	color: #5F5F5F;
 }
 .inputBox input.checkSpan {
 	width: 4vw;
@@ -144,6 +149,7 @@ input{
 }
 .copyright > p{
 	width: 100vw;
+	color:#5F5F5F;
 }
 .copyright > p > a{
 	color: #1963aa;
