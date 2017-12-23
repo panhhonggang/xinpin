@@ -136,6 +136,19 @@ input{
 	top: 15px;
 	color: #007958;
 }
+.copyright{
+	position: absolute;
+	left: 0;
+	bottom: 1vh;
+	text-align: center;
+}
+.copyright > p{
+	width: 100vw;
+}
+.copyright > p > a{
+	color: #1963aa;
+	text-decoration: none;
+}
 /*注册页面css end*/
 
 /*数据显示主页面css */

@@ -259,26 +259,22 @@
     },5000);
     //滤芯显示
     var str='reflowfilter';
-    var filterHtml='';
+    var filterHtml='';//滤芯显示html代码
     var filterList=[];//字符串数组
-    var filterNum=[];
+    var filterNum=[];//存放滤芯键值对
     var CmdList=[];//命令队列
-    var reflowName=[];
+    var reflowName=[];//存放滤芯名称
     var data = {{$data|json_encode}};//数组转换为对象
-    // alert(typeof(data));
+    var flowPercent;//剩余滤芯百分比值
+    //遍历出以“reflowfilter”开头的数据字段
     for(var i=1;i<20;i++){
-        // alert(data['reflowfilter'+i]);
         if(data['reflowfilter'+i] >= 0){
             filterList['reflowfilter'+i] = data['reflowfilter'+i];
             filterList['length'] = i;
             reflowName.push(filterList['reflowfilter'+i]);
         }
-        // console.log(reflowName);
     }
-    // console.log(filterList);
-    // console.log(data['data'][1]);
-    // alert(data['data'].length);
-    var flowPercent;
+    //遍历显示滤芯
     for(var i=0;i<data['data'].length;i++){
         filterNum[i]=data['data'][i];
         //计算百分比
@@ -287,22 +283,25 @@
             flowPercent=100;
         }
         filterHtml+='<tr><td>' + filterNum[i]['filtername'] + '</td><td><div class="surplusBg"><p class="surplusShowColor" style="width:'+ flowPercent +'%"></p></div><div class="text-center">还剩'+flowPercent+'%</div></td><td><span class="surplusNum2">'+ reflowName[i] +'</span>/<span>'+ filterNum[i]['flowlife'] +'</span></td><td><button class="resetBtn clickBtn"name="2">复位</button></td></tr>';
-        // console.log(i);
     }
     $(".filterInfoTable tbody").html(filterHtml);
-    //websoket  1.建立连接
+
+
+    //websoket  
+    //1.建立连接
     var websoket= new WebSocket("ws://120.79.0.105:6001");
-    //websoket  2.打开事件
+    //2.打开事件
+    var deviceId=$(".deviceID").text();//设备id
     websoket.onopen=function(){
-        var deviceId=$(".deviceID").text();//设备id
-         ajson={
+        //包数据
+        ajson={
             "DeviceID":deviceId,
             "PackType":"login",
             "Vison":0,
         };
         websoket.send(JSON.stringify(ajson));
     }
-    //websoket  接收数据
+    //接收数据
     websoket.onmessage=function(data){
         console.log(data);
         if(data.PackType=="Select")
@@ -364,9 +363,8 @@
         {
 
         }
-       
+        //循环遍历设置滤芯剩余显示样式
         for(var i=1;i<=$(".filterInfoTable tbody tr").length;i++){
-            // console.log(data['reflowfilter'+i]);
             $(".filterInfoTable tbody tr").eq(i).children("td").children(".surplusShowColor").width(data['reflowfilter'+i]+"%");
             $(".filterInfoTable tbody tr").eq(i).children("td").children(".surplusNum2").text(data['reflowfilter'+i]);
         }
@@ -374,10 +372,8 @@
     }
     //按钮操作
     $('.clickBtn').click(function(){
-        var thisT=$(this);
         var _this=$(this).text();
         var filterN = $(this).attr('name');
-        var deviceId=$(".deviceID").text();//设备id
         var ajson;//数据对象
 
         if(_this!="复位"){
@@ -413,58 +409,24 @@
                     ajson['ReDayFilter'+filterN]=0;
                     type=filterN;
                 }
-                //websoket  3.发送数据
+                //发送数据
                 websoket.send(JSON.stringify(ajson));
                 CmdList.push({
                     cmd:ajson,
                     type:type
                 });
-                    //判断是否操作成功
+                //判断是否操作成功
                 setInterval(function(){
                     if(_this=="开机"){
-                    ""
                     
-                }else if(_this=="关机"){
-                    ajson['DeviceStause']=7;
-                    _this="开机中";
-                }else if(_this=="复位"){
-                    ajson['ReFlowFilter'+filterN]=0;
-                    ajson['ReDayFilter'+filterN]=0;
-                }
+                    }else if(_this=="关机"){
+                        ajson['DeviceStause']=7;
+                        _this="开机中";
+                    }else if(_this=="复位"){
+                        ajson['ReFlowFilter'+filterN]=0;
+                        ajson['ReDayFilter'+filterN]=0;
+                    }
                 },5000);
-                //websoket  4.接收数据
-                // websoket.onmessage=function(event){
-                    // console.log(124564);
-                    // var data=event.data;
-                    // var obj=JSON.parse(data); 
-                    // console.log(data);
-
-                    // if(obj.IsSuccess=='1'){
-                    //     if(PackNum==obj.PackNum)
-                    //     {
-                    //        if(_this=="开机"){
-                    //         thisT.text("关机");
-                    //         }else if(_this=="关机"){
-                    //             thisT.text("开机");
-                    //             $(".deviceStause").text("关机");
-                    //         }else if(_this=="复位"){
-                    //             thisT.parent().siblings().children(".surplusNum2").text(100);
-                    //             thisT.parent().siblings().children(".surplusBg").children(".surplusShowColor").width(100+"%");
-                    //             return false;
-                    //         };
-                    //        // PackNum++; 
-                    //     }
-                        
-
-                    // }else{
-                    //     layui.use('layer', function(){
-                    //         var layer = layui.layer;
-                    //         layer.msg('hello');
-                    //     });  
-                    // }
-                // }
-
-                
             });
         });
     });
