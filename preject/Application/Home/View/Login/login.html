@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" >
 <script src="__PUBLIC__/Home/js/jquery-1.8.3.min.js"></script>
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
 <link rel="stylesheet" href="__PUBLIC__/Admin/layui/css/layui.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
 <title>登录</title>
 <style type="text/css">
 
@@ -44,8 +44,8 @@
 		<!-- 登录按钮 -->
 		<section class="registerBtn text-center"><button style="border: none;background: none;">登录</button></section>
 		<section class="copyright">
-			<p class="text-center">版权所有©深圳市迪曼斯顿科技有限公司<p>
-			<p class="text-center"><a href="http://www.miitbeian.gov.cn">粤ICP备17153883号</a></p>
+			<section>版权所有©深圳市迪曼斯顿科技有限公司<section>
+			<section><a id="link" href="http://www.miitbeian.gov.cn">粤ICP备17153883号</a></section>
 
 		</section>
 	</form>
@@ -54,9 +54,20 @@
 <!-- layui.js -->
 <script type="text/javascript" src="__PUBLIC__/Admin/layui/layui.js"></script>
 <script>
+	//设置软件盘弹出后优化页面布局
+	var oHeight = $(document).height(); //浏览器当前的高度
+   	$(window).resize(function(){
+        if($(document).height() < oHeight){
+	        $(".copyright").css("position","static");
+	    }else{
+	        $(".copyright").css("position","absolute");
+	    } 
+   	});
+   	//自动登录
 	$(".checkSpan").click(function(){
 		$(this).toggleClass("checkSpanBg");
 	});
+	//登录
 	$(".registerBtn").click(function(){
 		if($(".phoneName").val()=="") {
 			layui.use('layer', function(){
@@ -74,50 +85,7 @@
 	            layer.msg('密码不能为空！');
 	        }); 
 		}else{
-			//设置cookie	
-			// alert(1223);		
-	      //   if($(".checkSpan").hasClass("checkSpanBg")){
-	      //   	function setCookie(name,value1,password,value2,ToLive)
-		     //    {
-		     //    	var exp = new Date();
-		     //    	exp.setTime(exp.getTime() + 7*24*60*60*1000);
-		     //    	document.cookie= name + "="+ escape (value1) + ";expires=" + exp.toGMTString();
-		     //    	document.cookie= password + "="+ escape (value2) + ";expires=" + exp.toGMTString();
-		     //    }
-			    // setCookie("name",$(".phoneName").val(),"password",$(".password").val());
-			    // // alert(document.cookie.name);
-			    // // alert(document.cookie);
-			    
-			    // var aa= getCookie();
-			    // // alert(aa);
-	      //   	// return false;
-	      //   }
-
 		}
 	});
-
-
-	// var cookie =(function (){
- //    	var cookie={};
- //    	alert(typeof cookie);
-	//     var all=document.cookie;
-	//     if(all===""){
-	//     	return cookie;
-	//     }
-	//     var list=all.split("; ");
-	//     alert(typeof list);
-	//     for(var i=0;i<list.length;i++){
-	//     	var cookie=list[i];
-	//     	var p=cookie.indexOf("=");
-	//     	alert(p);
-	//     	alert(cookie);
-	//     	var name=cookie.substring(0,p);
-	//     	var value=cookie.substring(p+1);
-	//     	value=decodeURIComponent(value);
-	//     	cookie[name]=value;
-	//     	// alert(111);
-	//     }
-	//     return cookie;
- //    }());
 </script>
 </html>

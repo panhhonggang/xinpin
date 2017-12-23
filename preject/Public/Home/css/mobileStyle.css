@@ -142,16 +142,18 @@ input{
 	color: #007958;
 }
 .copyright{
-	position: absolute;
-	left: 0;
+	position:absolute;
 	bottom: 1vh;
+	left: 0;
 	text-align: center;
+	width:100%;
 }
-.copyright > p{
-	width: 100vw;
+.copyright > section{
+
+	width: 100%;
 	color:#5F5F5F;
 }
-.copyright > p > a{
+#link{
 	color: #1963aa;
 	text-decoration: none;
 }
