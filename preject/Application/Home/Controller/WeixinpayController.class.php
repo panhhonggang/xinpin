@@ -10,13 +10,14 @@ class WeixinpayController extends Controller
      */
     public function notify()
     {
+        // echo 1;
     	// 获取微信服务器返回的xml文档
         $xml=file_get_contents('php://input', 'r');
 
         if($xml){
         	//解析微信返回数据数组格式
         	$result = $this->notifyData($xml);
-
+            file_put_contents('./xml.txt',$xml."\r\n", FILE_APPEND);
 	    	// 如果订单号不为空
         	if(!empty($result['out_trade_no'])){
         		// file_put_contents('./wx_notifyNOnull.txt','不为空', FILE_APPEND);
@@ -43,10 +44,10 @@ class WeixinpayController extends Controller
 
 	    			if($msg){
 	    				// 写充值日志
-	    				file_put_contents('./log/wx_logY.txt','充值成功'.$xml.'\r\n', FILE_APPEND);
+	    				file_put_contents('./log/wx_logY.txt','充值成功'.$xml."r\n", FILE_APPEND);
 	    			}else{
 	    				// 写充值日志
-	    				file_put_contents('./log/wx_logN.txt','充值失败'.$xml.'\r\n', FILE_APPEND);
+	    				file_put_contents('./log/wx_logN.txt','充值失败'.$xml."\r\n", FILE_APPEND);
 	    			}
 
 	    			// 更新用户余额
@@ -69,7 +70,7 @@ class WeixinpayController extends Controller
 
                         // 用户名
                         $username = $user['name'];
-                        $content = $username . '：您于'.date('Y年m月d日 h时i分s秒',$data['addtime']).'成功冲值'.$data['money']/100.'元';
+                        $content = $username . '：您于'.date('Y年m月d日 h时i分s秒',$data['addtime']).'成功冲值'.($data['money']/100).'元';
                         $phone = $user['phone'];
                         //file_put_contents('./log/wxgxY_log.txt',$content.' '.$phone, FILE_APPEND);
                         // 开始接口代码
