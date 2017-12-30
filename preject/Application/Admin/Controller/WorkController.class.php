@@ -21,7 +21,6 @@ class WorkController extends CommonController
        // 根据名称进行搜索
         $map = '';
         if(!empty($_GET['name'])) $map['name'] = array('like',"%{$_GET['name']}%");
-
         $type = D('work');
         
         $total =$type->where($map)->count();

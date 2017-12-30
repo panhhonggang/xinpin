@@ -34,7 +34,6 @@ class WorkModel extends Model
     public function getAll()
     {
         $list = $this->select();
-
         $type = array('安装','维修','维护');
         $result = array('未处理','正在处理','已处理');
         foreach ($list as $key => $val) {

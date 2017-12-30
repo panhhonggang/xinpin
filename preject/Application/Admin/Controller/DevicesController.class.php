@@ -16,7 +16,7 @@ class DevicesController extends CommonController
     public function devicesList()
     {
         $map = '';
-        if(!empty($_GET['name'])) $map['name'] = array('like',"%{$_GET['name']}%");
+        if(!empty($_GET['name'])) $map['device_code'] = array('like',"%{$_GET['name']}%");
         $devices = M('Devices');
         $count = $devices
                 ->where($map)
@@ -40,6 +40,7 @@ class DevicesController extends CommonController
                   ->field('xp_devices.*,xp_device_type.typename,xp_crew.dcode,xp_crew.cname,xp_vendors.name,xp_devices_statu.updatetime')
                   ->limit($Page->firstRow.','.$Page->listRows)
                   ->select();
+        // dump($vendor);die;
         $this->assign('deviceInfo', $vendor);
         $this->assign('page',$show);
         $this->display('devicesList');
@@ -61,7 +62,6 @@ class DevicesController extends CommonController
         }
 
         $chargelist = $this->chargelist($code);
-        dump($data);
         $assign = [
             'data' => $data,
             'vendors' => $vendors,
@@ -170,10 +170,11 @@ class DevicesController extends CommonController
             $_POST['device_code'] = $val['A'];
             $_POST['type_id'] = (string)$val['B'];
             $datas['addtime'] = time();
-            $Devices = D('Devices'); 
-            $res = D('Devices')->getCate();
+            $Devices = D('devices'); 
+            $res = $Devices->getCate();
             $info = $Devices->create();
-            if($info){
+            $code = $Devices->where("device_code='{$_POST['device_code']}'")->find();
+            if($info && empty($code)){
                 if(!in_array($_POST['type_id'], $res)){
                     $this->error('已导入' . $i . '条数据<br>' . $_POST['device_code'] . '设备类型不存在');
                 }
@@ -183,7 +184,7 @@ class DevicesController extends CommonController
                     $this->error('导入失败啦！');
                 }
             } else {
-                $this->error('已导入' . $i . '条数据<br>' . $_POST['device_code'] . '不正确');
+                $this->error('已导入' . $i . '条数据<br>' . $_POST['device_code'] . '已存在 或 不正确');
             }   
             $i ++;
         }

@@ -20,7 +20,7 @@ class CrewController extends CommonController
     {	
        // 根据名称进行搜索
         $map = '';
-        if(!empty($_GET['name'])) $map['name'] = array('like',"%{$_GET['name']}%");
+        if(!empty($_GET['cname'])) $map['cname'] = array('like',"%{$_GET['cname']}%");
 
         $type = M('crew');
         
@@ -29,7 +29,6 @@ class CrewController extends CommonController
         $pageButton =$page->show();
 
         $list = $type->where($map)->limit($page->firstRow.','.$page->listRows)->select();
-
         $this->assign('list',$list);
         $this->assign('button',$pageButton);
         $this->display();
@@ -124,6 +123,10 @@ class CrewController extends CommonController
             $_POST['dcode'] = $val['B'];
             // $datas['addtime'] = time();
             $crew = D('crew'); 
+            $code = M('devices')->where("device_code='{$_POST["dcode"]}'")->find();
+            $cname = $crew->where("cname='{$_POST["cname"]}'")->find();
+            if(!empty($code)) $this->error('设备码不存在');
+            if(!empty($cname)) $this->error('机组不能重复');
             $info = $crew->create();
             if($info){
                 $res = $crew->add();
