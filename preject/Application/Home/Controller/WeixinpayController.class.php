@@ -35,12 +35,20 @@ class WeixinpayController extends Controller
 	    			$data['ordernumber'] = $result['out_trade_no'];
 	    			// 金额
 	    			$data['money'] = $result['total_fee'];
+                    // 读取用户余额
+                    $user = M('users')->where('id='.$data['uid'])->find();
+                    // 用户余额
+                    $money = (int) $user['balance'];
+                    // 用户当前余额
+                    $data['currentbalance'] = $money + $data['money'];
 	    			// 充值类型
 	    			$data['mode'] = 1;
 	    			// 充值时间
 	    			$data['time'] = time();
 	    			// 写入数据库
 	    			$msg = $model->add($data);
+
+
 
 	    			if($msg){
 	    				// 写充值日志
@@ -51,12 +59,6 @@ class WeixinpayController extends Controller
 	    			}
 
 	    			// 更新用户余额
-	    			// 读取用户余额
-    				$user = M('users')->where('id='.$data['uid'])->find();
-
-                    // 用户余额
-                    $money = (int) $user['balance'];
-
     				// 更新用户余额
     				$data['balance'] = $money + $data['money'];
 

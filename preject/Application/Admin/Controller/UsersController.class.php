@@ -100,14 +100,14 @@ class UsersController extends CommonController
         if(!empty($_GET['name'])) $map['name'] = array('like',"%{$_GET['name']}%");
 
         $flow = M('flow');
-        $total = $flow->where($map)
+        $total = $flow->where($map)->order('xp_flow.id desc')
                                 ->join('xp_users ON xp_flow.uid = xp_users.id')
                                 ->field('xp_flow.*,xp_users.name,xp_users.balance')
                                 ->count();
         $page  = new \Think\Page($total,8);
         $pageButton =$page->show();
 
-        $list = $flow->where($map)->limit($page->firstRow.','.$page->listRows)
+        $list = $flow->where($map)->limit($page->firstRow.','.$page->listRows)->order('xp_flow.id desc')
                                 ->join('xp_users ON xp_flow.uid = xp_users.id')
                                 ->field('xp_flow.*,xp_users.name,xp_users.balance')
                                 ->select();
@@ -136,7 +136,8 @@ class UsersController extends CommonController
         $page  = new \Think\Page($total,8);
         $pageButton =$page->show();
 
-        $list = $consume->where($map)->limit($page->firstRow.','.$page->listRows)
+        $list = $consume->where($map)
+                                ->limit($page->firstRow.','.$page->listRows)
                                 ->join('xp_users ON xp_consume.uid = xp_users.id')
                                 ->join('xp_card ON xp_consume.icid = xp_card.id')
                                 ->field('xp_consume.*,xp_users.name,xp_users.balance,xp_card.iccard')
