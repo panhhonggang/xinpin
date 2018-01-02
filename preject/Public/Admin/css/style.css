@@ -35,6 +35,12 @@ a{
 	background: #333;
 }
 
+._start{
+	position: relative;
+	left: 3px;
+	top: -5px;
+	color:red
+}
 /*content part css*/
 .content{
 	overflow: hidden;
