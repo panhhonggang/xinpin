@@ -35,7 +35,7 @@
                         <input type="text" class="control _null" name="name" placeholder="请输入处理人姓名..." style="width:210px;">
                     </div>
                     <div class="control-group">
-                        <span>处理人电话<sub class="_start">*</sub></span>
+                        <span>处理人手机号码<sub class="_start">*</sub></span>
                         <input type="text" class="control _null" name="phone" placeholder="请输入处理人电话..." style="width:210px;">
                     </div>
                     <div class="control-group">
@@ -67,7 +67,7 @@
                     <div class="control-group">
                         <span>处理时间<sub class="_start">*</sub></span>
                         <!-- 需要时间插件 -->
-                        <input type="text" id="addMaintenanceDate" name="time" disabled />
+                        <input type="text" id="addMaintenanceDate" name="time" />
                     </div>
                     <div class="btn-groups">
                         <button class="btns reset btn-primary" type="reset">重置</button>
@@ -91,12 +91,12 @@ $(function(){
         var name = _null.eq(1).val().trim()
         var phone = _null.eq(2).val().trim()
         var content = _null.eq(3).val().trim()
-        var reg = /^1[3|4|5|8][0-9]\d{4,8}$/
+        var phoneReg = /^1[34578]\d{9}$/
         if(number&&phone&&name&&content){
-            if(reg.test(phone)){
-                return
+            if(phoneReg.test(phone)){
+                    return
             }else{
-                layuiHint('电话号码的格式不对哦！')
+                layuiHint('"处理人手机号码"输入的格式不对哦！')
             }
         }else{
             layuiHint('带星号的为必填项，不能为空哦！')
@@ -113,6 +113,9 @@ $(function(){
     var Da = new Date()
     var val = Da.getFullYear()+'-'+fn(Da.getMonth()+1)+'-'+fn(Da.getDate())
     $('#addMaintenanceDate').attr('value',val) 
+    $('#addMaintenanceDate').click(function(){
+        $(this).blur();
+    })
     //城市三级联动
     _init_area();
     var Gid  = document.getElementById ;
