@@ -9,7 +9,7 @@
                     <div class="control-group">
                         <label class="control-label">请选择经销商：</label>
                         <div class="controls">
-                            <select name="vid" id="">
+                            <select name="vid" id="" title="一个经销商可以绑定多个机组" >
                                 <notempty name="user">
                                     <foreach name="user" item="vo" key="key">
                                         <option value="{{$vo.id}}">{{$vo.name}}</option>
@@ -23,7 +23,7 @@
                     <div class="control-group">
                         <label class="control-label">请选择机组：</label>
                         <div class="controls">
-                            <select name="cid" id="">
+                            <select name="cid" id="" title="一个机组只能被一个经销商绑定" >
                                 <notempty name="devices">
                                     <foreach name="devices" item="vv" key="key">
                                         <option value="{{$vv.id}}">{{$vv.cname}}</option>
