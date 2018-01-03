@@ -44,7 +44,7 @@
                                 <a class="deletBnt" ruleId="{{$vo['id']}}"  href="javascript:;" >删除</a>
                             <else/>
                                 <span>您无操作权限</span>
-                            </if>
+                            </if> 
                         </td>
                     </tr>
                     </foreach>
@@ -70,7 +70,7 @@
                             window.location.href='del?id='+id;
                             layer.close(index);
                             
-                        });
+                        }); 
                     });
                 });
                 $('.pagination ul a').unwrap('div').wrap('<li></li>');

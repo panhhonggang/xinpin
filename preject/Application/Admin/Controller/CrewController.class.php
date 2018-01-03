@@ -46,6 +46,7 @@ class CrewController extends CommonController
             // dump($_POST);die;
             $devices = M('devices');
             $info = $devices->where('device_code='.$_POST['dcode'])->select();
+
             if ($info) {
                 $device_type = D('crew');
                 $info = $device_type->create();
@@ -118,14 +119,12 @@ class CrewController extends CommonController
         $i = 0;
         unset($data[1]);
         foreach ($data as $key => $val) {
-            // dump($val);die;
             $_POST['cname'] = $val['A'];
             $_POST['dcode'] = $val['B'];
-            // $datas['addtime'] = time();
             $crew = D('crew'); 
             $code = M('devices')->where("device_code='{$_POST["dcode"]}'")->find();
             $cname = $crew->where("cname='{$_POST["cname"]}'")->find();
-            if(!empty($code)) $this->error('设备码不存在');
+            if(empty($code)) $this->error('设备码不存在');
             if(!empty($cname)) $this->error('机组不能重复');
             $info = $crew->create();
             if($info){
