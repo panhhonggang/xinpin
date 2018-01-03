@@ -9,6 +9,36 @@
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
 	<script src="__PUBLIC__/Home/js/public.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+</head>
+<body>
+	<section class="addICtitle">请填写持卡人资料</section>
+	<form class="container addIC" action="__URL__/add" method="post" name="formUser" onsubmit="return toVaild()">
+		<section class="row">
+			<section class="col-md-12">
+				<input class="form-control" type="text" value="" name="name" placeholder="持卡人姓名">
+			</section>
+		</section>
+		<section class="row">
+			<section class="col-md-12">
+				<input class="form-control" type="text" value="" name="school" placeholder="学校">
+			</section>
+		</section>
+		<section class="row">
+			<section class="col-md-12">
+				<input class="form-control" type="text" value="" name="studentcode" placeholder="学籍号">
+			</section>
+		</section>
+		<section class="row iccardbox">
+		    <section class="input-group">
+		      <input id="Ickahao" type="text" class="form-control" name="iccard" placeholder="IC卡账号">
+		      <span class="input-group-btn">
+		        <button class="btn btn-default" type="button" onclick="scanQRCode()"></button>
+		      </span>
+		    </section>
+		</section><!-- /.row -->
+		<input class="form-control addIDBtn" type="submit" value="保存" class="button conserve"></td>
+	</form>
 	<script>
 	  // 通过config接口注入权限验证配置
 	  wx.config({
@@ -48,35 +78,19 @@
 	      // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
 	      console.dir('接口失败：10001');
 	  });
+
+		//表单验证
+		function toVaild(){
+			
+		   if(val == "可以提交"){
+		       alert("校验成功，之后进行提交");
+		       return true;
+		   }
+		    else{
+		       alert("校验失败，不进行提交");
+		       return false;
+		   }
+		} 
 	</script>
-</head>
-<body>
-	<section class="addICtitle">请填写持卡人资料</section>
-	<form class="container addIC" action="__URL__/add" method="post" name="formUser">
-		<section class="row">
-			<section class="col-md-12">
-				<input class="form-control" type="text" value="" name="name" placeholder="持卡人姓名">
-			</section>
-		</section>
-		<section class="row">
-			<section class="col-md-12">
-				<input class="form-control" type="text" value="" name="school" placeholder="学校">
-			</section>
-		</section>
-		<section class="row">
-			<section class="col-md-12">
-				<input class="form-control" type="text" value="" name="studentcode" placeholder="学籍号">
-			</section>
-		</section>
-		<section class="row iccardbox">
-		    <section class="input-group">
-		      <input id="Ickahao" type="text" class="form-control" name="iccard" placeholder="IC卡账号">
-		      <span class="input-group-btn">
-		        <button class="btn btn-default" type="button" onclick="scanQRCode()"></button>
-		      </span>
-		    </section>
-		</section><!-- /.row -->
-		<input class="form-control addIDBtn" type="submit" value="保存" class="button conserve"></td>
-	</form>
 </body>
 </html>

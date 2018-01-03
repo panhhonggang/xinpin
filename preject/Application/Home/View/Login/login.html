@@ -54,15 +54,8 @@
 <!-- layui.js -->
 <script type="text/javascript" src="__PUBLIC__/Admin/layui/layui.js"></script>
 <script>
-	//设置软件盘弹出后优化页面布局
-	var oHeight = $(document).height(); //浏览器当前的高度
-   	$(window).resize(function(){
-        if($(document).height() < oHeight){
-	        $(".copyright").css("position","static");
-	    }else{
-	        $(".copyright").css("position","absolute");
-	    } 
-   	});
+	
+	solveCompatible($(".copyright"));
    	//自动登录
 	$(".checkSpan").click(function(){
 		$(this).toggleClass("checkSpanBg");
