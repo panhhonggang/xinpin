@@ -24,19 +24,19 @@
         <div class="tableBox">
             <div class="titleBar">工单管理/<span>新增工单</span></div>
             <div class="formBox">
-                <form class="" action="__URL__/add" method="post">
+                <form class="" action="__URL__/add" method="post" id="_fm">
                     <div class="control-group">
                         <span>工单号<sub class="_start">*</sub></span>
                         <!-- 需加数字验证 -->
-                        <input type="text" class="control" name="number" placeholder="请输入年月日+机组ID..." style="width:210px;">
+                        <input type="text" class="control _null" name="number" placeholder="请输入年月日+机组ID..." style="width:210px;">
                     </div>
                     <div class="control-group">
                         <span>处理人<sub class="_start">*</sub></span>
-                        <input type="text" class="control" name="name" placeholder="请输入处理人姓名..." style="width:210px;">
+                        <input type="text" class="control _null" name="name" placeholder="请输入处理人姓名..." style="width:210px;">
                     </div>
                     <div class="control-group">
                         <span>处理人电话<sub class="_start">*</sub></span>
-                        <input type="text" class="control" name="phone" placeholder="请输入处理人电话..." style="width:210px;">
+                        <input type="text" class="control _null" name="phone" placeholder="请输入处理人电话..." style="width:210px;">
                     </div>
                     <div class="control-group">
                         <span>维护类型</span>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="control-group">
                         <span>工作内容<sub class="_start">*</sub></span>
-                        <textarea name="content" cols="30" rows="5"></textarea>
+                        <textarea name="content" cols="30" rows="5" class="_null"></textarea>
                     </div>
                     <div class="control-group">
                         <span>地址<sub class="_start">*</sub></span>
@@ -84,6 +84,25 @@
 </div>
 <script>
 $(function(){
+    //验证表单
+    $('#_fm').submit(function(event) {
+        var _null = $('._null')
+        var number = _null.eq(0).val().trim()
+        var name = _null.eq(1).val().trim()
+        var phone = _null.eq(2).val().trim()
+        var content = _null.eq(3).val().trim()
+        var reg = /^1[3|4|5|8][0-9]\d{4,8}$/
+        if(number&&phone&&name&&content){
+            if(reg.test(phone)){
+                return
+            }else{
+                layuiHint('电话号码的格式不对哦！')
+            }
+        }else{
+            layuiHint('带星号的为必填项，不能为空哦！')
+        }
+        return false
+    })
     //处理日期
     function fn(num){
         return num<10?('0'+num):num
