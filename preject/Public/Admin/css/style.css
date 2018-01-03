@@ -371,3 +371,8 @@ a{
 	margin: 14px 0;
 
 }
+.formBox form div label{
+	display: inline-block; 
+	margin-left: 10px; 
+	color: #f00
+}

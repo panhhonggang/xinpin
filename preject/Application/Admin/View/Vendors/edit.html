@@ -10,8 +10,7 @@
             <div class="titleBar">后台管理/<span>编辑经销商</span></div>
             <div class="formBox">
                 <foreach name="info" item="vo" key="key">
-                <form class="" action="__URL__/edit" method="post">
-                    
+                <form class="" action="__URL__/edit" method="post" onsubmit="return toVaild()">
                     <input type="hidden" name="id" value="{{$vo.id}}">
                     <input type="hidden" name="name" value="{{$vo.name}}">
                     <input type="hidden" name="password" value="{{$vo.password}}">
@@ -21,11 +20,11 @@
                     </div>
                     <div class="control-group">
                         <span>手机</span>
-                        <input type="text" name="phone" value="{{$vo.phone}}">
+                        <input type="text" class="phone" name="phone" value="{{$vo.phone}}">
                     </div>
                     <div class="control-group">
                         <span>邮箱</span>
-                        <input type="email" name="email" value="{{$vo.email}}">
+                        <input type="email" class="email" name="email" value="{{$vo.email}}">
                     </div>
                     <div class="control-group">
                         <span>地址</span>
@@ -33,17 +32,17 @@
                             <select id="s_province" name="s_province"></select>&nbsp;&nbsp;
                             <select id="s_city" name="s_city" ></select>&nbsp;&nbsp;
                             <select id="s_county" name="s_county"></select>
-                            <!-- <input type="text" name="address" value="{{$vo.address}}"> -->
+                            <input type="text" class="getAddress" type="hidden" value="{{$vo.address}}">
                             <input class="addressValue" type="hidden" name="address" value="" />
                         </div>
                     </div>
                     <div class="control-group">
                         <span>公司</span>
-                        <input type="text" name="company" value="{{$vo.company}}">
+                        <input type="text" name="company" class="company" value="{{$vo.company}}">
                     </div>
                     <div class="control-group">
                         <span>身份证号</span>
-                        <input type="text" name="idcard" value="{{$vo.idcard}}">
+                        <input type="text" name="idcard" class="idcard" value="{{$vo.idcard}}">
                     </div>
                     
                     <div class="btn-groups">
@@ -58,19 +57,38 @@
     </div>
 </div>
 <script>
-$(function(){
     //城市三级联动
     _init_area();
-    $(".oddbtn").click(function(ev){
-        if($('#s_province').val()==""||$('#s_city').val()==""||$('#s_county').val()==""){
-            layui.use('layer', function(){
-                var layer = layui.layer;
-                layer.msg('亲，请把地址填写完整');
-            });    
-            ev.preventDefault();
-        }else{
-            $(".addressValue").val($('#s_province').val() + " " + $('#s_city').val() + " " + $('#s_county').val());
+    var getAddress=$(".getAddress").val();
+    splice();
+    // 表单验证
+    function toVaild(){
+        var phone=$(".phone").val();
+        var email=$(".phone").val();
+        var company=$(".company").val();
+        var idcard=$(".idcard").val();
+        if(phone==""){
+            layuiHint('手机号码不能为空');
+            return false;
+        }else if(!(/^1[34578]\d{9}$/.test(phone))){
+            layuiHint('手机号码格式不正确');
+            return false;
+        }else if(email==""){
+            layuiHint('邮箱不能为空');
+            return false;
+        }else if(!(/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/.test(email))){
+            layuiHint('邮箱格式不正确');
+            return false;
+        }else if($('#s_province').val()==""||$('#s_city').val()==""||$('#s_county').val()==""){
+            layuiHint('请把地址填写完整');
+            return false;
+        }else if(idcard==""){
+            layuiHint('身份证号码不能为空');
+            return false;
+        }else if(!(/\d{17}[\d|x]|\d{15}/.test(idcard))){
+            layuiHint('身份证格式不正确');
+            return false;
         }
-    });
-})
+    }
+
 </script>

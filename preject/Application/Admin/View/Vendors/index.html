@@ -5,7 +5,7 @@
         <div class="tableBox">
             <div class="titleBar">后台管理/<span>经销商列表</span></div>
             <form class="form-search fr" action="__URL__/index" method="get">
-                <input type="text" name="name" class="input-medium" placeholder="请输入真实姓名...">
+                <input type="text" name="name" class="input-medium" placeholder="输入账户名...">
                 <button type="submit" class="btn">搜索</button>
             </form>
 
@@ -13,7 +13,7 @@
                 <thead>
                 <tr>
                     <th>用户ID</th>
-                    <th>姓名</th>
+                    <th>账户名</th>
                     <th>手机</th>
                     <th>邮箱</th>
                     <th>地址</th>
@@ -40,7 +40,8 @@
                         <td>
                             <if condition="$Think.session.adminuser.leavel eq 0">
                                 <a href="__URL__/edit/id/{{$vo.id}}">编辑</a>
-                                <a href="__URL__/del/id/{{$vo.id}}">删除</a>
+                                <!-- <a href="__URL__/del/id/{{$vo.id}}">删除</a> -->
+                                <a class="deletBnt" ruleId="{{$vo['id']}}"  href="javascript:;" >删除</a>
                             <else/>
                                 <span>您无操作权限</span>
                             </if>
@@ -60,6 +61,18 @@
                 </ul>
             </div>
             <script>
+                //删除提示
+                $(".deletBnt").click(function(){
+                    var id = $(this).attr('ruleId');
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.confirm('确定删除?', {icon: 3, title:'温馨提示'}, function(index){
+                            window.location.href='del?id='+id;
+                            layer.close(index);
+                            
+                        });
+                    });
+                });
                 $('.pagination ul a').unwrap('div').wrap('<li></li>');
                 $('.pagination ul span').wrap('<li class="active"></li>')
             </script>
