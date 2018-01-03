@@ -32,6 +32,7 @@ class UsersController extends CommonController
         $this->display();
     }
 
+    
     /**
      * 推送信息方法
      * @author 潘宏钢 <619328391@qq.com>
