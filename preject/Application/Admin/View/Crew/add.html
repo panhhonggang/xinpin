@@ -23,8 +23,10 @@
     </style>
         <div class="tableBox">
             <div class="titleBar">机组管理/<span>机组设置</span></div>
-            <div class="formBox">
+            <div class="formBox" style="position: relative;">
+                <div style="position: absolute;left: 20%;top: 100px;font-size: 12px;"><span>&nbsp;(&nbsp;如果没有设备编码，请到&nbsp;"&nbsp;设备管理&nbsp;>>&nbsp;设备添加&nbsp;"&nbsp;中进行添加&nbsp;)&nbsp;</span></div>
                 <form class="form-group" action="__URL__/add" method="post">
+                    
                     <div class="control-group">
                         <span>机组编码</span>
                         <input type="text" class="control" name="cname" placeholder="请输入机组编码" style="width:210px;"><a class="addBtn" href="javascript:;">批量添加</a>

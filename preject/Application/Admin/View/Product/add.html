@@ -11,15 +11,15 @@
             <div class="formBox">
                 <form class="form-horizontal " action="__URL__/add" method="post">
                     <div class="groupBox control-group">
-                        <span>类型名称<sub class="_start">*</sub>：</span>
-                        <input type="text" class="control" name="typename" placeholder="请输入类型名称" style="width:210px;">
+                        <span>类型名称：</span>
+                        <input type="text" class="control" name="typename" placeholder="请输入类型名称" style="width:210px;"><sub class="_start">*</sub>
                     </div>
                     <div class="groupBox control-group">
                         <span>请设置滤芯：</span>
-                        <input type="text" class="control selects" placeholder="设置滤芯" />
+                        <input type="text" class="control selects" placeholder="设置滤芯"/>
                         <div class="selectList">
                             <foreach name="list" item="vo">
-                                <p>{{$vo.filtername}}-{{$vo.alias}}</p>
+                                <p style="position: relative;padding-left: 15px;"><span style="position:absolute;left:2px;top:8px;width:0;height:0;border-top: 5px solid #272822;border-left: 5px solid transparent;border-right: 5px solid transparent;border-bottom: 5px solid transparent;"></span>{{$vo.filtername}}-{{$vo.alias}}</p>
                             </foreach>
                         </div>
                     </div>
@@ -45,6 +45,8 @@
     
     //添加滤芯项
     $(".selects").click(function(ev){
+        $(this).blur();
+        console.log($(".textarea").children('p').length)
         b++;
         if(b>8){
             layui.use('layer', function(){
@@ -57,8 +59,8 @@
             var i=0,textareaHtml2="";
             //设置显示已选择滤芯 
             $(".selectList p").unbind('click').click(function(){
-                textareaHtml1+="<p class='inline form-control'>"+$(this).html()+"<input type='hidden' name='' value='"+$(this).html()+"' /></p>";
-                $(".selects").val($(this).html());
+                textareaHtml1+="<p class='inline form-control'>"+$(this).text()+"<input type='hidden' name='' value='"+$(this).text()+"' /></p>";
+                $(".selects").val($(this).text());
                 $(".textarea").html(textareaHtml1);
                 $(".selectList").hide();
                 for (;i<$(".textarea").children().length; i++) {
