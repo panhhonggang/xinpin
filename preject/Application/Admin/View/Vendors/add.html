@@ -7,49 +7,42 @@
             <div class="formBox">
                 <form class="" action="__URL__/add" method="post" onsubmit="return toVaild()">
                     <div class="control-group">
-                        <span>经销商姓名</span>
+                        <span>经销商姓名<sub class="_start">*</sub></span>
                         <input type="text" class="userName" name="name" placeholder="请输入登录账号" title="添加成功后，账号不可编辑，请正确输入">
-                        <label>*</label>
+                        
                     </div>
                     <div class="control-group">
-                        <span>密码</span>
+                        <span>密码<sub class="_start">*</sub></span>
                         <input type="password" class="password0" name="password" placeholder="请输入登录密码">
-                        <label>*</label>
                     </div>
                     <div class="control-group">
-                        <span>确认密码</span>
+                        <span>确认密码<sub class="_start">*</sub></span>
                         <input type="password" class="password1" name="repassword" placeholder="请再次输入密码">
-                        <label>*</label>
                     </div>
                     <div class="control-group">
-                        <span>公司名称</span>
+                        <span>公司名称<sub class="_start">*</sub></span>
                         <input type="text" name="company" class="company" placeholder="请输入公司名称">
-                        <label>*</label>
                     </div>
                     <div class="control-group">
-                        <span>手机号码</span>
+                        <span>手机号码<sub class="_start">*</sub></span>
                         <input type="text" name="phone" class="phone" placeholder="请输入手机号码">
-                        <label>*</label>
                     </div>
                     <div class="control-group">
-                        <span>邮箱</span>
+                        <span>邮箱<sub class="_start">*</sub></span>
                         <input type="text" name="email" class="email" placeholder="请输入邮箱">
-                        <label>*</label>
                     </div>
                     <div class="control-group">
-                        <span>地址</span>
+                        <span>地址<sub class="_start">*</sub></span>
                         <div class="info">
                             <select id="s_province" name="s_province"></select>&nbsp;&nbsp;
                             <select id="s_city" name="s_city" ></select>&nbsp;&nbsp;
                             <select id="s_county" name="s_county"></select>
                             <input class="addressValue" type="hidden" name="address" value="" />
-                            <label>*</label>
                         </div>
                     </div>
                     <div class="control-group">
-                        <span>身份证号</span>
+                        <span>身份证号<sub class="_start">*</sub></span>
                         <input type="text" name="idcard" class="idcard" placeholder="请输入身份证号">
-                        <label>*</label>
                     </div>
                     <div class="btn-groups">
                         <button class="subbtn btns btn-primary oddbtn" type="submit">确认</button>
@@ -99,7 +92,7 @@ function toVaild(){
     }else if(!(/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/.test(email))){
         layuiHint('邮箱格式不正确');
         return false;
-    }else if($('#s_province').val()==""||$('#s_city').val()==""||$('#s_county').val()==""){
+    }else if($('#s_province').text()==""||$('#s_city').text()==""||$('#s_county').text()==""){
         layuiHint('请把地址填写完整');
         return false;
     }else if(idcard==""){
@@ -110,7 +103,7 @@ function toVaild(){
         return false;
     }else{
         //验证通过
-        addressValue=$('#s_province').val() + " " + $('#s_city').val() + " " + $('#s_county').val() + "";
+        addressValue=$('#s_province').text() + " " + $('#s_city').text() + " " + $('#s_county').text() + "";
         $(".addressValue").val(addressValue);
        return true;
     }
