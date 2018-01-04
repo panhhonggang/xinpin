@@ -23,3 +23,10 @@ function solveCompatible(obj){
         } 
     });
 }
+//layuiHint弹框提示封装
+function layuiHint(text){
+    layui.use('layer', function(){
+        var layer = layui.layer;
+        layer.msg(text);
+    });  
+}
