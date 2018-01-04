@@ -54,9 +54,11 @@ class LoginController extends Controller
 
             // 查询手机号
             $condition['phone'] = $_POST['phone'];
+
             $info = M('Users')->where($condition)->find();
+
             // 判断用户状态（0：禁用 1：启用）
-            if($info['status']==0){
+            if(!empty($info) && $info['status']==0){
                 $this->error('用户名已被禁用，请与管理员联系！');
             }
    
