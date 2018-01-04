@@ -38,8 +38,8 @@
                         <td>
                             <if condition="$Think.session.adminuser.leavel eq 0">
                                 <switch name="vo.result">
-                                    <case value="未处理"><a href="__URL__/edit/id/{{$vo.id}}/result/1">正在处理</a></case>
-                                    <case value="正在处理"><a href="__URL__/edit/id/{{$vo.id}}/result/2">已处理</a></case>
+                                    <case value="未处理"><a href="javascript:void(0)" data="__URL__/edit/id/{{$vo.id}}/result/1" class="_a">正在处理</a></case>
+                                    <case value="正在处理"><a href="javascript:void(0)" data="__URL__/edit/id/{{$vo.id}}/result/2" class="_a">已处理</a></case>
                                     <default />
                                 </switch>
                             <else/>
@@ -63,6 +63,18 @@
             <script>
                 $('.pagination ul a').unwrap('div').wrap('<li></li>');
                 $('.pagination ul span').wrap('<li class="active"></li>')
+
+                //操作提示
+                $('._a').click(function(){
+                    var This = this
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.confirm('确定修改处理状态？', {icon: 3, title:'温馨提示'}, function(index){
+                            window.location.href = $(This).attr('data')
+                        });
+                    });
+                    return false
+                })
             </script>
         </div>
         <!-- footer part -->
