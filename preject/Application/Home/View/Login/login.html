@@ -17,7 +17,7 @@
 	<!-- logo -->
 	<section class="logo"></section>
 	<!-- 输入框 -->
-	<form action="__URL__/login" method="post">
+	<form action="__URL__/login" method="post" onsubmit="return toVaild()">
 		<section class="container inputBox">
 			<section class="row">
 				<section class="col-md-8 text-center">
@@ -56,29 +56,24 @@
 <script>
 	
 	solveCompatible($(".copyright"));
-   	//自动登录
+   	//自动登录js效果
 	$(".checkSpan").click(function(){
 		$(this).toggleClass("checkSpanBg");
 	});
-	//登录
-	$(".registerBtn").click(function(){
+	//登录验证
+	function toVaild(){
 		if($(".phoneName").val()=="") {
-			layui.use('layer', function(){
-	            var layer = layui.layer;
-	            layer.msg('手机号码不能为空！');
-	        }); 
+			layuiHint('手机号码不能为空！');
+	     	return false;
 		}else if(!(/^1[34578]\d{9}$/.test($(".phoneName").val()))){
-			layui.use('layer', function(){
-	            var layer = layui.layer;
-	            layer.msg('请输入正确的手机号码！');
-	        }); 
+	        layuiHint('请输入正确的手机号码！');
+	     	return false;
 		}else if($(".password").val()==""){
-			layui.use('layer', function(){
-	            var layer = layui.layer;
-	            layer.msg('密码不能为空！');
-	        }); 
+	        layuiHint('密码不能为空！');
+	     	return false;
 		}else{
+			return true;
 		}
-	});
+	};
 </script>
 </html>

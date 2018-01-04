@@ -30,3 +30,13 @@ function layuiHint(text){
         layer.msg(text);
     });  
 }
+//密码验证封装
+function passwordVaild(obj){
+    var reg = /^[0-9a-zA-Z]{6,12}$/;
+    if(!reg.test(obj)){
+        layuiHint("密码只能由6-12位数字或字母组成");
+        return 0;
+    }else{
+        return 1;
+    }
+}
