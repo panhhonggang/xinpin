@@ -12,23 +12,99 @@
 <body>
 <ul class="personalList">
 	<li>
-		<i class="i1"></i>用户姓名：<input type="text" name="" value="{{$user['name']}}" />
+		<i class="i1"></i>用户姓名：<span>{{$user['name']}}</span>
 	</li>
 	<li>
-		<i class="i2"></i>用户电话：<input type="number" name="" value="{{$user['phone']}}">
+		<i class="i2"></i>用户电话：<span>{{$user['phone']}}</span>
 	</li>
 	<li>
-		<i class="i3"></i>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：<input type="text" name="" value="{{$user['address']}}">
+		<i class="i3"></i>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：<span>{{$user['address']}}</span>
 	</li>
 </ul>
+<div style="width: 80%;margin:0 auto">
+	<button class="btn btn-info btn-block" id="_btn" data="{{:U('Home/Users/reviseUser')}}">编辑</button>
+</div>
+
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
 <script src="__PUBLIC__/Home/js/public.js"></script>
+<script src="__PUBLIC__/Home/js/LAreaData1.js"></script>
+    <script src="__PUBLIC__/Home/js/LAreaData2.js"></script>
+<script src="__PUBLIC__/Home/js/LArea.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Home/css/LArea.css">
 <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js" ></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/layui/layui.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/layui/css/layui.css" />
 <script>
 	//设置当前按钮显示样式
     $(".logo5").css("background-position","-7.6rem 0");
     $(".btn5").css("color","#008C63");
+
+    //编辑
+    var span = $('.personalList').find('li span')
+    var name = span.eq(0).text()
+    var phone = span.eq(1).text()
+    var addr = span.eq(2).text()
+    $('#_btn').click(function fn(){
+    	console.log(name,phone,addr)
+    	var addrHtml = '<input class="form-control address" id="demo1" type="text" readonly="" placeholder="'+addr+'" name="address" value=""/>'+
+		            '<input id="value1" type="hidden" value="20,234,504"/><span class="caret"></span>'
+    	span.eq(0).html('<input type="text" value="'+name+'">')
+    	span.eq(1).html('<input type="text" value="'+phone+'">')
+    	span.eq(2).html(addrHtml)
+    	//输入地址js
+	    var area1 = new LArea();
+	    area1.init({
+	        'trigger': '#demo1', //触发选择控件的文本框，同时选择完毕后name属性输出到该位置
+	        'valueTo': '#value1', //选择完毕后id属性输出到该位置
+	        'keys': {
+	            id: 'id',
+	            name: 'name'
+	        }, //绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
+	        'type': 1, //数据源类型
+	        'data': LAreaData //数据源
+	    });
+	    area1.value=[1,13,3];//控制初始位置，注意：该方法并不会影响到input的value
+    	span.find('input').css({'display':'inline-block','position':'relative','left':'0','top':'0px','width':'60%','height':'30px','border':'1px solid #46AF90','border-radius':'8px'})
+    	$(this).unbind().text('确定').click(function(){
+    		var name_ = span.eq(0).find('input').val()
+    		var phone_ = span.eq(1).find('input').val()
+		    var addr_ = $('#demo1').val()
+		    console.log('input',name_,phone_,addr_)
+    		var json = {}
+    		if(name != name_){json.name = name_}
+    		if(phone != phone_){json.phone = phone_}
+    		if(addr_&&(addr != addr_)){json.address = addr_}
+
+    		if($.isEmptyObject(json)){
+    			layuiHint('未作修改')
+    			span.eq(0).text(name)
+				span.eq(1).text(phone)
+				span.eq(2).text(addr)
+				$(this).text('编辑')
+				$(this).unbind().click(fn)
+    		}else{
+    			$.ajax({
+    				url:$('#_btn').attr('data'),
+    				success:function(data){
+    					layuiHint('修改成功')
+    					span.eq(0).text(name_||name)
+    					span.eq(1).text(phone_||phone)
+    					span.eq(2).text(addr_||addr)
+    					$('#_btn').text('编辑')
+    				},
+    				error:function(err){
+    					layuiHint('修改失败')
+    					span.eq(0).text(name)
+						span.eq(1).text(phone)
+						span.eq(2).text(addr)
+						$('#_btn').text('编辑')
+    				}
+    			})
+    		}
+    		console.log(json,$.isEmptyObject(json))
+    	})
+    })
     
 
 
