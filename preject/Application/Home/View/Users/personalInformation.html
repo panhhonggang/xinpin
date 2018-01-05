@@ -22,7 +22,7 @@
 	</li>
 </ul>
 <div style="width: 80%;margin:0 auto">
-	<button class="btn btn-info btn-block" id="_btn" data="{{:U('Home/Users/reviseUser')}}">编辑</button>
+	<button class="btn btn-info btn-block" id="_btn" data="{{:U('Home/Users/reviseUser')}}" style="background-color: #008C61">编辑</button>
 </div>
 
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
@@ -41,12 +41,13 @@
     $(".btn5").css("color","#008C63");
 
     //编辑
-    var span = $('.personalList').find('li span')
-    var name = span.eq(0).text()
-    var phone = span.eq(1).text()
-    var addr = span.eq(2).text()
+    
     $('#_btn').click(function fn(){
-    	console.log(name,phone,addr)
+    	var span = $('.personalList').find('li span')
+	    var name = span.eq(0).text()
+	    var phone = span.eq(1).text()
+	    var addr = span.eq(2).text()
+
     	var addrHtml = '<input class="form-control address" id="demo1" type="text" readonly="" placeholder="'+addr+'" name="address" value=""/>'+
 		            '<input id="value1" type="hidden" value="20,234,504"/><span class="caret"></span>'
     	span.eq(0).html('<input type="text" value="'+name+'">')
@@ -70,39 +71,48 @@
     		var name_ = span.eq(0).find('input').val()
     		var phone_ = span.eq(1).find('input').val()
 		    var addr_ = $('#demo1').val()
-		    console.log('input',name_,phone_,addr_)
     		var json = {}
+    		function fn2(){
+				span.eq(0).text(name)
+				span.eq(1).text(phone)
+				span.eq(2).text(addr)
+				$('#_btn').text('编辑')
+				$('#_btn').unbind().click(fn)
+	    	}
+	    	if(!/^1[34578]\d{9}$/.test(phone_)){return layuiHint('请输入正确的手机号码')}
     		if(name != name_){json.name = name_}
     		if(phone != phone_){json.phone = phone_}
     		if(addr_&&(addr != addr_)){json.address = addr_}
 
     		if($.isEmptyObject(json)){
     			layuiHint('未作修改')
-    			span.eq(0).text(name)
-				span.eq(1).text(phone)
-				span.eq(2).text(addr)
-				$(this).text('编辑')
-				$(this).unbind().click(fn)
+    			fn2()
     		}else{
+    			console.log(json)
     			$.ajax({
+    				type:'post',
+    				data:JSON.stringify(json),
     				url:$('#_btn').attr('data'),
     				success:function(data){
-    					layuiHint('修改成功')
-    					span.eq(0).text(name_||name)
-    					span.eq(1).text(phone_||phone)
-    					span.eq(2).text(addr_||addr)
-    					$('#_btn').text('编辑')
+    					if(Number(data)){
+    						layuiHint('修改成功')
+	    					span.eq(0).text(name_||name)
+							span.eq(1).text(phone_||phone)
+							span.eq(2).text(addr_||addr)
+							$('#_btn').text('编辑')
+							$('#_btn').unbind().click(fn)
+    					}else{
+    						layuiHint('修改失败')
+    						fn2()
+    					}
     				},
     				error:function(err){
     					layuiHint('修改失败')
-    					span.eq(0).text(name)
-						span.eq(1).text(phone)
-						span.eq(2).text(addr)
-						$('#_btn').text('编辑')
+    					fn2()
     				}
     			})
     		}
-    		console.log(json,$.isEmptyObject(json))
+    		// console.log(json,$.isEmptyObject(json))
     	})
     })
     
