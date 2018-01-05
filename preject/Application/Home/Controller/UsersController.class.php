@@ -34,4 +34,39 @@ class UsersController extends CommonController
         // 显示模板
         $this->display();   
 	}
+
+    // 修改用户头像
+    public function headPortrait()
+    {
+        if(IS_POST){
+            // 获取用户ID
+            $id = $_SESSION['homeuser']['id'];
+            // 实例化上传类
+            $upload = new \Think\Upload();
+            // 设置图片上传目录
+            $upload->rootPath = './Uploads/head/';
+            // 执行图片上传
+            $picpath = $upload->upload();
+            if($picpath){
+                // 上传头像
+                $data['head'] = './Uploads/head/'.$picpath['photo']['savepath'].$picpath['photo']['savename'];
+                // 将头像写入数据库
+                $res = M('Users')->where("id={$id}")->save($data);
+                if($res){
+                    echo 1;
+                }else{
+                    echo -1;
+                }
+            }
+            //dump($picpath);
+        }
+        // {{:U('Home/Users/headPortrait')}}
+    }
+
+    // 编辑用户资料
+    public function reviseUser()
+    {
+        echo 1;
+        //{{:U('Home/Users/reviseUser')}}
+    }
 }
