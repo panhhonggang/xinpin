@@ -88,10 +88,9 @@
     			layuiHint('未作修改')
     			fn2()
     		}else{
-    			console.log(json)
     			$.ajax({
     				type:'post',
-    				data:JSON.stringify(json),
+    				data:json,
     				url:$('#_btn').attr('data'),
     				success:function(data){
     					if(Number(data)){
