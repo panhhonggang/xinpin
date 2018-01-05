@@ -90,7 +90,7 @@ class UsersController extends CommonController
             if($res){
                 echo 1;
             }else{
-                echo -1;
+                echo 0;
             }    
         }
     }
