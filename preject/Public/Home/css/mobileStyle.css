@@ -546,11 +546,22 @@ a.addIDbtn{
     margin: 0 auto;
     margin-top: 15vw;
     margin-bottom: 3vw;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
 }
 .minelogo img{
 	width: 100%;
-	border-radius: 50%;
-	border:1px solid #ccc;
+}
+.minelogo > input{
+	width: 25vw;
+    height: 25vw;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #f00;
+    border-radius: 50%;
+    opacity: 0;
 }
 .textMine{
 	color: #5e5e5e;

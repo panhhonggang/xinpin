@@ -12,8 +12,14 @@
 <body>
 <!-- logo -->
 <section class="showmine">
-    <p class="minelogo"><img src="__PUBLIC__/Home/image/ceneo.jpg"></p>
-    <p class="textMine text-center">{{$name}}</p>
+	<form action="{{:U('Home/Users/headPortrait')}}" enctype="multipart/form-data" method="post" name="phone" >
+		<p class="minelogo">
+	    <img id="img" src="__PUBLIC__/Home/image/ceneo.jpg">
+	    <input name="pic" id="file" accept="image/*" type="file" />
+	    </p>
+	    <p class="textMine text-center">{{$name}}</p>
+	</form>
+    
 </section>
 <ul class="mineList">
 	<li>
