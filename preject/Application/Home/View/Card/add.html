@@ -16,17 +16,17 @@
 	<form class="container addIC" action="__URL__/add" method="post" name="formUser" onsubmit="return toVaild()">
 		<section class="row">
 			<section class="col-md-12">
-				<input class="form-control" type="text" value="" name="name" placeholder="持卡人姓名">
+				<input class="form-control cardholder" type="text" value="" name="name" placeholder="持卡人姓名">
 			</section>
 		</section>
 		<section class="row">
 			<section class="col-md-12">
-				<input class="form-control" type="text" value="" name="school" placeholder="学校">
+				<input class="form-control schoolName" type="text" value="" name="school" placeholder="学校">
 			</section>
 		</section>
 		<section class="row">
 			<section class="col-md-12">
-				<input class="form-control" type="text" value="" name="studentcode" placeholder="学籍号">
+				<input class="form-control studentId" type="text" value="" name="studentcode" placeholder="学籍号">
 			</section>
 		</section>
 		<section class="row iccardbox">
@@ -80,7 +80,33 @@
 	  });
 
 		//表单验证
-		
+		function toVaild(){
+			var cardholder=$(".cardholder").val().trim();
+			var schoolName=$(".schoolName").val().trim();
+			var studentId=$(".studentId").val().trim();
+			var Ickahao=$("#Ickahao").val().trim();
+			if(cardholder==""){
+				layuiVaild("持卡人姓名不能为空");
+				return false;
+			}else if(schoolName==""){
+				layuiVaild("学校名不能为空");
+				return false;
+			}else if(!(/^([\xe4-\xe9][\x80-\xbf]{2}){4,20}$/.test(schoolName))){
+				layuiVaild("学校名为4-20个中文字符");
+				return false;
+			}else if(studentId==""){
+				layuiVaild("学籍号不能为空");
+				return false;
+			}else if(!(/^\d{5,11}$/.test(studentId))){
+				layuiVaild("学籍号为5-11个数字");
+				return false;
+			}else if(Ickahao==""){
+				layuiVaild("IC卡账号不能为空");
+				return false;
+			}else{
+				return true;
+			}
+		}
 	</script>
 </body>
 </html>

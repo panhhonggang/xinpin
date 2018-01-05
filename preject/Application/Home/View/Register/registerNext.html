@@ -77,19 +77,20 @@
     	var address=$(".address").val();
     	if(username==""){
     		layuiHint("请输入用户姓名");
-    		return false;
-    	}else if(password0==""){
-    		layuiHint("密码不能为空");
-    		return false;
-    	}else if(password1!=password0){
-    		layuiHint("密码输入前后不一致");
-    		return false;
     	}else if(address==""){
     		layuiHint("您所在地址");
-    		return false;
-    	}else{
-    		return true;
-    	}
+    	}else if(password0==""){
+			layuiHint("密码不能为空"); 
+		}else{
+			if(passwordVaild(password0)){ 
+				if(password1==password0){
+					return true;
+				}else{
+					layuiHint("两次输入的密码不一致");
+				}
+			}
+		}
+		return false;
     }
     </script>
 </body>

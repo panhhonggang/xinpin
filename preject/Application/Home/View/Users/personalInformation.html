@@ -12,13 +12,13 @@
 <body>
 <ul class="personalList">
 	<li>
-		<i class="i1"></i>用户姓名：<span>{{$user['name']}}</span>
+		<i class="i1"></i>用户姓名：<input type="text" name="" value="{{$user['name']}}" />
 	</li>
 	<li>
-		<i class="i2"></i>用户电话：<span>{{$user['phone']}}</span>
+		<i class="i2"></i>用户电话：<input type="number" name="" value="{{$user['phone']}}">
 	</li>
 	<li>
-		<i class="i3"></i>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：<span>{{$user['address']}}</span>
+		<i class="i3"></i>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：<input type="text" name="" value="{{$user['address']}}">
 	</li>
 </ul>
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
@@ -26,8 +26,12 @@
 <script src="__PUBLIC__/Home/js/public.js"></script>
 <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js" ></script>
 <script>
+	//设置当前按钮显示样式
     $(".logo5").css("background-position","-7.6rem 0");
     $(".btn5").css("color","#008C63");
+    
+
+
 </script>
 </body>
 </html>
