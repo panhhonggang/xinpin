@@ -66,7 +66,32 @@ class UsersController extends CommonController
     // 编辑用户资料
     public function reviseUser()
     {
-        echo 1;
-        //{{:U('Home/Users/reviseUser')}}
+        if(IS_POST){
+            // 获取用户ID
+            $id = $_SESSION['homeuser']['id'];
+
+            // 接收用户名
+            if(!empty(I('post.name'))){
+                $data['name'] = I('post.name');
+            }
+            
+            // 接收密码
+            if(!empty(I('post.phone'))){
+                $data['phone'] = I('post.phone');
+            }
+            
+            // 接收地址
+            if(!empty(I('post.address'))){
+                $data['address'] = I('post.address');
+            }
+
+            $res = M('Users')->where("id={$id}")->save($data);
+
+            if($res){
+                echo 1;
+            }else{
+                echo -1;
+            }    
+        }
     }
 }
