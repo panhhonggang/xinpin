@@ -18,14 +18,6 @@ class CommonController extends Controller
     {	
     	// 登录检测
     	if(empty($_SESSION['homeuser'])) $this->redirect('Login/login');
-
-        // 查询用户IC卡号 xp_card
-        $uid = $_SESSION['homeuser']['id'];
-        // 查询用户名是否绑定IC卡
-        $icid = M('Card')->field('id')->where('`uid`='.$uid)->find();
-        // 如果没有绑定IC卡
-    	if(empty($icid)) $this->redirect('Home/Card/add');
-
     }
 
 
