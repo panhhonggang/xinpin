@@ -5,7 +5,15 @@ class IndexController extends CommonController
 {
     public function index()
     {
-    	
+        // 查询用户IC卡号 xp_card
+        $uid = $_SESSION['homeuser']['id'];
+        // 查询用户名是否绑定IC卡
+        $icid = M('Card')->field('id')->where('`uid`='.$uid)->find();
+        // 如果没有绑定IC卡
+        if(empty($icid)){
+            $this->redirect('Home/Card/add');
+            exit;
+        }
     	// 读取用户余额
     	$money = (int) M('users')->where('id='.$_SESSION['homeuser']['id'])->find()['balance'];
         $map['uid'] = session('homeuser.id');
