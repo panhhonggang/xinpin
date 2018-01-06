@@ -20,7 +20,7 @@ class UsersController extends CommonController
     }
 	
 	//个人信息
-	public function personalInformation()
+	public function personalinformation()
 	{
         // 查询用户IC卡号 xp_card
         $id = $_SESSION['homeuser']['id'];
