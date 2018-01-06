@@ -76,7 +76,7 @@ class FlowController extends CommonController
     }
 
 	// 充值记录
-	public function rechargeNodes(){
+	public function rechargenodes(){
         // 查询用户IC卡号 xp_card
         $id = $_SESSION['homeuser']['id'];
 
