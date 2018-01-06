@@ -67,8 +67,10 @@ class RegisterController extends Controller
                 $info['phone'] = $_SESSION['phone'];
                 $mes = $user->add($info);
                 if($mes){
+                    $condition['phone'] = $info['phone'];
+                    $userInfo = M('Users')->where($condition)->find();
                     // 写缓存
-                    $_SESSION['homeuser'] = $info;
+                    $_SESSION['homeuser'] = $userInfo;
                     // 跳转到主页
                     $this->redirect('Index/index');
                 }else{
