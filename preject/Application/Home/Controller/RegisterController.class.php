@@ -80,12 +80,12 @@ class RegisterController extends Controller
                 $this->error('确密码不正确，请重新输入！');
             }
         }else{
-            $this->display();
+            $this->display('registernext');
         }
     }
 
     // 用户密码自助找回-入口
-    public function resetPassword()
+    public function resetpassword()
     {
         if(IS_POST){
 
@@ -114,14 +114,14 @@ class RegisterController extends Controller
             // 判断手机验证码是否有效
             if($_SESSION['phone_code']!=$_POST['phone_code'])  $this->error('验证码错误，请重新输入！');
             // 跳转到下一页
-            $this->redirect('resetPasswordNext');
+            $this->redirect('resetpasswordnext');
         }else{
-            $this->display();
+            $this->display('resetpassword');
         }
     }
 
     // 用户密码自助找回-设置新密码
-    public function resetPasswordNext()
+    public function resetpasswordnext()
     {
         if(IS_POST){
 
@@ -144,7 +144,7 @@ class RegisterController extends Controller
                 $this->error('确密码不正确，请重新输入!');
             }
         }else{
-            $this->display();    
+            $this->display('resetpasswordnext');    
         }
     }
 
