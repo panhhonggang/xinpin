@@ -22,13 +22,13 @@
         }
     </style>
         <div class="tableBox">
-            <div class="titleBar">工单管理/<span>新增工单</span></div>
+            <div class="titleBar">工单管理/<span>添加工单</span></div>
             <div class="formBox">
-                <form class="" action="__URL__/add" method="post" id="_fm">
+                <form class="" action="__URL__/add" method="post" id="_fm" onsubmit="return toVaild()">
                     <div class="control-group">
                         <span>工单号<sub class="_start">*</sub></span>
                         <!-- 需加数字验证 -->
-                        <input type="text" class="control _null" name="number" placeholder="请输入年月日+机组ID..." style="width:210px;">
+                        <input type="text" class="control _null gongdanId" name="number" placeholder="只能是字母加数字组成的字符串" style="width:210px;">
                     </div>
                     <div class="control-group">
                         <span>处理人<sub class="_start">*</sub></span>
@@ -82,27 +82,43 @@
         <include file="Public/footer"/>
     </div>
 </div>
-<script>
-$(function(){
+<script> 
     //验证表单
-    $('#_fm').submit(function(event) {
+
+    function toVaild() {
         var _null = $('._null')
-        var number = _null.eq(0).val().trim()
-        var name = _null.eq(1).val().trim()
-        var phone = _null.eq(2).val().trim()
-        var content = _null.eq(3).val().trim()
-        var phoneReg = /^1[34578]\d{9}$/
-        if(number&&phone&&name&&content){
-            if(phoneReg.test(phone)){
-                    return
-            }else{
-                layuiHint('"处理人手机号码"输入的格式不对哦！')
-            }
+        var number = _null.eq(0).val().trim();
+        var name = _null.eq(1).val().trim();
+        var phone = _null.eq(2).val().trim();
+        var content = _null.eq(3).val().trim();
+        var phoneReg = /^1[34578]\d{9}$/;
+        if(number==""){
+            layuiHint('工单号不能为空');
+            return false;
+        }else if(name==""){
+            layuiHint('处理人不能为空')
+            return false;
+        }else if(phone==""){
+            layuiHint('手机号码不能为空')
+            return false;
+        }else if(content==""){
+            layuiHint('工作内容不能为空')
+            return false;
+        }else if(!phoneReg.test(phone)){
+            layuiHint('手机号码格式不正确')
+            return false;
+        }else if($('#s_province').val()==""||$('#s_city').val()==""||$('#s_county').val()==""){
+            layuiHint('请把地址填写完整'); 
+            return false; 
+        }else if($("#addMaintenanceDate").val()==""){
+            layuiHint('请输入处理时间');  
+            return false; 
         }else{
-            layuiHint('带星号的为必填项，不能为空哦！')
+            $(".addressValue").val($('#s_province').val() + " " + $('#s_city').val() + " " + $('#s_county').val());
+            return true
         }
-        return false
-    })
+        
+    }
     //处理日期
     function fn(num){
         return num<10?('0'+num):num
@@ -122,18 +138,20 @@ $(function(){
     var showArea = function(){
         Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" + Gid('s_city').value + " - 县/区" + Gid('s_county').value + "</h3>"
     }
-    $(".subbtn").click(function(ev){
-        if($('#s_province').val()==""||$('#s_city').val()==""||$('#s_county').val()==""){
-            layuiHint('请把地址填写完整');  
-            ev.preventDefault();
-        }else{
-            $(".addressValue").val($('#s_province').val() + " " + $('#s_city').val() + " " + $('#s_county').val());
-        } 
-        if($("#addMaintenanceDate").val()==""){
-            layuiHint('请输入处理时间');   
-            ev.preventDefault();
-        }
-    });
-})
+    // $(".subbtn").click(function(ev){
+
+    //     if($('#s_province').val()==""||$('#s_city').val()==""||$('#s_county').val()==""){
+    //         layuiHint('请把地址填写完整');  
+    //         ev.preventDefault();
+    //     }else{
+    //         $(".addressValue").val($('#s_province').val() + " " + $('#s_city').val() + " " + $('#s_county').val());
+    //     } 
+    //     if($("#addMaintenanceDate").val()==""){
+    //         layuiHint('请输入处理时间');   
+    //         ev.preventDefault();
+    //     }
+        
+    // });
+
 
 </script>

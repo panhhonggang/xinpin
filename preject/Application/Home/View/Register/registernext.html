@@ -71,12 +71,14 @@
     area1.value=[1,13,3];//控制初始位置，注意：该方法并不会影响到input的value
     // 表单验证
     function toVaild(){
-    	var username=$(".username").val();
-    	var password0=$(".password0").val();
-    	var password1=$(".password1").val();
-    	var address=$(".address").val();
+    	var username=$(".username").val().trim();
+    	var password0=$(".password0").trim();
+    	var password1=$(".password1").trim();
+    	var address=$(".address").trim();
     	if(username==""){
     		layuiHint("请输入用户姓名");
+    	}else if(!(/^[0-9a-zA-Z]{6,12}$/.test(username))){
+    		layuiHint("只能输入6-12位数字+字母组合的字符串");
     	}else if(address==""){
     		layuiHint("您所在地址");
     	}else if(password0==""){

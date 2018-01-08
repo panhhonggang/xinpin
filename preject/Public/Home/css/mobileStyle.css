@@ -405,7 +405,7 @@ a.addIDbtn{
 	height: 9vh;
 	line-height: 9vh;
 	display: block;
-	position: absolute;
+	position:fixed;
 	left: 0;
 	bottom: 0;
 	background:#E8F9F5 url("../image/sprite.png") no-repeat;

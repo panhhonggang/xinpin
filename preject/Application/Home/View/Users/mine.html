@@ -33,7 +33,7 @@
 	</li>
 </ul>
 <section class="container quitB">
-	<a href="{{:U('Home/Login/logout')}}"><button class="quitBtn btn text-center form-control">退出登录</button></a>
+	<button class="quitBtn btn text-center form-control">退出登录</button>
 </section>
 <footer>
     <a class="btn1" href="{{:U('Home/index/index')}}"><span class="logo1"></span>首页</a>
@@ -43,9 +43,23 @@
     <a class="btn5" href="{{:U('Home/Users/mine')}}"><span class="logo5"></span>我的</a>
 </footer>
 <script src="__PUBLIC__/Home/js/public.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/layui/layui.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/layui/css/layui.css" />
 <script>
     $(".logo5").css("background-position","-6.22rem 0");
     $(".btn5").css("color","#008C63");
+    // 退出提示框
+    $(".quitBtn").click(function(){
+    	layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.confirm('确定退出?', {icon: 3, title:'温馨提示'}, function(index){
+                window.location.href="{{:U('Home/Login/logout')}}";
+                layer.close(index);
+                
+            }); 
+        });
+    	
+    });
 </script>
 </body>
 </html>

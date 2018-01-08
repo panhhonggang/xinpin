@@ -69,12 +69,8 @@ bind(document,"touchmove",function(ev){
     //text触屏滑动
 function fnTab_txt(oTab,oList,aNav,iW,classActive)
 {
-    // var oTab=id("text");
-    // var oList=id("textList");
-    // var aNav=id("textNav").children;
     var iNow=0;//任意自然数
     var iX=0;
-    // var iW=$(window).width();
     var oTimer=0;
     var iStartTouchX=0;
     var iStartX=0;
