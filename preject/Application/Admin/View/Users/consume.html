@@ -1,3 +1,4 @@
+{{$list|dump}}
 <include file="Public/header" />
 <div class="content">
     <include file="Public/nav" />
@@ -8,7 +9,6 @@
                 <input type="text" name="name" class="input-medium" placeholder="请输入用户昵称...">
                 <button type="submit" class="btn">搜索</button>
             </form>
-
             <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
@@ -19,7 +19,6 @@
                     <th>消费流量</th>
                     <th>消费地点</th>
                     <th>消费时间</th>
-                    <!-- <th>操作</th> -->
                 </tr>
                 </thead>
                 <tbody>
@@ -33,13 +32,6 @@
                         <td>{{$vo.flow}}</td>
                         <td>{{$vo.address}}</td>
                         <td>{{$vo.time|date='Y-m-d H:i:s',###}}</td>
-                        <!-- <td>
-                            <if condition="$Think.session.adminuser.leavel eq 0">
-                                
-                            <else/>
-                                <span>您无操作权限</span>
-                            </if>
-                        </td> -->
                     </tr>
                     </foreach>
                     <else />
@@ -59,7 +51,6 @@
                 $('.pagination ul span').wrap('<li class="active"></li>')
             </script>
         </div>
-        <!-- footer part -->
         <include file="Public/footer" />
     </div>
 </div>

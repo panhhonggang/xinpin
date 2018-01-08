@@ -430,7 +430,7 @@ a.addIDbtn{
 	overflow: hidden;
 }
 .consumeList{
-	width: 200vw;
+	width: 1000vw;
 }
 .consumeList >li{
 	text-align: center;
@@ -778,4 +778,12 @@ a.addIDbtn{
 .iccardbox{
 	margin-left: 6%;
 	width: 88%;
+}
+#_btn{
+    background-color: #008C61;
+    color: #fff;
+    height: 12vw;
+    border-radius: 8px;
+    margin-bottom: 5vh;
+    font-size: .74rem;
 }

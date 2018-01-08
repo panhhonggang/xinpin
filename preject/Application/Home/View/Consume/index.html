@@ -23,9 +23,9 @@
         </ul> 
     </section>
     <ul class="thead nav nav-pills" role="tablist">
-        <li role="presentation" class="">用水地点</li>
+        <li role="presentation" class="">地点</li>
         <li>盛水量/mL</li>
-        <li></li>
+        <li>时间</li>
     </ul>
     <section class="consumeNode ">
         <table class="consumeTable ">
@@ -48,10 +48,10 @@
         <a><span class="logo4"></span>扫码取水</a>
         <a class="btn5" href="{{:U('Home/Users/mine')}}"><span class="logo5"></span>我的</a>
     </footer>
-
-    
     <script src="__PUBLIC__/Home/js/public.js"></script>
     <script>
+    //设置ul宽度
+    // $(".consumeList").width(10000);
     $(".logo2").css("background-position","-1.6rem 0");
         $(".btn2").css("color","#008C63");
         $(".consumeList li").eq(0).children("span").addClass("spanActive");

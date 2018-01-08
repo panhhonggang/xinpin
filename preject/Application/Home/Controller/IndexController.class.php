@@ -31,16 +31,18 @@ class IndexController extends CommonController
             ->field("did,icid,flow,address,FROM_UNIXTIME(time,'%Y-%m-%d') as time")
             ->group('time,icid')
             ->order('time asc')
-            ->select();
-
+            ->select();  
     	//分配数据     
         $assign = [
             'money' => $money/100,
-            'iccard' => json_encode($res),
+            'iccard' => json_encode($iccard),
             'record' => json_encode($record),
         ];   
+        // dump($iccard);
+        // dump($assign);
         $this->assign($assign);
     	$this->display();
+
 	}
 
 }

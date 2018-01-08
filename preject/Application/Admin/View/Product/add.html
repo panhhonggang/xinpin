@@ -16,10 +16,12 @@
                     </div>
                     <div class="groupBox control-group">
                         <span>请设置滤芯</span>
-                        <input type="text" class="control selects" placeholder="设置滤芯"/>
+                        <input type="text" class="control selects" placeholder="设置滤芯" style="cursor: pointer;" />
+                        <span style="position:absolute;left:385px;top:12px;width:0;height:0;border-top: 5px solid #272822;border-left: 5px solid transparent;border-right: 5px solid transparent;border-bottom: 5px solid transparent;"></span>
                         <div class="selectList">
+
                             <foreach name="list" item="vo">
-                                <p style="position: relative;padding-left: 15px;"><span style="position:absolute;left:2px;top:8px;width:0;height:0;border-top: 5px solid #272822;border-left: 5px solid transparent;border-right: 5px solid transparent;border-bottom: 5px solid transparent;"></span>{{$vo.filtername}}-{{$vo.alias}}</p>
+                                <p style="position: relative;padding-left: 15px;">{{$vo.filtername}}-{{$vo.alias}}</p>
                             </foreach>
                         </div>
                     </div>
@@ -51,10 +53,7 @@
         console.log($(".textarea").children('p').length)
         b++;
         if(b>8){
-            layui.use('layer', function(){
-                var layer = layui.layer;
-                layer.msg('亲，设置滤芯不能超过8个！');
-            });    
+            layuiHint('亲，设置滤芯不能超过8个！');  
             ev.preventDefault();
         }else{
             $(".selectList").show();

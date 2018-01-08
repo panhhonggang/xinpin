@@ -124,19 +124,13 @@ $(function(){
     }
     $(".subbtn").click(function(ev){
         if($('#s_province').val()==""||$('#s_city').val()==""||$('#s_county').val()==""){
-            layui.use('layer', function(){
-                var layer = layui.layer;
-                layer.msg('请把地址填写完整');
-            });    
+            layuiHint('请把地址填写完整');  
             ev.preventDefault();
         }else{
             $(".addressValue").val($('#s_province').val() + " " + $('#s_city').val() + " " + $('#s_county').val());
         } 
         if($("#addMaintenanceDate").val()==""){
-            layui.use('layer', function(){
-                var layer = layui.layer;
-                layer.msg('请输入处理时间');
-            });    
+            layuiHint('请输入处理时间');   
             ev.preventDefault();
         }
     });
