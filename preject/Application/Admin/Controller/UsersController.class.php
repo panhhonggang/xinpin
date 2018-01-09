@@ -130,18 +130,25 @@ class UsersController extends CommonController
 
         $consume = M('consume');
         $total = $consume->where($map)
-                                ->join('xp_users ON xp_consume.uid = xp_users.id')
-                                ->join('xp_card ON xp_consume.icid = xp_card.id')
-                                ->field('xp_consume.*,xp_users.name,xp_card.iccard')
+                                ->alias('c')
+                                ->join('__CARD__ card ON c.icid = card.id', 'LEFT')
+                                ->join('__DEVICES__ d ON c.did = d.id', 'LEFT')
+                                ->join('__USERS__ u ON c.uid = u.id', 'LEFT')
+                                ->field('c.*,u.name,card.iccard')
                                 ->count();
         $page  = new \Think\Page($total,8);
         $pageButton =$page->show();
 
         $list = $consume->where($map)
                                 ->limit($page->firstRow.','.$page->listRows)
-                                ->join('xp_users ON xp_consume.uid = xp_users.id')
-                                ->join('xp_card ON xp_consume.icid = xp_card.id')
-                                ->field('xp_consume.*,xp_users.name,xp_users.balance,xp_card.iccard')
+                                // ->join('xp_users ON xp_consume.uid = xp_users.id')
+                                // ->join('xp_card ON xp_consume.icid = xp_card.id')
+                                // ->field('xp_consume.*,xp_users.name,xp_users.balance,xp_card.iccard')
+                                ->alias('c')
+                                ->join('__CARD__ card ON c.icid = card.id', 'LEFT')
+                                ->join('__DEVICES__ d ON c.did = d.id', 'LEFT')
+                                ->join('__USERS__ u ON c.uid = u.id', 'LEFT')
+                                ->field('c.*,u.name,card.iccard')
                                 ->select();
         // dump($list);die;
         $this->assign('list',$list);

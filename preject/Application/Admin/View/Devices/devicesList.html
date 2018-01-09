@@ -28,7 +28,7 @@
                         <tr>
                             <td>{{$key+1}}</td>
                             <td>
-                                <a class="btn-link detail" href="deviceDetail?code={{$data.device_code}}">{{$data.device_code}}</a>
+                                <a class="btn-link detail" href="{{:U('deviceDetail', [code=>$data['device_code']])}}">{{$data.device_code}}</a>
                             </td>
                             <td>{{$data.cname}}</td>
                             <td>{{$data.name}}</td>

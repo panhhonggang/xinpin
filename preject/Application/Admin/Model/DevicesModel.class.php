@@ -89,7 +89,6 @@ class DevicesModel extends Model
         $alivestause = ['未激活', '已激活', 2, 3];
         $count = count($data);
         foreach ($devicesInfo as $key => $value) {
-            
             if( $key == 'devicestause' ){
                 $devicesInfo['devicestause'] = $devicestause[$value];
             }
@@ -116,7 +115,7 @@ class DevicesModel extends Model
     public function getVendors($code)
     {
         if( !empty($code) ){
-            $res = $this->where()
+            $res = $this->where($code)
                 ->join("LEFT JOIN xp_crew ON xp_devices.device_code = xp_crew.dcode")
                 ->join("LEFT JOIN xp_binding ON xp_crew.id = xp_binding.cid")
                 ->join("LEFT JOIN xp_vendors ON xp_binding.vid = xp_vendors.id")
