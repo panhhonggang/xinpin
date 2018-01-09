@@ -62,7 +62,7 @@
                 // alert($(".cid").val());
                 $(".unbindBtn").click(function(){
                     var id = $(this).attr('ruleId');
-                    var cid = $(".cid").val();
+                    var cid = $(this).siblings(".cid").val();
                     layui.use('layer', function(){
                         var layer = layui.layer;
                         layer.confirm('确定解除绑定?', {icon: 3, title:'温馨提示'}, function(index){
