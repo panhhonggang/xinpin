@@ -52,7 +52,7 @@ function addClass(obj, sClass) {
 }
     // 删除class
 function removeClass(obj, sClass) { 
-    var aClass = obj.className.split(' ');
+    var aClass = obj.className.split(' '); 
     if (!obj.className) return;
     for (var i = 0; i < aClass.length; i++) {
         if (aClass[i] === sClass) {
