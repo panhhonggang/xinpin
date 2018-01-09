@@ -85,7 +85,7 @@
         }else if(!(/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/.test(email))){
             layuiHint('邮箱格式不正确');
             return false;
-        }else if($('#s_province').text()==""||$('#s_city').text()==""||$('#s_county').text()==""){
+        }else if($('#s_province').val()==""||$('#s_city').val()==""||$('#s_county').val()==""){
             layuiHint('请把地址填写完整');
             return false;
         }else if(idcard==""){
@@ -99,7 +99,7 @@
             return false;
         }else{
             //验证通过
-            addressValue=$('#s_province').text() + " " + $('#s_city').text() + " " + $('#s_county').text() + "";
+            addressValue=$('#s_province').val() + " " + $('#s_city').val() + " " + $('#s_county').val() + "";
             $(".addressValue").val(addressValue);
             return true;
         }
