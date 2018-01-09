@@ -16,6 +16,7 @@ class WorkModel extends Model
         array('number','require','工单号不能为空'),
         array('name','require','处理人不能为空'),
         array('phone','/^1[34578]\d{9}$/','电话号码格式不对',1,'regex'),
+        array('number','/^\w+$/','工单号格式不对',1,'regex'),
         array('content','require','工作内容不能为空'),
         array('address','require','地址不能为空'),
         array('name','/^([\xe4-\xe9][\x80-\xbf]{2}){2,4}$/','请输入真实姓名',1,'regex')

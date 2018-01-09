@@ -119,12 +119,13 @@ class CrewController extends CommonController
         $i = 0;
         unset($data[1]);
         foreach ($data as $key => $val) {
-            $_POST['cname'] = $val['A'];
-            $_POST['dcode'] = $val['B'];
+            $_POST['cname'] = (int)$val['A'];
+            $_POST['dcode'] = (int)$val['B'];
             $crew = D('crew'); 
             $code = M('devices')->where("device_code='{$_POST["dcode"]}'")->find();
+            if(is_null($code)) $this->error('设备码不存在');
+            // dump($code);die;
             $cname = $crew->where("cname='{$_POST["cname"]}'")->find();
-            if(empty($code)) $this->error('设备码不存在');
             if(!empty($cname)) $this->error('机组不能重复');
             $info = $crew->create();
             if($info){

@@ -83,6 +83,9 @@ class CardController extends CommonController
         $iccard = I('numVal');
         $data['status'] = 0;
         $data['uid'] = null;
+        $data['name'] = null;
+        $data['studentcode'] = null;
+        $data['school'] = null;
         $res = M('Card')->where('`iccard`="'.$iccard.'"')->save($data);
 
         // 检查是否解绑成功

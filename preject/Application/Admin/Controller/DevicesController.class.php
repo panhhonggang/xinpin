@@ -174,7 +174,8 @@ class DevicesController extends CommonController
             $res = $Devices->getCate();
             $info = $Devices->create();
             $code = $Devices->where("device_code='{$_POST['device_code']}'")->find();
-            if($info && empty($code)){
+            if(!empty($code)) $this->error( '已导入' . $i . '条数据<br>' . $_POST['device_code'] . '已存在');
+            if($info){
                 if(!in_array($_POST['type_id'], $res)){
                     $this->error('已导入' . $i . '条数据<br>' . $_POST['device_code'] . '设备类型不存在');
                 }
@@ -184,7 +185,7 @@ class DevicesController extends CommonController
                     $this->error('导入失败啦！');
                 }
             } else {
-                $this->error('已导入' . $i . '条数据<br>' . $_POST['device_code'] . '已存在 或 不正确');
+                $this->error('已导入' . $i . '条数据<br>');
             }   
             $i ++;
         }

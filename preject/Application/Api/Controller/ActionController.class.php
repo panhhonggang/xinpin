@@ -16,7 +16,7 @@ class ActionController extends Controller
         $message = I('post.');
         $client_id = $message['client_id'];
         unset($message['client_id']);
-
+        Log::write(json_encode($message), '接收数据');
         if( $message['soure']=='TCP'){
             if( empty( Gateway::getSession($client_id) ) ){
                 Gateway::setSession($client_id, $message);
