@@ -55,8 +55,8 @@
 <section class="showmine">
 	<form action="{{:U('Home/Users/headPortrait')}}" enctype="multipart/form-data" method="post" name="phone" >
 		<p class="minelogo">
-	    <img id="img" src="__PUBLIC__/Home/image/ceneo.jpg" data-src>
-	    <input name="pic" id="file" accept="image/*" type="file" />
+	    <img id="img" src="__PUBLIC__/Home/image/ceneo.jpg">
+	    <!-- <input name="pic" id="file" accept="image/*" type="file" /> -->
 	    </p>
 	    <p class="textMine text-center">{{$name}}</p>
 	</form>
@@ -95,45 +95,45 @@
     $(".btn5").css("color","#008C63");
 
     // 点击头像修改
-	$("#file").on("change",function(e){
-		var files =this.files;
-		var span = $("<span></span>"),
-			span1 = $("<span>X</span>"),
-			img = $('<img src="" alt="" />'
-				);
-		var reader =new FileReader();
-		reader.readAsDataURL(files[0]);
-		reader.onload =function(e){
+	// $("#file").on("change",function(e){
+	// 	var files =this.files;
+	// 	var span = $("<span></span>"),
+	// 		span1 = $("<span>X</span>"),
+	// 		img = $('<img src="" alt="" />'
+	// 			);
+	// 	var reader =new FileReader();
+	// 	reader.readAsDataURL(files[0]);
+	// 	reader.onload =function(e){
 			
-			var dx =(e.total/1024)/1024;
-			if(dx>=2){
-			  layuiHint("文件不能大于2M");
-			  return;
-			}
+	// 		var dx =(e.total/1024)/1024;
+	// 		if(dx>=2){
+	// 		  layuiHint("文件不能大于2M");
+	// 		  return;
+	// 		}
 
-			// 先把图片存进data-src, 确定后再替换src，并异步提交到服务器
-			$("#img").attr("data-src", this.result);
+	// 		// 先把图片存进data-src, 确定后再替换src，并异步提交到服务器
+	// 		$("#img").attr("data-src", this.result);
 
-			$("#picChangeBG").css({display: "flex"});
+	// 		$("#picChangeBG").css({display: "flex"});
 			
-		}
+	// 	}
 
-	});	
-	// 选好图片后，点击确定切换头像
-	$("#changeNow").on("click", function(){
+	// });	
+	// // 选好图片后，点击确定切换头像
+	// $("#changeNow").on("click", function(){
 
-		$("#picChangeBG").css({display: "none"});
-		$("#img").attr("src", $("#img").attr("data-src"));
+	// 	$("#picChangeBG").css({display: "none"});
+	// 	$("#img").attr("src", $("#img").attr("data-src"));
 
-		// 在这里提交到服务器
+	// 	// 在这里提交到服务器
 		
-	})
-	// 选好图片后，点击取消不切换头像
-	$("#noChange").on("click", function(){
+	// })
+	// // 选好图片后，点击取消不切换头像
+	// $("#noChange").on("click", function(){
 
-		$("#picChangeBG").css({display: "none"});
-		$("#img").attr("data-src", "");
-	})
+	// 	$("#picChangeBG").css({display: "none"});
+	// 	$("#img").attr("data-src", "");
+	// })
 
    
 </script>
