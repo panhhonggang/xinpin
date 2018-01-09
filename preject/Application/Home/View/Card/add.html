@@ -65,7 +65,7 @@
 	      success: function (res) {
 	        var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
 	        if(result){
-	          document.getElementById("Ickahao").value = result;
+	          document.getElementById("Ickahao").value = result.substr(-16);
 	        }else{
 	          console.dir('扫描失败：10000');
 	        }
