@@ -124,7 +124,7 @@
                 }
             }else{
 
-                layuiHint("用户名不合法！只能含有数字英文汉字下划线!!");
+                layuiHint("用户名只能是数字英文汉字下划线!");
             }
             
         })
@@ -134,7 +134,7 @@
 
     // 用户名不允许有空格和特殊字符
     var regUsername = /^[a-zA-Z0-9_\u4e00-\u9fa5]+$/;
-    var regUsernameOK = null;
+    var regUsernameOK = true;
     $(".username").on("change","input", function(){
 
         !regUsername.exec($(".username>input").val())
