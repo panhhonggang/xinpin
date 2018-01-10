@@ -181,7 +181,7 @@
 
 <script>
     var PackNum=0;//包数据
-    //开关机按钮
+    //根据当前设备状态实时设置开关机按钮
     setInterval(function(){
         if(($(".deviceStause").html())=="关机"){
             $(".shutDown").text("开机");
@@ -257,15 +257,15 @@
         console.log(data);
         if(data.PackType=="Select")
         {
-            $(".deviceStause").text(data.deviceStause);//获取设备状态
-            $(".puretdsVal").text(data.puretds);//获取当前设备原水值
-            $(".rawtdsVal").text(data.rawtds);//获取当前设备纯水值
-            $(".leasingmodeVal").text(data.leasingmode);//获取当前设备租赁模式
-            $(".reflow").text(data.reflow);//获取当前设备剩余流量
-            $(".reday").text(data.reday);//获取当前设备剩余天数
-            $(".filtermode").text(data.filtermode);//获取当前设备滤芯模式
-            $(".temperature").text(data.temperature);//获取当前设备温度
-            $(".updatetime").text(data.updatetime);//获取当前设备更新时间
+            $(".deviceStause").text(data.deviceStause);//设置设备状态
+            $(".puretdsVal").text(data.puretds);//设置当前设备原水值
+            $(".rawtdsVal").text(data.rawtds);//设置当前设备纯水值
+            $(".leasingmodeVal").text(data.leasingmode);//设置当前设备租赁模式
+            $(".reflow").text(data.reflow);//设置当前设备剩余流量
+            $(".reday").text(data.reday);//设置当前设备剩余天数
+            $(".filtermode").text(data.filtermode);//设置当前设备滤芯模式
+            $(".temperature").text(data.temperature);//设置当前设备温度
+            $(".updatetime").text(data.updatetime);//设置当前设备更新时间
         }
         else if(data.PackType=="SetData")
         {
@@ -291,7 +291,7 @@
                     }
                     else if(CmdList[i].type=="3")
                     {
-                        
+                         
                     }
                     else if(CmdList[i].type=="4")
                     {
@@ -327,6 +327,9 @@
         }
 
     }
+
+
+
     //按钮操作
     $('.clickBtn').click(function(){
         var _this=$(this).text();
@@ -344,12 +347,13 @@
             layer.confirm(tipsText, {icon: 3, title:'温馨提示'}, function(index){
                 layer.close(index);
                 ajson={
-                        "DeviceID":deviceId,
-                        "PackType":"SetData",
-                        "Vison":0,
-                        "PackNum":PackNum,
-                        "curTime":0,
-                    }; 
+                    "DeviceID":deviceId,
+                    "PackType":"SetData",
+                    "Vison":0,
+                    "PackNum":PackNum,
+                    "curTime":0,
+                }; 
+                //根据当前设备状态设置按钮文本
                 var type=0; 
                 if(_this=="开机"){
                     ajson['DeviceStause']=8;
@@ -375,7 +379,8 @@
                 //判断是否操作成功
                 setInterval(function(){
                     if(_this=="开机"){
-                    
+                        ajson['DeviceStause']=8;
+                        _this="关机中";
                     }else if(_this=="关机"){
                         ajson['DeviceStause']=7;
                         _this="开机中";
