@@ -123,17 +123,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <volist name="chargelist['data']" id="vendors">
-                            <tr>
-                                <td>{{$vendors['id']}}</td>
-                                <td>{{$vendors['name']}}</td>
-                                <td>{{$vendors['phone']}}</td>
-                                <td>{{$vendors['leavel']}}</td>
-                                <td>{{$vendors['addtime']}}</td>
-                                <td>{{$vendors['id']}}</td>
-                                <td>{{$vendors['email']}}</td>
-                            </tr>
-                        </volist>
+                        <tr>
+                            <td>{{$vendors['id']}}</td>
+                            <td>{{$vendors['name']}}</td>
+                            <td>{{$vendors['phone']}}</td>
+                            <td>{{$vendors['address']}}</td>
+                            <td>{{$vendors['leavel']}}</td>
+                            <td>{{$vendors['addtime']|date='Y-m-d H:i:s', ###}}</td>
+                            <td>{{$vendors['email']}}</td>
+                        </tr>
                     </tbody>
                 </table>
                 <div class="pagination">
@@ -164,17 +162,17 @@
                                 <td>{{$vo.iccard}}</td>
                                 <td>{{$vo.name}}</td>
                                 <td>{{$vo.phone}}</td>
-                                <td>{{$vo.time}}</td>
+                                <td>{{$vo.time|date='Y-m-d H:i:s', ###}}</td>
                                 <td>{{$vo.flow}}</td>
                                 <td>{{$vo.address}}</td>
-                                <td>是空的</td>
+                                <td></td>
                             </tr>
                         </volist>
                     </tbody>
                 </table>
                 <div class="pagination">
                     <ul>
-                        
+                        {{$chargelist['show']}}
                     </ul>
                 </div>
             </div>

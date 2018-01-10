@@ -25,7 +25,7 @@ class VendorsController extends CommonController
         $page  = new \Think\Page($total,8);
         $pageButton =$page->show();
 
-        $userlist = $user->where($map)->limit($page->firstRow.','.$page->listRows)->getAll();
+        $userlist = $user->where($map)->limit($page->firstRow.','.$page->listRows)->order('id desc')->getAll();
 
         $this->assign('list',$userlist);
         $this->assign('button',$pageButton);

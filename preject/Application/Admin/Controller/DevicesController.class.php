@@ -67,9 +67,8 @@ class DevicesController extends CommonController
             'vendors' => $vendors,
             'chargelist' => $chargelist,
         ];
-        // dump($assign['data']);
-        $this->assign($assign);
 
+        $this->assign($assign);
         $this->display();
     }
 
@@ -80,9 +79,9 @@ class DevicesController extends CommonController
         $count = $devices
             ->where('device_code='.$code)
             ->join('LEFT JOIN xp_consume on xp_devices.id=xp_consume.did')
-            ->join('LEFT JOIN xp_users on xp_consume.uid=xp_users.id')
             ->join('LEFT JOIN xp_card on xp_consume.icid=xp_card.id')
-            ->field('xp_consume.flow,xp_consume.time,xp_users.*,xp_card.iccard')
+            ->join('LEFT JOIN xp_users on xp_card.uid=xp_users.id')
+            ->field('xp_consume.flow,xp_consume.time,xp_users.*,xp_card.*')
             ->count();
         $Page   = new \Think\Page($count,15);
         $show   = $Page->show();
@@ -90,9 +89,9 @@ class DevicesController extends CommonController
         $data = $devices
             ->where('device_code='.$code)
             ->join('LEFT JOIN xp_consume on xp_devices.id=xp_consume.did')
-            ->join('LEFT JOIN xp_users on xp_consume.uid=xp_users.id')
             ->join('LEFT JOIN xp_card on xp_consume.icid=xp_card.id')
-            ->field('xp_consume.flow,xp_consume.time,xp_users.*,xp_card.iccard')
+            ->join('LEFT JOIN xp_users on xp_card.uid=xp_users.id')
+            ->field('xp_consume.flow,xp_consume.time,xp_users.*,xp_card.*')
             ->limit($Page->firstRow.','.$Page->listRows)
             ->select();
         $assign = [
@@ -100,9 +99,6 @@ class DevicesController extends CommonController
             'show' => $show,
         ];
         return $assign;
-        // $this->assign('$data', $data);
-        // $this->assign('page',$show);
-        // $this->display('chargelist');
     }
 
     /**

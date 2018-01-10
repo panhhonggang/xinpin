@@ -45,6 +45,7 @@ class ActionController extends Controller
                     $message = $this->RequesAction($client_id, $message);
                     break;
                 case 'Stopwater':
+                    Log::write(json_encode($message), '停水数据');
                     $this->stopAction($client_id, $message);
                     break;
                 default:
@@ -105,11 +106,15 @@ class ActionController extends Controller
     // 停水处理
     public function stopAction($client_id, $message)
     {
+        Log::write(json_encode($message),'接收停水数据');
         $arr = array('iccard' => $message['iccard']);
+
         $icCard = M('card')->where($arr)->find();
+        Log::write(json_encode($message),'查询IC卡');
        
         if( !empty($icCard) && $message['water'] > 0 ){
             $res = $this->saveConsume($message['DeviceID'], $icCard['id'], $message['water']);
+            Log::write(json_encode($res),'停水处理结果');
         }
     }
 
@@ -126,7 +131,7 @@ class ActionController extends Controller
             'flow' => $flow,
             'time' => time(),
         );
-        Log::write(json_encode($data),'存储数据');
+        Log::write(json_encode($data),'存储停水的数据');
         // 执行添加
         M('consume')->add($data);
 
