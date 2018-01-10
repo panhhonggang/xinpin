@@ -20,7 +20,7 @@ class IndexController extends CommonController
         $map['uid'] = session('homeuser.id');
         $card = M('card')->where($map)->select();
         // 拿到IC卡号
-        $iccard = array_column($card, 'name','iccard');
+        $iccard = array_column($card, 'iccard','id');
         $name = array_column($card, 'id','name');
         // 查询每张IC卡一周的使用记录
         $icid = array_column($card, 'id');
@@ -34,7 +34,6 @@ class IndexController extends CommonController
             ->order('time asc')
             ->select();  
         // echo M('consume')->getLastSQL();
-        dump($record);
     	//分配数据     
         $assign = [
             'money' => $money/100,
