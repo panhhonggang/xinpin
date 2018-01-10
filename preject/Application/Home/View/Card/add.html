@@ -105,7 +105,7 @@
 			}else if(!(/^\d{5,11}$/.test(studentId))){
 				layuiHint("学籍号为5-11个数字");
 				return false;
-			}else if(!(/^XP\d{14}$/.test(Ickahao))){
+			}else if(Ickahao==""){
 				layuiHint("IC卡账号不能为空");
 				return false;
 			}else{

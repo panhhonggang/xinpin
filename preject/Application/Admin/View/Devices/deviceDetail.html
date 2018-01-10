@@ -242,10 +242,9 @@
     //1.建立连接
     var websoket= new WebSocket("ws://120.79.0.105:6001");
     //2.打开事件
-    // var deviceId=$(".deviceID").text();//设备id
-    var deviceId="112233445566778";
+    var deviceId=$(".deviceID").text();//设备id
     websoket.onopen=function(){
-        //包数据
+        //发送包数据
         ajson={
             "DeviceID":deviceId,
             "PackType":"login",
@@ -253,20 +252,20 @@
         };
         websoket.send(JSON.stringify(ajson));
     }
-    //接收数据
+    //实时接收数据
     websoket.onmessage=function(data){
         console.log(data);
         if(data.PackType=="Select")
         {
-            $(".deviceStause").text(data.deviceStause);
-            $(".puretdsVal").text(data.puretds);
-            $(".rawtdsVal").text(data.rawtds);
-            $(".leasingmodeVal").text(data.leasingmode);
-            $(".reflow").text(data.reflow);
-            $(".reday").text(data.reday);
-            $(".filtermode").text(data.filtermode);
-            $(".temperature").text(data.temperature);
-            $(".updatetime").text(data.updatetime);
+            $(".deviceStause").text(data.deviceStause);//获取设备状态
+            $(".puretdsVal").text(data.puretds);//获取当前设备原水值
+            $(".rawtdsVal").text(data.rawtds);//获取当前设备纯水值
+            $(".leasingmodeVal").text(data.leasingmode);//获取当前设备租赁模式
+            $(".reflow").text(data.reflow);//获取当前设备剩余流量
+            $(".reday").text(data.reday);//获取当前设备剩余天数
+            $(".filtermode").text(data.filtermode);//获取当前设备滤芯模式
+            $(".temperature").text(data.temperature);//获取当前设备温度
+            $(".updatetime").text(data.updatetime);//获取当前设备更新时间
         }
         else if(data.PackType=="SetData")
         {
