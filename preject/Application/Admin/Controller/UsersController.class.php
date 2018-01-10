@@ -126,27 +126,28 @@ class UsersController extends CommonController
     {
         // 根据用户昵称进行搜索
         $map = '';
-        if(!empty($_GET['name'])) $map['name'] = array('like',"%{$_GET['name']}%");
+        if(!empty($_GET['name'])) $map['card.name'] = array('like',"%{$_GET['name']}%");
 
         $consume = M('consume');
         $total = $consume->where($map)
-                                ->alias('c')
-                                ->join('__CARD__ card ON c.icid = card.id', 'LEFT')
-                                ->join('__DEVICES__ d ON c.did = d.id', 'LEFT')
-                                ->join('__USERS__ u ON card.uid = u.id', 'LEFT')
-                                ->field('c.flow,c.time,u.*,card.iccard,c.id')
-                                ->count();
+           
+            ->alias('c')
+            ->join('__CARD__ card ON c.icid = card.id', 'LEFT')
+            ->join('__DEVICES__ d ON c.did = d.id', 'LEFT')
+            ->join('__USERS__ u ON card.uid = u.id', 'LEFT')
+            ->field('c.flow,c.time,u.*,card.iccard,c.id,card.name')
+            ->count();
         $page  = new \Think\Page($total,8);
         $pageButton =$page->show();
 
         $list = $consume->where($map)
-                                ->limit($page->firstRow.','.$page->listRows)
-                                ->alias('c')
-                                ->join('__CARD__ card ON c.icid = card.id', 'LEFT')
-                                ->join('__DEVICES__ d ON c.did = d.id', 'LEFT')
-                                ->join('__USERS__ u ON card.uid = u.id', 'LEFT')
-                                ->field('c.flow,c.time,u.*,card.iccard,c.id')
-                                ->select();
+            ->limit($page->firstRow.','.$page->listRows)
+            ->alias('c')
+            ->join('__CARD__ card ON c.icid = card.id', 'LEFT')
+            ->join('__DEVICES__ d ON c.did = d.id', 'LEFT')
+            ->join('__USERS__ u ON card.uid = u.id', 'LEFT')
+            ->field('c.flow,c.time,u.*,card.iccard,c.id,card.name')
+            ->select();
         $this->assign('list',$list);
         $this->assign('button',$pageButton);
         $this->display();        

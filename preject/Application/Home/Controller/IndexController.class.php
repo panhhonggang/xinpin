@@ -9,6 +9,7 @@ class IndexController extends CommonController
         $uid = $_SESSION['homeuser']['id'];
         // 查询用户名是否绑定IC卡
         $icid = M('Card')->field('id')->where('`uid`='.$uid)->find();
+
         // 如果没有绑定IC卡
         if(empty($icid)){
             $this->redirect('Home/Card/add');
@@ -20,7 +21,7 @@ class IndexController extends CommonController
         $card = M('card')->where($map)->select();
         // 拿到IC卡号
         $iccard = array_column($card, 'name','iccard');
-        $name = array_column($card, 'name');
+        $name = array_column($card, 'id','name');
         // 查询每张IC卡一周的使用记录
         $icid = array_column($card, 'id');
         $where['icid'] = ['in', $icid];
@@ -39,8 +40,6 @@ class IndexController extends CommonController
             'record' => json_encode($record),
             'name' => json_encode($name),
         ];   
-        // dump($iccard);
-        // dump($assign);
         $this->assign($assign);
     	$this->display();
 
