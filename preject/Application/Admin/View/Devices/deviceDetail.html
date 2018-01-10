@@ -332,13 +332,13 @@
         var _this=$(this).text();
         var filterN = $(this).attr('name');
         var ajson;//数据对象
-
+        //判断操作类型
         if(_this!="复位"){
             var tipsText = "确定要"+ _this + deviceId +"吗？";
         } else {
             var tipsText = "确定要"+ _this + "<a>滤芯" + filterN +"</a>吗";
         }
-
+        //弹框提示
         layui.use('layer', function(){
             var layer = layui.layer;
             layer.confirm(tipsText, {icon: 3, title:'温馨提示'}, function(index){
