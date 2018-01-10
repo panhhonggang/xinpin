@@ -90,14 +90,14 @@
 			if(cardholder==""){
 				layuiHint("持卡人姓名不能为空");
 				return false;
-			}else if(!(/^[a-zA-Z0-9_\u4e00-\u9fa5]{4,16}$/.exec(cardholder))){
-	    		layuiHint("姓名是4-16位数字或字母字符串");
+			}else if(!(/^[a-zA-Z\u4e00-\u9fa5]{2,10}$/.exec(cardholder))){
+	    		layuiHint("持卡人姓名至少2位汉字或英文");
 	    		return false;
 	    	}else if(schoolName==""){
 				layuiHint("学校名不能为空");
 				return false;
-			}else if(!(/^([\xe4-\xe9][\x80-\xbf]{2}){4,20}$/.test(schoolName))){
-				layuiHint("学校名为4-20个中文字符");
+			}else if(!(/^([\u4e00-\u9fa5]){4,16}$/.test(schoolName))){
+				layuiHint("学校名为4-16个中文字符");
 				return false;
 			}else if(studentId==""){
 				layuiHint("学籍号不能为空");
@@ -105,15 +105,51 @@
 			}else if(!(/^\d{5,11}$/.test(studentId))){
 				layuiHint("学籍号为5-11个数字");
 				return false;
-			}else if(Ickahao==""){
+			}else if(!(/^XP\d{14}$/.test(Ickahao))){
 				layuiHint("IC卡账号不能为空");
 				return false;
-
 			}else{
 				return true;
 			}
-
 		}
+		// 持卡人姓名只能是汉字或英文
+	    var regUsername = /^[a-zA-Z\u4e00-\u9fa5]{2,10}$/,
+	    	regUsernameOK = null;
+	    //学校名只能是中文
+	    var regSchoolname = /^[\u4e00-\u9fa5]{4,16}$/,
+	    	regSchoolnameOK = null;
+	    // 学籍号只能是数字
+	    var regstudentId = /^\d{5,11}$/,
+	    	regstudentIdOK = null;
+	    //IC卡号只能是XP开头+14位数字格式
+	    var regIckahao = /^XP\d{14}$/,
+	    	regIckahaoOK = null;
+
+
+	    checkInput($(".cardholder"), regUsername, regUsernameOK, "持卡人姓名至少2位汉字或英文");
+	    checkInput($(".schoolName"), regSchoolname, regSchoolnameOK, "学校名为4-16个中文字符");
+	    checkInput($(".studentId"), regstudentId, regstudentIdOK, "学籍号为5-11个数字");
+	    checkInput($("#Ickahao"), regIckahao, regIckahaoOK, "IC卡号只能是XP开头+14位数字格式");
+
+
+	    function checkInput(ele, reg, regOK, notice){
+	    	//ele:标签
+	    	//reg:正则表达式
+	    	//regOK:验证通过标识
+	    	//notice:提示的内容
+	    	ele.on("change", function(){
+		    	!reg.exec(ele.val())
+		        ? (
+		            ele.css({color: "red"}),
+		            regOK = null,
+		            layuiHint(notice)
+		            )
+		        : (
+		            ele.css({color: "#000"}),
+		            regOK = true
+		            )
+		    })
+	    }
 	</script>
 </body>
 </html>

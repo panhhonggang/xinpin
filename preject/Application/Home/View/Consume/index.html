@@ -40,8 +40,8 @@
             <tbody>
             <foreach name="icidOne" item="v" key="k" class="container">
                 <tr class="row">
-                    <td class="col-xs-3">{{$v['address']}}</td>
-                    <td class="col-xs-3" >{{$v['flow']}}</td>
+                    <td class="col-xs-4">{{$v['address']}}</td>
+                    <td class="col-xs-2" >{{$v['flow']}}</td>
                     <td class="col-xs-7">{{:date('Y年m月d日', $v['time'])}}</td>
                 </tr>
             </foreach>
@@ -87,7 +87,7 @@
             // 回调操作-异步刷新
             if(res.length>0){
                 var trList="";
-                var trList0="<tr class='row'><td class='col-xs-3'></td><td class='col-xs-3'></td><td class='col-xs-7'></td></tr>";
+                var trList0="<tr class='row'><td class='col-xs-4'></td><td class='col-xs-2'></td><td class='col-xs-7'></td></tr>";
                 for(var i=0;i<res.length;i++){
                     trList+=trList0;
                 }
