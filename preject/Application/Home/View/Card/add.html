@@ -5,8 +5,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width,initial-scale=1" >
 	<title>添加IC卡</title>
+	<script src="__PUBLIC__/Home/js/jquery-1.8.3.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
+	<script type="text/javascript" src="__PUBLIC__/Admin/layui/layui.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/layui/css/layui.css" />
 	<script src="__PUBLIC__/Home/js/public.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
@@ -52,12 +55,10 @@
 	      'scanQRCode' //扫一扫
 	    ]
 	  });
-
 	  // 通过ready接口处理成功验证
 	  wx.ready(function () {
 	    // 在这里调用 API
 	  });
-
 	  function scanQRCode(){
 	    wx.scanQRCode({
 	      needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
@@ -72,40 +73,46 @@
 	      }
 	    }); 
 	  }
-
 	  // 通过error接口处理失败验证
 	  wx.error(function(res){
 	      // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
 	      console.dir('接口失败：10001');
 	  });
-
 		//表单验证
+		
 		function toVaild(){
+
 			var cardholder=$(".cardholder").val().trim();
 			var schoolName=$(".schoolName").val().trim();
 			var studentId=$(".studentId").val().trim();
 			var Ickahao=$("#Ickahao").val().trim();
+
 			if(cardholder==""){
-				layuiVaild("持卡人姓名不能为空");
+				layuiHint("持卡人姓名不能为空");
 				return false;
-			}else if(schoolName==""){
-				layuiVaild("学校名不能为空");
+			}else if(!(/^[a-zA-Z0-9_\u4e00-\u9fa5]{4,16}$/.exec(cardholder))){
+	    		layuiHint("姓名是4-16位数字或字母字符串");
+	    		return false;
+	    	}else if(schoolName==""){
+				layuiHint("学校名不能为空");
 				return false;
 			}else if(!(/^([\xe4-\xe9][\x80-\xbf]{2}){4,20}$/.test(schoolName))){
-				layuiVaild("学校名为4-20个中文字符");
+				layuiHint("学校名为4-20个中文字符");
 				return false;
 			}else if(studentId==""){
-				layuiVaild("学籍号不能为空");
+				layuiHint("学籍号不能为空");
 				return false;
 			}else if(!(/^\d{5,11}$/.test(studentId))){
-				layuiVaild("学籍号为5-11个数字");
+				layuiHint("学籍号为5-11个数字");
 				return false;
 			}else if(Ickahao==""){
-				layuiVaild("IC卡账号不能为空");
+				layuiHint("IC卡账号不能为空");
 				return false;
+
 			}else{
 				return true;
 			}
+
 		}
 	</script>
 </body>

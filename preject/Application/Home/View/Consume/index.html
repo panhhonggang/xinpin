@@ -8,6 +8,14 @@
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mobileStyle.css">
 <title>饮水记录</title>
+<style>
+    .row>td:not(:first-child) {
+        text-align: right !important;
+    }
+    .row>td:nth-of-type(3) {
+        color: #908f8f !important;
+    }
+</style>
 </head>
 <body>
     <!-- slider --> 
@@ -33,8 +41,8 @@
             <foreach name="icidOne" item="v" key="k" class="container">
                 <tr class="row">
                     <td class="col-xs-3">{{$v['address']}}</td>
-                    <td class=" col-xs-3" style="text-align: right" >{{$v['flow']}}</td>
-                    <td class="col-xs-7" style="color: #908f8f;text-align: right">{{:date('Y年m月d日', $v['time'])}}</td>
+                    <td class="col-xs-3" >{{$v['flow']}}</td>
+                    <td class="col-xs-7">{{:date('Y年m月d日', $v['time'])}}</td>
                 </tr>
             </foreach>
             </tbody>
@@ -79,15 +87,15 @@
             // 回调操作-异步刷新
             if(res.length>0){
                 var trList="";
-                var trList0="<tr><td></td><td></td><td></td></tr>";
+                var trList0="<tr class='row'><td class='col-xs-3'></td><td class='col-xs-3'></td><td class='col-xs-7'></td></tr>";
                 for(var i=0;i<res.length;i++){
                     trList+=trList0;
                 }
                 $(".consumeTable tbody").html(trList);
                 for(var i=0;i<res.length;i++){
                     $(".consumeTable tbody tr").eq(i).children().eq(0).html(res[i].address);
-                    $(".consumeTable tbody tr").eq(i).children().eq(1).html(res[i].time);
-                    $(".consumeTable tbody tr").eq(i).children().eq(2).html(res[i].flow);
+                    $(".consumeTable tbody tr").eq(i).children().eq(1).html(res[i].flow);
+                    $(".consumeTable tbody tr").eq(i).children().eq(2).html(getLocalTime(res[i].time));
                 }
             }else{
                 $(".consumeTable tbody").html("");
@@ -95,6 +103,10 @@
             // console.dir(res);
         });
     };
+
+    function getLocalTime(nS){
+        return new Date(parseInt(nS)*1000).toLocaleString().substr(0,11).replace("/", "年").replace("/", "月") + "日";
+    }
 </script>
 </body>
 </html>

@@ -152,7 +152,6 @@
                             <td>使用时间</td>
                             <td>使用流量/mL</td>
                             <td>使用地址</td>
-                            <td>备注</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -165,7 +164,6 @@
                                 <td>{{$vo.time|date='Y-m-d H:i:s', ###}}</td>
                                 <td>{{$vo.flow}}</td>
                                 <td>{{$vo.address}}</td>
-                                <td></td>
                             </tr>
                         </volist>
                     </tbody>
@@ -182,7 +180,7 @@
 </div>
 
 <script>
-    var PackNum=0;
+    var PackNum=0;//包数据
     //开关机按钮
     setInterval(function(){
         if(($(".deviceStause").html())=="关机"){
@@ -217,7 +215,19 @@
             if(flowPercent>100){
                 flowPercent=100;
             }
-            filterHtml+='<tr><td>' + filterNum[i]['filtername'] + '</td><td><div class="surplusBg"><p class="surplusShowColor" style="width:'+ flowPercent +'%"></p></div><div class="text-center">还剩'+flowPercent+'%</div></td><td><span class="surplusNum2">'+ reflowName[i] +'</span>/<span>'+ filterNum[i]['flowlife'] +'</span></td><td><button class="resetBtn clickBtn"name="2">复位</button></td></tr>';
+            var filterVal;
+            var filterSum;
+            if(reflowName[i]){
+                filterVal=reflowName[i];
+            }else{
+                filterVal=0;
+            }
+            if(filterNum[i]['flowlife']){
+                filterSum=filterNum[i]['flowlife'];
+            }else{
+                filterSum=0;
+            }
+            filterHtml+='<tr><td>' + filterNum[i]['filtername'] + '</td><td><div class="surplusBg"><p class="surplusShowColor" style="width:'+ flowPercent +'%"></p></div><div class="text-center">还剩'+flowPercent+'%</div></td><td><span class="surplusNum2">'+ filterVal +'</span>/<span>'+ filterNum[i]['flowlife'] +'</span></td><td><button class="resetBtn clickBtn"name="2">复位</button></td></tr>';
         }
     }else{
         filterHtml="无数据";
@@ -229,8 +239,8 @@
     //1.建立连接
     var websoket= new WebSocket("ws://120.79.0.105:6001");
     //2.打开事件
-    // var deviceId=$(".deviceID").text();//设备id
-    var deviceId="11223344556";
+    var deviceId=$(".deviceID").text();//设备id
+    // var deviceId="112233445566778";
     websoket.onopen=function(){
         //包数据
         ajson={
@@ -304,8 +314,14 @@
         }
         //循环遍历设置滤芯剩余显示样式
         for(var i=1;i<=$(".filterInfoTable tbody tr").length;i++){
+            var filterVal;
+            if(data['reflowfilter'+i]){
+                filterVal=data['reflowfilter'+i];
+            }else{
+                filterVal=0;
+            }
             $(".filterInfoTable tbody tr").eq(i).children("td").children(".surplusShowColor").width(data['reflowfilter'+i]+"%");
-            $(".filterInfoTable tbody tr").eq(i).children("td").children(".surplusNum2").text(data['reflowfilter'+i]);
+            $(".filterInfoTable tbody tr").eq(i).children("td").children(".surplusNum2").text(filterVal);
         }
 
     }
