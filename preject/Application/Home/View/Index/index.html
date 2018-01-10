@@ -99,6 +99,7 @@
     <!-- logo --> 
     <input class="iccardVal" type="hidden" name="" value='{{$iccard}}'>
     <input class="recordVal" type="hidden" name="" value='{{$record}}'>
+    <input class="nameVal" type="hidden" name="" value='{{$name}}'>
     <section class="showBalanceBox">
         <section class="showBalance">
             <img class="moneylogo" src="__PUBLIC__/Home/image/moneylogo.png" />
@@ -139,32 +140,41 @@
             //一周喝水记录
             var iccardVal=$(".iccardVal").val();//获取ic卡数据
             var recordVal=$(".recordVal").val();//获取饮水记录数据
-            var josniccardVal=JSON.parse(iccardVal);
+            var nameVal=$(".nameVal").val();
+            var josniccardVal=JSON.parse(iccardVal);nameVal
             var jsonrecordVal=JSON.parse(recordVal);
+            var jsonnameVal=JSON.parse(nameVal);
+            // console.log(nameVal);
             var LiHtml1="";
             //获取json对象长度
             var iccardNumber=0;
+            var times=0;
             for(var js2 in josniccardVal){
                 iccardNumber++; 
             }
-            
+            // console.dir(jsonrecordVal);
             if(iccardNumber){
-                
                 for(var i in josniccardVal){
+
                     // IC卡号ID
-                    //console.dir(i);
+                    // console.dir(i);
                     // IC卡卡号
                     // console.dir(josniccardVal[i]);
-                    LiHtml1+="<li><h4>"+josniccardVal[i]+"</h4><p class='tableTitle'>一周饮水统计表/mL</p><table class='table table-data'><thead><tr><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td></tr></thead><tbody><tr>";
+
+                    LiHtml1+="<li><h4>"+jsonnameVal[times]+"</h4><p class='tableTitle'>一周饮水统计表/mL</p><table class='table table-data'><thead><tr><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td></tr></thead><tbody><tr>";
                     // IC 卡消费记录
+                    times++;
                     var jl = icjili(i);
                     var lji = 0;
 
                     var tdHtml="";
-                    //console.dir(1);
+                    
                     for(var j in jl){
+                        // console.dir(jl[j]);
                         tdHtml+="<td>"+jl[j]+"</td>";
                         lji += jl[j]-0;
+                        // console.dir(jl[j]);
+
                     }
 
                     LiHtml1+=tdHtml;
@@ -189,8 +199,10 @@
 
             function icjili(id){
                 var icidjl = [0,0,0,0,0,0,0];
+
                 for(var j in jsonrecordVal){
                     // 返回IC卡消费记录
+                    console.dir(jsonrecordVal[j]);
                     if(jsonrecordVal[j]['icid'] == id){
                         console.dir(jsonrecordVal[j]['time']);
                         var d = new Date(jsonrecordVal[j]['time']);
