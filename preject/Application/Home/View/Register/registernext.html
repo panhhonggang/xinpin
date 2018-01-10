@@ -76,11 +76,11 @@
     	var password1=$(".password1").val().trim();
     	var address=$(".address").val().trim();
 
-    	if(!(/^[a-zA-Z0-9_\u4e00-\u9fa5]{4,16}$/.exec(username))){
+    	if(!(/^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/.exec(username))){
 
-    		layuiHint("用户名是4-16位的数字字母汉字");
+    		layuiHint("用户姓名是2-16位的数字、中文或英文字符");
     	}else if(address==""){
-    		layuiHint("您所在地址"); 
+    		layuiHint("您所在地址不能为空"); 
     	}else if(password0==""){
 			layuiHint("密码不能为空"); 
 		}else{
@@ -98,7 +98,7 @@
     }
 
      // 用户名不允许有空格和特殊字符
-    var regUsername = /^[a-zA-Z0-9_\u4e00-\u9fa5]{4,16}$/;
+    var regUsername = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
     var regUsernameOK = null;
     $(".username").on("change", function(){
 
@@ -112,7 +112,7 @@
             regUsernameOK = true
             )
 
-        console.log(regUsername.exec($(".username").val()))
+        // console.log(regUsername.exec($(".username").val()))
     })
     </script>
 </body>

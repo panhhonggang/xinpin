@@ -122,14 +122,14 @@
 	    var regstudentId = /^\d{5,11}$/,
 	    	regstudentIdOK = null;
 	    //IC卡号只能是XP开头+14位数字格式
-	    var regIckahao = /^XP\d{14}$/,
-	    	regIckahaoOK = null;
+	    // var regIckahao = /^XP\d{14}$/,
+	    // 	regIckahaoOK = null;
 
 
 	    checkInput($(".cardholder"), regUsername, regUsernameOK, "持卡人姓名至少2位汉字或英文");
 	    checkInput($(".schoolName"), regSchoolname, regSchoolnameOK, "学校名为4-16个中文字符");
 	    checkInput($(".studentId"), regstudentId, regstudentIdOK, "学籍号为5-11个数字");
-	    checkInput($("#Ickahao"), regIckahao, regIckahaoOK, "IC卡号只能是XP开头+14位数字格式");
+	    // checkInput($("#Ickahao"), regIckahao, regIckahaoOK, "IC卡号只能是XP开头+14位数字格式");
 
 
 	    function checkInput(ele, reg, regOK, notice){

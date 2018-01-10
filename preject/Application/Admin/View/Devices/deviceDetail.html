@@ -242,8 +242,8 @@
     //1.建立连接
     var websoket= new WebSocket("ws://120.79.0.105:6001");
     //2.打开事件
-    var deviceId=$(".deviceID").text();//设备id
-    // var deviceId="112233445566778";
+    // var deviceId=$(".deviceID").text();//设备id
+    var deviceId="112233445566778";
     websoket.onopen=function(){
         //包数据
         ajson={
