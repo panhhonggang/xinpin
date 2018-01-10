@@ -354,10 +354,10 @@ class XZCloudStandard
                         break;
                     }
                 }
-                if(isset($data[self::AliveStause]))
-                {
-                    $data['CurTime']=time();
-                }
+                // if(isset($data[self::AliveStause]))
+                // {
+                // }
+                $data['CurTime']=time();
                 $DataPack='';
                 for($j=0;$j<=$i;$j++)
                 {

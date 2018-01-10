@@ -98,7 +98,6 @@ class DevicesController extends CommonController
             'data' => $data,
             'show' => $show,
         ];
-        dump($assign['data']);
         return $assign;
     }
 

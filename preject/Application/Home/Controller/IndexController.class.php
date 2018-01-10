@@ -33,6 +33,8 @@ class IndexController extends CommonController
             ->group('time,icid')
             ->order('time asc')
             ->select();  
+        // echo M('consume')->getLastSQL();
+        dump($record);
     	//分配数据     
         $assign = [
             'money' => $money/100,
