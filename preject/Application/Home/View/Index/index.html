@@ -124,86 +124,89 @@
     </footer>
     
     <script>
-        $(".logo1").css("background-position","-9.5rem 0");
-        $(".btn1").css("color","#008C63");
-        // 剩余金额logo效果
-        $(".showBalanceBox").click(function(){
-            $(".moneylogo").animate({width:"26vw",height:"26vw",top:"4.5vw"},"fast");
-            $(".moneylogo").animate({width:"23vw",height:"23vw",top:"7vw"},"fast");
-            $(".moneylogo").animate({width:"25vw",height:"25vw",top:"6vw"},"fast");
-            $(".moneylogo").animate({width:"23vw",height:"23vw",top:"7vw"},"fast");
-            $(".moneylogo").animate({width:"24vw",height:"24vw",top:"6.5vw"},"fast");
-        });
+        $(function(){
+            $(".logo1").css("background-position","-9.5rem 0");
+            $(".btn1").css("color","#008C63");
+            // 剩余金额logo效果
+            $(".showBalanceBox").click(function(){
+                $(".moneylogo").animate({width:"26vw",height:"26vw",top:"4.5vw"},"fast");
+                $(".moneylogo").animate({width:"23vw",height:"23vw",top:"7vw"},"fast");
+                $(".moneylogo").animate({width:"25vw",height:"25vw",top:"6vw"},"fast");
+                $(".moneylogo").animate({width:"23vw",height:"23vw",top:"7vw"},"fast");
+                $(".moneylogo").animate({width:"24vw",height:"24vw",top:"6.5vw"},"fast");
+            });
 
-        //一周喝水记录
-        var iccardVal=$(".iccardVal").val();//获取ic卡数据
-        var recordVal=$(".recordVal").val();//获取饮水记录数据
-        var josniccardVal=JSON.parse(iccardVal);
-        var jsonrecordVal=JSON.parse(recordVal);
-
-        var iccardNumber=Object.keys(josniccardVal).length;
-        // console.log(jsonrecordVal);
-        //console.log(josniccardVal);
-        var LiHtml1="";
-        
-        if(iccardNumber){
+            //一周喝水记录
+            var iccardVal=$(".iccardVal").val();//获取ic卡数据
+            var recordVal=$(".recordVal").val();//获取饮水记录数据
+            var josniccardVal=JSON.parse(iccardVal);
+            var jsonrecordVal=JSON.parse(recordVal);
+            var LiHtml1="";
+            //获取json对象长度
+            var iccardNumber=0;
+            for(var js2 in josniccardVal){
+                iccardNumber++;
+            }
             
-            for(var i in josniccardVal){
-                // IC卡号ID
-                //console.dir(i);
-                // IC卡卡号
-                // console.dir(josniccardVal[i]);
-                LiHtml1+="<li><h4>"+josniccardVal[i]+"</h4><p class='tableTitle'>一周饮水统计表/mL</p><table class='table table-data'><thead><tr><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td></tr></thead><tbody><tr>";
-                // IC 卡消费记录
-                var jl = icjili(i);
-                var lji = 0;
+            if(iccardNumber){
+                
+                for(var i in josniccardVal){
+                    // IC卡号ID
+                    //console.dir(i);
+                    // IC卡卡号
+                    // console.dir(josniccardVal[i]);
+                    LiHtml1+="<li><h4>"+josniccardVal[i]+"</h4><p class='tableTitle'>一周饮水统计表/mL</p><table class='table table-data'><thead><tr><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td></tr></thead><tbody><tr>";
+                    // IC 卡消费记录
+                    var jl = icjili(i);
+                    var lji = 0;
 
-                var tdHtml="";
-                //console.dir(1);
-                for(var j in jl){
-                    tdHtml+="<td>"+jl[j]+"</td>";
-                    lji += jl[j]-0;
+                    var tdHtml="";
+                    //console.dir(1);
+                    for(var j in jl){
+                        tdHtml+="<td>"+jl[j]+"</td>";
+                        lji += jl[j]-0;
+                    }
+
+                    LiHtml1+=tdHtml;
+
+                    LiHtml1+="</tr></tbody></table><p class='text-right addUp'>累计：<span class='spanSize'>"+lji+"</span>mL</p></li>";
+
+                    $("#textList").html(LiHtml1);
                 }
 
-                LiHtml1+=tdHtml;
+                if(iccardNumber>1){
+                    $('#textNav').show();
+                    var textNavHtml = '<span class="spanActiveList"></span>';
+                    for(var i=1;i<iccardNumber;i++){
+                        textNavHtml += '<span></span>';
+                    }
 
-                LiHtml1+="</tr></tbody></table><p class='text-right addUp'>累计：<span class='spanSize'>"+lji+"</span>mL</p></li>";
+                    $('#textNav').html(textNavHtml);
 
-                $("#textList").html(LiHtml1);
-            }
-
-            if(iccardNumber>1){
-                $('#textNav').show();
-                var textNavHtml = '<span class="spanActiveList"></span>';
-                for(var i=1;i<iccardNumber;i++){
-                    textNavHtml += '<span></span>';
-                }
-
-                $('#textNav').html(textNavHtml);
-
-                $("#textList").css({'width':(iccardNumber*100)+'vw'});
-            }
-        }
-
-        function icjili(id){
-            var icidjl = [0,0,0,0,0,0,0];
-            for(var j in jsonrecordVal){
-                // 返回IC卡消费记录
-                if(jsonrecordVal[j]['icid'] == id){
-                    console.dir(jsonrecordVal[j]['time']);
-                    var d = new Date(jsonrecordVal[j]['time']);
-                    var zj = d.getDay();
-                    icidjl[zj] = jsonrecordVal[j]['flow'];
-                    //jsonrecordVal[j]['time']
-                    //icidjl.push(jsonrecordVal[j]['flow']);
+                    $("#textList").css({'width':(iccardNumber*100)+'vw'});
                 }
             }
-            return icidjl;
-        }
-        //数据表滑动显示
-        if($("#textList").children().size()>1){
-            fnTab_txt(id("text"),id("textList"),id("textNav").children,$(window).width(),"spanActiveList");
-        }
+
+            function icjili(id){
+                var icidjl = [0,0,0,0,0,0,0];
+                for(var j in jsonrecordVal){
+                    // 返回IC卡消费记录
+                    if(jsonrecordVal[j]['icid'] == id){
+                        console.dir(jsonrecordVal[j]['time']);
+                        var d = new Date(jsonrecordVal[j]['time']);
+                        var zj = d.getDay();
+                        icidjl[zj] = jsonrecordVal[j]['flow'];
+                        //jsonrecordVal[j]['time']
+                        //icidjl.push(jsonrecordVal[j]['flow']);
+                    }
+                }
+                return icidjl;
+            }
+            //数据表滑动显示
+            if($("#textList").children().size()>1){
+                fnTab_txt(id("text"),id("textList"),id("textNav").children,$(window).width(),"spanActiveList");
+            }
+        });
     </script>
 </body>
 </html>
