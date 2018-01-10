@@ -19,8 +19,7 @@ class IndexController extends CommonController
         $map['uid'] = session('homeuser.id');
         $card = M('card')->where($map)->select();
         // 拿到IC卡号
-        $iccard = array_column($card,'iccard', 'id', 'name');
-
+        $iccard = array_column($card, 'name','iccard');
         // 查询每张IC卡一周的使用记录
         $icid = array_column($card, 'id');
         $where['icid'] = ['in', $icid];
