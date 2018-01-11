@@ -67,6 +67,8 @@
 }
     #textList table tr td{
         border: 0;
+        width: 14.6%;
+        padding: 8px 0;
     }
     .addUp{
         width: 95vw;
@@ -97,9 +99,6 @@
 </head>
 <body>
     <!-- logo --> 
-    {{$iccard|dump}}
-    {{$record|dump}}
-    {{$name|dump}}
     <input class="iccardVal" type="hidden" name="" value='{{$iccard}}'>
     <input class="recordVal" type="hidden" name="" value='{{$record}}'>
     <input class="nameVal" type="hidden" name="" value='{{$name}}'>
