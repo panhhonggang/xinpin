@@ -116,9 +116,10 @@ class LoginController extends Controller
     // 用户登录验证码生成
     public function verifyCode(){
         $config =    array(
-            'fontSize'    =>    20,    // 验证码字体大小
-            'length'      =>    3,     // 验证码位数
-            'useNoise'    =>    false, // 关闭验证码杂点
+            'fontSize' =>   40,    // 验证码字体大小
+            'length'   =>   3,     // 验证码位数
+            'useNoise' =>   false, // 关闭验证码杂点
+            'useCurve' =>   false,
         );
         $Verify =     new \Think\Verify($config);
         $verify_code = $Verify->entry(); 

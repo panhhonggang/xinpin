@@ -21,7 +21,7 @@ class IndexController extends CommonController
         $card = M('card')->where($map)->select();
         // 拿到IC卡号
         $iccard = array_column($card, 'iccard','id');
-        $name = array_column($card, 'id','name');
+        $name = array_column($card, 'name');
         // 查询每张IC卡一周的使用记录
         $icid = array_column($card, 'id');
         $where['icid'] = ['in', $icid];
@@ -30,15 +30,24 @@ class IndexController extends CommonController
         $record = M('consume')
             ->where($where)
             ->field("did,icid,flow,address,FROM_UNIXTIME(time,'%Y-%m-%d') as time")
-            ->group('time,icid')
+            ->group('time')
             ->order('time asc')
-            ->select();  
-        // echo M('consume')->getLastSQL();
+            ->select();
+        $new = array();
+        foreach($record as $val){
+            $key = $val['time'].'&'.$val['icid'];
+            if(isset($new[$key])) {
+                $new[$key]['flow'] += $val['flow'];
+            } else {
+                $new[$key] = $val;
+            }
+        }
+        $new = array_values($new);
     	//分配数据     
         $assign = [
             'money' => $money/100,
             'iccard' => json_encode($iccard),
-            'record' => json_encode($record),
+            'record' => json_encode($new),
             'name' => json_encode($name),
         ];   
         $this->assign($assign);

@@ -3,7 +3,7 @@
     <include file="Public/nav" />
     <div class="row-fluid fl" id="main" style="background: #ecf0f5;">
         <div class="tableBox">
-            <div class="titleBar">用户管理/<span>用户息情</span></div>
+            <div class="titleBar">用户管理/<span>用户详情</span></div>
             <h1 class="deviceTitle text-center">当前用户：<span>{{$userInfo['name']}}</span></h1>
             <div class="tableList">
                 <h3>用户基础信息</h3>
@@ -30,10 +30,17 @@
                             <td>{{$userInfo['phone']}}</td>
                             <td>{{$userInfo['address']}}</td>
                             <td>{{$userInfo['balance']/100}}</td>
-                            <td>{{:date('Y年m月d日', $userInfo['login_time'])}}</td>
+                            <empty name="userInfo.login_time">
+                                <td>{{:date('Y年m月d日', $userInfo['addtime'])}}</td>
+                            <else />
+                                <td>{{:date('Y年m月d日', $userInfo['login_time'])}}</td>
+                            </empty>
                             <td>{{$userInfo['login_ip']}}</td>
                             <td>{{:date('Y年m月d日', $userInfo['addtime'])}}</td>
-                            <td>{{$userInfo['status']}}</td>
+                            <switch name="userInfo.status">
+                                <case value="0"><td>禁用</td></case>
+                                <case value="1"><td>启用</td></case>
+                            </switch>
                             <td></td>
                         </tr>
                     </tbody>
@@ -60,17 +67,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <foreach name="recordlist" item="v" key="k">
-                        <tr>
-                            <td>{{$v['id']}}</td>
-                            <td>{{$userInfo['name']}}</td>
-                            <td>{{$mode[$v['mode']]}}</td>
-                            <td>{{$v['money']/100}}</td>
-                            <td>{{$v['currentbalance']/100}}</td>
-                            <td>{{:date('Y年m月d日', $v['time'])}}</td>
-                            <td></td>
-                        </tr>
-                        </foreach>
+                        <empty name="recordlist">
+                            <tr><td>没有充值记录</td></tr>
+                            <else />
+                            <foreach name="recordlist" item="v" key="k">
+                                <tr>
+                                    <td>{{$v['id']}}</td>
+                                    <td>{{$userInfo['name']}}</td>
+                                    <td>{{$mode[$v['mode']]}}</td>
+                                    <td>{{$v['money']/100}}</td>
+                                    <td>{{$v['currentbalance']/100}}</td>
+                                    <td>{{:date('Y年m月d日', $v['time'])}}</td>                            
+                                    <td></td>
+                                </tr>
+                            </foreach>
+                        </empty>
                     </tbody>
                 </table>
                 <!-- 分页 -->
@@ -96,18 +107,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <foreach name="list" item="v" key="key">   
-                        <tr>
-                            <td>{{$v['id']}}</td>
-                            <td>{{$v['name']}}</td>
-                            <td>{{$v['balance']/100}}</td>
-                            <td>{{$v['icid']}}</td>
-                            <td>{{$v['address']}}</td>
-                            <td>{{:date('Y年m月d日', $v['time'])}}</td>
-                            <td>{{$v['flow']}}</td>
-                            <td></td>
-                        </tr>
-                    </foreach>
+                        <empty name="list">
+                            <tr><td>没有消费记录</td></tr>
+                        <else />
+                            <foreach name="list" item="v" key="key">   
+                                <tr>
+                                    <td>{{$v['id']}}</td>
+                                    <td>{{$v['name']}}</td>
+                                    <td>{{$v['balance']/100}}</td>
+                                    <td>{{$v['icid']}}</td>
+                                    <td>{{$v['address']}}</td>
+                                    <td>{{:date('Y年m月d日', $v['time'])}}</td>
+                                    <td>{{$v['flow']}}</td>
+                                    <td></td>
+                                </tr>
+                            </foreach>
+                        </empty>
                     </tbody>
                 </table>
                 <!-- 分页 -->

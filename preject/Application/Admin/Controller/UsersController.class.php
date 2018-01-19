@@ -26,7 +26,7 @@ class UsersController extends CommonController
         $pageButton =$page->show();
 
         $userlist = $user->where($map)->limit($page->firstRow.','.$page->listRows)->getAll();
-        // dump($userlist);die;
+        // dump($userlist);
         $this->assign('list',$userlist);
         $this->assign('button',$pageButton);
         $this->display();
@@ -181,7 +181,7 @@ class UsersController extends CommonController
         $this->assign('recordshow',$recordshow);// 赋值分页输出
         
 
-
+        $map="";
         // 查询用户消费记录
         $consume = M('consume');
         $total = $consume->where($map)
